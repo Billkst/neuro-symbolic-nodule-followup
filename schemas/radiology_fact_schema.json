@@ -1,0 +1,397 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.neuro-symbolic-nodule-followup.local/radiology_fact_schema.json",
+  "title": "Radiology Report Fact Extraction Schema",
+  "description": "Schema for structured facts extracted from a single radiology report in Module 2 radiology fact extraction.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "note_id",
+    "subject_id",
+    "exam_name",
+    "modality",
+    "body_site",
+    "report_text",
+    "sections",
+    "nodule_count",
+    "nodules",
+    "extraction_metadata"
+  ],
+  "properties": {
+    "note_id": {
+      "type": "string",
+      "pattern": "^\\d+-RR-\\d+$",
+      "description": "Unique radiology note identifier in the MIMIC-style report format, for example 10046097-RR-34."
+    },
+    "subject_id": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Patient subject identifier associated with the radiology report."
+    },
+    "exam_name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Original exam name or study label from the report header, such as CT CHEST W/CONTRAST."
+    },
+    "modality": {
+      "type": "string",
+      "enum": [
+        "CT",
+        "LDCT",
+        "CTA",
+        "X-ray",
+        "PET_CT",
+        "MRI",
+        "ultrasound",
+        "other"
+      ],
+      "description": "Normalized imaging modality for the report."
+    },
+    "body_site": {
+      "type": "string",
+      "enum": [
+        "chest",
+        "abdomen",
+        "pelvis",
+        "chest_abdomen_pelvis",
+        "other"
+      ],
+      "description": "Normalized body site primarily covered by the imaging exam."
+    },
+    "report_text": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Full original radiology report text before downstream structuring or normalization."
+    },
+    "sections": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Report sections parsed from the original text when available; absent keys indicate the section was not detected.",
+      "properties": {
+        "indication": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Clinical indication section describing the reason for the exam."
+        },
+        "technique": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Technique section describing how the imaging exam was performed."
+        },
+        "comparison": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Comparison section containing prior studies or reference exams."
+        },
+        "findings": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Findings section containing detailed imaging observations."
+        },
+        "impression": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Impression section summarizing the radiologist's main conclusions."
+        }
+      }
+    },
+    "nodule_count": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "description": "Number of nodules identified in the report, or null when the count cannot be determined reliably."
+    },
+    "nodules": {
+      "type": "array",
+      "minItems": 0,
+      "description": "Structured list of nodule-level facts extracted from the report.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "nodule_id_in_report",
+          "size_mm",
+          "size_text",
+          "density_category",
+          "density_text",
+          "location_lobe",
+          "location_text",
+          "count_type",
+          "change_status",
+          "change_text",
+          "calcification",
+          "spiculation",
+          "lobulation",
+          "cavitation",
+          "perifissural",
+          "lung_rads_category",
+          "recommendation_cue",
+          "evidence_span",
+          "confidence",
+          "missing_flags"
+        ],
+        "properties": {
+          "nodule_id_in_report": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "1-indexed position of the nodule mention within the report-level extraction output."
+          },
+          "size_mm": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "description": "Normalized nodule size in millimeters, or null when no normalized size can be extracted."
+          },
+          "size_text": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "description": "Original size expression copied from the report, such as 4 mm or 1 cm."
+          },
+          "density_category": {
+            "description": "Normalized density or attenuation category for the nodule.",
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "solid",
+                  "part_solid",
+                  "ground_glass",
+                  "calcified",
+                  "fat_containing",
+                  "unclear"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "density_text": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "description": "Original density-related wording from the report text."
+          },
+          "location_lobe": {
+            "description": "Normalized lung lobe location for the nodule.",
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "RUL",
+                  "RML",
+                  "RLL",
+                  "LUL",
+                  "LLL",
+                  "lingula",
+                  "bilateral",
+                  "unclear"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "location_text": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "description": "Original text span describing the nodule location, such as right middle lobe."
+          },
+          "count_type": {
+            "type": "string",
+            "enum": [
+              "single",
+              "multiple",
+              "unclear"
+            ],
+            "description": "Whether the report frames this nodule mention as a single lesion, multiple lesions, or unclear multiplicity."
+          },
+          "change_status": {
+            "description": "Normalized longitudinal change status relative to prior imaging.",
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "new",
+                  "stable",
+                  "increased",
+                  "decreased",
+                  "resolved",
+                  "unclear"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "change_text": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "description": "Original wording that supports the extracted change status, such as unchanged from prior exam."
+          },
+          "calcification": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Whether the report explicitly indicates calcification of the nodule."
+          },
+          "spiculation": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Whether the report explicitly indicates spiculation of the nodule."
+          },
+          "lobulation": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Whether the report explicitly indicates lobulation of the nodule."
+          },
+          "cavitation": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Whether the report explicitly indicates cavitation of the nodule."
+          },
+          "perifissural": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Whether the report explicitly identifies the nodule as perifissural."
+          },
+          "lung_rads_category": {
+            "description": "Lung-RADS category assigned in the report when present.",
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "0",
+                  "1",
+                  "2",
+                  "3",
+                  "4A",
+                  "4B",
+                  "4X",
+                  "S"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "recommendation_cue": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "description": "Follow-up or management cue copied from the report text for this nodule mention."
+          },
+          "evidence_span": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Exact text span from which the nodule facts were extracted."
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ],
+            "description": "Model confidence level for the structured nodule extraction."
+          },
+          "missing_flags": {
+            "type": "array",
+            "description": "List of nodule field names that could not be extracted from the evidence span.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "size_mm",
+                "size_text",
+                "density_category",
+                "density_text",
+                "location_lobe",
+                "location_text",
+                "count_type",
+                "change_status",
+                "change_text",
+                "calcification",
+                "spiculation",
+                "lobulation",
+                "cavitation",
+                "perifissural",
+                "lung_rads_category",
+                "recommendation_cue",
+                "evidence_span",
+                "confidence"
+              ],
+              "description": "Name of a nodule-level field that was missing or could not be resolved."
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "extraction_metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "extractor_version",
+        "extraction_timestamp",
+        "model_name"
+      ],
+      "description": "Metadata describing the extraction system and run that produced the structured output.",
+      "properties": {
+        "extractor_version": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Version identifier of the extraction pipeline or schema implementation."
+        },
+        "extraction_timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the report was processed, expressed in RFC 3339 date-time format."
+        },
+        "model_name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Name of the model or system used to extract the radiology facts."
+        }
+      }
+    }
+  }
+}

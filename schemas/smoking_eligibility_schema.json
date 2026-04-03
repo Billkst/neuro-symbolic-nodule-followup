@@ -1,0 +1,238 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neuro-symbolic-nodule-followup.local/schemas/smoking_eligibility_schema.json",
+  "title": "Smoking History and High-Risk Screening Eligibility Extraction Schema",
+  "description": "Schema for structured smoking history and lung cancer high-risk screening eligibility information extracted from discharge notes.",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "eligibility_criteria": {
+      "title": "High-Risk Screening Eligibility Criteria Reference",
+      "description": "Reference definitions for guideline criteria used when eligibility is determined from discharge note evidence.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "USPSTF_2021": {
+          "type": "object",
+          "description": "USPSTF 2021 lung cancer screening criteria: age 50 to 80 years, at least 20 pack-years, and current smoker or quit within the last 15 years.",
+          "additionalProperties": false,
+          "properties": {
+            "min_age": {
+              "type": "integer",
+              "const": 50,
+              "description": "Minimum eligible age in years under USPSTF 2021."
+            },
+            "max_age": {
+              "type": "integer",
+              "const": 80,
+              "description": "Maximum eligible age in years under USPSTF 2021."
+            },
+            "min_pack_years": {
+              "type": "number",
+              "const": 20,
+              "description": "Minimum cumulative tobacco exposure in pack-years under USPSTF 2021."
+            },
+            "max_years_since_quit": {
+              "type": "number",
+              "const": 15,
+              "description": "Maximum allowed years since quitting smoking under USPSTF 2021."
+            }
+          },
+          "required": ["min_age", "max_age", "min_pack_years", "max_years_since_quit"]
+        },
+        "Chinese_2021": {
+          "type": "object",
+          "description": "Chinese 2021 lung cancer screening criteria: age 40 years or older, at least 20 pack-years or a cigarette-year index of at least 400, and current smoker or quit within the last 15 years.",
+          "additionalProperties": false,
+          "properties": {
+            "min_age": {
+              "type": "integer",
+              "const": 40,
+              "description": "Minimum eligible age in years under Chinese 2021 guidance."
+            },
+            "min_pack_years": {
+              "type": "number",
+              "const": 20,
+              "description": "Minimum cumulative tobacco exposure in pack-years under Chinese 2021 guidance."
+            },
+            "min_cigarette_year_index": {
+              "type": "number",
+              "const": 400,
+              "description": "Minimum cigarette-year index threshold under Chinese 2021 guidance."
+            },
+            "max_years_since_quit": {
+              "type": "number",
+              "const": 15,
+              "description": "Maximum allowed years since quitting smoking under Chinese 2021 guidance."
+            }
+          },
+          "required": ["min_age", "min_pack_years", "min_cigarette_year_index", "max_years_since_quit"]
+        }
+      },
+      "required": ["USPSTF_2021", "Chinese_2021"]
+    }
+  },
+  "properties": {
+    "subject_id": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Unique patient identifier associated with the discharge note."
+    },
+    "note_id": {
+      "type": "string",
+      "pattern": "^[0-9]+-DS-[0-9]+$",
+      "description": "Discharge note identifier in MIMIC-style format such as 10014967-DS-11."
+    },
+    "source_section": {
+      "type": ["string", "null"],
+      "description": "Section of the discharge note where the smoking evidence was found, such as Social History, HPI, Past Medical History, or Assessment."
+    },
+    "smoking_status_raw": {
+      "type": ["string", "null"],
+      "description": "Original smoking-related text copied verbatim from the source note."
+    },
+    "smoking_status_norm": {
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": ["current_smoker", "former_smoker", "never_smoker", "passive_exposure", "unknown"],
+          "description": "Normalized smoking status label derived from the note text."
+        },
+        {
+          "type": "null",
+          "description": "Null when smoking status cannot be determined from the note."
+        }
+      ],
+      "description": "Normalized smoking status label mapped from raw note evidence, or null if unavailable."
+    },
+    "pack_year_value": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "description": "Numeric pack-year value extracted from the note when explicitly documented."
+    },
+    "pack_year_text": {
+      "type": ["string", "null"],
+      "description": "Original pack-year expression from the note, such as 46 pack year."
+    },
+    "ppd_value": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "description": "Numeric packs-per-day value extracted from the note."
+    },
+    "ppd_text": {
+      "type": ["string", "null"],
+      "description": "Original packs-per-day expression from the note, such as 1.5 ppd."
+    },
+    "years_smoked_value": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "description": "Numeric duration of smoking in years when explicitly documented or normalized from text."
+    },
+    "years_smoked_text": {
+      "type": ["string", "null"],
+      "description": "Original duration expression from the note, such as 30+ years."
+    },
+    "quit_years_value": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "description": "Numeric estimate of years since quitting smoking when derivable from the note."
+    },
+    "quit_years_text": {
+      "type": ["string", "null"],
+      "description": "Original expression describing smoking cessation timing, such as a couple of years ago."
+    },
+    "evidence_span": {
+      "type": ["string", "null"],
+      "description": "Exact text span that supports the extracted smoking or screening eligibility information."
+    },
+    "ever_smoker_flag": {
+      "type": ["boolean", "null"],
+      "description": "Boolean flag indicating whether the patient has any lifetime smoking history based on available evidence."
+    },
+    "eligible_for_high_risk_screening": {
+      "type": "string",
+      "enum": ["eligible", "not_eligible", "unknown"],
+      "description": "Eligibility status for high-risk lung cancer screening; unknown must be used when the note lacks sufficient evidence for a confident determination."
+    },
+    "eligibility_criteria_applied": {
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": ["USPSTF_2021", "NLST", "Chinese_2021", "none"],
+          "description": "Guideline or trial criteria applied to derive the eligibility judgment."
+        },
+        {
+          "type": "null",
+          "description": "Null when no eligibility criteria could be applied from the available evidence."
+        }
+      ],
+      "description": "Name of the eligibility framework used for the determination, or null if not applicable."
+    },
+    "eligibility_reason": {
+      "type": ["string", "null"],
+      "description": "Free-text explanation describing why the patient is eligible, not eligible, or unknown under the applied criteria."
+    },
+    "evidence_quality": {
+      "type": "string",
+      "enum": ["high", "medium", "low", "none"],
+      "description": "Quality assessment of the supporting evidence based on explicitness, completeness, ambiguity, and de-identification."
+    },
+    "extraction_metadata": {
+      "type": "object",
+      "description": "Metadata describing the extraction system version, extraction time, and model used to produce the structured record.",
+      "additionalProperties": false,
+      "properties": {
+        "extractor_version": {
+          "type": "string",
+          "description": "Version identifier of the extraction pipeline or prompt configuration."
+        },
+        "extraction_timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the extraction record was generated, formatted as an ISO 8601 date-time string."
+        },
+        "model_name": {
+          "type": "string",
+          "description": "Name of the model or system that produced the extraction."
+        }
+      },
+      "required": ["extractor_version", "extraction_timestamp", "model_name"]
+    },
+    "missing_flags": {
+      "type": "array",
+      "description": "List of field names that could not be extracted or confidently inferred from the note.",
+      "items": {
+        "type": "string",
+        "description": "Name of a missing or unresolvable field in this extraction record."
+      }
+    },
+    "data_quality_notes": {
+      "type": ["string", "null"],
+      "description": "Optional notes about ambiguity, de-identification, conflicting statements, or other extraction quality concerns."
+    }
+  },
+  "required": [
+    "subject_id",
+    "note_id",
+    "source_section",
+    "smoking_status_raw",
+    "smoking_status_norm",
+    "pack_year_value",
+    "pack_year_text",
+    "ppd_value",
+    "ppd_text",
+    "years_smoked_value",
+    "years_smoked_text",
+    "quit_years_value",
+    "quit_years_text",
+    "evidence_span",
+    "ever_smoker_flag",
+    "eligible_for_high_risk_screening",
+    "eligibility_criteria_applied",
+    "eligibility_reason",
+    "evidence_quality",
+    "extraction_metadata",
+    "missing_flags",
+    "data_quality_notes"
+  ]
+}

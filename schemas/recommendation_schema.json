@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neuro-symbolic-nodule-followup.local/schemas/recommendation_schema.json",
+  "title": "Follow-up Recommendation Output Schema",
+  "description": "JSON Schema for rule-engine and Clinical Decision State Graph outputs that encode guideline-based lung nodule follow-up recommendations.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "case_id", "recommendation_level", "recommendation_action", "followup_interval", "followup_modality",
+    "lung_rads_category", "guideline_source", "guideline_anchor", "reasoning_path", "triggered_rules",
+    "input_facts_used", "missing_information", "uncertainty_note", "output_type", "generation_metadata"
+  ],
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Unique identifier for this recommendation instance, typically composed from the source case and recommendation context."
+    },
+    "recommendation_level": {
+      "type": "string",
+      "enum": ["routine_screening", "short_interval_followup", "diagnostic_workup", "tissue_sampling", "multidisciplinary_review", "no_followup_needed", "insufficient_data"],
+      "description": "Normalized recommendation tier produced by the rule engine or CDSG."
+    },
+    "recommendation_action": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable action statement that describes the recommended next step for follow-up or management."
+    },
+    "followup_interval": {
+      "oneOf": [
+        { "type": "string", "enum": ["immediate", "1_month", "3_months", "6_months", "12_months", "24_months", "none", "unspecified"] },
+        { "type": "null" }
+      ],
+      "description": "Recommended elapsed time before the next action, or null when the interval is not applicable or cannot be determined."
+    },
+    "followup_modality": {
+      "oneOf": [
+        { "type": "string", "enum": ["LDCT", "CT_with_contrast", "PET_CT", "biopsy", "bronchoscopy", "surgical_consultation", "clinical_followup", "chest_xray", "none"] },
+        { "type": "null" }
+      ],
+      "description": "Recommended imaging or clinical modality for the next action, or null when no modality is applicable."
+    },
+    "lung_rads_category": {
+      "oneOf": [
+        { "type": "string", "enum": ["0", "1", "2", "3", "4A", "4B", "4X", "S"] },
+        { "type": "null" }
+      ],
+      "description": "Assigned Lung-RADS category when the recommendation is anchored to lung cancer screening logic, or null when not applicable."
+    },
+    "guideline_source": {
+      "type": "string",
+      "enum": ["Lung-RADS_v2022", "Fleischner_2017", "Chinese_Screening_2021", "Chinese_Clinical_2024", "NCCN_2018", "USPSTF_2021", "composite", "none"],
+      "description": "Primary guideline source or composite policy basis used to derive the recommendation."
+    },
+    "guideline_anchor": {
+      "type": ["string", "null"],
+      "description": "Specific section, table, rule, or anchor text within the cited guideline that supports the recommendation."
+    },
+    "reasoning_path": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Ordered list of intermediate reasoning steps, predicates, or symbolic transitions used to reach the recommendation."
+    },
+    "triggered_rules": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of internal rule identifiers that fired during recommendation generation."
+    },
+    "input_facts_used": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Structured subset of input facts that were consumed by the rule engine while producing this recommendation.",
+      "properties": {
+        "nodule_size_mm": {
+          "type": ["number", "null"],
+          "description": "Measured nodule size in millimeters that participated in the decision logic."
+        },
+        "nodule_density": {
+          "type": ["string", "null"],
+          "description": "Reported nodule density class, such as solid, part-solid, or ground-glass, if consumed by the rules."
+        },
+        "nodule_count": {
+          "type": ["integer", "null"],
+          "description": "Number of nodules considered by the reasoning process when multiplicity affects follow-up logic."
+        },
+        "change_status": {
+          "type": ["string", "null"],
+          "description": "Temporal status of the nodule, such as stable, new, or growing, when prior comparison was used."
+        },
+        "patient_risk_level": {
+          "type": ["string", "null"],
+          "description": "Risk grouping of the patient used by the guideline logic, for example low-risk or high-risk."
+        },
+        "smoking_eligible": {
+          "type": ["string", "null"],
+          "description": "Smoking eligibility assessment consumed by screening-related rules, encoded as the upstream structured value."
+        }
+      }
+    },
+    "missing_information": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of missing facts that limited recommendation confidence or prevented a more specific recommendation."
+    },
+    "uncertainty_note": {
+      "type": ["string", "null"],
+      "description": "Free-text explanation of uncertainty, ambiguity, or fallback behavior associated with the recommendation."
+    },
+    "output_type": {
+      "type": "string",
+      "enum": ["rule_based", "silver_label", "extracted_from_report", "model_predicted"],
+      "description": "Origin classification describing how the recommendation output was generated."
+    },
+    "generation_metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["engine_version", "generation_timestamp", "rules_version"],
+      "description": "Versioning and provenance metadata for the recommendation generation run.",
+      "properties": {
+        "engine_version": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Version identifier of the recommendation engine or CDSG executor."
+        },
+        "generation_timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp indicating when this recommendation instance was generated in RFC 3339 date-time format."
+        },
+        "rules_version": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Version identifier of the encoded guideline ruleset used for inference."
+        }
+      }
+    }
+  }
+}

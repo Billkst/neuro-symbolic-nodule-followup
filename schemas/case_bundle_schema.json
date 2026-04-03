@@ -1,0 +1,230 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neuro-symbolic-nodule-followup.local/schemas/case_bundle_schema.json",
+  "title": "Unified Case Bundle Schema",
+  "description": "Schema for the unified end-to-end case bundle consumed across radiology fact extraction, smoking eligibility assessment, and follow-up recommendation experiments.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["case_id", "subject_id", "demographics", "radiology_facts", "smoking_eligibility", "recommendation_target", "provenance", "split", "label_quality", "case_notes"],
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "pattern": "^CASE-[0-9]+-[0-9]+$",
+      "description": "Unique case identifier for the bundled sample, for example CASE-10001401-001."
+    },
+    "subject_id": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Patient subject identifier shared across all linked records in this unified case bundle."
+    },
+    "demographics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["age", "sex", "race", "insurance", "source", "missing_flags"],
+      "description": "Demographic attributes linked from the patient-level source tables for this case bundle.",
+      "properties": {
+        "age": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "description": "Patient age in years at the time of case assembly, or null when unavailable from the source tables."
+        },
+        "sex": {
+          "oneOf": [{"type": "string", "enum": ["M", "F", "unknown"]}, {"type": "null"}],
+          "description": "Normalized administrative sex value from the demographics source, or null when unavailable."
+        },
+        "race": {
+          "type": ["string", "null"],
+          "description": "Race or ethnicity string linked to the patient record, or null when unavailable or withheld."
+        },
+        "insurance": {
+          "type": ["string", "null"],
+          "description": "Insurance category associated with the patient record, or null when unavailable."
+        },
+        "source": {
+          "type": ["string", "null"],
+          "description": "Source file or table used to populate the demographics block, such as mimic-iv-3.1/patients.csv."
+        },
+        "missing_flags": {
+          "type": "array",
+          "uniqueItems": true,
+          "description": "List of demographics fields that are missing, unavailable, or not yet extracted for this case.",
+          "items": {
+            "type": "string",
+            "description": "Name of a demographics field that is missing or unresolved in this case bundle."
+          }
+        }
+      }
+    },
+    "radiology_facts": {
+      "type": "array",
+      "items": {
+        "$ref": "./radiology_fact_schema.json"
+      },
+      "minItems": 1,
+      "description": "One or more radiology fact extraction records linked into this case bundle."
+    },
+    "smoking_eligibility": {
+      "oneOf": [{"$ref": "./smoking_eligibility_schema.json"}, {"type": "null"}],
+      "description": "Structured smoking history and high-risk screening eligibility record, or null when no discharge note is available."
+    },
+    "recommendation_target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ground_truth_action", "ground_truth_source", "ground_truth_interval", "recommendation_output"],
+      "description": "Ground-truth recommendation fields and structured recommendation output associated with this case bundle.",
+      "properties": {
+        "ground_truth_action": {
+          "type": ["string", "null"],
+          "description": "Free-text follow-up action extracted from the report or annotation source, or null when unavailable."
+        },
+        "ground_truth_source": {
+          "oneOf": [{"type": "string", "enum": ["extracted_from_report", "silver_label", "expert_annotation", "none"]}, {"type": "null"}],
+          "description": "Source of the ground-truth recommendation label, or null when no label source is available."
+        },
+        "ground_truth_interval": {
+          "type": ["string", "null"],
+          "description": "Free-text or normalized interval string associated with the ground-truth recommendation, or null when unavailable."
+        },
+        "recommendation_output": {
+          "oneOf": [{"$ref": "./recommendation_schema.json"}, {"type": "null"}],
+          "description": "Structured recommendation output linked to this case, or null for partially labeled or unlabeled samples."
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["radiology_note_ids", "discharge_note_id", "data_version", "extraction_date", "pipeline_version"],
+      "description": "Source tracking metadata describing which notes and pipeline version produced this bundled case record.",
+      "properties": {
+        "radiology_note_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "List of radiology note identifiers used to assemble the radiology facts for this case.",
+          "items": {
+            "type": "string",
+            "description": "Radiology note identifier included in this case bundle."
+          }
+        },
+        "discharge_note_id": {
+          "type": ["string", "null"],
+          "description": "Discharge note identifier used for smoking eligibility extraction, or null when no discharge note was linked."
+        },
+        "data_version": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Version string for the underlying clinical data release, such as mimic-iv-note-2.2."
+        },
+        "extraction_date": {
+          "type": "string",
+          "format": "date",
+          "description": "Calendar date when this unified case bundle was assembled or exported in ISO 8601 date format."
+        },
+        "pipeline_version": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Version identifier of the end-to-end data assembly pipeline that produced this case bundle."
+        }
+      }
+    },
+    "split": {
+      "type": "string",
+      "enum": ["train", "val", "test", "unlabeled"],
+      "description": "Dataset partition assigned to this case bundle for training, validation, testing, or inference-only use."
+    },
+    "label_quality": {
+      "type": "string",
+      "enum": ["gold", "silver", "weak", "unlabeled"],
+      "description": "Quality tier describing the trust level and completeness of the recommendation target labels for this case."
+    },
+    "case_notes": {
+      "type": ["string", "null"],
+      "description": "Optional free-text notes about linkage decisions, ambiguity, exclusions, or manual review for this case."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "label_quality": {
+            "enum": ["gold", "silver"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "smoking_eligibility": {
+            "not": {
+              "type": "null"
+            }
+          },
+          "recommendation_target": {
+            "properties": {
+              "recommendation_output": {
+                "not": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "label_quality": {
+            "const": "weak"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "recommendation_target": {
+            "properties": {
+              "recommendation_output": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "label_quality": {
+            "const": "unlabeled"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "smoking_eligibility": {
+            "type": "null"
+          },
+          "recommendation_target": {
+            "properties": {
+              "ground_truth_action": {
+                "type": "null"
+              },
+              "ground_truth_source": {
+                "enum": ["none", null]
+              },
+              "ground_truth_interval": {
+                "type": "null"
+              },
+              "recommendation_output": {
+                "type": "null"
+              }
+            }
+          },
+          "split": {
+            "const": "unlabeled"
+          }
+        }
+      }
+    }
+  ]
+}
