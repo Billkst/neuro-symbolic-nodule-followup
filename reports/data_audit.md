@@ -20,7 +20,7 @@ data/
 │       ├── 188/
 │       └── 189/
 ├── mimic-iv-3.1.zip
-├── mimic-iv-note-deidentified-free-text-clinical-notes-3.1.zip
+├── mimic-iv-note-deidentified-free-text-clinical-notes-2.2.zip
 ├── mimic_note_extracted/
 │   ├── radiology.csv.gz
 │   ├── radiology_detail.csv.gz
@@ -56,12 +56,12 @@ data/
 当前可直接形成的输入输出:
 - 输入: 放射报告 text 字段
 - 输出: 结节大小(mm)、密度(solid/GGO/part-solid)、位置(lobe)、数量、变化(stable/new/increased)
-- 结节报告约 190,099 条 [radiology.csv.gz | 前 50,000 行采样: 8.19% 含 "nodule", 线性外推 | 50,000]
+- 结节报告约 190,099 条（采样估计，非全量统计）[radiology.csv.gz | 前 50,000 行采样: 8.19% 含 "nodule", 线性外推 | 50,000]
 
-Section 覆盖率 (结节报告子集, 采样 50K):
+Section 覆盖率（采样估计，非全量统计）(结节报告子集, 采样 50K):
 IMPRESSION 96.2%, TECHNIQUE 80.4%, FINDINGS 79.3%, COMPARISON 78.8%, INDICATION 76.1% [radiology.csv.gz | 50K 采样 | 50,000]
 
-关键词分布 (结节报告子集, 采样 50K):
+关键词分布（采样估计，非全量统计）(结节报告子集, 采样 50K):
 | 关键词 | 出现率 | 关键词 | 出现率 |
 | :--- | :--- | :--- | :--- |
 | size | 57.3% | mm | 57.2% |
@@ -126,15 +126,15 @@ RECOMMENDATION(S): PET-CT imaging may be performed for better characterization. 
 
 当前最缺的标签/字段:
 - Social History 段落被系统性脱敏 (替换为 "___"), 这是核心瓶颈
-- 定量吸烟信息 (pack-year) 仅在 ~0.5% 的记录中出现 [discharge.csv.gz | 前 10,000 行采样: 51 条含 "pack-year" | 10,000]
-- PPD 出现率 ~2.5%, 但存在歧义 (Postpartum Day vs Packs Per Day) [discharge.csv.gz | 前 10,000 行采样 | 10,000]
+- 定量吸烟信息 (pack-year) 仅在约 0.5% 的记录中出现（采样估计，非全量统计）[discharge.csv.gz | 前 10,000 行采样: 51 条含 "pack-year" | 10,000]
+- PPD 出现率约 2.5%（采样估计，非全量统计）, 但存在歧义 (Postpartum Day vs Packs Per Day) [discharge.csv.gz | 前 10,000 行采样 | 10,000]
 
 关键发现 — 脱敏模式:
-- 97.4% 的记录包含 "Social History" 段落 [discharge.csv.gz | 前 10,000 行采样 | 10,000]
+- 97.4% 的记录包含 "Social History" 段落（采样估计，非全量统计）[discharge.csv.gz | 前 10,000 行采样 | 10,000]
 - 其中 97.9% 的 Social History 内容被替换为 "___" [discharge.csv.gz | 前 10,000 行采样: 9,532/9,737 | 10,000]
 - 仅 2.1% (约 205/10,000) 保留了实际 Social History 内容
 - 吸烟信息散落在 Family History、HPI、Assessment 等非 Social History 段落中
-- 14.4% 的记录在非 SH 段落中提及 smoking/tobacco [discharge.csv.gz | 前 10,000 行采样 | 10,000]
+- 14.4% 的记录在非 SH 段落中提及 smoking/tobacco（采样估计，非全量统计）[discharge.csv.gz | 前 10,000 行采样 | 10,000]
 
 当前能做的 baseline:
 - 弱监督 baseline: 基于关键词匹配 (smoking/tobacco/cigarette) 的二分类
@@ -228,7 +228,7 @@ ___
 | malignancy | 1-5 | 恶性度 (1=极低, 5=极高) |
 
 - ROI 包含 edgeMap 像素轮廓, 无显式直径字段 (需从轮廓点计算)
-- 43% 的采样文件包含结节标注 [LIDC XML | 前 100 个文件采样 | 100]
+- 43% 的采样文件包含结节标注（采样估计，非全量统计）[LIDC XML | 前 100 个文件采样 | 100]
 
 真实样例:
 ```xml
@@ -269,7 +269,7 @@ First ROI: imageZposition=-198.5, edgeMap points=19
 
 ### C7. 数据关联性分析
 - radiology 与 discharge 通过 subject_id 关联。
-- 结节报告患者中 79.8% 可关联到 discharge 记录 [radiology 前 100K + discharge 前 100K subject_id 交集 | 100,000]
+- 结节报告患者中 79.8% 可关联到 discharge 记录（采样估计，非全量统计）[radiology 前 100K + discharge 前 100K subject_id 交集 | 100,000]
 - patients 表通过 subject_id 提供年龄/性别。
 - admissions 表通过 hadm_id 提供就诊事件级关联。
 
@@ -279,9 +279,9 @@ First ROI: imageZposition=-198.5, edgeMap points=19
 
 1. 当前数据是否足以构建最小闭环基线? — 部分可以。放射报告抽取 + 规则推理可闭环, 但吸烟史判定环节只能用弱监督 baseline 填充。
 2. 信息抽取模块数据是否充足? — 语料充足 (约 19 万条结节报告), 但缺人工标注金标准, 只能做规则/弱监督 baseline。
-3. 吸烟史判定模块数据是否充足? — 严重不足。Social History 脱敏是不可逆的数据缺陷。定量信息 (pack-year) 仅 0.5%。只能支撑弱监督 baseline, 不适合作为主实验的监督学习任务。
-4. 端到端评估数据是否充足? — 不足。缺 "报告 -> 随访建议" 金标准对。必须人工标注。
-5. 数据关联性是否满足需求? — 基本满足。79.8% 的结节患者可关联 discharge (采样估计), patients 表提供年龄/性别。但 MIMIC-IV hosp 尚未解压。
+3. 吸烟史判定模块数据是否充足? — 严重不足。Social History 脱敏是不可逆的数据缺陷。定量信息 (pack-year) 仅约 0.5%（采样估计，非全量统计）。只能支撑弱监督 baseline, 不适合作为主实验的监督学习任务。
+4. 端到端评估数据是否充足? — 不足。缺 "报告 -> 随访建议" 金标准对。需构建 silver-standard 评测集。
+5. 数据关联性是否满足需求? — 基本满足。79.8% 的结节患者可关联 discharge（采样估计，非全量统计）, patients 表提供年龄/性别。但 MIMIC-IV hosp 尚未解压。
 
 ---
 
@@ -299,10 +299,11 @@ P2: 构建结节报告语料库并计算 LIDC 直径
 - 从 LIDC XML 的 edgeMap 轮廓点计算结节等效直径, 建立形态学参考集
 - 目的: 为信息抽取模块提供可用语料和弱监督信号
 
-P3: 人工标注 500 条金标准
-- 从结节报告中分层抽样 500 条 (按结节大小/密度/是否含建议分层)
-- 标注: 结节特征 (size, density, location, count, change) + 随访建议 (如有)
-- 目的: 建立信息抽取和端到端评估的基准
+P3: 构建 silver-standard 评测集
+- 从结节报告中筛选含明确 recommendation cue 的样本 (如含 "recommend", "follow-up", "Lung-RADS" 的报告, 约占结节报告的 30%（采样估计，非全量统计）)
+- 用指南规则 (Lung-RADS / 中国指南) 对抽取出的结节特征自动生成伪标签 (pseudo-label)
+- 对伪标签进行少量人工 spot-check / case review (约 50-100 条), 而非大规模人工标注
+- 目的: 支持 baseline 评测与案例分析, 而非构建严格 gold standard
 
 ---
 
@@ -341,4 +342,4 @@ Readiness 结论:
 
 **(b) 可以启动部分 baseline 工作，但缺少关键标注。**
 
-放射报告信息抽取模块 (B1) 具备充足语料 (~190K 结节报告) 和清晰的文本结构 (FINDINGS/IMPRESSION), 可立即启动基于规则的 baseline。随访规则推理模块 (B3) 有三份可结构化的指南, 可立即编码 IF-THEN 规则。但吸烟史判定模块 (B2) 因 Social History 系统性脱敏, 仅能支撑弱监督 baseline, 不适合作为主实验任务。端到端评估缺乏金标准对, 必须先完成 P3 (人工标注 500 条) 才能进入正式实验阶段。
+放射报告信息抽取模块 (B1) 具备充足语料 (~190K 结节报告，采样估计) 和清晰的文本结构 (FINDINGS/IMPRESSION), 可立即启动基于规则的 baseline。随访规则推理模块 (B3) 有三份可结构化的指南, 可立即编码 IF-THEN 规则。但吸烟史判定模块 (B2) 因 Social History 系统性脱敏, 仅能支撑弱监督 baseline, 不适合作为主实验任务。端到端评估需先完成 P3 (构建 silver-standard 评测集) 才能进入正式实验阶段。
