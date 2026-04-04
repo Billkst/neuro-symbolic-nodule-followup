@@ -28,7 +28,7 @@
   "subject_id": 10046097,
   "exam_name": "CT ABD AND PELVIS WITH CONTRAST",
   "modality": "CT",
-  "body_site": "other",
+  "body_site": "chest_abdomen_pelvis",
   "report_text": "EXAMINATION: CT ABD AND PELVIS WITH CONTRAST\nINDICATION: NO_PO contrast; History: ___ with 1 day of n/v, BRBPR, diffuse abd tendernessNO_PO contrast// Colitis, other intraabdominal pathology present?\nTECHNIQUE: Single phase contrast: MDCT axial images were acquired through the abdomen and pelvis following intravenous contrast administration. Oral contrast was not administered. Coronal and sagittal reformations were performed and reviewed on PACS.\nCOMPARISON: None.\nFINDINGS: LOWER CHEST: There is a 4 mm solid nodule in the right middle lobe (2:2). Visualized lung fields are otherwise within normal limits. There is no evidence of pleural or pericardial effusion.\nIMPRESSION: 3. 4 mm right middle lobe pulmonary nodule without prior study for comparison. For incidentally detected single solid pulmonary nodule smaller than 6 mm, no CT follow-up is recommended in a low-risk patient, and an optional CT in 12 months is recommended in a high-risk patient.\nRECOMMENDATION(S): For incidentally detected single solid pulmonary nodule smaller than 6 mm, no CT follow-up is recommended in a low-risk patient, and an optional CT in 12 months is recommended in a high-risk patient.",
   "sections": {"indication": "NO_PO contrast; History: ___ with 1 day of n/v, BRBPR, diffuse abd tendernessNO_PO contrast// Colitis, other intraabdominal pathology present?", "technique": "Single phase contrast: MDCT axial images were acquired through the abdomen and pelvis following intravenous contrast administration. Oral contrast was not administered. Coronal and sagittal reformations were performed and reviewed on PACS.", "comparison": "None.", "findings": "LOWER CHEST: There is a 4 mm solid nodule in the right middle lobe (2:2). Visualized lung fields are otherwise within normal limits. There is no evidence of pleural or pericardial effusion.", "impression": "3. 4 mm right middle lobe pulmonary nodule without prior study for comparison. For incidentally detected single solid pulmonary nodule smaller than 6 mm, no CT follow-up is recommended in a low-risk patient, and an optional CT in 12 months is recommended in a high-risk patient."},
   "nodule_count": 1,
@@ -43,7 +43,7 @@
 
 5. 规范化决策
 - `right middle lobe` 规范化为 `RML`；`solid` 规范化为 `density_category = solid`。
-- `body_site` 记为 `other`，因为 schema 当前没有 `abdomen_pelvis` 枚举；该限制需要在实现时单独处理。
+- `body_site` 记为 `chest_abdomen_pelvis`，对应 schema 枚举中的腹盆联合扫描类型；虽然结节位于肺部，但检查范围覆盖胸腹盆，因此按检查覆盖区域而非结节位置赋值。
 - 报告中的随访句子被完整复制到 `recommendation_cue`，方便下游监督 `text -> recommendation` 对齐。
 
 ### Example A2: 多发 part-solid 结节与高危形态学

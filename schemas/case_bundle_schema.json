@@ -154,11 +154,6 @@
       },
       "then": {
         "properties": {
-          "smoking_eligibility": {
-            "not": {
-              "type": "null"
-            }
-          },
           "recommendation_target": {
             "properties": {
               "recommendation_output": {
