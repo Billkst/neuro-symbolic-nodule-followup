@@ -1,0 +1,4 @@
+pandas>=2.0
+jsonschema>=4.20
+tqdm>=4.60
+pytest>=7.0
