@@ -1,0 +1,56 @@
+# Phase 4 Evaluation Framework 配置
+# 继承 phase3_config.yaml 的数据路径
+
+data:
+  base_dir: "data/mimic_note_extracted/note"
+  radiology_file: "radiology.csv.gz"
+  radiology_detail_file: "radiology_detail.csv.gz"
+  discharge_file: "discharge.csv.gz"
+  mimic_iv_zip: "data/mimic-iv-3.1.zip"
+
+eval_sets:
+  radiology_explicit_eval:
+    target_size: 500
+    description: "含显式结节字段（size/density/location/change/recommendation cue）的胸部CT报告"
+    min_explicit_fields: 1
+  smoking_explicit_eval:
+    target_size: 500
+    description: "含显式吸烟线索的出院记录"
+  recommendation_eval:
+    target_size: 500
+    description: "含显式 recommendation cue 或可规则推导 silver label 的样本"
+  case_study_set:
+    target_size: 16
+    description: "覆盖所有结节类型和边界情况的案例集"
+
+baselines:
+  smoking_variants:
+    - social_history_only
+    - social_history_plus_fallback
+  recommendation_variants:
+    - cue_only
+    - structured_rule
+  radiology_variants:
+    - full_text_regex
+    - section_aware_regex
+
+pipeline:
+  random_seed: 42
+  cache_enabled: true
+  nrows_limit: null  # null = 全量加载; 设置数字可限制加载行数加速调试
+  export_sample_size: 2000  # 候选池大小，从中筛选 eval sets
+
+output:
+  phase4_dir: "outputs/phase4"
+  manifests_dir: "outputs/phase4/manifests"
+  eval_results_dir: "outputs/phase4/results"
+  comparisons_dir: "outputs/phase4/comparisons"
+  cache_dir: "outputs/phase4/cache"
+  reports_dir: "reports"
+
+versions:
+  pipeline_version: "0.2.0"
+  eval_version: "phase4_v1"
+  data_version: "mimic-iv-note-2.2"
+  rules_version: "lung_rads_v2022_minimal_0.1"
+  extractor_version: "regex_baseline_0.1"
