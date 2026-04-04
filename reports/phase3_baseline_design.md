@@ -59,7 +59,8 @@
 | 字段 | 支持状态 | 说明 |
 |------|---------|------|
 | subject_id / note_id | ✅ 稳定 | 直接传入 |
-| smoking_status_raw | ⚠️ 中等 | Social History 原文片段 |
+| source_section | ✅ 稳定 | `Social History` / `full_text_fallback` / `null` |
+| smoking_status_raw | ⚠️ 中等 | Social History 原文片段或全文 fallback 片段 |
 | smoking_status_norm | ⚠️ 中等 | current_smoker/former_smoker/never_smoker/unknown |
 | ever_smoker_flag | ⚠️ 中等 | 从 status_norm 推导 |
 | pack_year_text / pack_year_value | ❌ 弱 | 数据中仅 ~0.5% 含 pack-year |
@@ -68,8 +69,14 @@
 | quit_years_text / quit_years_value | ❌ 弱 | 极少出现 |
 | eligible_for_high_risk_screening | ⚠️ 中等 | 大量输出 unknown（数据不足） |
 | eligibility_reason | ⚠️ 中等 | 解释判定依据 |
-| evidence_quality | ✅ 稳定 | strong/moderate/weak/absent 四级评估 |
+| evidence_quality | ✅ 稳定 | high/medium/low/none 四级评估；fallback 来源上限为 low |
 | missing_flags | ✅ 稳定 | 自动收集 |
+
+> **Phase 3.1 更新**：Smoking baseline 新增 full-text fallback 策略。
+> 当 Social History 段不存在或内容被脱敏（如 `___`）时，自动在全文中搜索含烟草语义的句子进行抽取。
+> 该 fallback 保留 PPD 歧义保护（排除 postpartum/TB 上下文），且 evidence_quality 上限为 `low`。
+> 在 20K discharge 样本中，fallback 额外捕获 ~1,210 条 smoking 信息（对比 Social History 路径的 ~193 条），覆盖率提升约 6 倍。
+> 这仍然是弱监督 baseline，不是高精度 eligibility extractor。
 
 ### 2.3 Recommendation Schema
 

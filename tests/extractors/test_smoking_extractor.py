@@ -93,6 +93,64 @@ def test_no_social_history_section_returns_unknown_absent():
     assert result["evidence_quality"] == "none"
 
 
+def test_fulltext_fallback_when_social_history_deidentified():
+    text = (
+        "Admission Date: 2020-01-01\n"
+        "Social History: ___\n"
+        "Family History: none\n"
+        "History of Present Illness: Patient is a former smoker with 40 pack-year history."
+    )
+    result = extract_smoking_eligibility(10000012, "10000012-DS-12", text)
+    assert result["source_section"] == "full_text_fallback"
+    assert result["smoking_status_norm"] == "former_smoker"
+    assert result["evidence_quality"] == "low"
+    assert "full-text fallback" in (result["data_quality_notes"] or "")
+
+
+def test_fulltext_fallback_when_social_history_missing():
+    text = (
+        "Admission Date: 2020-01-01\n"
+        "History of Present Illness: Patient quit smoking a couple of years ago.\n"
+        "Family History: none"
+    )
+    result = extract_smoking_eligibility(10000013, "10000013-DS-13", text)
+    assert result["source_section"] == "full_text_fallback"
+    assert result["smoking_status_norm"] in {"former_smoker", "current_smoker"}
+    assert result["quit_years_value"] == 2.0
+
+
+def test_fulltext_fallback_ppd_disambiguation_preserved():
+    text = (
+        "Admission Date: 2020-01-01\n"
+        "Social History: ___\n"
+        "Hospital Course: PPD 2, postpartum day 2. Patient recovering well."
+    )
+    result = extract_smoking_eligibility(10000014, "10000014-DS-14", text)
+    assert result["ppd_value"] is None
+
+
+def test_fulltext_fallback_no_smoking_cues_stays_unknown():
+    text = (
+        "Admission Date: 2020-01-01\n"
+        "Social History: ___\n"
+        "History of Present Illness: Patient presents with chest pain."
+    )
+    result = extract_smoking_eligibility(10000015, "10000015-DS-15", text)
+    assert result["smoking_status_norm"] == "unknown"
+    assert result["evidence_quality"] == "none"
+
+
+def test_social_history_preferred_over_fallback():
+    text = (
+        "Admission Date: 2020-01-01\n"
+        "Social History: Never smoked\n"
+        "History of Present Illness: Patient is a former smoker."
+    )
+    result = extract_smoking_eligibility(10000016, "10000016-DS-16", text)
+    assert result["source_section"] == "Social History"
+    assert result["smoking_status_norm"] == "never_smoker"
+
+
 def test_complex_former_smoker_full_quantitative():
     result = extract_smoking_eligibility(
         10000010,

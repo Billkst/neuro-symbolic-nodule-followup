@@ -2,7 +2,7 @@ import re
 from datetime import datetime, timezone
 
 
-_EXTRACTOR_VERSION = "smoking_extractor_v1"
+_EXTRACTOR_VERSION = "smoking_extractor_v1.1"
 _MODEL_NAME = "regex_rule_based"
 
 
@@ -116,6 +116,36 @@ def _has_tobacco_context(text: str) -> bool:
         re.search(r"\b(smok|smoker|tobacco|cigarette|pack[-\s]?year|ppd|packs?\s+per\s+day)\b", text, re.IGNORECASE)
         is not None
     )
+
+
+_SMOKING_SENTENCE_PATTERN = re.compile(
+    r"\b(smok(?:e[drs]?|ing)|tobacco|cigarette|pack[-\s]?year|pk[-\s]?yr"
+    r"|ppd|packs?\s+per\s+day|nicotine|quit\s+smoking|former\s+smoker"
+    r"|current\s+smoker|non[-\s]?smoker|never\s+smoked|denies\s+(?:smoking|tobacco))\b",
+    re.IGNORECASE,
+)
+
+_PPD_EXCLUDE_FULLTEXT = re.compile(
+    r"\b(postpartum|delivery|ppd\s*test|tuberculin|\btb\b|induration|purified\s+protein)\b",
+    re.IGNORECASE,
+)
+
+
+def _extract_smoking_sentences(full_text: str) -> str | None:
+    """从全文中提取含烟草语义的句子，拼接返回。排除 PPD 歧义上下文。"""
+    sentences = re.split(r"(?<=[.!?\n])\s+", full_text)
+    relevant = []
+    for sent in sentences:
+        if not _SMOKING_SENTENCE_PATTERN.search(sent):
+            continue
+        if _PPD_EXCLUDE_FULLTEXT.search(sent) and not re.search(
+            r"\b(smok|tobacco|cigarette|pack[-\s]?year|nicotine)\b", sent, re.IGNORECASE
+        ):
+            continue
+        relevant.append(sent.strip())
+    if not relevant:
+        return None
+    return " ".join(relevant)
 
 
 def extract_pack_years(text: str) -> tuple[str | None, float | None]:
@@ -274,8 +304,15 @@ def assess_evidence_quality(
 def extract_smoking_eligibility(subject_id: int, note_id: str, text: str) -> dict:
     source_section, social_history_text = find_social_history_section(text or "")
 
-    if social_history_text is None:
-        target_text = ""
+    use_fallback = False
+    if social_history_text is None or _is_deidentified(social_history_text):
+        fallback_text = _extract_smoking_sentences(text or "")
+        if fallback_text:
+            target_text = fallback_text
+            source_section = "full_text_fallback"
+            use_fallback = True
+        else:
+            target_text = ""
     else:
         target_text = social_history_text
 
@@ -310,8 +347,10 @@ def extract_smoking_eligibility(subject_id: int, note_id: str, text: str) -> dic
         pack_year_value=pack_year_value,
         ppd_value=ppd_value,
         years_smoked_value=years_smoked_value,
-        social_history_text=social_history_text,
+        social_history_text=target_text if use_fallback else social_history_text,
     )
+    if use_fallback and evidence_quality in {"high", "medium"}:
+        evidence_quality = "low"
 
     extraction_timestamp = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     missing_flags = []
@@ -337,7 +376,9 @@ def extract_smoking_eligibility(subject_id: int, note_id: str, text: str) -> dic
             missing_flags.append(key)
 
     notes = []
-    if source_section is None:
+    if use_fallback:
+        notes.append("Social History missing or de-identified; used full-text fallback.")
+    elif source_section is None:
         notes.append("Social History section not found.")
     elif _is_deidentified(social_history_text):
         notes.append("Social History appears de-identified.")

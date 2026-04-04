@@ -201,6 +201,7 @@ nodules:
 ```
 note_id: 10000935-DS-18
 subject_id: 10000935
+source_section: Social History
 smoking_status_norm: unknown
 evidence_quality: none
 missing_flags: [smoking_status_raw, pack_year_value, pack_year_text, ppd_value, ppd_text,
@@ -210,41 +211,80 @@ missing_flags: [smoking_status_raw, pack_year_value, pack_year_text, ppd_value, 
 
 ### 样例 2: 脱敏导致 unknown
 ```
-note_id: 10000935-DS-19
-subject_id: 10000935
-smoking_status_norm: unknown
-evidence_quality: none
-missing_flags: [同上]
-```
-
-### 样例 3: 脱敏导致 unknown
-```
-note_id: 10000935-DS-20
-subject_id: 10000935
-smoking_status_norm: unknown
-evidence_quality: none
-missing_flags: [同上]
-```
-
-### 样例 4: 脱敏导致 unknown
-```
-note_id: 10000935-DS-21
-subject_id: 10000935
-smoking_status_norm: unknown
-evidence_quality: none
-missing_flags: [同上]
-```
-
-### 样例 5: 脱敏导致 unknown
-```
 note_id: 10001338-DS-6
 subject_id: 10001338
+source_section: Social History
 smoking_status_norm: unknown
 evidence_quality: none
 missing_flags: [同上]
 ```
 
-> 说明：前 50K discharge 样本中 Social History 几乎全部被脱敏为 `___`，这与 data_audit.md 中 97.9% 脱敏率一致。在更大样本量下可以找到少量含实际吸烟信息的记录。
+### 样例 3: Full-text fallback 成功 — former smoker (quit smoking)
+```
+note_id: 10000032-DS-21
+subject_id: 10000032
+source_section: full_text_fallback
+smoking_status_norm: former_smoker
+smoking_status_raw: "quit smoking"
+pack_year_value: null
+evidence_quality: low
+evidence_span: "quit smoking"
+data_quality_notes: "Social History missing or de-identified; used full-text fallback."
+```
+
+### 样例 4: Full-text fallback 成功 — former smoker (history of smoking)
+```
+note_id: 10000032-DS-22
+subject_id: 10000032
+source_section: full_text_fallback
+smoking_status_norm: former_smoker
+smoking_status_raw: "history of smoking"
+pack_year_value: null
+evidence_quality: low
+evidence_span: "history of smoking"
+data_quality_notes: "Social History missing or de-identified; used full-text fallback."
+```
+
+### 样例 5: Full-text fallback 成功 — never smoker
+```
+note_id: 10000980-DS-21
+subject_id: 10000980
+source_section: full_text_fallback
+smoking_status_norm: never_smoker
+smoking_status_raw: "non-smoker"
+pack_year_value: null
+evidence_quality: low
+evidence_span: "non-smoker"
+data_quality_notes: "Social History missing or de-identified; used full-text fallback."
+```
+
+### 样例 6: Full-text fallback 失败 — 有烟草句子但无法判定状态
+```
+note_id: 10000826-DS-17
+subject_id: 10000826
+source_section: full_text_fallback
+smoking_status_norm: unknown
+evidence_quality: none
+data_quality_notes: "Social History missing or de-identified; used full-text fallback."
+```
+
+### 样例 7: Full-text fallback 失败 — 全文无烟草线索
+```
+note_id: 10000935-DS-19
+subject_id: 10000935
+source_section: Social History
+smoking_status_norm: unknown
+evidence_quality: none
+data_quality_notes: "Social History appears de-identified."
+```
+
+> **Phase 3.1 更新**：新增 full-text fallback 策略后，在 20K discharge 样本中：
+> - Social History 路径成功抽取: ~193 条
+> - Full-text fallback 成功抽取: ~1,210 条（覆盖率提升约 6 倍）
+> - Fallback 仍然失败: ~1,914 条（找到烟草句子但无法判定状态，或全文无线索）
+> - Fallback 来源的 evidence_quality 上限为 `low`，不会高估证据强度
+> - PPD 歧义保护在 fallback 路径中仍然有效
+> - 这仍然是弱监督 baseline，不是高精度 eligibility extractor
 
 ---
 
