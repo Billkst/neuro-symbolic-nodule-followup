@@ -1,0 +1,12 @@
+{
+  "task": "location",
+  "subset_size": 26134,
+  "prediction_distribution": {
+    "no_location": 26134
+  },
+  "non_default_prediction_count": 0,
+  "sampled_case_count": 0,
+  "sampled_text_support_distribution": {},
+  "note": "关注 regex 标为 no_location 的样本中，BERT 是否能补出具体肺叶位置。",
+  "sampled_cases": []
+}

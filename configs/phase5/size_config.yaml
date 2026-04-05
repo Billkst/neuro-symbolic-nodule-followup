@@ -1,0 +1,11 @@
+task:
+  name: "size_mm"
+  type: "classification"
+  num_labels: 2
+  label_map:
+    no_size: 0
+    has_size: 1
+  regression_enabled: true
+  primary_metric: "f1"
+  regression_metric: "mae"
+  tolerance_mm: 1.0

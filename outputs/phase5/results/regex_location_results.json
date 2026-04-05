@@ -1,0 +1,466 @@
+{
+  "method": "regex",
+  "task": "location",
+  "val_results": {
+    "accuracy": 1.0,
+    "macro_f1": 1.0,
+    "per_class_f1": {
+      "RUL": 1.0,
+      "RML": 1.0,
+      "RLL": 1.0,
+      "LUL": 1.0,
+      "LLL": 1.0,
+      "lingula": 1.0,
+      "bilateral": 1.0,
+      "unclear": 1.0,
+      "no_location": 1.0
+    },
+    "confusion_matrix": {
+      "labels": [
+        "RUL",
+        "RML",
+        "RLL",
+        "LUL",
+        "LLL",
+        "lingula",
+        "bilateral",
+        "unclear",
+        "no_location"
+      ],
+      "matrix": [
+        [
+          4363,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1647,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3396,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          2530,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2638,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          373,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1078,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1045,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          27820
+        ]
+      ],
+      "rows": {
+        "RUL": {
+          "RUL": 4363,
+          "RML": 0,
+          "RLL": 0,
+          "LUL": 0,
+          "LLL": 0,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 0,
+          "no_location": 0
+        },
+        "RML": {
+          "RUL": 0,
+          "RML": 1647,
+          "RLL": 0,
+          "LUL": 0,
+          "LLL": 0,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 0,
+          "no_location": 0
+        },
+        "RLL": {
+          "RUL": 0,
+          "RML": 0,
+          "RLL": 3396,
+          "LUL": 0,
+          "LLL": 0,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 0,
+          "no_location": 0
+        },
+        "LUL": {
+          "RUL": 0,
+          "RML": 0,
+          "RLL": 0,
+          "LUL": 2530,
+          "LLL": 0,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 0,
+          "no_location": 0
+        },
+        "LLL": {
+          "RUL": 0,
+          "RML": 0,
+          "RLL": 0,
+          "LUL": 0,
+          "LLL": 2638,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 0,
+          "no_location": 0
+        },
+        "lingula": {
+          "RUL": 0,
+          "RML": 0,
+          "RLL": 0,
+          "LUL": 0,
+          "LLL": 0,
+          "lingula": 373,
+          "bilateral": 0,
+          "unclear": 0,
+          "no_location": 0
+        },
+        "bilateral": {
+          "RUL": 0,
+          "RML": 0,
+          "RLL": 0,
+          "LUL": 0,
+          "LLL": 0,
+          "lingula": 0,
+          "bilateral": 1078,
+          "unclear": 0,
+          "no_location": 0
+        },
+        "unclear": {
+          "RUL": 0,
+          "RML": 0,
+          "RLL": 0,
+          "LUL": 0,
+          "LLL": 0,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 1045,
+          "no_location": 0
+        },
+        "no_location": {
+          "RUL": 0,
+          "RML": 0,
+          "RLL": 0,
+          "LUL": 0,
+          "LLL": 0,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 0,
+          "no_location": 27820
+        }
+      }
+    }
+  },
+  "test_results": {
+    "accuracy": 1.0,
+    "macro_f1": 1.0,
+    "per_class_f1": {
+      "RUL": 1.0,
+      "RML": 1.0,
+      "RLL": 1.0,
+      "LUL": 1.0,
+      "LLL": 1.0,
+      "lingula": 1.0,
+      "bilateral": 1.0,
+      "unclear": 1.0,
+      "no_location": 1.0
+    },
+    "confusion_matrix": {
+      "labels": [
+        "RUL",
+        "RML",
+        "RLL",
+        "LUL",
+        "LLL",
+        "lingula",
+        "bilateral",
+        "unclear",
+        "no_location"
+      ],
+      "matrix": [
+        [
+          3879,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1627,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3208,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          2459,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2488,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          326,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          988,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          948,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          26134
+        ]
+      ],
+      "rows": {
+        "RUL": {
+          "RUL": 3879,
+          "RML": 0,
+          "RLL": 0,
+          "LUL": 0,
+          "LLL": 0,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 0,
+          "no_location": 0
+        },
+        "RML": {
+          "RUL": 0,
+          "RML": 1627,
+          "RLL": 0,
+          "LUL": 0,
+          "LLL": 0,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 0,
+          "no_location": 0
+        },
+        "RLL": {
+          "RUL": 0,
+          "RML": 0,
+          "RLL": 3208,
+          "LUL": 0,
+          "LLL": 0,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 0,
+          "no_location": 0
+        },
+        "LUL": {
+          "RUL": 0,
+          "RML": 0,
+          "RLL": 0,
+          "LUL": 2459,
+          "LLL": 0,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 0,
+          "no_location": 0
+        },
+        "LLL": {
+          "RUL": 0,
+          "RML": 0,
+          "RLL": 0,
+          "LUL": 0,
+          "LLL": 2488,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 0,
+          "no_location": 0
+        },
+        "lingula": {
+          "RUL": 0,
+          "RML": 0,
+          "RLL": 0,
+          "LUL": 0,
+          "LLL": 0,
+          "lingula": 326,
+          "bilateral": 0,
+          "unclear": 0,
+          "no_location": 0
+        },
+        "bilateral": {
+          "RUL": 0,
+          "RML": 0,
+          "RLL": 0,
+          "LUL": 0,
+          "LLL": 0,
+          "lingula": 0,
+          "bilateral": 988,
+          "unclear": 0,
+          "no_location": 0
+        },
+        "unclear": {
+          "RUL": 0,
+          "RML": 0,
+          "RLL": 0,
+          "LUL": 0,
+          "LLL": 0,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 948,
+          "no_location": 0
+        },
+        "no_location": {
+          "RUL": 0,
+          "RML": 0,
+          "RLL": 0,
+          "LUL": 0,
+          "LLL": 0,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 0,
+          "no_location": 26134
+        }
+      }
+    }
+  },
+  "train_time_seconds": 0.0,
+  "eval_time_seconds": 2.4513
+}

@@ -1,0 +1,194 @@
+{
+  "method": "ml_svm",
+  "task": "density",
+  "val_results": {
+    "accuracy": 0.9990643795945645,
+    "macro_f1": 0.9960793858278751,
+    "per_class_f1": {
+      "solid": 0.9973958333333334,
+      "part_solid": 0.9931506849315068,
+      "ground_glass": 0.9951657458563536,
+      "calcified": 0.9951292618958412,
+      "unclear": 0.9995554031223404
+    },
+    "confusion_matrix": {
+      "labels": [
+        "solid",
+        "part_solid",
+        "ground_glass",
+        "calcified",
+        "unclear"
+      ],
+      "matrix": [
+        [
+          1149,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          145,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          1,
+          2882,
+          0,
+          7
+        ],
+        [
+          2,
+          0,
+          0,
+          1328,
+          5
+        ],
+        [
+          0,
+          0,
+          17,
+          6,
+          39344
+        ]
+      ],
+      "rows": {
+        "solid": {
+          "solid": 1149,
+          "part_solid": 0,
+          "ground_glass": 1,
+          "calcified": 0,
+          "unclear": 0
+        },
+        "part_solid": {
+          "solid": 1,
+          "part_solid": 145,
+          "ground_glass": 0,
+          "calcified": 0,
+          "unclear": 0
+        },
+        "ground_glass": {
+          "solid": 2,
+          "part_solid": 1,
+          "ground_glass": 2882,
+          "calcified": 0,
+          "unclear": 7
+        },
+        "calcified": {
+          "solid": 2,
+          "part_solid": 0,
+          "ground_glass": 0,
+          "calcified": 1328,
+          "unclear": 5
+        },
+        "unclear": {
+          "solid": 0,
+          "part_solid": 0,
+          "ground_glass": 17,
+          "calcified": 6,
+          "unclear": 39344
+        }
+      }
+    }
+  },
+  "test_results": {
+    "accuracy": 0.9992153505956203,
+    "macro_f1": 0.9975251954416123,
+    "per_class_f1": {
+      "solid": 0.9986244841815681,
+      "part_solid": 0.997289972899729,
+      "ground_glass": 0.9966476701307408,
+      "calcified": 0.995475113122172,
+      "unclear": 0.9995887368738519
+    },
+    "confusion_matrix": {
+      "labels": [
+        "solid",
+        "part_solid",
+        "ground_glass",
+        "calcified",
+        "unclear"
+      ],
+      "matrix": [
+        [
+          1089,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          184,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          2973,
+          0,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          1320,
+          5
+        ],
+        [
+          0,
+          0,
+          17,
+          6,
+          36458
+        ]
+      ],
+      "rows": {
+        "solid": {
+          "solid": 1089,
+          "part_solid": 0,
+          "ground_glass": 0,
+          "calcified": 1,
+          "unclear": 0
+        },
+        "part_solid": {
+          "solid": 1,
+          "part_solid": 184,
+          "ground_glass": 0,
+          "calcified": 0,
+          "unclear": 0
+        },
+        "ground_glass": {
+          "solid": 1,
+          "part_solid": 0,
+          "ground_glass": 2973,
+          "calcified": 0,
+          "unclear": 2
+        },
+        "calcified": {
+          "solid": 0,
+          "part_solid": 0,
+          "ground_glass": 0,
+          "calcified": 1320,
+          "unclear": 5
+        },
+        "unclear": {
+          "solid": 0,
+          "part_solid": 0,
+          "ground_glass": 17,
+          "calcified": 6,
+          "unclear": 36458
+        }
+      }
+    }
+  },
+  "train_time_seconds": 48.3498,
+  "eval_time_seconds": 3.6565
+}

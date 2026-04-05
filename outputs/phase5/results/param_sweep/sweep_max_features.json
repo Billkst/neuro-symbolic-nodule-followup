@@ -1,0 +1,98 @@
+[
+  {
+    "config": {
+      "max_features": 5000,
+      "ngram_range": [
+        1,
+        2
+      ],
+      "C": 1.0
+    },
+    "tasks": {
+      "density": {
+        "primary_metric_name": "macro_f1",
+        "primary_metric": 0.9969136040325655,
+        "accuracy": 0.9990964643222293,
+        "macro_f1": 0.9969136040325655
+      },
+      "size": {
+        "primary_metric_name": "f1",
+        "primary_metric": 0.9897758552890287,
+        "accuracy": 0.9925814965404094,
+        "f1": 0.9897758552890287,
+        "macro_f1": 0.9919773712804709
+      },
+      "location": {
+        "primary_metric_name": "macro_f1",
+        "primary_metric": 0.9971673838301192,
+        "accuracy": 0.9983118149178496,
+        "macro_f1": 0.9971673838301192
+      }
+    },
+    "elapsed_seconds": 35.3407
+  },
+  {
+    "config": {
+      "max_features": 10000,
+      "ngram_range": [
+        1,
+        2
+      ],
+      "C": 1.0
+    },
+    "tasks": {
+      "density": {
+        "primary_metric_name": "macro_f1",
+        "primary_metric": 0.9975251954416123,
+        "accuracy": 0.9992153505956203,
+        "macro_f1": 0.9975251954416123
+      },
+      "size": {
+        "primary_metric_name": "f1",
+        "primary_metric": 0.9900068805085024,
+        "accuracy": 0.9927479373231567,
+        "f1": 0.9900068805085024,
+        "macro_f1": 0.9921579193839882
+      },
+      "location": {
+        "primary_metric_name": "macro_f1",
+        "primary_metric": 0.9971772994044247,
+        "accuracy": 0.9983118149178496,
+        "macro_f1": 0.9971772994044247
+      }
+    },
+    "elapsed_seconds": 121.0041
+  },
+  {
+    "config": {
+      "max_features": 20000,
+      "ngram_range": [
+        1,
+        2
+      ],
+      "C": 1.0
+    },
+    "tasks": {
+      "density": {
+        "primary_metric_name": "macro_f1",
+        "primary_metric": 0.9963854635725837,
+        "accuracy": 0.9991915733409421,
+        "macro_f1": 0.9963854635725837
+      },
+      "size": {
+        "primary_metric_name": "f1",
+        "primary_metric": 0.9904674550398008,
+        "accuracy": 0.9930808188886511,
+        "f1": 0.9904674550398008,
+        "macro_f1": 0.9925185167411668
+      },
+      "location": {
+        "primary_metric_name": "macro_f1",
+        "primary_metric": 0.9967168012389804,
+        "accuracy": 0.9978362698242861,
+        "macro_f1": 0.9967168012389804
+      }
+    },
+    "elapsed_seconds": 157.9696
+  }
+]

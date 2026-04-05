@@ -1,0 +1,1484 @@
+{
+  "density": {
+    "task": "density",
+    "sample_count": 42057,
+    "pairwise_agreement_rate": {
+      "regex_vs_svm": 0.999215,
+      "regex_vs_bert": 0.99931,
+      "svm_vs_bert": 0.99962
+    },
+    "three_way_agreement": {
+      "all_same_count": 42018,
+      "all_same_rate": 0.999073,
+      "bert_only_disagree_count": 6,
+      "regex_only_disagree_count": 23,
+      "svm_only_disagree_count": 10,
+      "all_different_count": 0
+    },
+    "top_prediction_patterns": [
+      {
+        "pattern": "regex=unclear | svm=unclear | bert=unclear",
+        "count": 36455
+      },
+      {
+        "pattern": "regex=ground_glass | svm=ground_glass | bert=ground_glass",
+        "count": 2973
+      },
+      {
+        "pattern": "regex=calcified | svm=calcified | bert=calcified",
+        "count": 1318
+      },
+      {
+        "pattern": "regex=solid | svm=solid | bert=solid",
+        "count": 1088
+      },
+      {
+        "pattern": "regex=part_solid | svm=part_solid | bert=part_solid",
+        "count": 184
+      },
+      {
+        "pattern": "regex=unclear | svm=ground_glass | bert=ground_glass",
+        "count": 17
+      },
+      {
+        "pattern": "regex=calcified | svm=unclear | bert=unclear",
+        "count": 5
+      },
+      {
+        "pattern": "regex=unclear | svm=calcified | bert=unclear",
+        "count": 5
+      },
+      {
+        "pattern": "regex=unclear | svm=unclear | bert=ground_glass",
+        "count": 3
+      },
+      {
+        "pattern": "regex=ground_glass | svm=unclear | bert=ground_glass",
+        "count": 2
+      },
+      {
+        "pattern": "regex=calcified | svm=calcified | bert=unclear",
+        "count": 2
+      },
+      {
+        "pattern": "regex=solid | svm=calcified | bert=solid",
+        "count": 1
+      },
+      {
+        "pattern": "regex=solid | svm=solid | bert=ground_glass",
+        "count": 1
+      },
+      {
+        "pattern": "regex=ground_glass | svm=solid | bert=ground_glass",
+        "count": 1
+      },
+      {
+        "pattern": "regex=unclear | svm=calcified | bert=calcified",
+        "count": 1
+      },
+      {
+        "pattern": "regex=part_solid | svm=solid | bert=part_solid",
+        "count": 1
+      }
+    ],
+    "sample_disagreements": [
+      {
+        "sample_id": "10035168-RR-48__2",
+        "mention_text": "Ground- glass opacity seen along the major fissure on the left is also stable.",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "ground_glass",
+        "bert_prediction": "ground_glass",
+        "bert_confidence": 0.999779
+      },
+      {
+        "sample_id": "10620406-RR-63__1",
+        "mention_text": "described small non- calcified nodules in the right middle (series 2, image 36), right upper (series 2, image 19) and left upper lobes (series 2, image",
+        "gold_label": "calcified",
+        "regex_prediction": "calcified",
+        "svm_prediction": "unclear",
+        "bert_prediction": "unclear",
+        "bert_confidence": 0.816397
+      },
+      {
+        "sample_id": "11052935-RR-29__4",
+        "mention_text": "presence of multiple calcified granuloma may represent non-calcified",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "calcified",
+        "bert_prediction": "unclear",
+        "bert_confidence": 0.860913
+      },
+      {
+        "sample_id": "11052935-RR-35__5",
+        "mention_text": "non-calcified and calcified pulmonary nodules are unchanged. A branching fluid-filled structure in the right lower lobe is unchanged from",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "calcified",
+        "bert_prediction": "unclear",
+        "bert_confidence": 0.861424
+      },
+      {
+        "sample_id": "11052935-RR-39__4",
+        "mention_text": "Unchanged 3 mm solid subpleural nodule in the right lower lobe (4, 175). Unchanged bilateral lower lobe partly calcified and partly noncalcified",
+        "gold_label": "solid",
+        "regex_prediction": "solid",
+        "svm_prediction": "calcified",
+        "bert_prediction": "solid",
+        "bert_confidence": 0.99999
+      },
+      {
+        "sample_id": "11236410-RR-17__3",
+        "mention_text": "associated with non-calcified less than 3 mm lung nodules located in the subpleural regions or near the fissures for instance in the left upper lobe (5:40, 44, 57, 67), in the right lower lobe (5:163). Largest areas of ground- glass opacities are in the right upper lobe measuring 7 mm (5:89), and right lower lobe (5:119).",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "ground_glass",
+        "bert_prediction": "ground_glass",
+        "bert_confidence": 0.999769
+      },
+      {
+        "sample_id": "12548159-RR-19__6",
+        "mention_text": "ground- glass nodule left upper lobe (4.307), 3 mm nodule in the right upper",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "ground_glass",
+        "bert_prediction": "ground_glass",
+        "bert_confidence": 0.99978
+      },
+      {
+        "sample_id": "12632853-RR-83__2",
+        "mention_text": "Multiple less than 3 mm non- calcified lung nodules in the right upper lobe (3:15, 16, 17), in the left lower lobe (3:30), and a",
+        "gold_label": "calcified",
+        "regex_prediction": "calcified",
+        "svm_prediction": "unclear",
+        "bert_prediction": "unclear",
+        "bert_confidence": 0.813815
+      },
+      {
+        "sample_id": "12768720-RR-22__8",
+        "mention_text": "ground- glass nodule with stable bidirectional ___, concerning for a",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "ground_glass",
+        "bert_prediction": "ground_glass",
+        "bert_confidence": 0.99978
+      },
+      {
+        "sample_id": "12916898-RR-43__4",
+        "mention_text": "Eighteen-month stability of previously described ground- glass nodules.",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "ground_glass",
+        "bert_prediction": "ground_glass",
+        "bert_confidence": 0.99978
+      },
+      {
+        "sample_id": "12943431-RR-64__2",
+        "mention_text": "ground- glass opacity is unchanged (7 x 8 mm, 5:206). Right upper lobe",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "ground_glass",
+        "bert_prediction": "ground_glass",
+        "bert_confidence": 0.999778
+      },
+      {
+        "sample_id": "12943431-RR-64__4",
+        "mention_text": "3-mm left upper lobe ground- glass opacity is unchanged in retrospect",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "ground_glass",
+        "bert_prediction": "ground_glass",
+        "bert_confidence": 0.99978
+      },
+      {
+        "sample_id": "13103745-RR-52__1",
+        "mention_text": "There is a 4 mm ___ nodule in the right upper lobe not appreciated on prior CT with surrounding groundglass (3:31).",
+        "gold_label": "ground_glass",
+        "regex_prediction": "ground_glass",
+        "svm_prediction": "unclear",
+        "bert_prediction": "ground_glass",
+        "bert_confidence": 0.999778
+      },
+      {
+        "sample_id": "13103745-RR-52__5",
+        "mention_text": "4 mm right upper lobe nodule with surrounding groundglass may be",
+        "gold_label": "ground_glass",
+        "regex_prediction": "ground_glass",
+        "svm_prediction": "unclear",
+        "bert_prediction": "ground_glass",
+        "bert_confidence": 0.999783
+      },
+      {
+        "sample_id": "13479418-RR-26__5",
+        "mention_text": "other lung nodules of concern. Subpleural ground-glassing in the upper lobe and apical segment of the left lower lobe are likely post-radiation change.",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "unclear",
+        "bert_prediction": "ground_glass",
+        "bert_confidence": 0.999778
+      },
+      {
+        "sample_id": "14152811-RR-38__2",
+        "mention_text": "4- mm left upper lobe nodule (4:195) and focal area of ground- glass opacity in the medial segment of the right lower lobe with traction bronchiectasis are stable.",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "ground_glass",
+        "bert_prediction": "ground_glass",
+        "bert_confidence": 0.999778
+      },
+      {
+        "sample_id": "14182053-RR-36__2",
+        "mention_text": "A non- calcified 4- mm nodule in the left lower lobe is stable since ___",
+        "gold_label": "calcified",
+        "regex_prediction": "calcified",
+        "svm_prediction": "unclear",
+        "bert_prediction": "unclear",
+        "bert_confidence": 0.842911
+      },
+      {
+        "sample_id": "14493095-RR-43__10",
+        "mention_text": "right lower lobe and the other one is a mixture of ground and solid opacity in the left lower lobe.",
+        "gold_label": "solid",
+        "regex_prediction": "solid",
+        "svm_prediction": "solid",
+        "bert_prediction": "ground_glass",
+        "bert_confidence": 0.999519
+      },
+      {
+        "sample_id": "14514200-RR-18__2",
+        "mention_text": "Most of these are noncalcified, but several calcified nodules are present predominantly in the right lower lobe.",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "calcified",
+        "bert_prediction": "unclear",
+        "bert_confidence": 0.999979
+      },
+      {
+        "sample_id": "15064096-RR-23__1",
+        "mention_text": "CT CHEST:  Within the right middle lobe, and ill-defined ground- glass opacity",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "ground_glass",
+        "bert_prediction": "ground_glass",
+        "bert_confidence": 0.999779
+      },
+      {
+        "sample_id": "15585564-RR-71__1",
+        "mention_text": "There is surrounding ground- glass opacity around those mass,",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "ground_glass",
+        "bert_prediction": "ground_glass",
+        "bert_confidence": 0.999778
+      },
+      {
+        "sample_id": "15589112-RR-37__2",
+        "mention_text": "right, several of which are calcified though there are noncalcified nodules.",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "calcified",
+        "bert_prediction": "unclear",
+        "bert_confidence": 0.999979
+      },
+      {
+        "sample_id": "15840768-RR-133__3",
+        "mention_text": "by ground- glass opacity. A 6-cm diameter rounded consolidation in left lower lobe with air bronchograms is adjacent to areas of ground- glass and acinar",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "ground_glass",
+        "bert_prediction": "ground_glass",
+        "bert_confidence": 0.99978
+      },
+      {
+        "sample_id": "15890202-RR-29__2",
+        "mention_text": "A ground- glass opacity in the right apex, 4-mm",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "ground_glass",
+        "bert_prediction": "ground_glass",
+        "bert_confidence": 0.99978
+      },
+      {
+        "sample_id": "16047293-RR-23__1",
+        "mention_text": "consolidation with surrounding ground- glass opacity consistent with resolving",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "ground_glass",
+        "bert_prediction": "ground_glass",
+        "bert_confidence": 0.99978
+      },
+      {
+        "sample_id": "16675591-RR-51__1",
+        "mention_text": "Stable left upper lobe spiculated nodule and focal area of ground- glass consolidation in the posterior segment of the left upper lobe are suspicious",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "ground_glass",
+        "bert_prediction": "ground_glass",
+        "bert_confidence": 0.999779
+      },
+      {
+        "sample_id": "17672505-RR-16__4",
+        "mention_text": "Five non-calcified and one calcified lung nodule, the largest non-calcified measuring 6 mm in the right middle lobe.",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "calcified",
+        "bert_prediction": "unclear",
+        "bert_confidence": 0.857434
+      },
+      {
+        "sample_id": "17848669-RR-28__1",
+        "mention_text": "ground-gland nodule (5, 158) is unchanged.",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "unclear",
+        "bert_prediction": "ground_glass",
+        "bert_confidence": 0.952205
+      },
+      {
+        "sample_id": "17953560-RR-17__1",
+        "mention_text": "of ground- glass opacity is seen in the left upper lobe (2:25).",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "ground_glass",
+        "bert_prediction": "ground_glass",
+        "bert_confidence": 0.999776
+      },
+      {
+        "sample_id": "18083037-RR-56__3",
+        "mention_text": "of the pre-existing solid, sub-solid, and non-solid pulmonary nodules.",
+        "gold_label": "ground_glass",
+        "regex_prediction": "ground_glass",
+        "svm_prediction": "solid",
+        "bert_prediction": "ground_glass",
+        "bert_confidence": 0.999097
+      },
+      {
+        "sample_id": "18234816-RR-21__4",
+        "mention_text": "non-characteristic and partly calcified lung nodules without morphology that",
+        "gold_label": "calcified",
+        "regex_prediction": "calcified",
+        "svm_prediction": "calcified",
+        "bert_prediction": "unclear",
+        "bert_confidence": 0.845245
+      },
+      {
+        "sample_id": "18413600-RR-72__1",
+        "mention_text": "There are several small subpleural non- calcified pulmonary nodules,",
+        "gold_label": "calcified",
+        "regex_prediction": "calcified",
+        "svm_prediction": "unclear",
+        "bert_prediction": "unclear",
+        "bert_confidence": 0.861517
+      },
+      {
+        "sample_id": "18937331-RR-160__1",
+        "mention_text": "except for a persisting 8-mm wide left upper lobe ground- glass nodule, 3A:10. New left pleural drain is probably responsible for small collections of left",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "ground_glass",
+        "bert_prediction": "ground_glass",
+        "bert_confidence": 0.999779
+      },
+      {
+        "sample_id": "19293671-RR-19__1",
+        "mention_text": "A few pulmonary nodules are noted not definitely calcified (5:67, 142) measuring 2 mm.",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "calcified",
+        "bert_prediction": "calcified",
+        "bert_confidence": 0.999948
+      },
+      {
+        "sample_id": "19705191-RR-46__1",
+        "mention_text": "Semi-solid lesion in the subpleural region of the right upper lobe measures 19 mm,  the solid portion measures 8 x 10 mm (4, 115) Soft tissue mass in the left hilum obstructing the superior segment bronchus of the left lower lobe is difficult to measure, it is continuous to a large area of postobstructive pneumonia and atelectasis , measuring approximately 3.8 cm in maximum diameter Mild to moderate centrilobular emphysema is upper lobe predominant.",
+        "gold_label": "part_solid",
+        "regex_prediction": "part_solid",
+        "svm_prediction": "solid",
+        "bert_prediction": "part_solid",
+        "bert_confidence": 0.999938
+      },
+      {
+        "sample_id": "19763862-RR-19__4",
+        "mention_text": "Multiple non- calcified pulmonary nodule in the right lower lobe measuring",
+        "gold_label": "calcified",
+        "regex_prediction": "calcified",
+        "svm_prediction": "unclear",
+        "bert_prediction": "unclear",
+        "bert_confidence": 0.860634
+      },
+      {
+        "sample_id": "19867560-RR-59__1",
+        "mention_text": "Mltiple non- calcified and partially calcified pulmonary nodules are unchanged, including the largest, which is located in the left lower lobe and measures 8 mm (2A:55).",
+        "gold_label": "calcified",
+        "regex_prediction": "calcified",
+        "svm_prediction": "calcified",
+        "bert_prediction": "unclear",
+        "bert_confidence": 0.82622
+      },
+      {
+        "sample_id": "19868102-RR-90__4",
+        "mention_text": "lobe (3:12), 5 mm right lower lobe subpleural ground- glass opacity (3:24),",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "ground_glass",
+        "bert_prediction": "ground_glass",
+        "bert_confidence": 0.999776
+      },
+      {
+        "sample_id": "19944328-RR-24__1",
+        "mention_text": "A 4-mm ground-nodule in the left lower lobe (4:126) is unchanged.",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "unclear",
+        "bert_prediction": "ground_glass",
+        "bert_confidence": 0.999775
+      }
+    ]
+  },
+  "size": {
+    "task": "size",
+    "sample_count": 42057,
+    "pairwise_agreement_rate": {
+      "regex_vs_svm": 0.992748,
+      "regex_vs_bert": 0.999429,
+      "svm_vs_bert": 0.993223
+    },
+    "three_way_agreement": {
+      "all_same_count": 41750,
+      "all_same_rate": 0.9927,
+      "bert_only_disagree_count": 2,
+      "regex_only_disagree_count": 22,
+      "svm_only_disagree_count": 283,
+      "all_different_count": 0
+    },
+    "top_prediction_patterns": [
+      {
+        "pattern": "regex=no_size | svm=no_size | bert=no_size",
+        "count": 26642
+      },
+      {
+        "pattern": "regex=has_size | svm=has_size | bert=has_size",
+        "count": 15108
+      },
+      {
+        "pattern": "regex=no_size | svm=has_size | bert=no_size",
+        "count": 249
+      },
+      {
+        "pattern": "regex=has_size | svm=no_size | bert=has_size",
+        "count": 34
+      },
+      {
+        "pattern": "regex=no_size | svm=has_size | bert=has_size",
+        "count": 22
+      },
+      {
+        "pattern": "regex=no_size | svm=no_size | bert=has_size",
+        "count": 2
+      }
+    ],
+    "sample_disagreements": [
+      {
+        "sample_id": "10116409-RR-30__5",
+        "mention_text": "mm anterior left upper lobe nodule (series 5, image 98) is new.",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10157506-RR-18__2",
+        "mention_text": "mm nodule is identified in the right middle lobe (4:102).",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10260365-RR-77__1",
+        "mention_text": "mm nodule is unchanged with mixed density but primarily solid. Left upper",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10267084-RR-22__6",
+        "mention_text": "There are more than a score of tiny pulmonary nodules ranging in radiodensity from ground-glass to solid, but none calcified, for example, right upper lobe, 4:42, 44, 46, all peripheral, and deeper ground-glass lesions, 4:54, and 55 and 57, as well as 5:56, 86, 92, 104, in the left upper lobe, 4:33, 52, 54, 57, 70, and left lower lobe 4:120.",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10267341-RR-24__5",
+        "mention_text": "cm right apical partially solid and ground-glass opacity is also concerning",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10289937-RR-27__6",
+        "mention_text": "mm nodule is seen in the right upper lobe, series 3, image 20.",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10415772-RR-13__6",
+        "mention_text": "10mm right apical lesion is likely scarring.",
+        "gold_label": "has_size",
+        "regex_prediction": "has_size",
+        "svm_prediction": "no_size",
+        "bert_prediction": "has_size",
+        "bert_confidence": 0.999954
+      },
+      {
+        "sample_id": "10422517-RR-18__3",
+        "mention_text": "cm right upper kidney soft tissue lesion.",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10433502-RR-17__1",
+        "mention_text": "mm nodule is seen within the right lower lobe (series 406, image 106).",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10438187-RR-104__1",
+        "mention_text": "mm right sided lung nodules. The loculated left pleural effusion which was previously moderate in volume has   decreased in the interval now showing a small volume.",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10441972-RR-33__5",
+        "mention_text": "mm nodule in the left lower lobe.",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10452422-RR-29__2",
+        "mention_text": "mm pulmonary nodules are not definitely visualized on this study. No new or",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10483086-RR-18__2",
+        "mention_text": "10mm nodule posterior to the major fissure in the left lower lobe (4:115) has punctate central calcification.",
+        "gold_label": "has_size",
+        "regex_prediction": "has_size",
+        "svm_prediction": "no_size",
+        "bert_prediction": "has_size",
+        "bert_confidence": 0.999954
+      },
+      {
+        "sample_id": "10488182-RR-66__2",
+        "mention_text": "mm pulmonary nodule in the left upper lobe (4, 47) is new.",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10561828-RR-21__3",
+        "mention_text": "mm area of hazy opacity in the right middle lobe is no longer visualized and",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10578209-RR-78__4",
+        "mention_text": "mm ground-glass opacity within the right middle lobe is new, likely infectious",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10583763-RR-86__6",
+        "mention_text": "mm nodules in the right lung.",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10591041-RR-68__1",
+        "mention_text": "Four-mm noncalcified pulmonary nodules in bilateral upper lobes.",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10616558-RR-47__1",
+        "mention_text": "mm pulmonary nodules can be followed up in one year with dedicated chest CT if",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10647315-RR-49__1",
+        "mention_text": "40, as well as mm 8 increase in size in multiple pulmonary nodules scattered",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10666345-RR-54__4",
+        "mention_text": "A 4- mm left upper lobe subpleural nodule,",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "has_size",
+        "bert_confidence": 0.995672
+      },
+      {
+        "sample_id": "10666345-RR-65__2",
+        "mention_text": "The right middle lobe lesion is stable in appearance and size (22x16mm (5:161)previously measured 18 x 25",
+        "gold_label": "has_size",
+        "regex_prediction": "has_size",
+        "svm_prediction": "no_size",
+        "bert_prediction": "has_size",
+        "bert_confidence": 0.999843
+      },
+      {
+        "sample_id": "10697731-RR-58__5",
+        "mention_text": "mm nodules as described above.",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10728002-RR-61__1",
+        "mention_text": "mm pulmonary nodule in the right lower lobe (series 5: Image 179), unchanged",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10744019-RR-144__1",
+        "mention_text": "mm right lower lobe pulmonary nodule (5, 111) is unchanged.",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10744238-RR-11__4",
+        "mention_text": "mm calcified granuloma in the lateral basal segment of the left lower lobe",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10755736-RR-21__6",
+        "mention_text": "With one exception of a 10mm right middle lobe nodule slightly larger and",
+        "gold_label": "has_size",
+        "regex_prediction": "has_size",
+        "svm_prediction": "no_size",
+        "bert_prediction": "has_size",
+        "bert_confidence": 0.999954
+      },
+      {
+        "sample_id": "10862544-RR-39__5",
+        "mention_text": "mm nodule in the lower lobe that is stable since the earliest comparison study",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10891570-RR-7__3",
+        "mention_text": "mm (4:60) are surrounded by a ground-glass opacity.",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10894051-RR-86__1",
+        "mention_text": "mm pulmonary nodules, in right upper lobe, 4:28, 29, stable compared to both",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10924634-RR-12__3",
+        "mention_text": "Five-mm right lung lesion.",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10924768-RR-76__4",
+        "mention_text": "Slightly increasing nodule in the left lower lobe from 5 to 7mmsince ___.",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "no_size",
+        "bert_prediction": "has_size",
+        "bert_confidence": 0.999952
+      },
+      {
+        "sample_id": "10924768-RR-95__2",
+        "mention_text": "mm hyperenhancing lesion consistent with a hemangioma. The right adrenal",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10977201-RR-53__8",
+        "mention_text": "Previously questioned progression of a cm wide lesion in the superior segment of the left lower lobe has not changed since at least ___. Small right",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10977201-RR-65__5",
+        "mention_text": "cm right apex nodule (302:19).",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "10998182-RR-82__6",
+        "mention_text": "cm ground-glass nodule in the lingula could also be a metastasis.",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "11052935-RR-28__3",
+        "mention_text": "The 2- mm nodule in the right apex is not",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "has_size",
+        "bert_confidence": 0.995624
+      },
+      {
+        "sample_id": "11116948-RR-37__1",
+        "mention_text": "mm right lower lobe pulmonary nodule is unchanged (5, 187). No new pulmonary",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "11192809-RR-12__2",
+        "mention_text": "mm opacity in the right upper lobe (5:49).",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "11310901-RR-13__1",
+        "mention_text": "cm spiculated nodule in the right upper lobe (06:30).",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "11315894-RR-27__2",
+        "mention_text": "mm diameter peripheral left apical nodule is identified (41, 4), not included",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "11325182-RR-13__1",
+        "mention_text": "mm wide nodule, 5:57.",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "11349875-RR-2__5",
+        "mention_text": "A 0.9cm lesion within segment III peripherally is concerning",
+        "gold_label": "has_size",
+        "regex_prediction": "has_size",
+        "svm_prediction": "no_size",
+        "bert_prediction": "has_size",
+        "bert_confidence": 0.999943
+      },
+      {
+        "sample_id": "11399106-RR-96__2",
+        "mention_text": "cm right hepatic lobe hypodense lesion with peripheral nodular enhancement is",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "11579715-RR-26__2",
+        "mention_text": "mm spiculated pulmonary nodule.",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "11614357-RR-19__4",
+        "mention_text": "10mm right upper lobe lung nodule, eccentrically calcified, stable since",
+        "gold_label": "has_size",
+        "regex_prediction": "has_size",
+        "svm_prediction": "no_size",
+        "bert_prediction": "has_size",
+        "bert_confidence": 0.999955
+      },
+      {
+        "sample_id": "11645644-RR-13__3",
+        "mention_text": "mm left upper node nodule (04:40) there is a punctate calcified nodule in the lingula (4:177).",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "11700392-RR-20__4",
+        "mention_text": "___ mm bilobed soft tissue nodule, left lower lobe, 7:133, new since ___ mm solid left lower lobe nodule, 7:231, unchanged.",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "11815394-RR-57__9",
+        "mention_text": "mm nodule in the left upper lobe at the apex is unchanged (03:52).",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      },
+      {
+        "sample_id": "12060317-RR-45__1",
+        "mention_text": "mm left upper lobe nodule is unchanged (05:56) dating back to ___.",
+        "gold_label": "no_size",
+        "regex_prediction": "no_size",
+        "svm_prediction": "has_size",
+        "bert_prediction": "no_size",
+        "bert_confidence": 0.999991
+      }
+    ]
+  },
+  "location": {
+    "task": "location",
+    "sample_count": 42057,
+    "pairwise_agreement_rate": {
+      "regex_vs_svm": 0.998312,
+      "regex_vs_bert": 0.999976,
+      "svm_vs_bert": 0.998288
+    },
+    "three_way_agreement": {
+      "all_same_count": 41985,
+      "all_same_rate": 0.998288,
+      "bert_only_disagree_count": 1,
+      "regex_only_disagree_count": 0,
+      "svm_only_disagree_count": 71,
+      "all_different_count": 0
+    },
+    "top_prediction_patterns": [
+      {
+        "pattern": "regex=no_location | svm=no_location | bert=no_location",
+        "count": 26110
+      },
+      {
+        "pattern": "regex=RUL | svm=RUL | bert=RUL",
+        "count": 3875
+      },
+      {
+        "pattern": "regex=RLL | svm=RLL | bert=RLL",
+        "count": 3199
+      },
+      {
+        "pattern": "regex=LLL | svm=LLL | bert=LLL",
+        "count": 2481
+      },
+      {
+        "pattern": "regex=LUL | svm=LUL | bert=LUL",
+        "count": 2443
+      },
+      {
+        "pattern": "regex=RML | svm=RML | bert=RML",
+        "count": 1620
+      },
+      {
+        "pattern": "regex=bilateral | svm=bilateral | bert=bilateral",
+        "count": 986
+      },
+      {
+        "pattern": "regex=unclear | svm=unclear | bert=unclear",
+        "count": 947
+      },
+      {
+        "pattern": "regex=lingula | svm=lingula | bert=lingula",
+        "count": 324
+      },
+      {
+        "pattern": "regex=LUL | svm=RUL | bert=LUL",
+        "count": 12
+      },
+      {
+        "pattern": "regex=no_location | svm=LUL | bert=no_location",
+        "count": 9
+      },
+      {
+        "pattern": "regex=no_location | svm=RUL | bert=no_location",
+        "count": 7
+      },
+      {
+        "pattern": "regex=no_location | svm=LLL | bert=no_location",
+        "count": 5
+      },
+      {
+        "pattern": "regex=LLL | svm=RLL | bert=LLL",
+        "count": 4
+      },
+      {
+        "pattern": "regex=RML | svm=RLL | bert=RML",
+        "count": 4
+      },
+      {
+        "pattern": "regex=RLL | svm=LUL | bert=RLL",
+        "count": 3
+      },
+      {
+        "pattern": "regex=RLL | svm=LLL | bert=RLL",
+        "count": 3
+      },
+      {
+        "pattern": "regex=RLL | svm=RUL | bert=RLL",
+        "count": 2
+      },
+      {
+        "pattern": "regex=no_location | svm=RLL | bert=no_location",
+        "count": 2
+      },
+      {
+        "pattern": "regex=LLL | svm=LUL | bert=LLL",
+        "count": 2
+      }
+    ],
+    "sample_disagreements": [
+      {
+        "sample_id": "10003637-RR-30__2",
+        "mention_text": "lung nodules are new: Some solitary 3 mm, left upper lobe, 5:64, 69, 133, some clustered, left upper lobe, 5:121, and some irregularly shaped ground-glass lesions, right lower lobe, up to 10 mm, 5:162. Large scale, ground-glass opacification traversed by septal lines, \"crazy paving pattern\" is present  at the lung bases, right substantially greater than left and more pronounced today than in ___.",
+        "gold_label": "RLL",
+        "regex_prediction": "RLL",
+        "svm_prediction": "LUL",
+        "bert_prediction": "RLL",
+        "bert_confidence": 0.999995
+      },
+      {
+        "sample_id": "10168648-RR-27__1",
+        "mention_text": "PARENCHYMA: 5 mm left lower lobe nodule (2:28), stable. 3 mm right lower",
+        "gold_label": "LLL",
+        "regex_prediction": "LLL",
+        "svm_prediction": "RLL",
+        "bert_prediction": "LLL",
+        "bert_confidence": 0.999995
+      },
+      {
+        "sample_id": "10463621-RR-27__9",
+        "mention_text": "1.7 cm irregular lesion in the right upper pulmonary lobe, with no recent prior imaging available for comparison, new since ___.",
+        "gold_label": "no_location",
+        "regex_prediction": "no_location",
+        "svm_prediction": "RUL",
+        "bert_prediction": "no_location",
+        "bert_confidence": 0.999987
+      },
+      {
+        "sample_id": "10594556-RR-61__2",
+        "mention_text": "improvement of subpleural opacity in the medial aspect of the right lower lobe. Right middle lobe subpleural opacities previously seen have resolved. Cystic structure in the right lower lobe is unchanged.",
+        "gold_label": "RML",
+        "regex_prediction": "RML",
+        "svm_prediction": "RLL",
+        "bert_prediction": "RML",
+        "bert_confidence": 0.999996
+      },
+      {
+        "sample_id": "10611755-RR-51__4",
+        "mention_text": "5-mm nodule in the left lower",
+        "gold_label": "no_location",
+        "regex_prediction": "no_location",
+        "svm_prediction": "LLL",
+        "bert_prediction": "no_location",
+        "bert_confidence": 0.999988
+      },
+      {
+        "sample_id": "10723261-RR-37__4",
+        "mention_text": "A 2 mm right a upper lobe nodule,",
+        "gold_label": "no_location",
+        "regex_prediction": "no_location",
+        "svm_prediction": "RUL",
+        "bert_prediction": "no_location",
+        "bert_confidence": 0.999983
+      },
+      {
+        "sample_id": "10877695-RR-68__2",
+        "mention_text": "These nodules are stable since ___ and can be considered benign: 4 mm, left upper lobe, 4:70 to, 5 mm, left upper lobe, 4:107 5 mm, left lower lobe, 4:136, 3 mm, right middle lobe, 4:144.",
+        "gold_label": "RML",
+        "regex_prediction": "RML",
+        "svm_prediction": "LUL",
+        "bert_prediction": "RML",
+        "bert_confidence": 0.999996
+      },
+      {
+        "sample_id": "10924565-RR-55__8",
+        "mention_text": "presence of several small new pulmonary nodules as well as a growing nodule in the left upper lobe, and the presence of a right dorsal growing chest wall metastasis, and a slightly growing lymph node at the lower aspect of the left",
+        "gold_label": "LUL",
+        "regex_prediction": "LUL",
+        "svm_prediction": "no_location",
+        "bert_prediction": "LUL",
+        "bert_confidence": 0.999997
+      },
+      {
+        "sample_id": "10924768-RR-86__2",
+        "mention_text": "Otherwise, no new nodules are visualized throughout the lungs. Post-surgical changes from right upper lobectomy and left upper lobe wedge resection are stable.",
+        "gold_label": "LUL",
+        "regex_prediction": "LUL",
+        "svm_prediction": "RUL",
+        "bert_prediction": "LUL",
+        "bert_confidence": 0.999997
+      },
+      {
+        "sample_id": "11012243-RR-16__1",
+        "mention_text": "The lungs are clear of nodules, consolidations and effusions. There is mild interstitial thickening located predominantly in the left middle lobe (2:46) as well as the lingula which may represent an early/mild",
+        "gold_label": "lingula",
+        "regex_prediction": "lingula",
+        "svm_prediction": "lingula",
+        "bert_prediction": "no_location",
+        "bert_confidence": 0.997231
+      },
+      {
+        "sample_id": "11216730-RR-80__2",
+        "mention_text": "Subpleural right apical lung nodule is stable (04:30, 96). In the left upper",
+        "gold_label": "no_location",
+        "regex_prediction": "no_location",
+        "svm_prediction": "LUL",
+        "bert_prediction": "no_location",
+        "bert_confidence": 0.999986
+      },
+      {
+        "sample_id": "11236410-RR-17__2",
+        "mention_text": "multifocal areas of peribronchial interstitial opacity in the right upper, middle, lower lobes and in much less extent in the left lower lobe.",
+        "gold_label": "LLL",
+        "regex_prediction": "LLL",
+        "svm_prediction": "RUL",
+        "bert_prediction": "LLL",
+        "bert_confidence": 0.999995
+      },
+      {
+        "sample_id": "11811925-RR-35__6",
+        "mention_text": "Stable right upper lower lobe pulmonary nodules.",
+        "gold_label": "no_location",
+        "regex_prediction": "no_location",
+        "svm_prediction": "RUL",
+        "bert_prediction": "no_location",
+        "bert_confidence": 0.99999
+      },
+      {
+        "sample_id": "11964399-RR-16__1",
+        "mention_text": "The two left lower lobe nodules, presumed to be metastases are smaller, the first in series 5, image 157, decreased from 8.2 to 5.6 mm, the one image 194, previously cavitary decreased from 10.7 to 7 mm. The new 2 mm right lower",
+        "gold_label": "LLL",
+        "regex_prediction": "LLL",
+        "svm_prediction": "RLL",
+        "bert_prediction": "LLL",
+        "bert_confidence": 0.999995
+      },
+      {
+        "sample_id": "11985277-RR-30__1",
+        "mention_text": "Millimetric calcified granuloma in the left upper lobe (4:64). Right lower",
+        "gold_label": "LUL",
+        "regex_prediction": "LUL",
+        "svm_prediction": "RLL",
+        "bert_prediction": "LUL",
+        "bert_confidence": 0.999997
+      },
+      {
+        "sample_id": "12033165-RR-32__1",
+        "mention_text": "is also peribronchial nodular ground-glass opacity throughout the right lower lobe. The right upper and right middle lobes are clear.",
+        "gold_label": "RLL",
+        "regex_prediction": "RLL",
+        "svm_prediction": "RUL",
+        "bert_prediction": "RLL",
+        "bert_confidence": 0.999995
+      },
+      {
+        "sample_id": "12066241-RR-48__3",
+        "mention_text": "Interval development of centrilobular nodules adjacent to the foci of atelectasis of the left lower and right lower lobe.",
+        "gold_label": "RLL",
+        "regex_prediction": "RLL",
+        "svm_prediction": "LLL",
+        "bert_prediction": "RLL",
+        "bert_confidence": 0.999995
+      },
+      {
+        "sample_id": "12112807-RR-47__1",
+        "mention_text": "upper lobe nodule, series 5, image 106 is stable. Right medial lobe and right lower lobe extensive still in the bronchiectasis are unchanged as well as subpleural fibrosis in the posterior aspect of the right lower lobe and right middle lobe atelectasis. Post left breast radiation subpleural changes are stable, series 5, images 58- 139 post wedge resection appearance of the right lower lobe is stable.",
+        "gold_label": "RML",
+        "regex_prediction": "RML",
+        "svm_prediction": "RLL",
+        "bert_prediction": "RML",
+        "bert_confidence": 0.999996
+      },
+      {
+        "sample_id": "12451514-RR-49__1",
+        "mention_text": "Patient has had multiple resections of right lung nodules, some since ___. The volume of soft tissue surrounding a new row of suture in the right middle lobe, 11 mm thick, 5:186, warrants subsequent follow-up. Other new sites of wedge resection, in the right lower lobe are generally smaller or low enough in attenuation to reflect fluid contents, such as in the right lower lobe, 5:222. Recent surgery explains small right pleural effusion, partially",
+        "gold_label": "RML",
+        "regex_prediction": "RML",
+        "svm_prediction": "RLL",
+        "bert_prediction": "RML",
+        "bert_confidence": 0.999996
+      },
+      {
+        "sample_id": "12548159-RR-19__6",
+        "mention_text": "ground- glass nodule left upper lobe (4.307), 3 mm nodule in the right upper",
+        "gold_label": "LUL",
+        "regex_prediction": "LUL",
+        "svm_prediction": "RUL",
+        "bert_prediction": "LUL",
+        "bert_confidence": 0.999997
+      },
+      {
+        "sample_id": "12598279-RR-35__4",
+        "mention_text": "Stable right upper and left upper lobe pulmonary nodule. No new pulmonary",
+        "gold_label": "LUL",
+        "regex_prediction": "LUL",
+        "svm_prediction": "RUL",
+        "bert_prediction": "LUL",
+        "bert_confidence": 0.999997
+      },
+      {
+        "sample_id": "12697277-RR-99__2",
+        "mention_text": "3 mm left upper solid lobe pulmonary nodule has been",
+        "gold_label": "no_location",
+        "regex_prediction": "no_location",
+        "svm_prediction": "LUL",
+        "bert_prediction": "no_location",
+        "bert_confidence": 0.999989
+      },
+      {
+        "sample_id": "13270259-RR-28__1",
+        "mention_text": "New left upper lobe pulmonary nodule is 3 mm, series 5, image 86. Right upper",
+        "gold_label": "LUL",
+        "regex_prediction": "LUL",
+        "svm_prediction": "RUL",
+        "bert_prediction": "LUL",
+        "bert_confidence": 0.999998
+      },
+      {
+        "sample_id": "13479418-RR-31__2",
+        "mention_text": "A 1 mm nodule in the superior segment of the left lower",
+        "gold_label": "no_location",
+        "regex_prediction": "no_location",
+        "svm_prediction": "LLL",
+        "bert_prediction": "no_location",
+        "bert_confidence": 0.999988
+      },
+      {
+        "sample_id": "13724605-RR-72__3",
+        "mention_text": "Small sub 4 mm pulmonary nodule in the right lower lobe (4, 155). -AIRWAYS:  Attenuation of the left lower lobe bronchi in the soft tissue mass in the left lower lobe.",
+        "gold_label": "RLL",
+        "regex_prediction": "RLL",
+        "svm_prediction": "LLL",
+        "bert_prediction": "RLL",
+        "bert_confidence": 0.999996
+      },
+      {
+        "sample_id": "13739395-RR-23__4",
+        "mention_text": "Areas of mixed nodular consolidative and ground-glass opacity in the right upper and lower lobes as well as the left upper lobe, concerning for",
+        "gold_label": "LUL",
+        "regex_prediction": "LUL",
+        "svm_prediction": "RUL",
+        "bert_prediction": "LUL",
+        "bert_confidence": 0.999997
+      },
+      {
+        "sample_id": "13748236-RR-24__3",
+        "mention_text": "Small nodules in the left lung apex (___) and right middle lobe (3:131, 133) are similar. There is narrowing of the right lung bronchi in the right hilar region secondary to mass effects from extensive right hilar lymphadenopathy.",
+        "gold_label": "RML",
+        "regex_prediction": "RML",
+        "svm_prediction": "unclear",
+        "bert_prediction": "RML",
+        "bert_confidence": 0.999996
+      },
+      {
+        "sample_id": "13880706-RR-35__1",
+        "mention_text": "lower paratracheal lymph node and primary right lower lobe lung nodule.",
+        "gold_label": "RLL",
+        "regex_prediction": "RLL",
+        "svm_prediction": "no_location",
+        "bert_prediction": "RLL",
+        "bert_confidence": 0.999995
+      },
+      {
+        "sample_id": "13972513-RR-178__1",
+        "mention_text": "A 4 mm nodule in the left lower",
+        "gold_label": "no_location",
+        "regex_prediction": "no_location",
+        "svm_prediction": "LLL",
+        "bert_prediction": "no_location",
+        "bert_confidence": 0.999988
+      },
+      {
+        "sample_id": "13976907-RR-161__1",
+        "mention_text": "Multiple discrete regions of ground-glass opacity have not unchanged from ___, the largest measuring 13 mm in the left lower and 11 mm in the left upper lobes (series 4, image 100, 47). No new pulmonary",
+        "gold_label": "no_location",
+        "regex_prediction": "no_location",
+        "svm_prediction": "LUL",
+        "bert_prediction": "no_location",
+        "bert_confidence": 0.999988
+      },
+      {
+        "sample_id": "13999829-RR-96__2",
+        "mention_text": "The nodule in the superior segment of the right lower lobe has increased in size now measuring 10 mm previously 6 mm (02:40). Scattered ground-glass opacification is noted throughout the bilateral lungs with more prominently in the right lower lobe with a more focal area of ground-glass and septal thickening in the right lower lobe (2:86).",
+        "gold_label": "bilateral",
+        "regex_prediction": "bilateral",
+        "svm_prediction": "RLL",
+        "bert_prediction": "bilateral",
+        "bert_confidence": 0.999978
+      },
+      {
+        "sample_id": "14032553-RR-21__3",
+        "mention_text": "Left lower, right upper, middle, and lower lobe nodules,stable",
+        "gold_label": "no_location",
+        "regex_prediction": "no_location",
+        "svm_prediction": "LLL",
+        "bert_prediction": "no_location",
+        "bert_confidence": 0.999989
+      },
+      {
+        "sample_id": "14214341-RR-181__1",
+        "mention_text": "LUNGS/AIRWAYS:  Clusters of ___  centrilobular nodules in the right upper, middle and lower lobes and left upper lobe are suggestive of infectious",
+        "gold_label": "LUL",
+        "regex_prediction": "LUL",
+        "svm_prediction": "RUL",
+        "bert_prediction": "LUL",
+        "bert_confidence": 0.999997
+      },
+      {
+        "sample_id": "14295224-RR-142__1",
+        "mention_text": "for a lower lobe calcified granuloma (2:37). The right lung is notable for apical and medial scar with associated upper lobe atelectasis.",
+        "gold_label": "unclear",
+        "regex_prediction": "unclear",
+        "svm_prediction": "RUL",
+        "bert_prediction": "unclear",
+        "bert_confidence": 0.999998
+      },
+      {
+        "sample_id": "14295224-RR-325__1",
+        "mention_text": "calcified granuloma (302:145), stable. Stable paramediastinal chronic post treatment changes, right greater than left. Upper lobe predominant centrilobular emphysema, stable.",
+        "gold_label": "no_location",
+        "regex_prediction": "no_location",
+        "svm_prediction": "LUL",
+        "bert_prediction": "no_location",
+        "bert_confidence": 0.999989
+      },
+      {
+        "sample_id": "14368163-RR-21__5",
+        "mention_text": "Stable left upper lobe ground-glass opacity with improving right upper",
+        "gold_label": "LUL",
+        "regex_prediction": "LUL",
+        "svm_prediction": "RUL",
+        "bert_prediction": "LUL",
+        "bert_confidence": 0.999998
+      },
+      {
+        "sample_id": "14808570-RR-83__4",
+        "mention_text": "There is a 5 mm nodule in the left upper",
+        "gold_label": "no_location",
+        "regex_prediction": "no_location",
+        "svm_prediction": "LUL",
+        "bert_prediction": "no_location",
+        "bert_confidence": 0.999988
+      },
+      {
+        "sample_id": "14808570-RR-90__2",
+        "mention_text": "left upper and right lower lobes (102:166, 255), a 5 mm nodule in the right",
+        "gold_label": "no_location",
+        "regex_prediction": "no_location",
+        "svm_prediction": "RLL",
+        "bert_prediction": "no_location",
+        "bert_confidence": 0.999986
+      },
+      {
+        "sample_id": "14820219-RR-31__6",
+        "mention_text": "Right upper opacity is mostly likely infectious with lower lobe",
+        "gold_label": "no_location",
+        "regex_prediction": "no_location",
+        "svm_prediction": "RUL",
+        "bert_prediction": "no_location",
+        "bert_confidence": 0.999986
+      },
+      {
+        "sample_id": "14992613-RR-25__1",
+        "mention_text": "Multiple nodules are noted in both lungs, left upper lobe (3:78), right middle lobe (3:88), right lower lobe (3:101, 123). The largest spiculated mass is located in right lower lobe measuring 55 x 28 mm (3:118) that is concerning for malignancy but",
+        "gold_label": "RML",
+        "regex_prediction": "RML",
+        "svm_prediction": "RLL",
+        "bert_prediction": "RML",
+        "bert_confidence": 0.999996
+      },
+      {
+        "sample_id": "15003294-RR-62__2",
+        "mention_text": "Punctate subpleural nodule in the left upper",
+        "gold_label": "no_location",
+        "regex_prediction": "no_location",
+        "svm_prediction": "LUL",
+        "bert_prediction": "no_location",
+        "bert_confidence": 0.999989
+      },
+      {
+        "sample_id": "15403936-RR-15__2",
+        "mention_text": "Lungs are clear except for left upper lobe posterior subpleural nodule, 3 mm in diameter, 6:60 and minimal subpleural atelectasis in the right upper lung,",
+        "gold_label": "LUL",
+        "regex_prediction": "LUL",
+        "svm_prediction": "RUL",
+        "bert_prediction": "LUL",
+        "bert_confidence": 0.999997
+      },
+      {
+        "sample_id": "15734777-RR-18__1",
+        "mention_text": "For example left lower lobe 2.2 cm nodule, in prior 3 cm (5:214), left upper",
+        "gold_label": "LLL",
+        "regex_prediction": "LLL",
+        "svm_prediction": "LUL",
+        "bert_prediction": "LLL",
+        "bert_confidence": 0.999995
+      },
+      {
+        "sample_id": "15734777-RR-18__2",
+        "mention_text": "lobe 0.7 cm nodule with new cavitation, in prior 1.2 cm (5:134), left upper",
+        "gold_label": "no_location",
+        "regex_prediction": "no_location",
+        "svm_prediction": "LUL",
+        "bert_prediction": "no_location",
+        "bert_confidence": 0.999988
+      },
+      {
+        "sample_id": "15874174-RR-84__2",
+        "mention_text": "lesion in the superior segment of left lower lobe (5:88) is stable right lower",
+        "gold_label": "LLL",
+        "regex_prediction": "LLL",
+        "svm_prediction": "RLL",
+        "bert_prediction": "LLL",
+        "bert_confidence": 0.999995
+      },
+      {
+        "sample_id": "15874174-RR-97__3",
+        "mention_text": "A spiculated 1.5 cm left lower lobe opacity has decreased since ___ (series 301, image 56). A 1.6 x 1 cm left upper",
+        "gold_label": "LLL",
+        "regex_prediction": "LLL",
+        "svm_prediction": "LUL",
+        "bert_prediction": "LLL",
+        "bert_confidence": 0.999996
+      },
+      {
+        "sample_id": "16108352-RR-5__1",
+        "mention_text": "-PARENCHYMA:  3 suspicious pulmonary nodules with surrounding ground-glass seen in the left upper lobe and right upper lobe (4, 104, 102 and 82) with the largest in the anterior aspect of the left upper lobe measuring 8 mm diameter. Suspected scarring in the left upper lobe (4, 48 and 58) which could be",
+        "gold_label": "RUL",
+        "regex_prediction": "RUL",
+        "svm_prediction": "LUL",
+        "bert_prediction": "RUL",
+        "bert_confidence": 0.999993
+      },
+      {
+        "sample_id": "16382164-RR-63__1",
+        "mention_text": "pulmonary nodules, in left lower lobe, 3:23, in left upper lobe, 3:26, in lingula, 3:34, in the left lower lobe, 3:40, 35, are stable, ranging up to 4 mm in left lower lobe, 3:35.",
+        "gold_label": "LUL",
+        "regex_prediction": "LUL",
+        "svm_prediction": "LLL",
+        "bert_prediction": "LUL",
+        "bert_confidence": 0.999997
+      },
+      {
+        "sample_id": "16482566-RR-31__2",
+        "mention_text": "nodule are slightly less defined than on prior examinations due to the presence of increased superimposed atelectasis/consolidation. Increased atelectasis/consolidation within the dependent portions of the right upper and lower lobe, some of which is likely positional given the right",
+        "gold_label": "no_location",
+        "regex_prediction": "no_location",
+        "svm_prediction": "RUL",
+        "bert_prediction": "no_location",
+        "bert_confidence": 0.999988
+      },
+      {
+        "sample_id": "16581762-RR-14__1",
+        "mention_text": "Multiple 2-3 mm part solid and solid nodules (5, 44, 70, 71, 73, 101, 165, ___ in the left upper lobe, and lingula as well as right upper and lower lobes are indeterminate and may be related to",
+        "gold_label": "LUL",
+        "regex_prediction": "LUL",
+        "svm_prediction": "RUL",
+        "bert_prediction": "LUL",
+        "bert_confidence": 0.999997
+      }
+    ]
+  }
+}

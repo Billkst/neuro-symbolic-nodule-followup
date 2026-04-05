@@ -1,0 +1,53 @@
+{
+  "density": {
+    "regex": {
+      "val_macro_f1": 1.0,
+      "test_macro_f1": 1.0,
+      "test_accuracy": 1.0
+    },
+    "ml_lr": {
+      "val_macro_f1": 0.9891973449125473,
+      "test_macro_f1": 0.9937763782475638,
+      "test_accuracy": 0.9981691513897806
+    },
+    "ml_svm": {
+      "val_macro_f1": 0.9960793858278751,
+      "test_macro_f1": 0.9975251954416123,
+      "test_accuracy": 0.9992153505956203
+    }
+  },
+  "size": {
+    "regex": {
+      "val_f1": 1.0,
+      "test_f1": 1.0,
+      "test_accuracy": 1.0
+    },
+    "ml_lr": {
+      "val_f1": 0.9893439068211387,
+      "test_f1": 0.9889504573920457,
+      "test_accuracy": 0.991987065173455
+    },
+    "ml_svm": {
+      "val_f1": 0.9906177426846261,
+      "test_f1": 0.9900068805085024,
+      "test_accuracy": 0.9927479373231567
+    }
+  },
+  "location": {
+    "regex": {
+      "val_macro_f1": 1.0,
+      "test_macro_f1": 1.0,
+      "test_accuracy": 1.0
+    },
+    "ml_lr": {
+      "val_macro_f1": 0.9840626153490503,
+      "test_macro_f1": 0.9848594835789098,
+      "test_accuracy": 0.9871840597284638
+    },
+    "ml_svm": {
+      "val_macro_f1": 0.9965039819161786,
+      "test_macro_f1": 0.9971772994044247,
+      "test_accuracy": 0.9983118149178496
+    }
+  }
+}

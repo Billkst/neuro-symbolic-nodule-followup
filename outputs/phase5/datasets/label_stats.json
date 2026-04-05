@@ -1,0 +1,194 @@
+{
+  "density": {
+    "splits": {
+      "train": {
+        "sample_count": 201947,
+        "label_distribution": {
+          "calcified": 6517,
+          "ground_glass": 13095,
+          "part_solid": 683,
+          "solid": 5194,
+          "unclear": 176458
+        }
+      },
+      "val": {
+        "sample_count": 44890,
+        "label_distribution": {
+          "calcified": 1335,
+          "ground_glass": 2892,
+          "part_solid": 146,
+          "solid": 1150,
+          "unclear": 39367
+        }
+      },
+      "test": {
+        "sample_count": 42057,
+        "label_distribution": {
+          "calcified": 1325,
+          "ground_glass": 2976,
+          "part_solid": 185,
+          "solid": 1090,
+          "unclear": 36481
+        }
+      }
+    },
+    "quality_counts": {
+      "explicit": 11228,
+      "silver": 150688,
+      "weak": 126978
+    },
+    "quality_counts_by_split": {
+      "test": {
+        "explicit": 1736,
+        "silver": 21772,
+        "weak": 18549
+      },
+      "train": {
+        "explicit": 7796,
+        "silver": 105627,
+        "weak": 88524
+      },
+      "val": {
+        "explicit": 1696,
+        "silver": 23289,
+        "weak": 19905
+      }
+    }
+  },
+  "size": {
+    "splits": {
+      "train": {
+        "sample_count": 201947,
+        "label_distribution": {
+          "false": 128564,
+          "true": 73383
+        },
+        "size_value_stats": {
+          "count": 73383,
+          "min": 0.0,
+          "max": 4216.0,
+          "mean": 8.9908,
+          "median": 5.5
+        }
+      },
+      "val": {
+        "sample_count": 44890,
+        "label_distribution": {
+          "false": 28843,
+          "true": 16047
+        },
+        "size_value_stats": {
+          "count": 16047,
+          "min": 0.1,
+          "max": 200.0,
+          "mean": 8.84,
+          "median": 5.4
+        }
+      },
+      "test": {
+        "sample_count": 42057,
+        "label_distribution": {
+          "false": 26915,
+          "true": 15142
+        },
+        "size_value_stats": {
+          "count": 15142,
+          "min": 0.2,
+          "max": 422.5,
+          "mean": 9.1092,
+          "median": 6.0
+        }
+      }
+    },
+    "quality_counts": {
+      "explicit": 11228,
+      "silver": 150688,
+      "weak": 126978
+    },
+    "quality_counts_by_split": {
+      "test": {
+        "explicit": 1736,
+        "silver": 21772,
+        "weak": 18549
+      },
+      "train": {
+        "explicit": 7796,
+        "silver": 105627,
+        "weak": 88524
+      },
+      "val": {
+        "explicit": 1696,
+        "silver": 23289,
+        "weak": 19905
+      }
+    }
+  },
+  "location": {
+    "splits": {
+      "train": {
+        "sample_count": 201947,
+        "label_distribution": {
+          "LLL": 12361,
+          "LUL": 11544,
+          "RLL": 14895,
+          "RML": 7705,
+          "RUL": 18894,
+          "bilateral": 4957,
+          "lingula": 1592,
+          "no_location": 125116,
+          "unclear": 4883
+        }
+      },
+      "val": {
+        "sample_count": 44890,
+        "label_distribution": {
+          "LLL": 2638,
+          "LUL": 2530,
+          "RLL": 3396,
+          "RML": 1647,
+          "RUL": 4363,
+          "bilateral": 1078,
+          "lingula": 373,
+          "no_location": 27820,
+          "unclear": 1045
+        }
+      },
+      "test": {
+        "sample_count": 42057,
+        "label_distribution": {
+          "LLL": 2488,
+          "LUL": 2459,
+          "RLL": 3208,
+          "RML": 1627,
+          "RUL": 3879,
+          "bilateral": 988,
+          "lingula": 326,
+          "no_location": 26134,
+          "unclear": 948
+        }
+      }
+    },
+    "quality_counts": {
+      "explicit": 11228,
+      "silver": 150688,
+      "weak": 126978
+    },
+    "quality_counts_by_split": {
+      "test": {
+        "explicit": 1736,
+        "silver": 21772,
+        "weak": 18549
+      },
+      "train": {
+        "explicit": 7796,
+        "silver": 105627,
+        "weak": 88524
+      },
+      "val": {
+        "explicit": 1696,
+        "silver": 23289,
+        "weak": 19905
+      }
+    }
+  }
+}

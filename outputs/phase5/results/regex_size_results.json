@@ -1,0 +1,42 @@
+{
+  "method": "regex",
+  "task": "size",
+  "val_results": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "detection": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "regression": {
+      "mae": 0.0,
+      "exact_match_rate": 1.0,
+      "within_tolerance_rate": 1.0
+    },
+    "positive_gold_count": 16047
+  },
+  "test_results": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "detection": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "regression": {
+      "mae": 0.0,
+      "exact_match_rate": 1.0,
+      "within_tolerance_rate": 1.0
+    },
+    "positive_gold_count": 15142
+  },
+  "train_time_seconds": 0.0,
+  "eval_time_seconds": 2.7824
+}

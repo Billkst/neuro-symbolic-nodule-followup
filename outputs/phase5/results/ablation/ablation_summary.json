@@ -1,0 +1,58 @@
+{
+  "a1_window": {
+    "density": {
+      "mention_text_primary_metric": 0.9975251954416123,
+      "full_text_primary_metric": 0.4784924072259993,
+      "delta_primary_metric": 0.519033
+    },
+    "size": {
+      "mention_text_primary_metric": 0.9900068805085024,
+      "full_text_primary_metric": 0.6079570078876658,
+      "delta_primary_metric": 0.38205
+    },
+    "location": {
+      "mention_text_primary_metric": 0.9971772994044247,
+      "full_text_primary_metric": 0.364499257003554,
+      "delta_primary_metric": 0.632678
+    }
+  },
+  "a2_exam_feature": {
+    "density": {
+      "plain_primary_metric": 0.9975251954416123,
+      "plus_exam_primary_metric": 0.9974890472039988,
+      "delta_primary_metric": -3.6e-05
+    },
+    "size": {
+      "plain_primary_metric": 0.9900068805085024,
+      "plus_exam_primary_metric": 0.9899413518560991,
+      "delta_primary_metric": -6.6e-05
+    },
+    "location": {
+      "plain_primary_metric": 0.9971772994044247,
+      "plus_exam_primary_metric": 0.9974137137317752,
+      "delta_primary_metric": 0.000236
+    }
+  },
+  "a3_label_quality": {
+    "density": {
+      "all_primary_metric": 0.9975251954416123,
+      "explicit_only_primary_metric": 0.4408683604648993,
+      "delta_primary_metric": -0.556657
+    },
+    "size": {
+      "all_primary_metric": 0.9900068805085024,
+      "explicit_only_primary_metric": 0.7809828206152617,
+      "delta_primary_metric": -0.209024
+    },
+    "location": {
+      "all_primary_metric": 0.9971772994044247,
+      "explicit_only_primary_metric": 0.5621896560119715,
+      "delta_primary_metric": -0.434988
+    }
+  },
+  "takeaways": [
+    "A1 用 full_text 替代 mention_text，用于验证 section-aware 窗口是否更高效且更准。",
+    "A2 同时给出 exam_name 特征增强与 exam_name 分组表现，作为 chest CT 过滤设计的简化讨论证据。",
+    "A3 检验只用 explicit 样本训练是否会牺牲覆盖率，从而反证保留全部 silver labels 的合理性。"
+  ]
+}

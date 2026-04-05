@@ -1,0 +1,42 @@
+{
+  "method": "ml_lr",
+  "task": "size",
+  "val_results": {
+    "accuracy": 0.9923368233459567,
+    "precision": 0.983615645210964,
+    "recall": 0.9951392783697888,
+    "f1": 0.9893439068211387,
+    "detection": {
+      "accuracy": 0.9923368233459567,
+      "precision": 0.983615645210964,
+      "recall": 0.9951392783697888,
+      "f1": 0.9893439068211387
+    },
+    "regression": {
+      "mae": 8.839995014644481,
+      "exact_match_rate": 0.0,
+      "within_tolerance_rate": 0.014956066554496168
+    },
+    "positive_gold_count": 16047
+  },
+  "test_results": {
+    "accuracy": 0.991987065173455,
+    "precision": 0.9820277397929283,
+    "recall": 0.9959714700832123,
+    "f1": 0.9889504573920457,
+    "detection": {
+      "accuracy": 0.991987065173455,
+      "precision": 0.9820277397929283,
+      "recall": 0.9959714700832123,
+      "f1": 0.9889504573920457
+    },
+    "regression": {
+      "mae": 9.109159952450138,
+      "exact_match_rate": 0.0,
+      "within_tolerance_rate": 0.012878087438911636
+    },
+    "positive_gold_count": 15142
+  },
+  "train_time_seconds": 8.6453,
+  "eval_time_seconds": 2.6119
+}

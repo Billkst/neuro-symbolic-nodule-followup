@@ -205,3 +205,10 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Phase 5 large files
+outputs/phase5/models/
+outputs/phase5/datasets/*.jsonl
+outputs/phase5/hf_cache/
+*.safetensors
+*.bin

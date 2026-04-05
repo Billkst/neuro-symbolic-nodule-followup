@@ -1,0 +1,601 @@
+{
+  "max_features": {
+    "results": [
+      {
+        "config": {
+          "max_features": 5000,
+          "ngram_range": [
+            1,
+            2
+          ],
+          "C": 1.0
+        },
+        "tasks": {
+          "density": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9969136040325655,
+            "accuracy": 0.9990964643222293,
+            "macro_f1": 0.9969136040325655
+          },
+          "size": {
+            "primary_metric_name": "f1",
+            "primary_metric": 0.9897758552890287,
+            "accuracy": 0.9925814965404094,
+            "f1": 0.9897758552890287,
+            "macro_f1": 0.9919773712804709
+          },
+          "location": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9971673838301192,
+            "accuracy": 0.9983118149178496,
+            "macro_f1": 0.9971673838301192
+          }
+        },
+        "elapsed_seconds": 35.3407
+      },
+      {
+        "config": {
+          "max_features": 10000,
+          "ngram_range": [
+            1,
+            2
+          ],
+          "C": 1.0
+        },
+        "tasks": {
+          "density": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9975251954416123,
+            "accuracy": 0.9992153505956203,
+            "macro_f1": 0.9975251954416123
+          },
+          "size": {
+            "primary_metric_name": "f1",
+            "primary_metric": 0.9900068805085024,
+            "accuracy": 0.9927479373231567,
+            "f1": 0.9900068805085024,
+            "macro_f1": 0.9921579193839882
+          },
+          "location": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9971772994044247,
+            "accuracy": 0.9983118149178496,
+            "macro_f1": 0.9971772994044247
+          }
+        },
+        "elapsed_seconds": 121.0041
+      },
+      {
+        "config": {
+          "max_features": 20000,
+          "ngram_range": [
+            1,
+            2
+          ],
+          "C": 1.0
+        },
+        "tasks": {
+          "density": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9963854635725837,
+            "accuracy": 0.9991915733409421,
+            "macro_f1": 0.9963854635725837
+          },
+          "size": {
+            "primary_metric_name": "f1",
+            "primary_metric": 0.9904674550398008,
+            "accuracy": 0.9930808188886511,
+            "f1": 0.9904674550398008,
+            "macro_f1": 0.9925185167411668
+          },
+          "location": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9967168012389804,
+            "accuracy": 0.9978362698242861,
+            "macro_f1": 0.9967168012389804
+          }
+        },
+        "elapsed_seconds": 157.9696
+      }
+    ],
+    "best_by_task": {
+      "density": {
+        "config": {
+          "max_features": 10000,
+          "ngram_range": [
+            1,
+            2
+          ],
+          "C": 1.0
+        },
+        "tasks": {
+          "density": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9975251954416123,
+            "accuracy": 0.9992153505956203,
+            "macro_f1": 0.9975251954416123
+          },
+          "size": {
+            "primary_metric_name": "f1",
+            "primary_metric": 0.9900068805085024,
+            "accuracy": 0.9927479373231567,
+            "f1": 0.9900068805085024,
+            "macro_f1": 0.9921579193839882
+          },
+          "location": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9971772994044247,
+            "accuracy": 0.9983118149178496,
+            "macro_f1": 0.9971772994044247
+          }
+        },
+        "elapsed_seconds": 121.0041
+      },
+      "size": {
+        "config": {
+          "max_features": 20000,
+          "ngram_range": [
+            1,
+            2
+          ],
+          "C": 1.0
+        },
+        "tasks": {
+          "density": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9963854635725837,
+            "accuracy": 0.9991915733409421,
+            "macro_f1": 0.9963854635725837
+          },
+          "size": {
+            "primary_metric_name": "f1",
+            "primary_metric": 0.9904674550398008,
+            "accuracy": 0.9930808188886511,
+            "f1": 0.9904674550398008,
+            "macro_f1": 0.9925185167411668
+          },
+          "location": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9967168012389804,
+            "accuracy": 0.9978362698242861,
+            "macro_f1": 0.9967168012389804
+          }
+        },
+        "elapsed_seconds": 157.9696
+      },
+      "location": {
+        "config": {
+          "max_features": 10000,
+          "ngram_range": [
+            1,
+            2
+          ],
+          "C": 1.0
+        },
+        "tasks": {
+          "density": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9975251954416123,
+            "accuracy": 0.9992153505956203,
+            "macro_f1": 0.9975251954416123
+          },
+          "size": {
+            "primary_metric_name": "f1",
+            "primary_metric": 0.9900068805085024,
+            "accuracy": 0.9927479373231567,
+            "f1": 0.9900068805085024,
+            "macro_f1": 0.9921579193839882
+          },
+          "location": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9971772994044247,
+            "accuracy": 0.9983118149178496,
+            "macro_f1": 0.9971772994044247
+          }
+        },
+        "elapsed_seconds": 121.0041
+      }
+    }
+  },
+  "ngram_range": {
+    "results": [
+      {
+        "config": {
+          "max_features": 10000,
+          "ngram_range": [
+            1,
+            1
+          ],
+          "C": 1.0
+        },
+        "tasks": {
+          "density": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9911070783445801,
+            "accuracy": 0.9984307011912404,
+            "macro_f1": 0.9911070783445801
+          },
+          "size": {
+            "primary_metric_name": "f1",
+            "primary_metric": 0.9893070860992119,
+            "accuracy": 0.9922248377202368,
+            "f1": 0.9893070860992119,
+            "macro_f1": 0.9915993521766864
+          },
+          "location": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9510841196749161,
+            "accuracy": 0.9692084551917636,
+            "macro_f1": 0.9510841196749161
+          }
+        },
+        "elapsed_seconds": 23.8789
+      },
+      {
+        "config": {
+          "max_features": 10000,
+          "ngram_range": [
+            1,
+            2
+          ],
+          "C": 1.0
+        },
+        "tasks": {
+          "density": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9975251954416123,
+            "accuracy": 0.9992153505956203,
+            "macro_f1": 0.9975251954416123
+          },
+          "size": {
+            "primary_metric_name": "f1",
+            "primary_metric": 0.9900068805085024,
+            "accuracy": 0.9927479373231567,
+            "f1": 0.9900068805085024,
+            "macro_f1": 0.9921579193839882
+          },
+          "location": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9971772994044247,
+            "accuracy": 0.9983118149178496,
+            "macro_f1": 0.9971772994044247
+          }
+        },
+        "elapsed_seconds": 99.6345
+      },
+      {
+        "config": {
+          "max_features": 10000,
+          "ngram_range": [
+            1,
+            3
+          ],
+          "C": 1.0
+        },
+        "tasks": {
+          "density": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9948477671614343,
+            "accuracy": 0.9989538007941603,
+            "macro_f1": 0.9948477671614343
+          },
+          "size": {
+            "primary_metric_name": "f1",
+            "primary_metric": 0.989610985481598,
+            "accuracy": 0.9924626102670185,
+            "f1": 0.989610985481598,
+            "macro_f1": 0.9918484583571121
+          },
+          "location": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.999092827150786,
+            "accuracy": 0.9996671184345055,
+            "macro_f1": 0.999092827150786
+          }
+        },
+        "elapsed_seconds": 80.6818
+      }
+    ],
+    "best_by_task": {
+      "density": {
+        "config": {
+          "max_features": 10000,
+          "ngram_range": [
+            1,
+            2
+          ],
+          "C": 1.0
+        },
+        "tasks": {
+          "density": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9975251954416123,
+            "accuracy": 0.9992153505956203,
+            "macro_f1": 0.9975251954416123
+          },
+          "size": {
+            "primary_metric_name": "f1",
+            "primary_metric": 0.9900068805085024,
+            "accuracy": 0.9927479373231567,
+            "f1": 0.9900068805085024,
+            "macro_f1": 0.9921579193839882
+          },
+          "location": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9971772994044247,
+            "accuracy": 0.9983118149178496,
+            "macro_f1": 0.9971772994044247
+          }
+        },
+        "elapsed_seconds": 99.6345
+      },
+      "size": {
+        "config": {
+          "max_features": 10000,
+          "ngram_range": [
+            1,
+            2
+          ],
+          "C": 1.0
+        },
+        "tasks": {
+          "density": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9975251954416123,
+            "accuracy": 0.9992153505956203,
+            "macro_f1": 0.9975251954416123
+          },
+          "size": {
+            "primary_metric_name": "f1",
+            "primary_metric": 0.9900068805085024,
+            "accuracy": 0.9927479373231567,
+            "f1": 0.9900068805085024,
+            "macro_f1": 0.9921579193839882
+          },
+          "location": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9971772994044247,
+            "accuracy": 0.9983118149178496,
+            "macro_f1": 0.9971772994044247
+          }
+        },
+        "elapsed_seconds": 99.6345
+      },
+      "location": {
+        "config": {
+          "max_features": 10000,
+          "ngram_range": [
+            1,
+            3
+          ],
+          "C": 1.0
+        },
+        "tasks": {
+          "density": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9948477671614343,
+            "accuracy": 0.9989538007941603,
+            "macro_f1": 0.9948477671614343
+          },
+          "size": {
+            "primary_metric_name": "f1",
+            "primary_metric": 0.989610985481598,
+            "accuracy": 0.9924626102670185,
+            "f1": 0.989610985481598,
+            "macro_f1": 0.9918484583571121
+          },
+          "location": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.999092827150786,
+            "accuracy": 0.9996671184345055,
+            "macro_f1": 0.999092827150786
+          }
+        },
+        "elapsed_seconds": 80.6818
+      }
+    }
+  },
+  "regularization": {
+    "results": [
+      {
+        "config": {
+          "max_features": 10000,
+          "ngram_range": [
+            1,
+            2
+          ],
+          "C": 0.1
+        },
+        "tasks": {
+          "density": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9932540497212615,
+            "accuracy": 0.9986922509927004,
+            "macro_f1": 0.9932540497212615
+          },
+          "size": {
+            "primary_metric_name": "f1",
+            "primary_metric": 0.9899089181573947,
+            "accuracy": 0.9926766055591222,
+            "f1": 0.9899089181573947,
+            "macro_f1": 0.9920808958603065
+          },
+          "location": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9906303004100262,
+            "accuracy": 0.9923675012483059,
+            "macro_f1": 0.9906303004100262
+          }
+        },
+        "elapsed_seconds": 80.7922
+      },
+      {
+        "config": {
+          "max_features": 10000,
+          "ngram_range": [
+            1,
+            2
+          ],
+          "C": 1.0
+        },
+        "tasks": {
+          "density": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9975251954416123,
+            "accuracy": 0.9992153505956203,
+            "macro_f1": 0.9975251954416123
+          },
+          "size": {
+            "primary_metric_name": "f1",
+            "primary_metric": 0.9900068805085024,
+            "accuracy": 0.9927479373231567,
+            "f1": 0.9900068805085024,
+            "macro_f1": 0.9921579193839882
+          },
+          "location": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9971772994044247,
+            "accuracy": 0.9983118149178496,
+            "macro_f1": 0.9971772994044247
+          }
+        },
+        "elapsed_seconds": 65.5337
+      },
+      {
+        "config": {
+          "max_features": 10000,
+          "ngram_range": [
+            1,
+            2
+          ],
+          "C": 10.0
+        },
+        "tasks": {
+          "density": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.995700362504885,
+            "accuracy": 0.999048909812873,
+            "macro_f1": 0.995700362504885
+          },
+          "size": {
+            "primary_metric_name": "f1",
+            "primary_metric": 0.9867664926279841,
+            "accuracy": 0.9904177663646956,
+            "f1": 0.9867664926279841,
+            "macro_f1": 0.9896281914324208
+          },
+          "location": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9969677267983309,
+            "accuracy": 0.9984307011912404,
+            "macro_f1": 0.9969677267983309
+          }
+        },
+        "elapsed_seconds": 161.4467
+      }
+    ],
+    "best_by_task": {
+      "density": {
+        "config": {
+          "max_features": 10000,
+          "ngram_range": [
+            1,
+            2
+          ],
+          "C": 1.0
+        },
+        "tasks": {
+          "density": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9975251954416123,
+            "accuracy": 0.9992153505956203,
+            "macro_f1": 0.9975251954416123
+          },
+          "size": {
+            "primary_metric_name": "f1",
+            "primary_metric": 0.9900068805085024,
+            "accuracy": 0.9927479373231567,
+            "f1": 0.9900068805085024,
+            "macro_f1": 0.9921579193839882
+          },
+          "location": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9971772994044247,
+            "accuracy": 0.9983118149178496,
+            "macro_f1": 0.9971772994044247
+          }
+        },
+        "elapsed_seconds": 65.5337
+      },
+      "size": {
+        "config": {
+          "max_features": 10000,
+          "ngram_range": [
+            1,
+            2
+          ],
+          "C": 1.0
+        },
+        "tasks": {
+          "density": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9975251954416123,
+            "accuracy": 0.9992153505956203,
+            "macro_f1": 0.9975251954416123
+          },
+          "size": {
+            "primary_metric_name": "f1",
+            "primary_metric": 0.9900068805085024,
+            "accuracy": 0.9927479373231567,
+            "f1": 0.9900068805085024,
+            "macro_f1": 0.9921579193839882
+          },
+          "location": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9971772994044247,
+            "accuracy": 0.9983118149178496,
+            "macro_f1": 0.9971772994044247
+          }
+        },
+        "elapsed_seconds": 65.5337
+      },
+      "location": {
+        "config": {
+          "max_features": 10000,
+          "ngram_range": [
+            1,
+            2
+          ],
+          "C": 1.0
+        },
+        "tasks": {
+          "density": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9975251954416123,
+            "accuracy": 0.9992153505956203,
+            "macro_f1": 0.9975251954416123
+          },
+          "size": {
+            "primary_metric_name": "f1",
+            "primary_metric": 0.9900068805085024,
+            "accuracy": 0.9927479373231567,
+            "f1": 0.9900068805085024,
+            "macro_f1": 0.9921579193839882
+          },
+          "location": {
+            "primary_metric_name": "macro_f1",
+            "primary_metric": 0.9971772994044247,
+            "accuracy": 0.9983118149178496,
+            "macro_f1": 0.9971772994044247
+          }
+        },
+        "elapsed_seconds": 65.5337
+      }
+    }
+  },
+  "takeaways": [
+    "P1 用 TF-IDF max_features 近似特征空间大小，对应论文中的输入容量/长度讨论。",
+    "P2 比较 unigram 到 trigram，讨论文本粒度是否带来增益。",
+    "P3 比较不同 C 值，讨论 SVM 正则化强度对泛化的影响。"
+  ]
+}

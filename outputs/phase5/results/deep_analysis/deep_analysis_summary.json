@@ -1,0 +1,113 @@
+{
+  "failure_region_analysis": {
+    "density": {
+      "subset_size": 36481,
+      "distribution": {
+        "calcified": 1,
+        "ground_glass": 20,
+        "unclear": 36460
+      },
+      "sampled_support_distribution": {
+        "not_supported": 18,
+        "supported": 2
+      }
+    },
+    "size": {
+      "subset_size": 26915,
+      "distribution": {
+        "has_size": 24,
+        "no_size": 26891
+      },
+      "sampled_support_distribution": {
+        "not_supported": 20
+      }
+    },
+    "location": {
+      "subset_size": 26134,
+      "distribution": {
+        "no_location": 26134
+      },
+      "sampled_support_distribution": {}
+    }
+  },
+  "agreement_analysis": {
+    "density": {
+      "all_same_count": 42018,
+      "all_same_rate": 0.999073,
+      "bert_only_disagree_count": 6,
+      "regex_only_disagree_count": 23,
+      "svm_only_disagree_count": 10,
+      "all_different_count": 0
+    },
+    "size": {
+      "all_same_count": 41750,
+      "all_same_rate": 0.9927,
+      "bert_only_disagree_count": 2,
+      "regex_only_disagree_count": 22,
+      "svm_only_disagree_count": 283,
+      "all_different_count": 0
+    },
+    "location": {
+      "all_same_count": 41985,
+      "all_same_rate": 0.998288,
+      "bert_only_disagree_count": 1,
+      "regex_only_disagree_count": 0,
+      "svm_only_disagree_count": 71,
+      "all_different_count": 0
+    }
+  },
+  "confidence_analysis": {
+    "density": {
+      "high": {
+        "count": 41989,
+        "accuracy": 0.999476,
+        "mean_confidence": 0.999962
+      },
+      "mid": {
+        "count": 64,
+        "accuracy": 0.890625,
+        "mean_confidence": 0.849037
+      },
+      "low": {
+        "count": 4,
+        "accuracy": 1.0,
+        "mean_confidence": 0.784363
+      }
+    },
+    "size": {
+      "high": {
+        "count": 42057,
+        "accuracy": 0.999429,
+        "mean_confidence": 0.999749
+      },
+      "mid": {
+        "count": 0,
+        "accuracy": null
+      },
+      "low": {
+        "count": 0,
+        "accuracy": null
+      }
+    },
+    "location": {
+      "high": {
+        "count": 42057,
+        "accuracy": 0.999976,
+        "mean_confidence": 0.999991
+      },
+      "mid": {
+        "count": 0,
+        "accuracy": null
+      },
+      "low": {
+        "count": 0,
+        "accuracy": null
+      }
+    }
+  },
+  "takeaways": [
+    "silver label 场景下整体分数几乎饱和，因此重点转移到 regex 失败区域的补充预测能力。",
+    "sampled_text_support_distribution 用于近似人工检查：若 supported 占比更高，说明 BERT 在 regex 空白区可能携带增量价值。",
+    "confidence_analysis 的准确率仍基于 silver label，应仅作为置信度稳定性讨论，而非最终人工真实性能。"
+  ]
+}

@@ -1,0 +1,12 @@
+task:
+  name: "density_category"
+  type: "classification"
+  num_labels: 5
+  label_map:
+    solid: 0
+    part_solid: 1
+    ground_glass: 2
+    calcified: 3
+    unclear: 4
+  class_weights: "balanced"
+  primary_metric: "macro_f1"

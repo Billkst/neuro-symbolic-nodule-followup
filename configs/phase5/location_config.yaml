@@ -1,0 +1,16 @@
+task:
+  name: "location_lobe"
+  type: "classification"
+  num_labels: 9
+  label_map:
+    RUL: 0
+    RML: 1
+    RLL: 2
+    LUL: 3
+    LLL: 4
+    lingula: 5
+    bilateral: 6
+    unclear: 7
+    no_location: 8
+  class_weights: "balanced"
+  primary_metric: "macro_f1"

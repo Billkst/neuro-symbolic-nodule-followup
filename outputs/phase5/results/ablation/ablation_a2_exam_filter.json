@@ -1,0 +1,211 @@
+{
+  "density": {
+    "plain_mention_text": {
+      "primary_metric_name": "macro_f1",
+      "primary_metric": 0.9975251954416123,
+      "accuracy": 0.9992153505956203,
+      "fit_seconds": 61.3209,
+      "predict_seconds": 1.0449,
+      "config": {
+        "text_field": "mention_text",
+        "prepend_exam": false,
+        "max_features": 10000,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "C": 1.0
+      },
+      "macro_f1": 0.9975251954416123
+    },
+    "mention_text_plus_exam_name": {
+      "primary_metric_name": "macro_f1",
+      "primary_metric": 0.9974890472039988,
+      "accuracy": 0.9991915733409421,
+      "fit_seconds": 79.6036,
+      "predict_seconds": 1.4411,
+      "config": {
+        "text_field": "mention_text",
+        "prepend_exam": true,
+        "max_features": 10000,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "C": 1.0
+      },
+      "macro_f1": 0.9974890472039988
+    },
+    "delta_primary_metric": -3.6e-05,
+    "exam_group_analysis": {
+      "CT CHEST W/CONTRAST": {
+        "count": 20078,
+        "macro_f1": 0.9971595169448744,
+        "accuracy": 0.9996015539396355
+      },
+      "CT CHEST W/O CONTRAST": {
+        "count": 13820,
+        "macro_f1": 0.9973664960715827,
+        "accuracy": 0.9985528219971056
+      },
+      "CTA CHEST W&W/O C&RECONS, NON-CORONARY": {
+        "count": 3661,
+        "macro_f1": 0.9980924541371496,
+        "accuracy": 0.9991805517618138
+      },
+      "OTHER": {
+        "count": 3351,
+        "macro_f1": 0.9982080899323847,
+        "accuracy": 0.9994031632348552
+      },
+      "CT LOW DOSE LUNG SCREENING": {
+        "count": 1147,
+        "macro_f1": 1.0,
+        "accuracy": 1.0
+      }
+    }
+  },
+  "size": {
+    "plain_mention_text": {
+      "primary_metric_name": "f1",
+      "primary_metric": 0.9900068805085024,
+      "accuracy": 0.9927479373231567,
+      "fit_seconds": 13.1521,
+      "predict_seconds": 1.0526,
+      "config": {
+        "text_field": "mention_text",
+        "prepend_exam": false,
+        "max_features": 10000,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "C": 1.0
+      },
+      "f1": 0.9900068805085024,
+      "macro_f1": 0.9921579193839882,
+      "precision": 0.9823785681773848,
+      "recall": 0.9977545898824461
+    },
+    "mention_text_plus_exam_name": {
+      "primary_metric_name": "f1",
+      "primary_metric": 0.9899413518560991,
+      "accuracy": 0.9927003828138004,
+      "fit_seconds": 21.6705,
+      "predict_seconds": 1.4414,
+      "config": {
+        "text_field": "mention_text",
+        "prepend_exam": true,
+        "max_features": 10000,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "C": 1.0
+      },
+      "f1": 0.9899413518560991,
+      "macro_f1": 0.992106495904539,
+      "precision": 0.982313544443722,
+      "recall": 0.9976885484084005
+    },
+    "delta_primary_metric": -6.6e-05,
+    "exam_group_analysis": {
+      "CT CHEST W/CONTRAST": {
+        "count": 20078,
+        "f1": 0.9894574079280293,
+        "macro_f1": 0.9918360782312161,
+        "accuracy": 0.9925291363681642
+      },
+      "CT CHEST W/O CONTRAST": {
+        "count": 13820,
+        "f1": 0.9912819496730731,
+        "macro_f1": 0.993133280775212,
+        "accuracy": 0.9936324167872649
+      },
+      "CTA CHEST W&W/O C&RECONS, NON-CORONARY": {
+        "count": 3661,
+        "f1": 0.9889483065953654,
+        "macro_f1": 0.991042672226175,
+        "accuracy": 0.9915323682054084
+      },
+      "OTHER": {
+        "count": 3351,
+        "f1": 0.9880028228652082,
+        "macro_f1": 0.9896063752381884,
+        "accuracy": 0.9898537749925396
+      },
+      "CT LOW DOSE LUNG SCREENING": {
+        "count": 1147,
+        "f1": 0.9964285714285714,
+        "macro_f1": 0.997637584445543,
+        "accuracy": 0.998256320836966
+      }
+    }
+  },
+  "location": {
+    "plain_mention_text": {
+      "primary_metric_name": "macro_f1",
+      "primary_metric": 0.9971772994044247,
+      "accuracy": 0.9983118149178496,
+      "fit_seconds": 75.3609,
+      "predict_seconds": 1.0438,
+      "config": {
+        "text_field": "mention_text",
+        "prepend_exam": false,
+        "max_features": 10000,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "C": 1.0
+      },
+      "macro_f1": 0.9971772994044247
+    },
+    "mention_text_plus_exam_name": {
+      "primary_metric_name": "macro_f1",
+      "primary_metric": 0.9974137137317752,
+      "accuracy": 0.998502032955275,
+      "fit_seconds": 73.7231,
+      "predict_seconds": 1.469,
+      "config": {
+        "text_field": "mention_text",
+        "prepend_exam": true,
+        "max_features": 10000,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "C": 1.0
+      },
+      "macro_f1": 0.9974137137317752
+    },
+    "delta_primary_metric": 0.000236,
+    "exam_group_analysis": {
+      "CT CHEST W/CONTRAST": {
+        "count": 20078,
+        "macro_f1": 0.9973171211038214,
+        "accuracy": 0.9982069927283594
+      },
+      "CT CHEST W/O CONTRAST": {
+        "count": 13820,
+        "macro_f1": 0.9978807023797489,
+        "accuracy": 0.9984804630969609
+      },
+      "CTA CHEST W&W/O C&RECONS, NON-CORONARY": {
+        "count": 3661,
+        "macro_f1": 0.9929816327103457,
+        "accuracy": 0.9975416552854411
+      },
+      "OTHER": {
+        "count": 3351,
+        "macro_f1": 0.997514449923444,
+        "accuracy": 0.9985079080871382
+      },
+      "CT LOW DOSE LUNG SCREENING": {
+        "count": 1147,
+        "macro_f1": 0.8888888888888888,
+        "accuracy": 1.0
+      }
+    }
+  }
+}

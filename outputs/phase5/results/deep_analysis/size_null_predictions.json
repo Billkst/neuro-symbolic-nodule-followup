@@ -1,0 +1,356 @@
+{
+  "task": "size",
+  "subset_size": 26915,
+  "prediction_distribution": {
+    "has_size": 24,
+    "no_size": 26891
+  },
+  "non_default_prediction_count": 20,
+  "sampled_case_count": 20,
+  "sampled_text_support_distribution": {
+    "not_supported": 20
+  },
+  "note": "关注 regex 未识别到尺寸的样本中，BERT 是否能补出有意义的尺寸信号。",
+  "sampled_cases": [
+    {
+      "sample_id": "10666345-RR-54__4",
+      "note_id": "10666345-RR-54",
+      "exam_name": "CT CHEST W&W/O C ",
+      "section": "findings",
+      "mention_text": "A 4- mm left upper lobe subpleural nodule,",
+      "predicted_label": "has_size",
+      "confidence": 0.995672,
+      "probabilities": {
+        "no_size": 0.004329,
+        "has_size": 0.995672
+      },
+      "text_support": {
+        "assessment": "not_supported",
+        "reason": "文本中未检测到明确尺寸表达"
+      }
+    },
+    {
+      "sample_id": "10924768-RR-76__4",
+      "note_id": "10924768-RR-76",
+      "exam_name": "CT CHEST W/CONTRAST",
+      "section": "impression",
+      "mention_text": "Slightly increasing nodule in the left lower lobe from 5 to 7mmsince ___.",
+      "predicted_label": "has_size",
+      "confidence": 0.999952,
+      "probabilities": {
+        "no_size": 4.8e-05,
+        "has_size": 0.999952
+      },
+      "text_support": {
+        "assessment": "not_supported",
+        "reason": "文本中未检测到明确尺寸表达"
+      }
+    },
+    {
+      "sample_id": "11052935-RR-28__3",
+      "note_id": "11052935-RR-28",
+      "exam_name": "CTA CHEST W&W/O C&RECONS, NON-CORONARY",
+      "section": "findings",
+      "mention_text": "The 2- mm nodule in the right apex is not",
+      "predicted_label": "has_size",
+      "confidence": 0.995624,
+      "probabilities": {
+        "no_size": 0.004376,
+        "has_size": 0.995624
+      },
+      "text_support": {
+        "assessment": "not_supported",
+        "reason": "文本中未检测到明确尺寸表达"
+      }
+    },
+    {
+      "sample_id": "12768720-RR-20__5",
+      "note_id": "12768720-RR-20",
+      "exam_name": "CT CHEST W/O CONTRAST",
+      "section": "findings",
+      "mention_text": "A 5- mm left lower lobe nodule (5:247) is seen at the confluence of multiple vessels and is also stable.",
+      "predicted_label": "has_size",
+      "confidence": 0.995696,
+      "probabilities": {
+        "no_size": 0.004304,
+        "has_size": 0.995696
+      },
+      "text_support": {
+        "assessment": "not_supported",
+        "reason": "文本中未检测到明确尺寸表达"
+      }
+    },
+    {
+      "sample_id": "12768720-RR-22__9",
+      "note_id": "12768720-RR-22",
+      "exam_name": "CT CHEST W/CONTRAST",
+      "section": "impression",
+      "mention_text": "sub-2- mm nodules within the lungs and 4-6- mm subpleural nodules.",
+      "predicted_label": "has_size",
+      "confidence": 0.995782,
+      "probabilities": {
+        "no_size": 0.004218,
+        "has_size": 0.995782
+      },
+      "text_support": {
+        "assessment": "not_supported",
+        "reason": "文本中未检测到明确尺寸表达"
+      }
+    },
+    {
+      "sample_id": "12917597-RR-18__5",
+      "note_id": "12917597-RR-18",
+      "exam_name": "CTA CHEST W&W/O C&RECONS, NON-CORONARY",
+      "section": "findings",
+      "mention_text": "hamartoma and a sub-2- mm nodule in the left lower lobe (3.56) unchanged.",
+      "predicted_label": "has_size",
+      "confidence": 0.995733,
+      "probabilities": {
+        "no_size": 0.004267,
+        "has_size": 0.995733
+      },
+      "text_support": {
+        "assessment": "not_supported",
+        "reason": "文本中未检测到明确尺寸表达"
+      }
+    },
+    {
+      "sample_id": "12943431-RR-67__5",
+      "note_id": "12943431-RR-67",
+      "exam_name": "CT CHEST W/O CONTRAST",
+      "section": "findings",
+      "mention_text": "lobe (5:103), 2- mm left upper lobe nodule (5:112), ground-glass opacity in the left upper lobe (5:110).",
+      "predicted_label": "has_size",
+      "confidence": 0.995738,
+      "probabilities": {
+        "no_size": 0.004262,
+        "has_size": 0.995738
+      },
+      "text_support": {
+        "assessment": "not_supported",
+        "reason": "文本中未检测到明确尺寸表达"
+      }
+    },
+    {
+      "sample_id": "14152811-RR-38__2",
+      "note_id": "14152811-RR-38",
+      "exam_name": "CT CHEST W/CONTRAST",
+      "section": "findings",
+      "mention_text": "4- mm left upper lobe nodule (4:195) and focal area of ground- glass opacity in the medial segment of the right lower lobe with traction bronchiectasis are stable.",
+      "predicted_label": "has_size",
+      "confidence": 0.995697,
+      "probabilities": {
+        "no_size": 0.004303,
+        "has_size": 0.995697
+      },
+      "text_support": {
+        "assessment": "not_supported",
+        "reason": "文本中未检测到明确尺寸表达"
+      }
+    },
+    {
+      "sample_id": "14295224-RR-114__2",
+      "note_id": "14295224-RR-114",
+      "exam_name": "CT CHEST W/O CONTRAST",
+      "section": "impression",
+      "mention_text": "4mmm nodule in the right upper lobe is not definitely seen on the prior",
+      "predicted_label": "has_size",
+      "confidence": 0.999951,
+      "probabilities": {
+        "no_size": 4.9e-05,
+        "has_size": 0.999951
+      },
+      "text_support": {
+        "assessment": "not_supported",
+        "reason": "文本中未检测到明确尺寸表达"
+      }
+    },
+    {
+      "sample_id": "15550984-RR-27__1",
+      "note_id": "15550984-RR-27",
+      "exam_name": "CT CHEST W/O CONTRAST",
+      "section": "findings",
+      "mention_text": "the previously visualized 4- mm nodule appears contiguous with these linear",
+      "predicted_label": "has_size",
+      "confidence": 0.99575,
+      "probabilities": {
+        "no_size": 0.00425,
+        "has_size": 0.99575
+      },
+      "text_support": {
+        "assessment": "not_supported",
+        "reason": "文本中未检测到明确尺寸表达"
+      }
+    },
+    {
+      "sample_id": "15550984-RR-27__2",
+      "note_id": "15550984-RR-27",
+      "exam_name": "CT CHEST W/O CONTRAST",
+      "section": "findings",
+      "mention_text": "A 2- mm calcified right upper lobe nodule (4, 38) is",
+      "predicted_label": "has_size",
+      "confidence": 0.995641,
+      "probabilities": {
+        "no_size": 0.004359,
+        "has_size": 0.995641
+      },
+      "text_support": {
+        "assessment": "not_supported",
+        "reason": "文本中未检测到明确尺寸表达"
+      }
+    },
+    {
+      "sample_id": "15780880-RR-52__3",
+      "note_id": "15780880-RR-52",
+      "exam_name": "CT CHEST W/CONTRAST",
+      "section": "findings",
+      "mention_text": "a 4- mm right upper lobe nodule (4:103) are stable.",
+      "predicted_label": "has_size",
+      "confidence": 0.995722,
+      "probabilities": {
+        "no_size": 0.004278,
+        "has_size": 0.995722
+      },
+      "text_support": {
+        "assessment": "not_supported",
+        "reason": "文本中未检测到明确尺寸表达"
+      }
+    },
+    {
+      "sample_id": "16382164-RR-115__3",
+      "note_id": "16382164-RR-115",
+      "exam_name": "CT CHEST W/O CONTRAST",
+      "section": "findings",
+      "mention_text": "Additional 3- mm nodules are identified in the right upper lobe (2,",
+      "predicted_label": "has_size",
+      "confidence": 0.995814,
+      "probabilities": {
+        "no_size": 0.004186,
+        "has_size": 0.995814
+      },
+      "text_support": {
+        "assessment": "not_supported",
+        "reason": "文本中未检测到明确尺寸表达"
+      }
+    },
+    {
+      "sample_id": "17891364-RR-17__1",
+      "note_id": "17891364-RR-17",
+      "exam_name": "CT CHEST W/O CONTRAST",
+      "section": "findings",
+      "mention_text": "pulmonary nodule (3:31) and 7- mm pulmonary nodule (3:35) are seen in the superior segment of the right lower lobe.",
+      "predicted_label": "has_size",
+      "confidence": 0.995745,
+      "probabilities": {
+        "no_size": 0.004255,
+        "has_size": 0.995745
+      },
+      "text_support": {
+        "assessment": "not_supported",
+        "reason": "文本中未检测到明确尺寸表达"
+      }
+    },
+    {
+      "sample_id": "17891364-RR-17__3",
+      "note_id": "17891364-RR-17",
+      "exam_name": "CT CHEST W/O CONTRAST",
+      "section": "findings",
+      "mention_text": "There is a 4- mm pulmonary nodule in the left lower lobe (3:47).",
+      "predicted_label": "has_size",
+      "confidence": 0.995771,
+      "probabilities": {
+        "no_size": 0.004229,
+        "has_size": 0.995771
+      },
+      "text_support": {
+        "assessment": "not_supported",
+        "reason": "文本中未检测到明确尺寸表达"
+      }
+    },
+    {
+      "sample_id": "18613771-RR-19__1",
+      "note_id": "18613771-RR-19",
+      "exam_name": "CT CHEST W/CONTRAST",
+      "section": "impression",
+      "mention_text": "1.6- cm ground-glass nodule is seen within the right lower lobe for which a",
+      "predicted_label": "has_size",
+      "confidence": 0.995683,
+      "probabilities": {
+        "no_size": 0.004317,
+        "has_size": 0.995683
+      },
+      "text_support": {
+        "assessment": "not_supported",
+        "reason": "文本中未检测到明确尺寸表达"
+      }
+    },
+    {
+      "sample_id": "18973855-RR-42__7",
+      "note_id": "18973855-RR-42",
+      "exam_name": "CT CHEST W/O CONTRAST",
+      "section": "findings",
+      "mention_text": "2- mm superior segment of the left lower lobe nodule persist (5:121).",
+      "predicted_label": "has_size",
+      "confidence": 0.995649,
+      "probabilities": {
+        "no_size": 0.004351,
+        "has_size": 0.995649
+      },
+      "text_support": {
+        "assessment": "not_supported",
+        "reason": "文本中未检测到明确尺寸表达"
+      }
+    },
+    {
+      "sample_id": "18974272-RR-21__2",
+      "note_id": "18974272-RR-21",
+      "exam_name": "CT CHEST W/CONTRAST",
+      "section": "findings",
+      "mention_text": "A 4- mm hypodense lesion is seen at the pancreatic neck, incompletely",
+      "predicted_label": "has_size",
+      "confidence": 0.995763,
+      "probabilities": {
+        "no_size": 0.004237,
+        "has_size": 0.995763
+      },
+      "text_support": {
+        "assessment": "not_supported",
+        "reason": "文本中未检测到明确尺寸表达"
+      }
+    },
+    {
+      "sample_id": "19407684-RR-101__2",
+      "note_id": "19407684-RR-101",
+      "exam_name": "CT CHEST W/CONTRAST",
+      "section": "findings",
+      "mention_text": "Again seen is a 4- mm nodule in the right lower lobe (series 4, image 22).",
+      "predicted_label": "has_size",
+      "confidence": 0.995825,
+      "probabilities": {
+        "no_size": 0.004175,
+        "has_size": 0.995825
+      },
+      "text_support": {
+        "assessment": "not_supported",
+        "reason": "文本中未检测到明确尺寸表达"
+      }
+    },
+    {
+      "sample_id": "19687069-RR-11__1",
+      "note_id": "19687069-RR-11",
+      "exam_name": "CT CHEST W/CONTRAST",
+      "section": "impression",
+      "mention_text": "1.3- cm enhancing polypoid lesion within the second portion of the duodenum",
+      "predicted_label": "has_size",
+      "confidence": 0.995734,
+      "probabilities": {
+        "no_size": 0.004266,
+        "has_size": 0.995734
+      },
+      "text_support": {
+        "assessment": "not_supported",
+        "reason": "文本中未检测到明确尺寸表达"
+      }
+    }
+  ]
+}

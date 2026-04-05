@@ -1,0 +1,125 @@
+{
+  "density": {
+    "mention_text": {
+      "primary_metric_name": "macro_f1",
+      "primary_metric": 0.9975251954416123,
+      "accuracy": 0.9992153505956203,
+      "fit_seconds": 66.7942,
+      "predict_seconds": 1.0751,
+      "config": {
+        "text_field": "mention_text",
+        "prepend_exam": false,
+        "max_features": 10000,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "C": 1.0
+      },
+      "macro_f1": 0.9975251954416123
+    },
+    "full_text": {
+      "primary_metric_name": "macro_f1",
+      "primary_metric": 0.4784924072259993,
+      "accuracy": 0.8113274841286825,
+      "fit_seconds": 314.8806,
+      "predict_seconds": 20.1143,
+      "config": {
+        "text_field": "full_text",
+        "prepend_exam": false,
+        "max_features": 10000,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "C": 1.0
+      },
+      "macro_f1": 0.4784924072259993
+    },
+    "delta_primary_metric": 0.519033
+  },
+  "size": {
+    "mention_text": {
+      "primary_metric_name": "f1",
+      "primary_metric": 0.9900068805085024,
+      "accuracy": 0.9927479373231567,
+      "fit_seconds": 15.5219,
+      "predict_seconds": 0.9919,
+      "config": {
+        "text_field": "mention_text",
+        "prepend_exam": false,
+        "max_features": 10000,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "C": 1.0
+      },
+      "f1": 0.9900068805085024,
+      "macro_f1": 0.9921579193839882,
+      "precision": 0.9823785681773848,
+      "recall": 0.9977545898824461
+    },
+    "full_text": {
+      "primary_metric_name": "f1",
+      "primary_metric": 0.6079570078876658,
+      "accuracy": 0.6773664312718454,
+      "fit_seconds": 233.0191,
+      "predict_seconds": 20.4245,
+      "config": {
+        "text_field": "full_text",
+        "prepend_exam": false,
+        "max_features": 10000,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "C": 1.0
+      },
+      "f1": 0.6079570078876658,
+      "macro_f1": 0.6669262040832185,
+      "precision": 0.5403975550875751,
+      "recall": 0.694822348434817
+    },
+    "delta_primary_metric": 0.38205
+  },
+  "location": {
+    "mention_text": {
+      "primary_metric_name": "macro_f1",
+      "primary_metric": 0.9971772994044247,
+      "accuracy": 0.9983118149178496,
+      "fit_seconds": 27.7421,
+      "predict_seconds": 1.0704,
+      "config": {
+        "text_field": "mention_text",
+        "prepend_exam": false,
+        "max_features": 10000,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "C": 1.0
+      },
+      "macro_f1": 0.9971772994044247
+    },
+    "full_text": {
+      "primary_metric_name": "macro_f1",
+      "primary_metric": 0.364499257003554,
+      "accuracy": 0.5058135387688137,
+      "fit_seconds": 603.916,
+      "predict_seconds": 19.9755,
+      "config": {
+        "text_field": "full_text",
+        "prepend_exam": false,
+        "max_features": 10000,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "C": 1.0
+      },
+      "macro_f1": 0.364499257003554
+    },
+    "delta_primary_metric": 0.632678
+  }
+}

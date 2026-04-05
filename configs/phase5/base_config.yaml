@@ -1,0 +1,34 @@
+data:
+  base_dir: "data/mimic_note_extracted/note"
+  datasets_dir: "outputs/phase5/datasets"
+
+training:
+  seed: 42
+  device: "cuda"
+  fp16: true
+  num_workers: 4
+
+  model_name: "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext"
+  max_seq_length: 128
+  learning_rate: 2.0e-5
+  weight_decay: 0.01
+  warmup_ratio: 0.1
+  batch_size: 16
+  gradient_accumulation_steps: 1
+  max_epochs: 10
+  early_stopping_patience: 3
+
+  ml_baseline:
+    tfidf_max_features: 10000
+    tfidf_ngram_range: [1, 2]
+
+output:
+  phase5_dir: "outputs/phase5"
+  models_dir: "outputs/phase5/models"
+  results_dir: "outputs/phase5/results"
+  logs_dir: "logs"
+
+versions:
+  pipeline_version: "0.3.0"
+  phase: "phase5"
+  model_version: "pubmedbert_v1"

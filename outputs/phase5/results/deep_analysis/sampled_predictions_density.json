@@ -1,0 +1,402 @@
+[
+  {
+    "sample_id": "10035168-RR-48__2",
+    "note_id": "10035168-RR-48",
+    "exam_name": "CT CHEST W/CONTRAST W/ONC TABLE",
+    "section": "findings",
+    "mention_text": "Ground- glass opacity seen along the major fissure on the left is also stable.",
+    "predicted_label": "ground_glass",
+    "confidence": 0.999779,
+    "probabilities": {
+      "solid": 1.1e-05,
+      "part_solid": 6e-06,
+      "ground_glass": 0.999779,
+      "calcified": 4e-06,
+      "unclear": 0.000199
+    },
+    "text_support": {
+      "assessment": "not_supported",
+      "reason": "未发现与预测类别直接对应的密度关键词"
+    }
+  },
+  {
+    "sample_id": "11236410-RR-17__3",
+    "note_id": "11236410-RR-17",
+    "exam_name": "CT CHEST W/CONTRAST",
+    "section": "findings",
+    "mention_text": "associated with non-calcified less than 3 mm lung nodules located in the subpleural regions or near the fissures for instance in the left upper lobe (5:40, 44, 57, 67), in the right lower lobe (5:163). Largest areas of ground- glass opacities are in the right upper lobe measuring 7 mm (5:89), and right lower lobe (5:119).",
+    "predicted_label": "ground_glass",
+    "confidence": 0.999769,
+    "probabilities": {
+      "solid": 1.2e-05,
+      "part_solid": 6e-06,
+      "ground_glass": 0.999769,
+      "calcified": 4e-06,
+      "unclear": 0.000209
+    },
+    "text_support": {
+      "assessment": "not_supported",
+      "reason": "未发现与预测类别直接对应的密度关键词"
+    }
+  },
+  {
+    "sample_id": "12548159-RR-19__6",
+    "note_id": "12548159-RR-19",
+    "exam_name": "CT CHEST W/O CONTRAST",
+    "section": "findings",
+    "mention_text": "ground- glass nodule left upper lobe (4.307), 3 mm nodule in the right upper",
+    "predicted_label": "ground_glass",
+    "confidence": 0.99978,
+    "probabilities": {
+      "solid": 1.1e-05,
+      "part_solid": 6e-06,
+      "ground_glass": 0.99978,
+      "calcified": 4e-06,
+      "unclear": 0.000198
+    },
+    "text_support": {
+      "assessment": "not_supported",
+      "reason": "未发现与预测类别直接对应的密度关键词"
+    }
+  },
+  {
+    "sample_id": "12768720-RR-22__8",
+    "note_id": "12768720-RR-22",
+    "exam_name": "CT CHEST W/CONTRAST",
+    "section": "impression",
+    "mention_text": "ground- glass nodule with stable bidirectional ___, concerning for a",
+    "predicted_label": "ground_glass",
+    "confidence": 0.99978,
+    "probabilities": {
+      "solid": 1.1e-05,
+      "part_solid": 6e-06,
+      "ground_glass": 0.99978,
+      "calcified": 4e-06,
+      "unclear": 0.000199
+    },
+    "text_support": {
+      "assessment": "not_supported",
+      "reason": "未发现与预测类别直接对应的密度关键词"
+    }
+  },
+  {
+    "sample_id": "12916898-RR-43__4",
+    "note_id": "12916898-RR-43",
+    "exam_name": "CT CHEST W/O CONTRAST",
+    "section": "impression",
+    "mention_text": "Eighteen-month stability of previously described ground- glass nodules.",
+    "predicted_label": "ground_glass",
+    "confidence": 0.99978,
+    "probabilities": {
+      "solid": 1.1e-05,
+      "part_solid": 6e-06,
+      "ground_glass": 0.99978,
+      "calcified": 4e-06,
+      "unclear": 0.000199
+    },
+    "text_support": {
+      "assessment": "not_supported",
+      "reason": "未发现与预测类别直接对应的密度关键词"
+    }
+  },
+  {
+    "sample_id": "12943431-RR-64__2",
+    "note_id": "12943431-RR-64",
+    "exam_name": "CT CHEST W/O CONTRAST",
+    "section": "findings",
+    "mention_text": "ground- glass opacity is unchanged (7 x 8 mm, 5:206). Right upper lobe",
+    "predicted_label": "ground_glass",
+    "confidence": 0.999778,
+    "probabilities": {
+      "solid": 1.1e-05,
+      "part_solid": 6e-06,
+      "ground_glass": 0.999778,
+      "calcified": 4e-06,
+      "unclear": 0.0002
+    },
+    "text_support": {
+      "assessment": "not_supported",
+      "reason": "未发现与预测类别直接对应的密度关键词"
+    }
+  },
+  {
+    "sample_id": "12943431-RR-64__4",
+    "note_id": "12943431-RR-64",
+    "exam_name": "CT CHEST W/O CONTRAST",
+    "section": "findings",
+    "mention_text": "3-mm left upper lobe ground- glass opacity is unchanged in retrospect",
+    "predicted_label": "ground_glass",
+    "confidence": 0.99978,
+    "probabilities": {
+      "solid": 1.1e-05,
+      "part_solid": 6e-06,
+      "ground_glass": 0.99978,
+      "calcified": 4e-06,
+      "unclear": 0.000199
+    },
+    "text_support": {
+      "assessment": "not_supported",
+      "reason": "未发现与预测类别直接对应的密度关键词"
+    }
+  },
+  {
+    "sample_id": "13479418-RR-26__5",
+    "note_id": "13479418-RR-26",
+    "exam_name": "CT CHEST W/CONTRAST",
+    "section": "findings",
+    "mention_text": "other lung nodules of concern. Subpleural ground-glassing in the upper lobe and apical segment of the left lower lobe are likely post-radiation change.",
+    "predicted_label": "ground_glass",
+    "confidence": 0.999778,
+    "probabilities": {
+      "solid": 1.1e-05,
+      "part_solid": 6e-06,
+      "ground_glass": 0.999778,
+      "calcified": 4e-06,
+      "unclear": 0.000201
+    },
+    "text_support": {
+      "assessment": "supported",
+      "reason": "文本含有关键词: ground-glass"
+    }
+  },
+  {
+    "sample_id": "14152811-RR-38__2",
+    "note_id": "14152811-RR-38",
+    "exam_name": "CT CHEST W/CONTRAST",
+    "section": "findings",
+    "mention_text": "4- mm left upper lobe nodule (4:195) and focal area of ground- glass opacity in the medial segment of the right lower lobe with traction bronchiectasis are stable.",
+    "predicted_label": "ground_glass",
+    "confidence": 0.999778,
+    "probabilities": {
+      "solid": 1.1e-05,
+      "part_solid": 6e-06,
+      "ground_glass": 0.999778,
+      "calcified": 4e-06,
+      "unclear": 0.000201
+    },
+    "text_support": {
+      "assessment": "not_supported",
+      "reason": "未发现与预测类别直接对应的密度关键词"
+    }
+  },
+  {
+    "sample_id": "15064096-RR-23__1",
+    "note_id": "15064096-RR-23",
+    "exam_name": "CT CHEST W/CONTRAST",
+    "section": "findings",
+    "mention_text": "CT CHEST:  Within the right middle lobe, and ill-defined ground- glass opacity",
+    "predicted_label": "ground_glass",
+    "confidence": 0.999779,
+    "probabilities": {
+      "solid": 1.1e-05,
+      "part_solid": 6e-06,
+      "ground_glass": 0.999779,
+      "calcified": 4e-06,
+      "unclear": 0.000199
+    },
+    "text_support": {
+      "assessment": "not_supported",
+      "reason": "未发现与预测类别直接对应的密度关键词"
+    }
+  },
+  {
+    "sample_id": "15585564-RR-71__1",
+    "note_id": "15585564-RR-71",
+    "exam_name": "CTA CHEST W&W/O C&RECONS, NON-CORONARY",
+    "section": "findings",
+    "mention_text": "There is surrounding ground- glass opacity around those mass,",
+    "predicted_label": "ground_glass",
+    "confidence": 0.999778,
+    "probabilities": {
+      "solid": 1.1e-05,
+      "part_solid": 6e-06,
+      "ground_glass": 0.999778,
+      "calcified": 4e-06,
+      "unclear": 0.0002
+    },
+    "text_support": {
+      "assessment": "not_supported",
+      "reason": "未发现与预测类别直接对应的密度关键词"
+    }
+  },
+  {
+    "sample_id": "15840768-RR-133__3",
+    "note_id": "15840768-RR-133",
+    "exam_name": "CT CHEST W/O CONTRAST",
+    "section": "findings",
+    "mention_text": "by ground- glass opacity. A 6-cm diameter rounded consolidation in left lower lobe with air bronchograms is adjacent to areas of ground- glass and acinar",
+    "predicted_label": "ground_glass",
+    "confidence": 0.99978,
+    "probabilities": {
+      "solid": 1.1e-05,
+      "part_solid": 7e-06,
+      "ground_glass": 0.99978,
+      "calcified": 4e-06,
+      "unclear": 0.000198
+    },
+    "text_support": {
+      "assessment": "not_supported",
+      "reason": "未发现与预测类别直接对应的密度关键词"
+    }
+  },
+  {
+    "sample_id": "15890202-RR-29__2",
+    "note_id": "15890202-RR-29",
+    "exam_name": "CT CHEST W/O CONTRAST",
+    "section": "findings",
+    "mention_text": "A ground- glass opacity in the right apex, 4-mm",
+    "predicted_label": "ground_glass",
+    "confidence": 0.99978,
+    "probabilities": {
+      "solid": 1.1e-05,
+      "part_solid": 6e-06,
+      "ground_glass": 0.99978,
+      "calcified": 4e-06,
+      "unclear": 0.000199
+    },
+    "text_support": {
+      "assessment": "not_supported",
+      "reason": "未发现与预测类别直接对应的密度关键词"
+    }
+  },
+  {
+    "sample_id": "16047293-RR-23__1",
+    "note_id": "16047293-RR-23",
+    "exam_name": "CT CHEST W/O CONTRAST",
+    "section": "findings",
+    "mention_text": "consolidation with surrounding ground- glass opacity consistent with resolving",
+    "predicted_label": "ground_glass",
+    "confidence": 0.99978,
+    "probabilities": {
+      "solid": 1.1e-05,
+      "part_solid": 6e-06,
+      "ground_glass": 0.99978,
+      "calcified": 4e-06,
+      "unclear": 0.000199
+    },
+    "text_support": {
+      "assessment": "not_supported",
+      "reason": "未发现与预测类别直接对应的密度关键词"
+    }
+  },
+  {
+    "sample_id": "16675591-RR-51__1",
+    "note_id": "16675591-RR-51",
+    "exam_name": "CT CHEST W/CONTRAST",
+    "section": "impression",
+    "mention_text": "Stable left upper lobe spiculated nodule and focal area of ground- glass consolidation in the posterior segment of the left upper lobe are suspicious",
+    "predicted_label": "ground_glass",
+    "confidence": 0.999779,
+    "probabilities": {
+      "solid": 1.1e-05,
+      "part_solid": 6e-06,
+      "ground_glass": 0.999779,
+      "calcified": 4e-06,
+      "unclear": 0.000199
+    },
+    "text_support": {
+      "assessment": "not_supported",
+      "reason": "未发现与预测类别直接对应的密度关键词"
+    }
+  },
+  {
+    "sample_id": "17848669-RR-28__1",
+    "note_id": "17848669-RR-28",
+    "exam_name": "CT CHEST W/O CONTRAST",
+    "section": "findings",
+    "mention_text": "ground-gland nodule (5, 158) is unchanged.",
+    "predicted_label": "ground_glass",
+    "confidence": 0.952205,
+    "probabilities": {
+      "solid": 4.1e-05,
+      "part_solid": 2.7e-05,
+      "ground_glass": 0.952205,
+      "calcified": 2.7e-05,
+      "unclear": 0.047701
+    },
+    "text_support": {
+      "assessment": "not_supported",
+      "reason": "未发现与预测类别直接对应的密度关键词"
+    }
+  },
+  {
+    "sample_id": "17953560-RR-17__1",
+    "note_id": "17953560-RR-17",
+    "exam_name": "CT CHEST W/O CONTRAST",
+    "section": "findings",
+    "mention_text": "of ground- glass opacity is seen in the left upper lobe (2:25).",
+    "predicted_label": "ground_glass",
+    "confidence": 0.999776,
+    "probabilities": {
+      "solid": 1.1e-05,
+      "part_solid": 6e-06,
+      "ground_glass": 0.999776,
+      "calcified": 4e-06,
+      "unclear": 0.000202
+    },
+    "text_support": {
+      "assessment": "not_supported",
+      "reason": "未发现与预测类别直接对应的密度关键词"
+    }
+  },
+  {
+    "sample_id": "18937331-RR-160__1",
+    "note_id": "18937331-RR-160",
+    "exam_name": "CT CHEST W/O CONTRAST",
+    "section": "findings",
+    "mention_text": "except for a persisting 8-mm wide left upper lobe ground- glass nodule, 3A:10. New left pleural drain is probably responsible for small collections of left",
+    "predicted_label": "ground_glass",
+    "confidence": 0.999779,
+    "probabilities": {
+      "solid": 1.2e-05,
+      "part_solid": 6e-06,
+      "ground_glass": 0.999779,
+      "calcified": 4e-06,
+      "unclear": 0.000199
+    },
+    "text_support": {
+      "assessment": "not_supported",
+      "reason": "未发现与预测类别直接对应的密度关键词"
+    }
+  },
+  {
+    "sample_id": "19293671-RR-19__1",
+    "note_id": "19293671-RR-19",
+    "exam_name": "CTA CHEST ",
+    "section": "findings",
+    "mention_text": "A few pulmonary nodules are noted not definitely calcified (5:67, 142) measuring 2 mm.",
+    "predicted_label": "calcified",
+    "confidence": 0.999948,
+    "probabilities": {
+      "solid": 4e-06,
+      "part_solid": 2e-06,
+      "ground_glass": 2e-06,
+      "calcified": 0.999948,
+      "unclear": 4.3e-05
+    },
+    "text_support": {
+      "assessment": "supported",
+      "reason": "文本含有关键词: calcified"
+    }
+  },
+  {
+    "sample_id": "19944328-RR-24__1",
+    "note_id": "19944328-RR-24",
+    "exam_name": "CT CHEST W/O CONTRAST",
+    "section": "findings",
+    "mention_text": "A 4-mm ground-nodule in the left lower lobe (4:126) is unchanged.",
+    "predicted_label": "ground_glass",
+    "confidence": 0.999775,
+    "probabilities": {
+      "solid": 1.3e-05,
+      "part_solid": 7e-06,
+      "ground_glass": 0.999775,
+      "calcified": 4e-06,
+      "unclear": 0.000202
+    },
+    "text_support": {
+      "assessment": "not_supported",
+      "reason": "未发现与预测类别直接对应的密度关键词"
+    }
+  }
+]

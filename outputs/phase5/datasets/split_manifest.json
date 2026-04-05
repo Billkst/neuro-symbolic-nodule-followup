@@ -1,0 +1,32 @@
+{
+  "seed": 42,
+  "nrows": null,
+  "total_mentions": 288894,
+  "total_subjects": 33149,
+  "reports_with_mentions": 74956,
+  "skipped": {
+    "empty_text_reports": 0,
+    "empty_findings_impression_reports": 558,
+    "empty_mentions": 0
+  },
+  "splits": {
+    "train": {
+      "mention_count": 201947,
+      "subject_count": 23204
+    },
+    "val": {
+      "mention_count": 44890,
+      "subject_count": 4972
+    },
+    "test": {
+      "mention_count": 42057,
+      "subject_count": 4973
+    }
+  },
+  "subject_overlap_check": {
+    "train_val_overlap": 0,
+    "train_test_overlap": 0,
+    "val_test_overlap": 0,
+    "disjoint": true
+  }
+}

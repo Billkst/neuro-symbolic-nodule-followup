@@ -1,0 +1,466 @@
+{
+  "method": "ml_svm",
+  "task": "location",
+  "val_results": {
+    "accuracy": 0.9977723323680107,
+    "macro_f1": 0.9965039819161786,
+    "per_class_f1": {
+      "RUL": 0.9947536496350365,
+      "RML": 0.9954614220877458,
+      "RLL": 0.9964643488509134,
+      "LUL": 0.9924633082110274,
+      "LLL": 0.9958364875094625,
+      "lingula": 0.9986577181208054,
+      "bilateral": 0.9995359628770302,
+      "unclear": 0.9961722488038277,
+      "no_location": 0.9991906911497581
+    },
+    "confusion_matrix": {
+      "labels": [
+        "RUL",
+        "RML",
+        "RLL",
+        "LUL",
+        "LLL",
+        "lingula",
+        "bilateral",
+        "unclear",
+        "no_location"
+      ],
+      "matrix": [
+        [
+          4361,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1645,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          5,
+          1,
+          3382,
+          3,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          23,
+          0,
+          1,
+          2502,
+          0,
+          0,
+          0,
+          2,
+          2
+        ],
+        [
+          2,
+          1,
+          2,
+          1,
+          2631,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          372,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1077,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1041,
+          2
+        ],
+        [
+          13,
+          9,
+          5,
+          5,
+          9,
+          0,
+          0,
+          0,
+          27779
+        ]
+      ],
+      "rows": {
+        "RUL": {
+          "RUL": 4361,
+          "RML": 1,
+          "RLL": 0,
+          "LUL": 1,
+          "LLL": 0,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 0,
+          "no_location": 0
+        },
+        "RML": {
+          "RUL": 0,
+          "RML": 1645,
+          "RLL": 2,
+          "LUL": 0,
+          "LLL": 0,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 0,
+          "no_location": 0
+        },
+        "RLL": {
+          "RUL": 5,
+          "RML": 1,
+          "RLL": 3382,
+          "LUL": 3,
+          "LLL": 5,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 0,
+          "no_location": 0
+        },
+        "LUL": {
+          "RUL": 23,
+          "RML": 0,
+          "RLL": 1,
+          "LUL": 2502,
+          "LLL": 0,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 2,
+          "no_location": 2
+        },
+        "LLL": {
+          "RUL": 2,
+          "RML": 1,
+          "RLL": 2,
+          "LUL": 1,
+          "LLL": 2631,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 1,
+          "no_location": 0
+        },
+        "lingula": {
+          "RUL": 0,
+          "RML": 0,
+          "RLL": 0,
+          "LUL": 0,
+          "LLL": 0,
+          "lingula": 372,
+          "bilateral": 0,
+          "unclear": 1,
+          "no_location": 0
+        },
+        "bilateral": {
+          "RUL": 0,
+          "RML": 1,
+          "RLL": 0,
+          "LUL": 0,
+          "LLL": 0,
+          "lingula": 0,
+          "bilateral": 1077,
+          "unclear": 0,
+          "no_location": 0
+        },
+        "unclear": {
+          "RUL": 1,
+          "RML": 0,
+          "RLL": 0,
+          "LUL": 0,
+          "LLL": 1,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 1041,
+          "no_location": 2
+        },
+        "no_location": {
+          "RUL": 13,
+          "RML": 9,
+          "RLL": 5,
+          "LUL": 5,
+          "LLL": 9,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 0,
+          "no_location": 27779
+        }
+      }
+    }
+  },
+  "test_results": {
+    "accuracy": 0.9983118149178496,
+    "macro_f1": 0.9971772994044247,
+    "per_class_f1": {
+      "RUL": 0.9965282242509965,
+      "RML": 0.9966164257151645,
+      "RLL": 0.9967284623773174,
+      "LUL": 0.9932913193738565,
+      "LLL": 0.9965856597710384,
+      "lingula": 0.9984639016897081,
+      "bilateral": 0.9989868287740629,
+      "unclear": 0.9978925184404637,
+      "no_location": 0.9995023542472151
+    },
+    "confusion_matrix": {
+      "labels": [
+        "RUL",
+        "RML",
+        "RLL",
+        "LUL",
+        "LLL",
+        "lingula",
+        "bilateral",
+        "unclear",
+        "no_location"
+      ],
+      "matrix": [
+        [
+          3875,
+          2,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1620,
+          4,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          2,
+          0,
+          3199,
+          3,
+          3,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          12,
+          1,
+          1,
+          2443,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          4,
+          2,
+          2481,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          325,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          986,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          947,
+          0
+        ],
+        [
+          7,
+          1,
+          2,
+          9,
+          5,
+          0,
+          0,
+          0,
+          26110
+        ]
+      ],
+      "rows": {
+        "RUL": {
+          "RUL": 3875,
+          "RML": 2,
+          "RLL": 0,
+          "LUL": 2,
+          "LLL": 0,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 0,
+          "no_location": 0
+        },
+        "RML": {
+          "RUL": 0,
+          "RML": 1620,
+          "RLL": 4,
+          "LUL": 1,
+          "LLL": 1,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 1,
+          "no_location": 0
+        },
+        "RLL": {
+          "RUL": 2,
+          "RML": 0,
+          "RLL": 3199,
+          "LUL": 3,
+          "LLL": 3,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 0,
+          "no_location": 1
+        },
+        "LUL": {
+          "RUL": 12,
+          "RML": 1,
+          "RLL": 1,
+          "LUL": 2443,
+          "LLL": 1,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 0,
+          "no_location": 1
+        },
+        "LLL": {
+          "RUL": 1,
+          "RML": 0,
+          "RLL": 4,
+          "LUL": 2,
+          "LLL": 2481,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 0,
+          "no_location": 0
+        },
+        "lingula": {
+          "RUL": 0,
+          "RML": 0,
+          "RLL": 0,
+          "LUL": 0,
+          "LLL": 0,
+          "lingula": 325,
+          "bilateral": 0,
+          "unclear": 1,
+          "no_location": 0
+        },
+        "bilateral": {
+          "RUL": 0,
+          "RML": 0,
+          "RLL": 1,
+          "LUL": 0,
+          "LLL": 0,
+          "lingula": 0,
+          "bilateral": 986,
+          "unclear": 1,
+          "no_location": 0
+        },
+        "unclear": {
+          "RUL": 1,
+          "RML": 0,
+          "RLL": 0,
+          "LUL": 0,
+          "LLL": 0,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 947,
+          "no_location": 0
+        },
+        "no_location": {
+          "RUL": 7,
+          "RML": 1,
+          "RLL": 2,
+          "LUL": 9,
+          "LLL": 5,
+          "lingula": 0,
+          "bilateral": 0,
+          "unclear": 0,
+          "no_location": 26110
+        }
+      }
+    }
+  },
+  "train_time_seconds": 16.8304,
+  "eval_time_seconds": 3.2924
+}

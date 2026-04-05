@@ -1,0 +1,140 @@
+{
+  "density": {
+    "train_counts": {
+      "all": 201947,
+      "explicit_only": 7796
+    },
+    "subset_note": "仅使用 label_quality == explicit 的训练样本。",
+    "all_silver_labels": {
+      "primary_metric_name": "macro_f1",
+      "primary_metric": 0.9975251954416123,
+      "accuracy": 0.9992153505956203,
+      "fit_seconds": 51.6056,
+      "predict_seconds": 1.0425,
+      "config": {
+        "text_field": "mention_text",
+        "prepend_exam": false,
+        "max_features": 10000,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "C": 1.0
+      },
+      "macro_f1": 0.9975251954416123
+    },
+    "explicit_only": {
+      "primary_metric_name": "macro_f1",
+      "primary_metric": 0.4408683604648993,
+      "accuracy": 0.13208264973726133,
+      "fit_seconds": 0.3259,
+      "predict_seconds": 1.01,
+      "config": {
+        "text_field": "mention_text",
+        "prepend_exam": false,
+        "max_features": 10000,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "C": 1.0
+      },
+      "macro_f1": 0.4408683604648993
+    },
+    "delta_primary_metric": -0.556657
+  },
+  "size": {
+    "train_counts": {
+      "all": 201947,
+      "explicit_only": 136360
+    },
+    "subset_note": "size 任务中 explicit 样本几乎全为正类；为保证二分类可训练，保留全部 no_size 负类并仅收缩正类到 explicit 子集。",
+    "all_silver_labels": {
+      "primary_metric_name": "f1",
+      "primary_metric": 0.9900068805085024,
+      "accuracy": 0.9927479373231567,
+      "fit_seconds": 16.6335,
+      "predict_seconds": 1.026,
+      "config": {
+        "text_field": "mention_text",
+        "prepend_exam": false,
+        "max_features": 10000,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "C": 1.0
+      },
+      "f1": 0.9900068805085024,
+      "macro_f1": 0.9921579193839882,
+      "precision": 0.9823785681773848,
+      "recall": 0.9977545898824461
+    },
+    "explicit_only": {
+      "primary_metric_name": "f1",
+      "primary_metric": 0.7809828206152617,
+      "accuracy": 0.8696530898542454,
+      "fit_seconds": 13.5026,
+      "predict_seconds": 1.0248,
+      "config": {
+        "text_field": "mention_text",
+        "prepend_exam": false,
+        "max_features": 10000,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "C": 1.0
+      },
+      "f1": 0.7809828206152617,
+      "macro_f1": 0.8440998322154232,
+      "precision": 0.9884708737864077,
+      "recall": 0.6454893673226787
+    },
+    "delta_primary_metric": -0.209024
+  },
+  "location": {
+    "train_counts": {
+      "all": 201947,
+      "explicit_only": 7796
+    },
+    "subset_note": "仅使用 label_quality == explicit 的训练样本。",
+    "all_silver_labels": {
+      "primary_metric_name": "macro_f1",
+      "primary_metric": 0.9971772994044247,
+      "accuracy": 0.9983118149178496,
+      "fit_seconds": 61.1449,
+      "predict_seconds": 1.0449,
+      "config": {
+        "text_field": "mention_text",
+        "prepend_exam": false,
+        "max_features": 10000,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "C": 1.0
+      },
+      "macro_f1": 0.9971772994044247
+    },
+    "explicit_only": {
+      "primary_metric_name": "macro_f1",
+      "primary_metric": 0.5621896560119715,
+      "accuracy": 0.37389732981429963,
+      "fit_seconds": 0.3612,
+      "predict_seconds": 0.9854,
+      "config": {
+        "text_field": "mention_text",
+        "prepend_exam": false,
+        "max_features": 10000,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "C": 1.0
+      },
+      "macro_f1": 0.5621896560119715
+    },
+    "delta_primary_metric": -0.434988
+  }
+}
