@@ -1,0 +1,71 @@
+# Phase 5.1: Gold Evaluation Configuration
+# 人工 gold 小样本评测配置
+
+gold_data:
+  gold_csv: "data/gold_eval_candidates_v1_final_usable_gold.csv"
+  filter_pulmonary: true                    # 仅保留 gold_is_pulmonary_target == "yes"
+  exclude_needs_review: true                # 排除 needs_review != 0
+
+phase5_data:
+  datasets_dir: "outputs/phase5/datasets"
+  test_jsonl_template: "{task}_test.jsonl"  # density_test.jsonl, size_test.jsonl, location_test.jsonl
+
+models:
+  pubmedbert_dir: "outputs/phase5/models"
+  density_model: "density_pubmedbert"
+  size_model: "size_pubmedbert"
+  location_model: "location_pubmedbert"
+  max_seq_length: 128
+  eval_batch_size: 64
+
+tasks:
+  density:
+    type: "classification"
+    label_names: ["solid", "part_solid", "ground_glass", "calcified", "unclear"]
+    gold_field: "gold_density_category"
+    silver_field: "silver_density_category"
+    primary_metric: "macro_f1"
+
+  has_size:
+    type: "binary_classification"
+    gold_field: "gold_has_size"
+    silver_field: "silver_has_size"
+    positive_value: "yes"
+    primary_metric: "f1"
+
+  size_mm:
+    type: "regression"
+    gold_field: "gold_size_mm"
+    silver_field: "silver_size_mm"
+    filter_condition: "gold_has_size == 'yes'"
+    tolerance_mm: 1.0
+    primary_metric: "mae"
+
+  location:
+    type: "classification"
+    label_names: ["RUL", "RML", "RLL", "LUL", "LLL", "lingula", "bilateral", "unclear", "no_location"]
+    gold_field: "gold_location_lobe"
+    silver_field: "silver_location_lobe"
+    primary_metric: "macro_f1"
+
+methods:
+  - "silver"       # silver label 直接作为预测（衡量 silver 质量）
+  - "regex"        # 规则/正则 baseline
+  - "ml_lr"        # TF-IDF + Logistic Regression
+  - "ml_svm"       # TF-IDF + Linear SVM
+  - "pubmedbert"   # PubMedBERT fine-tuned model
+
+ml_baseline:
+  tfidf_max_features: 10000
+  tfidf_ngram_range: [1, 2]
+
+output:
+  output_dir: "outputs/phase5_1"
+  manifest_file: "gold_eval_manifest.jsonl"
+  predictions_dir: "predictions"
+  metrics_file: "gold_eval_metrics.json"
+  summary_csv: "gold_eval_summary.csv"
+  error_analysis_file: "error_analysis.json"
+  report_path: "reports/phase5_1_gold_eval.md"
+
+seed: 42

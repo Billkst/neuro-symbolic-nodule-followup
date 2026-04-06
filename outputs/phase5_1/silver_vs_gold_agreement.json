@@ -1,0 +1,230 @@
+{
+  "density_category": {
+    "agreement_rate": 0.7258064516129032,
+    "disagreement_count": 17,
+    "total": 62,
+    "disagreements": [
+      {
+        "index": 1,
+        "silver": "part_solid",
+        "gold": "unclear"
+      },
+      {
+        "index": 3,
+        "silver": "part_solid",
+        "gold": "unclear"
+      },
+      {
+        "index": 5,
+        "silver": "part_solid",
+        "gold": "unclear"
+      },
+      {
+        "index": 7,
+        "silver": "ground_glass",
+        "gold": "unclear"
+      },
+      {
+        "index": 14,
+        "silver": "ground_glass",
+        "gold": "unclear"
+      },
+      {
+        "index": 15,
+        "silver": "ground_glass",
+        "gold": "unclear"
+      },
+      {
+        "index": 16,
+        "silver": "part_solid",
+        "gold": "unclear"
+      },
+      {
+        "index": 18,
+        "silver": "ground_glass",
+        "gold": "unclear"
+      },
+      {
+        "index": 26,
+        "silver": "ground_glass",
+        "gold": "unclear"
+      },
+      {
+        "index": 31,
+        "silver": "solid",
+        "gold": "part_solid"
+      },
+      {
+        "index": 37,
+        "silver": "solid",
+        "gold": "part_solid"
+      },
+      {
+        "index": 41,
+        "silver": "calcified",
+        "gold": "unclear"
+      },
+      {
+        "index": 46,
+        "silver": "unclear",
+        "gold": "solid"
+      },
+      {
+        "index": 47,
+        "silver": "unclear",
+        "gold": "solid"
+      },
+      {
+        "index": 54,
+        "silver": "ground_glass",
+        "gold": "calcified"
+      },
+      {
+        "index": 58,
+        "silver": "ground_glass",
+        "gold": "part_solid"
+      },
+      {
+        "index": 59,
+        "silver": "solid",
+        "gold": "part_solid"
+      }
+    ]
+  },
+  "has_size": {
+    "agreement_rate": 0.9354838709677419,
+    "disagreement_count": 4,
+    "total": 62,
+    "disagreements": [
+      {
+        "index": 13,
+        "silver": 0,
+        "gold": 1
+      },
+      {
+        "index": 15,
+        "silver": 0,
+        "gold": 1
+      },
+      {
+        "index": 46,
+        "silver": 0,
+        "gold": 1
+      },
+      {
+        "index": 54,
+        "silver": 0,
+        "gold": 1
+      }
+    ]
+  },
+  "size_mm": {
+    "agreement_rate": 0.8709677419354839,
+    "disagreement_count": 8,
+    "total": 62,
+    "disagreements": [
+      {
+        "index": 1,
+        "silver": 2.5,
+        "gold": 3.0
+      },
+      {
+        "index": 5,
+        "silver": 12.0,
+        "gold": 20.0
+      },
+      {
+        "index": 7,
+        "silver": 3.0,
+        "gold": 4.0
+      },
+      {
+        "index": 13,
+        "silver": null,
+        "gold": 4.8
+      },
+      {
+        "index": 15,
+        "silver": null,
+        "gold": 9.0
+      },
+      {
+        "index": 38,
+        "silver": 2.0,
+        "gold": 3.0
+      },
+      {
+        "index": 46,
+        "silver": null,
+        "gold": 15.0
+      },
+      {
+        "index": 54,
+        "silver": null,
+        "gold": 6.0
+      }
+    ]
+  },
+  "location_lobe": {
+    "agreement_rate": 0.8225806451612904,
+    "disagreement_count": 11,
+    "total": 62,
+    "disagreements": [
+      {
+        "index": 1,
+        "silver": "LUL",
+        "gold": "bilateral"
+      },
+      {
+        "index": 5,
+        "silver": "RUL",
+        "gold": "bilateral"
+      },
+      {
+        "index": 7,
+        "silver": "RUL",
+        "gold": "bilateral"
+      },
+      {
+        "index": 8,
+        "silver": "RUL",
+        "gold": "bilateral"
+      },
+      {
+        "index": 13,
+        "silver": "no_location",
+        "gold": "bilateral"
+      },
+      {
+        "index": 14,
+        "silver": "bilateral",
+        "gold": "RLL"
+      },
+      {
+        "index": 38,
+        "silver": "RUL",
+        "gold": "bilateral"
+      },
+      {
+        "index": 51,
+        "silver": "no_location",
+        "gold": "bilateral"
+      },
+      {
+        "index": 56,
+        "silver": "no_location",
+        "gold": "RUL"
+      },
+      {
+        "index": 58,
+        "silver": "no_location",
+        "gold": "LLL"
+      },
+      {
+        "index": 61,
+        "silver": "no_location",
+        "gold": "RUL"
+      }
+    ]
+  }
+}

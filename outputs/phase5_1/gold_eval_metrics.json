@@ -1,0 +1,3487 @@
+{
+  "silver": {
+    "density": {
+      "accuracy": 0.7258064516129032,
+      "macro_f1": 0.7002574002574002,
+      "per_class_f1": {
+        "solid": 0.8571428571428571,
+        "part_solid": 0.6,
+        "ground_glass": 0.8108108108108109,
+        "calcified": 0.8333333333333334,
+        "unclear": 0.4
+      },
+      "confusion_matrix": {
+        "labels": [
+          "solid",
+          "part_solid",
+          "ground_glass",
+          "calcified",
+          "unclear"
+        ],
+        "matrix": [
+          [
+            15,
+            0,
+            0,
+            0,
+            2
+          ],
+          [
+            3,
+            6,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            15,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            5,
+            0
+          ],
+          [
+            0,
+            4,
+            5,
+            1,
+            4
+          ]
+        ],
+        "rows": {
+          "solid": {
+            "solid": 15,
+            "part_solid": 0,
+            "ground_glass": 0,
+            "calcified": 0,
+            "unclear": 2
+          },
+          "part_solid": {
+            "solid": 3,
+            "part_solid": 6,
+            "ground_glass": 1,
+            "calcified": 0,
+            "unclear": 0
+          },
+          "ground_glass": {
+            "solid": 0,
+            "part_solid": 0,
+            "ground_glass": 15,
+            "calcified": 0,
+            "unclear": 0
+          },
+          "calcified": {
+            "solid": 0,
+            "part_solid": 0,
+            "ground_glass": 1,
+            "calcified": 5,
+            "unclear": 0
+          },
+          "unclear": {
+            "solid": 0,
+            "part_solid": 4,
+            "ground_glass": 5,
+            "calcified": 1,
+            "unclear": 4
+          }
+        }
+      },
+      "weighted_f1": 0.6989288827998505,
+      "per_class_precision": {
+        "solid": 0.8333333333333334,
+        "part_solid": 0.6,
+        "ground_glass": 0.6818181818181818,
+        "calcified": 0.8333333333333334,
+        "unclear": 0.6666666666666666
+      },
+      "per_class_recall": {
+        "solid": 0.8823529411764706,
+        "part_solid": 0.6,
+        "ground_glass": 1.0,
+        "calcified": 0.8333333333333334,
+        "unclear": 0.2857142857142857
+      },
+      "sample_count": 62,
+      "class_distribution": {
+        "solid": 17,
+        "part_solid": 10,
+        "ground_glass": 15,
+        "calcified": 6,
+        "unclear": 14
+      }
+    },
+    "has_size": {
+      "accuracy": 0.9354838709677419,
+      "precision": 1.0,
+      "recall": 0.9259259259259259,
+      "f1": 0.9615384615384616,
+      "confusion_matrix": {
+        "labels": [
+          0,
+          1
+        ],
+        "matrix": [
+          [
+            8,
+            0
+          ],
+          [
+            4,
+            50
+          ]
+        ],
+        "rows": {
+          "0": {
+            "0": 8,
+            "1": 0
+          },
+          "1": {
+            "0": 4,
+            "1": 50
+          }
+        }
+      },
+      "sample_count": 62
+    },
+    "size_mm": {
+      "mae": 0.8388888888888888,
+      "exact_match_rate": 0.8518518518518519,
+      "within_tolerance_rate": 0.9074074074074074,
+      "median_absolute_error": 0.0,
+      "max_error": 15.0,
+      "sample_count": 54,
+      "per_sample_errors": [
+        {
+          "true": 11.0,
+          "pred": 11.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 2.5,
+          "error": 0.5
+        },
+        {
+          "true": 15.0,
+          "pred": 15.0,
+          "error": 0.0
+        },
+        {
+          "true": 9.0,
+          "pred": 9.0,
+          "error": 0.0
+        },
+        {
+          "true": 24.0,
+          "pred": 24.0,
+          "error": 0.0
+        },
+        {
+          "true": 20.0,
+          "pred": 12.0,
+          "error": 8.0
+        },
+        {
+          "true": 7.0,
+          "pred": 7.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 3.0,
+          "error": 1.0
+        },
+        {
+          "true": 13.0,
+          "pred": 13.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.8,
+          "pred": 0.0,
+          "error": 4.8
+        },
+        {
+          "true": 10.0,
+          "pred": 10.0,
+          "error": 0.0
+        },
+        {
+          "true": 9.0,
+          "pred": 0.0,
+          "error": 9.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.2,
+          "pred": 4.2,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 10.0,
+          "pred": 10.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 15.0,
+          "pred": 15.0,
+          "error": 0.0
+        },
+        {
+          "true": 7.0,
+          "pred": 7.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 13.0,
+          "pred": 13.0,
+          "error": 0.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 8.0,
+          "pred": 8.0,
+          "error": 0.0
+        },
+        {
+          "true": 9.0,
+          "pred": 9.0,
+          "error": 0.0
+        },
+        {
+          "true": 27.0,
+          "pred": 27.0,
+          "error": 0.0
+        },
+        {
+          "true": 19.0,
+          "pred": 19.0,
+          "error": 0.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 19.0,
+          "pred": 19.0,
+          "error": 0.0
+        },
+        {
+          "true": 2.0,
+          "pred": 2.0,
+          "error": 0.0
+        },
+        {
+          "true": 6.0,
+          "pred": 6.0,
+          "error": 0.0
+        },
+        {
+          "true": 20.0,
+          "pred": 20.0,
+          "error": 0.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 9.0,
+          "pred": 9.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 2.0,
+          "error": 1.0
+        },
+        {
+          "true": 6.0,
+          "pred": 6.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 4.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 16.0,
+          "pred": 16.0,
+          "error": 0.0
+        },
+        {
+          "true": 12.0,
+          "pred": 12.0,
+          "error": 0.0
+        },
+        {
+          "true": 15.0,
+          "pred": 0.0,
+          "error": 15.0
+        },
+        {
+          "true": 8.0,
+          "pred": 8.0,
+          "error": 0.0
+        },
+        {
+          "true": 15.0,
+          "pred": 15.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 4.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 4.0,
+          "error": 0.0
+        },
+        {
+          "true": 6.0,
+          "pred": 0.0,
+          "error": 6.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 8.0,
+          "pred": 8.0,
+          "error": 0.0
+        },
+        {
+          "true": 28.0,
+          "pred": 28.0,
+          "error": 0.0
+        },
+        {
+          "true": 10.0,
+          "pred": 10.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 4.0,
+          "error": 0.0
+        },
+        {
+          "true": 15.0,
+          "pred": 15.0,
+          "error": 0.0
+        },
+        {
+          "true": 20.0,
+          "pred": 20.0,
+          "error": 0.0
+        }
+      ]
+    },
+    "location": {
+      "accuracy": 0.8225806451612904,
+      "macro_f1": 0.8729512317747612,
+      "per_class_f1": {
+        "RUL": 0.7692307692307693,
+        "RML": 1.0,
+        "RLL": 0.9230769230769231,
+        "LUL": 0.9411764705882353,
+        "LLL": 0.9230769230769231,
+        "lingula": 1.0,
+        "bilateral": 0.5,
+        "unclear": 1.0,
+        "no_location": 0.8
+      },
+      "confusion_matrix": {
+        "labels": [
+          "RUL",
+          "RML",
+          "RLL",
+          "LUL",
+          "LLL",
+          "lingula",
+          "bilateral",
+          "unclear",
+          "no_location"
+        ],
+        "matrix": [
+          [
+            10,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          [
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            6,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            8,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            6,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            0,
+            0,
+            1,
+            0,
+            0,
+            4,
+            0,
+            2
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            10
+          ]
+        ],
+        "rows": {
+          "RUL": {
+            "RUL": 10,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 2
+          },
+          "RML": {
+            "RUL": 0,
+            "RML": 4,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 0
+          },
+          "RLL": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 6,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 1,
+            "unclear": 0,
+            "no_location": 0
+          },
+          "LUL": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 8,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 0
+          },
+          "LLL": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 6,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 1
+          },
+          "lingula": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 1,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 0
+          },
+          "bilateral": {
+            "RUL": 4,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 1,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 4,
+            "unclear": 0,
+            "no_location": 2
+          },
+          "unclear": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 2,
+            "no_location": 0
+          },
+          "no_location": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 10
+          }
+        }
+      },
+      "weighted_f1": 0.8094073857830973,
+      "per_class_precision": {
+        "RUL": 0.7142857142857143,
+        "RML": 1.0,
+        "RLL": 1.0,
+        "LUL": 0.8888888888888888,
+        "LLL": 1.0,
+        "lingula": 1.0,
+        "bilateral": 0.8,
+        "unclear": 1.0,
+        "no_location": 0.6666666666666666
+      },
+      "per_class_recall": {
+        "RUL": 0.8333333333333334,
+        "RML": 1.0,
+        "RLL": 0.8571428571428571,
+        "LUL": 1.0,
+        "LLL": 0.8571428571428571,
+        "lingula": 1.0,
+        "bilateral": 0.36363636363636365,
+        "unclear": 1.0,
+        "no_location": 1.0
+      },
+      "sample_count": 62,
+      "class_distribution": {
+        "RUL": 12,
+        "RML": 4,
+        "RLL": 7,
+        "LUL": 8,
+        "LLL": 7,
+        "lingula": 1,
+        "bilateral": 11,
+        "unclear": 2,
+        "no_location": 10
+      }
+    }
+  },
+  "regex": {
+    "density": {
+      "accuracy": 0.7258064516129032,
+      "macro_f1": 0.7002574002574002,
+      "per_class_f1": {
+        "solid": 0.8571428571428571,
+        "part_solid": 0.6,
+        "ground_glass": 0.8108108108108109,
+        "calcified": 0.8333333333333334,
+        "unclear": 0.4
+      },
+      "confusion_matrix": {
+        "labels": [
+          "solid",
+          "part_solid",
+          "ground_glass",
+          "calcified",
+          "unclear"
+        ],
+        "matrix": [
+          [
+            15,
+            0,
+            0,
+            0,
+            2
+          ],
+          [
+            3,
+            6,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            15,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            5,
+            0
+          ],
+          [
+            0,
+            4,
+            5,
+            1,
+            4
+          ]
+        ],
+        "rows": {
+          "solid": {
+            "solid": 15,
+            "part_solid": 0,
+            "ground_glass": 0,
+            "calcified": 0,
+            "unclear": 2
+          },
+          "part_solid": {
+            "solid": 3,
+            "part_solid": 6,
+            "ground_glass": 1,
+            "calcified": 0,
+            "unclear": 0
+          },
+          "ground_glass": {
+            "solid": 0,
+            "part_solid": 0,
+            "ground_glass": 15,
+            "calcified": 0,
+            "unclear": 0
+          },
+          "calcified": {
+            "solid": 0,
+            "part_solid": 0,
+            "ground_glass": 1,
+            "calcified": 5,
+            "unclear": 0
+          },
+          "unclear": {
+            "solid": 0,
+            "part_solid": 4,
+            "ground_glass": 5,
+            "calcified": 1,
+            "unclear": 4
+          }
+        }
+      },
+      "weighted_f1": 0.6989288827998505,
+      "per_class_precision": {
+        "solid": 0.8333333333333334,
+        "part_solid": 0.6,
+        "ground_glass": 0.6818181818181818,
+        "calcified": 0.8333333333333334,
+        "unclear": 0.6666666666666666
+      },
+      "per_class_recall": {
+        "solid": 0.8823529411764706,
+        "part_solid": 0.6,
+        "ground_glass": 1.0,
+        "calcified": 0.8333333333333334,
+        "unclear": 0.2857142857142857
+      },
+      "sample_count": 62,
+      "class_distribution": {
+        "solid": 17,
+        "part_solid": 10,
+        "ground_glass": 15,
+        "calcified": 6,
+        "unclear": 14
+      }
+    },
+    "has_size": {
+      "accuracy": 0.9354838709677419,
+      "precision": 1.0,
+      "recall": 0.9259259259259259,
+      "f1": 0.9615384615384616,
+      "confusion_matrix": {
+        "labels": [
+          0,
+          1
+        ],
+        "matrix": [
+          [
+            8,
+            0
+          ],
+          [
+            4,
+            50
+          ]
+        ],
+        "rows": {
+          "0": {
+            "0": 8,
+            "1": 0
+          },
+          "1": {
+            "0": 4,
+            "1": 50
+          }
+        }
+      },
+      "sample_count": 62
+    },
+    "size_mm": {
+      "mae": 0.8388888888888888,
+      "exact_match_rate": 0.8518518518518519,
+      "within_tolerance_rate": 0.9074074074074074,
+      "median_absolute_error": 0.0,
+      "max_error": 15.0,
+      "sample_count": 54,
+      "per_sample_errors": [
+        {
+          "true": 11.0,
+          "pred": 11.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 2.5,
+          "error": 0.5
+        },
+        {
+          "true": 15.0,
+          "pred": 15.0,
+          "error": 0.0
+        },
+        {
+          "true": 9.0,
+          "pred": 9.0,
+          "error": 0.0
+        },
+        {
+          "true": 24.0,
+          "pred": 24.0,
+          "error": 0.0
+        },
+        {
+          "true": 20.0,
+          "pred": 12.0,
+          "error": 8.0
+        },
+        {
+          "true": 7.0,
+          "pred": 7.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 3.0,
+          "error": 1.0
+        },
+        {
+          "true": 13.0,
+          "pred": 13.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.8,
+          "pred": 0.0,
+          "error": 4.8
+        },
+        {
+          "true": 10.0,
+          "pred": 10.0,
+          "error": 0.0
+        },
+        {
+          "true": 9.0,
+          "pred": 0.0,
+          "error": 9.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.2,
+          "pred": 4.2,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 10.0,
+          "pred": 10.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 15.0,
+          "pred": 15.0,
+          "error": 0.0
+        },
+        {
+          "true": 7.0,
+          "pred": 7.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 13.0,
+          "pred": 13.0,
+          "error": 0.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 8.0,
+          "pred": 8.0,
+          "error": 0.0
+        },
+        {
+          "true": 9.0,
+          "pred": 9.0,
+          "error": 0.0
+        },
+        {
+          "true": 27.0,
+          "pred": 27.0,
+          "error": 0.0
+        },
+        {
+          "true": 19.0,
+          "pred": 19.0,
+          "error": 0.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 19.0,
+          "pred": 19.0,
+          "error": 0.0
+        },
+        {
+          "true": 2.0,
+          "pred": 2.0,
+          "error": 0.0
+        },
+        {
+          "true": 6.0,
+          "pred": 6.0,
+          "error": 0.0
+        },
+        {
+          "true": 20.0,
+          "pred": 20.0,
+          "error": 0.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 9.0,
+          "pred": 9.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 2.0,
+          "error": 1.0
+        },
+        {
+          "true": 6.0,
+          "pred": 6.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 4.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 16.0,
+          "pred": 16.0,
+          "error": 0.0
+        },
+        {
+          "true": 12.0,
+          "pred": 12.0,
+          "error": 0.0
+        },
+        {
+          "true": 15.0,
+          "pred": 0.0,
+          "error": 15.0
+        },
+        {
+          "true": 8.0,
+          "pred": 8.0,
+          "error": 0.0
+        },
+        {
+          "true": 15.0,
+          "pred": 15.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 4.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 4.0,
+          "error": 0.0
+        },
+        {
+          "true": 6.0,
+          "pred": 0.0,
+          "error": 6.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 8.0,
+          "pred": 8.0,
+          "error": 0.0
+        },
+        {
+          "true": 28.0,
+          "pred": 28.0,
+          "error": 0.0
+        },
+        {
+          "true": 10.0,
+          "pred": 10.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 4.0,
+          "error": 0.0
+        },
+        {
+          "true": 15.0,
+          "pred": 15.0,
+          "error": 0.0
+        },
+        {
+          "true": 20.0,
+          "pred": 20.0,
+          "error": 0.0
+        }
+      ]
+    },
+    "location": {
+      "accuracy": 0.8225806451612904,
+      "macro_f1": 0.8729512317747612,
+      "per_class_f1": {
+        "RUL": 0.7692307692307693,
+        "RML": 1.0,
+        "RLL": 0.9230769230769231,
+        "LUL": 0.9411764705882353,
+        "LLL": 0.9230769230769231,
+        "lingula": 1.0,
+        "bilateral": 0.5,
+        "unclear": 1.0,
+        "no_location": 0.8
+      },
+      "confusion_matrix": {
+        "labels": [
+          "RUL",
+          "RML",
+          "RLL",
+          "LUL",
+          "LLL",
+          "lingula",
+          "bilateral",
+          "unclear",
+          "no_location"
+        ],
+        "matrix": [
+          [
+            10,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          [
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            6,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            8,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            6,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            0,
+            0,
+            1,
+            0,
+            0,
+            4,
+            0,
+            2
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            10
+          ]
+        ],
+        "rows": {
+          "RUL": {
+            "RUL": 10,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 2
+          },
+          "RML": {
+            "RUL": 0,
+            "RML": 4,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 0
+          },
+          "RLL": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 6,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 1,
+            "unclear": 0,
+            "no_location": 0
+          },
+          "LUL": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 8,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 0
+          },
+          "LLL": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 6,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 1
+          },
+          "lingula": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 1,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 0
+          },
+          "bilateral": {
+            "RUL": 4,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 1,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 4,
+            "unclear": 0,
+            "no_location": 2
+          },
+          "unclear": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 2,
+            "no_location": 0
+          },
+          "no_location": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 10
+          }
+        }
+      },
+      "weighted_f1": 0.8094073857830973,
+      "per_class_precision": {
+        "RUL": 0.7142857142857143,
+        "RML": 1.0,
+        "RLL": 1.0,
+        "LUL": 0.8888888888888888,
+        "LLL": 1.0,
+        "lingula": 1.0,
+        "bilateral": 0.8,
+        "unclear": 1.0,
+        "no_location": 0.6666666666666666
+      },
+      "per_class_recall": {
+        "RUL": 0.8333333333333334,
+        "RML": 1.0,
+        "RLL": 0.8571428571428571,
+        "LUL": 1.0,
+        "LLL": 0.8571428571428571,
+        "lingula": 1.0,
+        "bilateral": 0.36363636363636365,
+        "unclear": 1.0,
+        "no_location": 1.0
+      },
+      "sample_count": 62,
+      "class_distribution": {
+        "RUL": 12,
+        "RML": 4,
+        "RLL": 7,
+        "LUL": 8,
+        "LLL": 7,
+        "lingula": 1,
+        "bilateral": 11,
+        "unclear": 2,
+        "no_location": 10
+      }
+    }
+  },
+  "ml_lr": {
+    "density": {
+      "accuracy": 0.7258064516129032,
+      "macro_f1": 0.7002574002574002,
+      "per_class_f1": {
+        "solid": 0.8571428571428571,
+        "part_solid": 0.6,
+        "ground_glass": 0.8108108108108109,
+        "calcified": 0.8333333333333334,
+        "unclear": 0.4
+      },
+      "confusion_matrix": {
+        "labels": [
+          "solid",
+          "part_solid",
+          "ground_glass",
+          "calcified",
+          "unclear"
+        ],
+        "matrix": [
+          [
+            15,
+            0,
+            0,
+            0,
+            2
+          ],
+          [
+            3,
+            6,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            15,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            5,
+            0
+          ],
+          [
+            0,
+            4,
+            5,
+            1,
+            4
+          ]
+        ],
+        "rows": {
+          "solid": {
+            "solid": 15,
+            "part_solid": 0,
+            "ground_glass": 0,
+            "calcified": 0,
+            "unclear": 2
+          },
+          "part_solid": {
+            "solid": 3,
+            "part_solid": 6,
+            "ground_glass": 1,
+            "calcified": 0,
+            "unclear": 0
+          },
+          "ground_glass": {
+            "solid": 0,
+            "part_solid": 0,
+            "ground_glass": 15,
+            "calcified": 0,
+            "unclear": 0
+          },
+          "calcified": {
+            "solid": 0,
+            "part_solid": 0,
+            "ground_glass": 1,
+            "calcified": 5,
+            "unclear": 0
+          },
+          "unclear": {
+            "solid": 0,
+            "part_solid": 4,
+            "ground_glass": 5,
+            "calcified": 1,
+            "unclear": 4
+          }
+        }
+      },
+      "weighted_f1": 0.6989288827998505,
+      "per_class_precision": {
+        "solid": 0.8333333333333334,
+        "part_solid": 0.6,
+        "ground_glass": 0.6818181818181818,
+        "calcified": 0.8333333333333334,
+        "unclear": 0.6666666666666666
+      },
+      "per_class_recall": {
+        "solid": 0.8823529411764706,
+        "part_solid": 0.6,
+        "ground_glass": 1.0,
+        "calcified": 0.8333333333333334,
+        "unclear": 0.2857142857142857
+      },
+      "sample_count": 62,
+      "class_distribution": {
+        "solid": 17,
+        "part_solid": 10,
+        "ground_glass": 15,
+        "calcified": 6,
+        "unclear": 14
+      }
+    },
+    "has_size": {
+      "accuracy": 0.9354838709677419,
+      "precision": 1.0,
+      "recall": 0.9259259259259259,
+      "f1": 0.9615384615384616,
+      "confusion_matrix": {
+        "labels": [
+          0,
+          1
+        ],
+        "matrix": [
+          [
+            8,
+            0
+          ],
+          [
+            4,
+            50
+          ]
+        ],
+        "rows": {
+          "0": {
+            "0": 8,
+            "1": 0
+          },
+          "1": {
+            "0": 4,
+            "1": 50
+          }
+        }
+      },
+      "sample_count": 62
+    },
+    "size_mm": {
+      "mae": 0.8388888888888888,
+      "exact_match_rate": 0.8518518518518519,
+      "within_tolerance_rate": 0.9074074074074074,
+      "median_absolute_error": 0.0,
+      "max_error": 15.0,
+      "sample_count": 54,
+      "per_sample_errors": [
+        {
+          "true": 11.0,
+          "pred": 11.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 2.5,
+          "error": 0.5
+        },
+        {
+          "true": 15.0,
+          "pred": 15.0,
+          "error": 0.0
+        },
+        {
+          "true": 9.0,
+          "pred": 9.0,
+          "error": 0.0
+        },
+        {
+          "true": 24.0,
+          "pred": 24.0,
+          "error": 0.0
+        },
+        {
+          "true": 20.0,
+          "pred": 12.0,
+          "error": 8.0
+        },
+        {
+          "true": 7.0,
+          "pred": 7.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 3.0,
+          "error": 1.0
+        },
+        {
+          "true": 13.0,
+          "pred": 13.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.8,
+          "pred": 0.0,
+          "error": 4.8
+        },
+        {
+          "true": 10.0,
+          "pred": 10.0,
+          "error": 0.0
+        },
+        {
+          "true": 9.0,
+          "pred": 0.0,
+          "error": 9.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.2,
+          "pred": 4.2,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 10.0,
+          "pred": 10.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 15.0,
+          "pred": 15.0,
+          "error": 0.0
+        },
+        {
+          "true": 7.0,
+          "pred": 7.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 13.0,
+          "pred": 13.0,
+          "error": 0.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 8.0,
+          "pred": 8.0,
+          "error": 0.0
+        },
+        {
+          "true": 9.0,
+          "pred": 9.0,
+          "error": 0.0
+        },
+        {
+          "true": 27.0,
+          "pred": 27.0,
+          "error": 0.0
+        },
+        {
+          "true": 19.0,
+          "pred": 19.0,
+          "error": 0.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 19.0,
+          "pred": 19.0,
+          "error": 0.0
+        },
+        {
+          "true": 2.0,
+          "pred": 2.0,
+          "error": 0.0
+        },
+        {
+          "true": 6.0,
+          "pred": 6.0,
+          "error": 0.0
+        },
+        {
+          "true": 20.0,
+          "pred": 20.0,
+          "error": 0.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 9.0,
+          "pred": 9.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 2.0,
+          "error": 1.0
+        },
+        {
+          "true": 6.0,
+          "pred": 6.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 4.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 16.0,
+          "pred": 16.0,
+          "error": 0.0
+        },
+        {
+          "true": 12.0,
+          "pred": 12.0,
+          "error": 0.0
+        },
+        {
+          "true": 15.0,
+          "pred": 0.0,
+          "error": 15.0
+        },
+        {
+          "true": 8.0,
+          "pred": 8.0,
+          "error": 0.0
+        },
+        {
+          "true": 15.0,
+          "pred": 15.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 4.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 4.0,
+          "error": 0.0
+        },
+        {
+          "true": 6.0,
+          "pred": 0.0,
+          "error": 6.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 8.0,
+          "pred": 8.0,
+          "error": 0.0
+        },
+        {
+          "true": 28.0,
+          "pred": 28.0,
+          "error": 0.0
+        },
+        {
+          "true": 10.0,
+          "pred": 10.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 4.0,
+          "error": 0.0
+        },
+        {
+          "true": 15.0,
+          "pred": 15.0,
+          "error": 0.0
+        },
+        {
+          "true": 20.0,
+          "pred": 20.0,
+          "error": 0.0
+        }
+      ]
+    },
+    "location": {
+      "accuracy": 0.8387096774193549,
+      "macro_f1": 0.8547008547008548,
+      "per_class_f1": {
+        "RUL": 0.7692307692307693,
+        "RML": 1.0,
+        "RLL": 1.0,
+        "LUL": 1.0,
+        "LLL": 0.9230769230769231,
+        "lingula": 0.6666666666666666,
+        "bilateral": 0.5333333333333333,
+        "unclear": 1.0,
+        "no_location": 0.8
+      },
+      "confusion_matrix": {
+        "labels": [
+          "RUL",
+          "RML",
+          "RLL",
+          "LUL",
+          "LLL",
+          "lingula",
+          "bilateral",
+          "unclear",
+          "no_location"
+        ],
+        "matrix": [
+          [
+            10,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          [
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            7,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            8,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            6,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            0,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            2
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            10
+          ]
+        ],
+        "rows": {
+          "RUL": {
+            "RUL": 10,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 2
+          },
+          "RML": {
+            "RUL": 0,
+            "RML": 4,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 0
+          },
+          "RLL": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 7,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 0
+          },
+          "LUL": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 8,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 0
+          },
+          "LLL": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 6,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 1
+          },
+          "lingula": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 1,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 0
+          },
+          "bilateral": {
+            "RUL": 4,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 1,
+            "bilateral": 4,
+            "unclear": 0,
+            "no_location": 2
+          },
+          "unclear": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 2,
+            "no_location": 0
+          },
+          "no_location": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 10
+          }
+        }
+      },
+      "weighted_f1": 0.8262200165425971,
+      "per_class_precision": {
+        "RUL": 0.7142857142857143,
+        "RML": 1.0,
+        "RLL": 1.0,
+        "LUL": 1.0,
+        "LLL": 1.0,
+        "lingula": 0.5,
+        "bilateral": 1.0,
+        "unclear": 1.0,
+        "no_location": 0.6666666666666666
+      },
+      "per_class_recall": {
+        "RUL": 0.8333333333333334,
+        "RML": 1.0,
+        "RLL": 1.0,
+        "LUL": 1.0,
+        "LLL": 0.8571428571428571,
+        "lingula": 1.0,
+        "bilateral": 0.36363636363636365,
+        "unclear": 1.0,
+        "no_location": 1.0
+      },
+      "sample_count": 62,
+      "class_distribution": {
+        "RUL": 12,
+        "RML": 4,
+        "RLL": 7,
+        "LUL": 8,
+        "LLL": 7,
+        "lingula": 1,
+        "bilateral": 11,
+        "unclear": 2,
+        "no_location": 10
+      }
+    }
+  },
+  "ml_svm": {
+    "density": {
+      "accuracy": 0.7258064516129032,
+      "macro_f1": 0.7002574002574002,
+      "per_class_f1": {
+        "solid": 0.8571428571428571,
+        "part_solid": 0.6,
+        "ground_glass": 0.8108108108108109,
+        "calcified": 0.8333333333333334,
+        "unclear": 0.4
+      },
+      "confusion_matrix": {
+        "labels": [
+          "solid",
+          "part_solid",
+          "ground_glass",
+          "calcified",
+          "unclear"
+        ],
+        "matrix": [
+          [
+            15,
+            0,
+            0,
+            0,
+            2
+          ],
+          [
+            3,
+            6,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            15,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            5,
+            0
+          ],
+          [
+            0,
+            4,
+            5,
+            1,
+            4
+          ]
+        ],
+        "rows": {
+          "solid": {
+            "solid": 15,
+            "part_solid": 0,
+            "ground_glass": 0,
+            "calcified": 0,
+            "unclear": 2
+          },
+          "part_solid": {
+            "solid": 3,
+            "part_solid": 6,
+            "ground_glass": 1,
+            "calcified": 0,
+            "unclear": 0
+          },
+          "ground_glass": {
+            "solid": 0,
+            "part_solid": 0,
+            "ground_glass": 15,
+            "calcified": 0,
+            "unclear": 0
+          },
+          "calcified": {
+            "solid": 0,
+            "part_solid": 0,
+            "ground_glass": 1,
+            "calcified": 5,
+            "unclear": 0
+          },
+          "unclear": {
+            "solid": 0,
+            "part_solid": 4,
+            "ground_glass": 5,
+            "calcified": 1,
+            "unclear": 4
+          }
+        }
+      },
+      "weighted_f1": 0.6989288827998505,
+      "per_class_precision": {
+        "solid": 0.8333333333333334,
+        "part_solid": 0.6,
+        "ground_glass": 0.6818181818181818,
+        "calcified": 0.8333333333333334,
+        "unclear": 0.6666666666666666
+      },
+      "per_class_recall": {
+        "solid": 0.8823529411764706,
+        "part_solid": 0.6,
+        "ground_glass": 1.0,
+        "calcified": 0.8333333333333334,
+        "unclear": 0.2857142857142857
+      },
+      "sample_count": 62,
+      "class_distribution": {
+        "solid": 17,
+        "part_solid": 10,
+        "ground_glass": 15,
+        "calcified": 6,
+        "unclear": 14
+      }
+    },
+    "has_size": {
+      "accuracy": 0.9193548387096774,
+      "precision": 1.0,
+      "recall": 0.9074074074074074,
+      "f1": 0.9514563106796117,
+      "confusion_matrix": {
+        "labels": [
+          0,
+          1
+        ],
+        "matrix": [
+          [
+            8,
+            0
+          ],
+          [
+            5,
+            49
+          ]
+        ],
+        "rows": {
+          "0": {
+            "0": 8,
+            "1": 0
+          },
+          "1": {
+            "0": 5,
+            "1": 49
+          }
+        }
+      },
+      "sample_count": 62
+    },
+    "size_mm": {
+      "mae": 0.8388888888888888,
+      "exact_match_rate": 0.8518518518518519,
+      "within_tolerance_rate": 0.9074074074074074,
+      "median_absolute_error": 0.0,
+      "max_error": 15.0,
+      "sample_count": 54,
+      "per_sample_errors": [
+        {
+          "true": 11.0,
+          "pred": 11.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 2.5,
+          "error": 0.5
+        },
+        {
+          "true": 15.0,
+          "pred": 15.0,
+          "error": 0.0
+        },
+        {
+          "true": 9.0,
+          "pred": 9.0,
+          "error": 0.0
+        },
+        {
+          "true": 24.0,
+          "pred": 24.0,
+          "error": 0.0
+        },
+        {
+          "true": 20.0,
+          "pred": 12.0,
+          "error": 8.0
+        },
+        {
+          "true": 7.0,
+          "pred": 7.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 3.0,
+          "error": 1.0
+        },
+        {
+          "true": 13.0,
+          "pred": 13.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.8,
+          "pred": 0.0,
+          "error": 4.8
+        },
+        {
+          "true": 10.0,
+          "pred": 10.0,
+          "error": 0.0
+        },
+        {
+          "true": 9.0,
+          "pred": 0.0,
+          "error": 9.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.2,
+          "pred": 4.2,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 10.0,
+          "pred": 10.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 15.0,
+          "pred": 15.0,
+          "error": 0.0
+        },
+        {
+          "true": 7.0,
+          "pred": 7.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 13.0,
+          "pred": 13.0,
+          "error": 0.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 8.0,
+          "pred": 8.0,
+          "error": 0.0
+        },
+        {
+          "true": 9.0,
+          "pred": 9.0,
+          "error": 0.0
+        },
+        {
+          "true": 27.0,
+          "pred": 27.0,
+          "error": 0.0
+        },
+        {
+          "true": 19.0,
+          "pred": 19.0,
+          "error": 0.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 19.0,
+          "pred": 19.0,
+          "error": 0.0
+        },
+        {
+          "true": 2.0,
+          "pred": 2.0,
+          "error": 0.0
+        },
+        {
+          "true": 6.0,
+          "pred": 6.0,
+          "error": 0.0
+        },
+        {
+          "true": 20.0,
+          "pred": 20.0,
+          "error": 0.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 9.0,
+          "pred": 9.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 2.0,
+          "error": 1.0
+        },
+        {
+          "true": 6.0,
+          "pred": 6.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 4.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 16.0,
+          "pred": 16.0,
+          "error": 0.0
+        },
+        {
+          "true": 12.0,
+          "pred": 12.0,
+          "error": 0.0
+        },
+        {
+          "true": 15.0,
+          "pred": 0.0,
+          "error": 15.0
+        },
+        {
+          "true": 8.0,
+          "pred": 8.0,
+          "error": 0.0
+        },
+        {
+          "true": 15.0,
+          "pred": 15.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 4.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 4.0,
+          "error": 0.0
+        },
+        {
+          "true": 6.0,
+          "pred": 0.0,
+          "error": 6.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 8.0,
+          "pred": 8.0,
+          "error": 0.0
+        },
+        {
+          "true": 28.0,
+          "pred": 28.0,
+          "error": 0.0
+        },
+        {
+          "true": 10.0,
+          "pred": 10.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 4.0,
+          "error": 0.0
+        },
+        {
+          "true": 15.0,
+          "pred": 15.0,
+          "error": 0.0
+        },
+        {
+          "true": 20.0,
+          "pred": 20.0,
+          "error": 0.0
+        }
+      ]
+    },
+    "location": {
+      "accuracy": 0.8387096774193549,
+      "macro_f1": 0.8885723330167774,
+      "per_class_f1": {
+        "RUL": 0.7407407407407407,
+        "RML": 1.0,
+        "RLL": 1.0,
+        "LUL": 1.0,
+        "LLL": 0.9230769230769231,
+        "lingula": 1.0,
+        "bilateral": 0.5333333333333333,
+        "unclear": 1.0,
+        "no_location": 0.8
+      },
+      "confusion_matrix": {
+        "labels": [
+          "RUL",
+          "RML",
+          "RLL",
+          "LUL",
+          "LLL",
+          "lingula",
+          "bilateral",
+          "unclear",
+          "no_location"
+        ],
+        "matrix": [
+          [
+            10,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          [
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            7,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            8,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            6,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            5,
+            0,
+            0,
+            0,
+            0,
+            0,
+            4,
+            0,
+            2
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            10
+          ]
+        ],
+        "rows": {
+          "RUL": {
+            "RUL": 10,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 2
+          },
+          "RML": {
+            "RUL": 0,
+            "RML": 4,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 0
+          },
+          "RLL": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 7,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 0
+          },
+          "LUL": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 8,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 0
+          },
+          "LLL": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 6,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 1
+          },
+          "lingula": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 1,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 0
+          },
+          "bilateral": {
+            "RUL": 5,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 4,
+            "unclear": 0,
+            "no_location": 2
+          },
+          "unclear": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 2,
+            "no_location": 0
+          },
+          "no_location": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 10
+          }
+        }
+      },
+      "weighted_f1": 0.8260821615660324,
+      "per_class_precision": {
+        "RUL": 0.6666666666666666,
+        "RML": 1.0,
+        "RLL": 1.0,
+        "LUL": 1.0,
+        "LLL": 1.0,
+        "lingula": 1.0,
+        "bilateral": 1.0,
+        "unclear": 1.0,
+        "no_location": 0.6666666666666666
+      },
+      "per_class_recall": {
+        "RUL": 0.8333333333333334,
+        "RML": 1.0,
+        "RLL": 1.0,
+        "LUL": 1.0,
+        "LLL": 0.8571428571428571,
+        "lingula": 1.0,
+        "bilateral": 0.36363636363636365,
+        "unclear": 1.0,
+        "no_location": 1.0
+      },
+      "sample_count": 62,
+      "class_distribution": {
+        "RUL": 12,
+        "RML": 4,
+        "RLL": 7,
+        "LUL": 8,
+        "LLL": 7,
+        "lingula": 1,
+        "bilateral": 11,
+        "unclear": 2,
+        "no_location": 10
+      }
+    }
+  },
+  "pubmedbert": {
+    "density": {
+      "accuracy": 0.7258064516129032,
+      "macro_f1": 0.7002574002574002,
+      "per_class_f1": {
+        "solid": 0.8571428571428571,
+        "part_solid": 0.6,
+        "ground_glass": 0.8108108108108109,
+        "calcified": 0.8333333333333334,
+        "unclear": 0.4
+      },
+      "confusion_matrix": {
+        "labels": [
+          "solid",
+          "part_solid",
+          "ground_glass",
+          "calcified",
+          "unclear"
+        ],
+        "matrix": [
+          [
+            15,
+            0,
+            0,
+            0,
+            2
+          ],
+          [
+            3,
+            6,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            15,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            5,
+            0
+          ],
+          [
+            0,
+            4,
+            5,
+            1,
+            4
+          ]
+        ],
+        "rows": {
+          "solid": {
+            "solid": 15,
+            "part_solid": 0,
+            "ground_glass": 0,
+            "calcified": 0,
+            "unclear": 2
+          },
+          "part_solid": {
+            "solid": 3,
+            "part_solid": 6,
+            "ground_glass": 1,
+            "calcified": 0,
+            "unclear": 0
+          },
+          "ground_glass": {
+            "solid": 0,
+            "part_solid": 0,
+            "ground_glass": 15,
+            "calcified": 0,
+            "unclear": 0
+          },
+          "calcified": {
+            "solid": 0,
+            "part_solid": 0,
+            "ground_glass": 1,
+            "calcified": 5,
+            "unclear": 0
+          },
+          "unclear": {
+            "solid": 0,
+            "part_solid": 4,
+            "ground_glass": 5,
+            "calcified": 1,
+            "unclear": 4
+          }
+        }
+      },
+      "weighted_f1": 0.6989288827998505,
+      "per_class_precision": {
+        "solid": 0.8333333333333334,
+        "part_solid": 0.6,
+        "ground_glass": 0.6818181818181818,
+        "calcified": 0.8333333333333334,
+        "unclear": 0.6666666666666666
+      },
+      "per_class_recall": {
+        "solid": 0.8823529411764706,
+        "part_solid": 0.6,
+        "ground_glass": 1.0,
+        "calcified": 0.8333333333333334,
+        "unclear": 0.2857142857142857
+      },
+      "sample_count": 62,
+      "class_distribution": {
+        "solid": 17,
+        "part_solid": 10,
+        "ground_glass": 15,
+        "calcified": 6,
+        "unclear": 14
+      }
+    },
+    "has_size": {
+      "accuracy": 0.9354838709677419,
+      "precision": 1.0,
+      "recall": 0.9259259259259259,
+      "f1": 0.9615384615384616,
+      "confusion_matrix": {
+        "labels": [
+          0,
+          1
+        ],
+        "matrix": [
+          [
+            8,
+            0
+          ],
+          [
+            4,
+            50
+          ]
+        ],
+        "rows": {
+          "0": {
+            "0": 8,
+            "1": 0
+          },
+          "1": {
+            "0": 4,
+            "1": 50
+          }
+        }
+      },
+      "sample_count": 62
+    },
+    "size_mm": {
+      "mae": 0.8388888888888888,
+      "exact_match_rate": 0.8518518518518519,
+      "within_tolerance_rate": 0.9074074074074074,
+      "median_absolute_error": 0.0,
+      "max_error": 15.0,
+      "sample_count": 54,
+      "per_sample_errors": [
+        {
+          "true": 11.0,
+          "pred": 11.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 2.5,
+          "error": 0.5
+        },
+        {
+          "true": 15.0,
+          "pred": 15.0,
+          "error": 0.0
+        },
+        {
+          "true": 9.0,
+          "pred": 9.0,
+          "error": 0.0
+        },
+        {
+          "true": 24.0,
+          "pred": 24.0,
+          "error": 0.0
+        },
+        {
+          "true": 20.0,
+          "pred": 12.0,
+          "error": 8.0
+        },
+        {
+          "true": 7.0,
+          "pred": 7.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 3.0,
+          "error": 1.0
+        },
+        {
+          "true": 13.0,
+          "pred": 13.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.8,
+          "pred": 0.0,
+          "error": 4.8
+        },
+        {
+          "true": 10.0,
+          "pred": 10.0,
+          "error": 0.0
+        },
+        {
+          "true": 9.0,
+          "pred": 0.0,
+          "error": 9.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.2,
+          "pred": 4.2,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 10.0,
+          "pred": 10.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 15.0,
+          "pred": 15.0,
+          "error": 0.0
+        },
+        {
+          "true": 7.0,
+          "pred": 7.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 13.0,
+          "pred": 13.0,
+          "error": 0.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 8.0,
+          "pred": 8.0,
+          "error": 0.0
+        },
+        {
+          "true": 9.0,
+          "pred": 9.0,
+          "error": 0.0
+        },
+        {
+          "true": 27.0,
+          "pred": 27.0,
+          "error": 0.0
+        },
+        {
+          "true": 19.0,
+          "pred": 19.0,
+          "error": 0.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 19.0,
+          "pred": 19.0,
+          "error": 0.0
+        },
+        {
+          "true": 2.0,
+          "pred": 2.0,
+          "error": 0.0
+        },
+        {
+          "true": 6.0,
+          "pred": 6.0,
+          "error": 0.0
+        },
+        {
+          "true": 20.0,
+          "pred": 20.0,
+          "error": 0.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 9.0,
+          "pred": 9.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 2.0,
+          "error": 1.0
+        },
+        {
+          "true": 6.0,
+          "pred": 6.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 4.0,
+          "error": 0.0
+        },
+        {
+          "true": 3.0,
+          "pred": 3.0,
+          "error": 0.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 16.0,
+          "pred": 16.0,
+          "error": 0.0
+        },
+        {
+          "true": 12.0,
+          "pred": 12.0,
+          "error": 0.0
+        },
+        {
+          "true": 15.0,
+          "pred": 0.0,
+          "error": 15.0
+        },
+        {
+          "true": 8.0,
+          "pred": 8.0,
+          "error": 0.0
+        },
+        {
+          "true": 15.0,
+          "pred": 15.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 4.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 4.0,
+          "error": 0.0
+        },
+        {
+          "true": 6.0,
+          "pred": 0.0,
+          "error": 6.0
+        },
+        {
+          "true": 5.0,
+          "pred": 5.0,
+          "error": 0.0
+        },
+        {
+          "true": 8.0,
+          "pred": 8.0,
+          "error": 0.0
+        },
+        {
+          "true": 28.0,
+          "pred": 28.0,
+          "error": 0.0
+        },
+        {
+          "true": 10.0,
+          "pred": 10.0,
+          "error": 0.0
+        },
+        {
+          "true": 4.0,
+          "pred": 4.0,
+          "error": 0.0
+        },
+        {
+          "true": 15.0,
+          "pred": 15.0,
+          "error": 0.0
+        },
+        {
+          "true": 20.0,
+          "pred": 20.0,
+          "error": 0.0
+        }
+      ]
+    },
+    "location": {
+      "accuracy": 0.8225806451612904,
+      "macro_f1": 0.8729512317747612,
+      "per_class_f1": {
+        "RUL": 0.7692307692307693,
+        "RML": 1.0,
+        "RLL": 0.9230769230769231,
+        "LUL": 0.9411764705882353,
+        "LLL": 0.9230769230769231,
+        "lingula": 1.0,
+        "bilateral": 0.5,
+        "unclear": 1.0,
+        "no_location": 0.8
+      },
+      "confusion_matrix": {
+        "labels": [
+          "RUL",
+          "RML",
+          "RLL",
+          "LUL",
+          "LLL",
+          "lingula",
+          "bilateral",
+          "unclear",
+          "no_location"
+        ],
+        "matrix": [
+          [
+            10,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          [
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            6,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            8,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            6,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            0,
+            0,
+            1,
+            0,
+            0,
+            4,
+            0,
+            2
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            10
+          ]
+        ],
+        "rows": {
+          "RUL": {
+            "RUL": 10,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 2
+          },
+          "RML": {
+            "RUL": 0,
+            "RML": 4,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 0
+          },
+          "RLL": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 6,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 1,
+            "unclear": 0,
+            "no_location": 0
+          },
+          "LUL": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 8,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 0
+          },
+          "LLL": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 6,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 1
+          },
+          "lingula": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 1,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 0
+          },
+          "bilateral": {
+            "RUL": 4,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 1,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 4,
+            "unclear": 0,
+            "no_location": 2
+          },
+          "unclear": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 2,
+            "no_location": 0
+          },
+          "no_location": {
+            "RUL": 0,
+            "RML": 0,
+            "RLL": 0,
+            "LUL": 0,
+            "LLL": 0,
+            "lingula": 0,
+            "bilateral": 0,
+            "unclear": 0,
+            "no_location": 10
+          }
+        }
+      },
+      "weighted_f1": 0.8094073857830973,
+      "per_class_precision": {
+        "RUL": 0.7142857142857143,
+        "RML": 1.0,
+        "RLL": 1.0,
+        "LUL": 0.8888888888888888,
+        "LLL": 1.0,
+        "lingula": 1.0,
+        "bilateral": 0.8,
+        "unclear": 1.0,
+        "no_location": 0.6666666666666666
+      },
+      "per_class_recall": {
+        "RUL": 0.8333333333333334,
+        "RML": 1.0,
+        "RLL": 0.8571428571428571,
+        "LUL": 1.0,
+        "LLL": 0.8571428571428571,
+        "lingula": 1.0,
+        "bilateral": 0.36363636363636365,
+        "unclear": 1.0,
+        "no_location": 1.0
+      },
+      "sample_count": 62,
+      "class_distribution": {
+        "RUL": 12,
+        "RML": 4,
+        "RLL": 7,
+        "LUL": 8,
+        "LLL": 7,
+        "lingula": 1,
+        "bilateral": 11,
+        "unclear": 2,
+        "no_location": 10
+      }
+    }
+  }
+}

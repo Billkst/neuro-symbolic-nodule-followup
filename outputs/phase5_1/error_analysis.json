@@ -1,0 +1,1682 @@
+{
+  "density": {
+    "silver": [
+      {
+        "sample_id": "16581762-RR-14__1",
+        "mention_text": "Multiple 2-3 mm part solid and solid nodules (5, 44, 70, 71, 73, 101, 165, ___ in the left upper lobe, and lingula as well as right upper and lower lobes are indeterminate and may be related to",
+        "gold": "unclear",
+        "predicted": "part_solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "13369123-RR-114__4",
+        "mention_text": "nodules are solid while majority of them are part solid the largest in the right lower lobe (3, 120 measuring 9 mm.",
+        "gold": "unclear",
+        "predicted": "part_solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "18122040-RR-49__1",
+        "mention_text": "Subsolid nodules in the right upper lobe (4:98) measuring 1.2 x 1.1 cm, in the right lower lobe (4:73) measuring 2.0 x 1.2 cm and in the left lower lobe (4:147) measuring 1.0 cm.",
+        "gold": "unclear",
+        "predicted": "part_solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "15683514-RR-32__1",
+        "mention_text": "A large number of 2-4 mm nodules of indeterminate nature, both ground-glass and solid density, is scattered throughout both lungs, for example right upper lobe, 03:27, 30, and left upper lobe, 4:89 but absent",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "13999829-RR-96__2",
+        "mention_text": "The nodule in the superior segment of the right lower lobe has increased in size now measuring 10 mm previously 6 mm (02:40). Scattered ground-glass opacification is noted throughout the bilateral lungs with more prominently in the right lower lobe with a more focal area of ground-glass and septal thickening in the right lower lobe (2:86).",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "16472682-RR-38__1",
+        "mention_text": "Scattered bilateral solid and ground-glass pulmonary nodules measuring up",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "15702242-RR-56__5",
+        "mention_text": "Multiple sub-5-mm semisolid and ground-glass nodules with bilateral upper lobe predominance is nonspecific, but could represent Langerhans cell",
+        "gold": "unclear",
+        "predicted": "part_solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16868333-RR-23__1",
+        "mention_text": "Unchnaged is a right lower lobe nodule (3:46) measuring 4.2 mm on today's study. Fibrotic scarring at the left base and the lingula is also stable. New since ___ are several small nodular, centrilobular ground-glass",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "17470752-RR-25__2",
+        "mention_text": "and a subpleural 5 mm right middle lobe lateral segment lung nodule (155, 4). Scattered smooth septal lines and ground-glass opacification suggests a",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "16310385-RR-18__4",
+        "mention_text": "Interval increase in the solid component of a right upper lobe nodule measuring 5 mm, previously 2 mm is worrisome for development of adenocarcinoma",
+        "gold": "part_solid",
+        "predicted": "solid",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "14485011-RR-22__1",
+        "mention_text": "PARENCHYMA:  There is a 9 mm sub solid nodule in the right lower lobe",
+        "gold": "part_solid",
+        "predicted": "solid",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "15589112-RR-37__6",
+        "mention_text": "Bilateral calcified granulomas with additional sub 4 mm pulmonary nodules",
+        "gold": "unclear",
+        "predicted": "calcified",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16461545-RR-28__2",
+        "mention_text": "Spiculated nodule in the right upper lobe is unchanged and measures 1.5 x 1.3",
+        "gold": "solid",
+        "predicted": "unclear",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "19392881-RR-33__1",
+        "mention_text": "Additionally, there is a 0.8 cm spiculated nodule in the right middle lobe, which is highly concerning for neoplasm, although this finding is stable since ___.",
+        "gold": "solid",
+        "predicted": "unclear",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "12159404-RR-127__1",
+        "mention_text": "calcified nodule, possibly a granuloma, unchanged. There are new patchy airspace and ground-glass opacities, predominately in the right lung,",
+        "gold": "calcified",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "19868102-RR-176__3",
+        "mention_text": "lobe mixed solid and ground-glass nodule now measures 10 x 8 mm compared to 8",
+        "gold": "part_solid",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "15072349-RR-8__2",
+        "mention_text": "4 mm sub solid pulmonary nodule for which no follow-up is recommended per",
+        "gold": "part_solid",
+        "predicted": "solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      }
+    ],
+    "regex": [
+      {
+        "sample_id": "16581762-RR-14__1",
+        "mention_text": "Multiple 2-3 mm part solid and solid nodules (5, 44, 70, 71, 73, 101, 165, ___ in the left upper lobe, and lingula as well as right upper and lower lobes are indeterminate and may be related to",
+        "gold": "unclear",
+        "predicted": "part_solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "13369123-RR-114__4",
+        "mention_text": "nodules are solid while majority of them are part solid the largest in the right lower lobe (3, 120 measuring 9 mm.",
+        "gold": "unclear",
+        "predicted": "part_solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "18122040-RR-49__1",
+        "mention_text": "Subsolid nodules in the right upper lobe (4:98) measuring 1.2 x 1.1 cm, in the right lower lobe (4:73) measuring 2.0 x 1.2 cm and in the left lower lobe (4:147) measuring 1.0 cm.",
+        "gold": "unclear",
+        "predicted": "part_solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "15683514-RR-32__1",
+        "mention_text": "A large number of 2-4 mm nodules of indeterminate nature, both ground-glass and solid density, is scattered throughout both lungs, for example right upper lobe, 03:27, 30, and left upper lobe, 4:89 but absent",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "13999829-RR-96__2",
+        "mention_text": "The nodule in the superior segment of the right lower lobe has increased in size now measuring 10 mm previously 6 mm (02:40). Scattered ground-glass opacification is noted throughout the bilateral lungs with more prominently in the right lower lobe with a more focal area of ground-glass and septal thickening in the right lower lobe (2:86).",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "16472682-RR-38__1",
+        "mention_text": "Scattered bilateral solid and ground-glass pulmonary nodules measuring up",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "15702242-RR-56__5",
+        "mention_text": "Multiple sub-5-mm semisolid and ground-glass nodules with bilateral upper lobe predominance is nonspecific, but could represent Langerhans cell",
+        "gold": "unclear",
+        "predicted": "part_solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16868333-RR-23__1",
+        "mention_text": "Unchnaged is a right lower lobe nodule (3:46) measuring 4.2 mm on today's study. Fibrotic scarring at the left base and the lingula is also stable. New since ___ are several small nodular, centrilobular ground-glass",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "17470752-RR-25__2",
+        "mention_text": "and a subpleural 5 mm right middle lobe lateral segment lung nodule (155, 4). Scattered smooth septal lines and ground-glass opacification suggests a",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "16310385-RR-18__4",
+        "mention_text": "Interval increase in the solid component of a right upper lobe nodule measuring 5 mm, previously 2 mm is worrisome for development of adenocarcinoma",
+        "gold": "part_solid",
+        "predicted": "solid",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "14485011-RR-22__1",
+        "mention_text": "PARENCHYMA:  There is a 9 mm sub solid nodule in the right lower lobe",
+        "gold": "part_solid",
+        "predicted": "solid",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "15589112-RR-37__6",
+        "mention_text": "Bilateral calcified granulomas with additional sub 4 mm pulmonary nodules",
+        "gold": "unclear",
+        "predicted": "calcified",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16461545-RR-28__2",
+        "mention_text": "Spiculated nodule in the right upper lobe is unchanged and measures 1.5 x 1.3",
+        "gold": "solid",
+        "predicted": "unclear",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "19392881-RR-33__1",
+        "mention_text": "Additionally, there is a 0.8 cm spiculated nodule in the right middle lobe, which is highly concerning for neoplasm, although this finding is stable since ___.",
+        "gold": "solid",
+        "predicted": "unclear",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "12159404-RR-127__1",
+        "mention_text": "calcified nodule, possibly a granuloma, unchanged. There are new patchy airspace and ground-glass opacities, predominately in the right lung,",
+        "gold": "calcified",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "19868102-RR-176__3",
+        "mention_text": "lobe mixed solid and ground-glass nodule now measures 10 x 8 mm compared to 8",
+        "gold": "part_solid",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "15072349-RR-8__2",
+        "mention_text": "4 mm sub solid pulmonary nodule for which no follow-up is recommended per",
+        "gold": "part_solid",
+        "predicted": "solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      }
+    ],
+    "ml_lr": [
+      {
+        "sample_id": "16581762-RR-14__1",
+        "mention_text": "Multiple 2-3 mm part solid and solid nodules (5, 44, 70, 71, 73, 101, 165, ___ in the left upper lobe, and lingula as well as right upper and lower lobes are indeterminate and may be related to",
+        "gold": "unclear",
+        "predicted": "part_solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "13369123-RR-114__4",
+        "mention_text": "nodules are solid while majority of them are part solid the largest in the right lower lobe (3, 120 measuring 9 mm.",
+        "gold": "unclear",
+        "predicted": "part_solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "18122040-RR-49__1",
+        "mention_text": "Subsolid nodules in the right upper lobe (4:98) measuring 1.2 x 1.1 cm, in the right lower lobe (4:73) measuring 2.0 x 1.2 cm and in the left lower lobe (4:147) measuring 1.0 cm.",
+        "gold": "unclear",
+        "predicted": "part_solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "15683514-RR-32__1",
+        "mention_text": "A large number of 2-4 mm nodules of indeterminate nature, both ground-glass and solid density, is scattered throughout both lungs, for example right upper lobe, 03:27, 30, and left upper lobe, 4:89 but absent",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "13999829-RR-96__2",
+        "mention_text": "The nodule in the superior segment of the right lower lobe has increased in size now measuring 10 mm previously 6 mm (02:40). Scattered ground-glass opacification is noted throughout the bilateral lungs with more prominently in the right lower lobe with a more focal area of ground-glass and septal thickening in the right lower lobe (2:86).",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "16472682-RR-38__1",
+        "mention_text": "Scattered bilateral solid and ground-glass pulmonary nodules measuring up",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "15702242-RR-56__5",
+        "mention_text": "Multiple sub-5-mm semisolid and ground-glass nodules with bilateral upper lobe predominance is nonspecific, but could represent Langerhans cell",
+        "gold": "unclear",
+        "predicted": "part_solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16868333-RR-23__1",
+        "mention_text": "Unchnaged is a right lower lobe nodule (3:46) measuring 4.2 mm on today's study. Fibrotic scarring at the left base and the lingula is also stable. New since ___ are several small nodular, centrilobular ground-glass",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "17470752-RR-25__2",
+        "mention_text": "and a subpleural 5 mm right middle lobe lateral segment lung nodule (155, 4). Scattered smooth septal lines and ground-glass opacification suggests a",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "16310385-RR-18__4",
+        "mention_text": "Interval increase in the solid component of a right upper lobe nodule measuring 5 mm, previously 2 mm is worrisome for development of adenocarcinoma",
+        "gold": "part_solid",
+        "predicted": "solid",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "14485011-RR-22__1",
+        "mention_text": "PARENCHYMA:  There is a 9 mm sub solid nodule in the right lower lobe",
+        "gold": "part_solid",
+        "predicted": "solid",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "15589112-RR-37__6",
+        "mention_text": "Bilateral calcified granulomas with additional sub 4 mm pulmonary nodules",
+        "gold": "unclear",
+        "predicted": "calcified",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16461545-RR-28__2",
+        "mention_text": "Spiculated nodule in the right upper lobe is unchanged and measures 1.5 x 1.3",
+        "gold": "solid",
+        "predicted": "unclear",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "19392881-RR-33__1",
+        "mention_text": "Additionally, there is a 0.8 cm spiculated nodule in the right middle lobe, which is highly concerning for neoplasm, although this finding is stable since ___.",
+        "gold": "solid",
+        "predicted": "unclear",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "12159404-RR-127__1",
+        "mention_text": "calcified nodule, possibly a granuloma, unchanged. There are new patchy airspace and ground-glass opacities, predominately in the right lung,",
+        "gold": "calcified",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "19868102-RR-176__3",
+        "mention_text": "lobe mixed solid and ground-glass nodule now measures 10 x 8 mm compared to 8",
+        "gold": "part_solid",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "15072349-RR-8__2",
+        "mention_text": "4 mm sub solid pulmonary nodule for which no follow-up is recommended per",
+        "gold": "part_solid",
+        "predicted": "solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      }
+    ],
+    "ml_svm": [
+      {
+        "sample_id": "16581762-RR-14__1",
+        "mention_text": "Multiple 2-3 mm part solid and solid nodules (5, 44, 70, 71, 73, 101, 165, ___ in the left upper lobe, and lingula as well as right upper and lower lobes are indeterminate and may be related to",
+        "gold": "unclear",
+        "predicted": "part_solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "13369123-RR-114__4",
+        "mention_text": "nodules are solid while majority of them are part solid the largest in the right lower lobe (3, 120 measuring 9 mm.",
+        "gold": "unclear",
+        "predicted": "part_solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "18122040-RR-49__1",
+        "mention_text": "Subsolid nodules in the right upper lobe (4:98) measuring 1.2 x 1.1 cm, in the right lower lobe (4:73) measuring 2.0 x 1.2 cm and in the left lower lobe (4:147) measuring 1.0 cm.",
+        "gold": "unclear",
+        "predicted": "part_solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "15683514-RR-32__1",
+        "mention_text": "A large number of 2-4 mm nodules of indeterminate nature, both ground-glass and solid density, is scattered throughout both lungs, for example right upper lobe, 03:27, 30, and left upper lobe, 4:89 but absent",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "13999829-RR-96__2",
+        "mention_text": "The nodule in the superior segment of the right lower lobe has increased in size now measuring 10 mm previously 6 mm (02:40). Scattered ground-glass opacification is noted throughout the bilateral lungs with more prominently in the right lower lobe with a more focal area of ground-glass and septal thickening in the right lower lobe (2:86).",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "16472682-RR-38__1",
+        "mention_text": "Scattered bilateral solid and ground-glass pulmonary nodules measuring up",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "15702242-RR-56__5",
+        "mention_text": "Multiple sub-5-mm semisolid and ground-glass nodules with bilateral upper lobe predominance is nonspecific, but could represent Langerhans cell",
+        "gold": "unclear",
+        "predicted": "part_solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16868333-RR-23__1",
+        "mention_text": "Unchnaged is a right lower lobe nodule (3:46) measuring 4.2 mm on today's study. Fibrotic scarring at the left base and the lingula is also stable. New since ___ are several small nodular, centrilobular ground-glass",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "17470752-RR-25__2",
+        "mention_text": "and a subpleural 5 mm right middle lobe lateral segment lung nodule (155, 4). Scattered smooth septal lines and ground-glass opacification suggests a",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "16310385-RR-18__4",
+        "mention_text": "Interval increase in the solid component of a right upper lobe nodule measuring 5 mm, previously 2 mm is worrisome for development of adenocarcinoma",
+        "gold": "part_solid",
+        "predicted": "solid",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "14485011-RR-22__1",
+        "mention_text": "PARENCHYMA:  There is a 9 mm sub solid nodule in the right lower lobe",
+        "gold": "part_solid",
+        "predicted": "solid",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "15589112-RR-37__6",
+        "mention_text": "Bilateral calcified granulomas with additional sub 4 mm pulmonary nodules",
+        "gold": "unclear",
+        "predicted": "calcified",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16461545-RR-28__2",
+        "mention_text": "Spiculated nodule in the right upper lobe is unchanged and measures 1.5 x 1.3",
+        "gold": "solid",
+        "predicted": "unclear",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "19392881-RR-33__1",
+        "mention_text": "Additionally, there is a 0.8 cm spiculated nodule in the right middle lobe, which is highly concerning for neoplasm, although this finding is stable since ___.",
+        "gold": "solid",
+        "predicted": "unclear",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "12159404-RR-127__1",
+        "mention_text": "calcified nodule, possibly a granuloma, unchanged. There are new patchy airspace and ground-glass opacities, predominately in the right lung,",
+        "gold": "calcified",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "19868102-RR-176__3",
+        "mention_text": "lobe mixed solid and ground-glass nodule now measures 10 x 8 mm compared to 8",
+        "gold": "part_solid",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "15072349-RR-8__2",
+        "mention_text": "4 mm sub solid pulmonary nodule for which no follow-up is recommended per",
+        "gold": "part_solid",
+        "predicted": "solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      }
+    ],
+    "pubmedbert": [
+      {
+        "sample_id": "16581762-RR-14__1",
+        "mention_text": "Multiple 2-3 mm part solid and solid nodules (5, 44, 70, 71, 73, 101, 165, ___ in the left upper lobe, and lingula as well as right upper and lower lobes are indeterminate and may be related to",
+        "gold": "unclear",
+        "predicted": "part_solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "13369123-RR-114__4",
+        "mention_text": "nodules are solid while majority of them are part solid the largest in the right lower lobe (3, 120 measuring 9 mm.",
+        "gold": "unclear",
+        "predicted": "part_solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "18122040-RR-49__1",
+        "mention_text": "Subsolid nodules in the right upper lobe (4:98) measuring 1.2 x 1.1 cm, in the right lower lobe (4:73) measuring 2.0 x 1.2 cm and in the left lower lobe (4:147) measuring 1.0 cm.",
+        "gold": "unclear",
+        "predicted": "part_solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "15683514-RR-32__1",
+        "mention_text": "A large number of 2-4 mm nodules of indeterminate nature, both ground-glass and solid density, is scattered throughout both lungs, for example right upper lobe, 03:27, 30, and left upper lobe, 4:89 but absent",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "13999829-RR-96__2",
+        "mention_text": "The nodule in the superior segment of the right lower lobe has increased in size now measuring 10 mm previously 6 mm (02:40). Scattered ground-glass opacification is noted throughout the bilateral lungs with more prominently in the right lower lobe with a more focal area of ground-glass and septal thickening in the right lower lobe (2:86).",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "16472682-RR-38__1",
+        "mention_text": "Scattered bilateral solid and ground-glass pulmonary nodules measuring up",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "15702242-RR-56__5",
+        "mention_text": "Multiple sub-5-mm semisolid and ground-glass nodules with bilateral upper lobe predominance is nonspecific, but could represent Langerhans cell",
+        "gold": "unclear",
+        "predicted": "part_solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16868333-RR-23__1",
+        "mention_text": "Unchnaged is a right lower lobe nodule (3:46) measuring 4.2 mm on today's study. Fibrotic scarring at the left base and the lingula is also stable. New since ___ are several small nodular, centrilobular ground-glass",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "17470752-RR-25__2",
+        "mention_text": "and a subpleural 5 mm right middle lobe lateral segment lung nodule (155, 4). Scattered smooth septal lines and ground-glass opacification suggests a",
+        "gold": "unclear",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "16310385-RR-18__4",
+        "mention_text": "Interval increase in the solid component of a right upper lobe nodule measuring 5 mm, previously 2 mm is worrisome for development of adenocarcinoma",
+        "gold": "part_solid",
+        "predicted": "solid",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "14485011-RR-22__1",
+        "mention_text": "PARENCHYMA:  There is a 9 mm sub solid nodule in the right lower lobe",
+        "gold": "part_solid",
+        "predicted": "solid",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "15589112-RR-37__6",
+        "mention_text": "Bilateral calcified granulomas with additional sub 4 mm pulmonary nodules",
+        "gold": "unclear",
+        "predicted": "calcified",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16461545-RR-28__2",
+        "mention_text": "Spiculated nodule in the right upper lobe is unchanged and measures 1.5 x 1.3",
+        "gold": "solid",
+        "predicted": "unclear",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "19392881-RR-33__1",
+        "mention_text": "Additionally, there is a 0.8 cm spiculated nodule in the right middle lobe, which is highly concerning for neoplasm, although this finding is stable since ___.",
+        "gold": "solid",
+        "predicted": "unclear",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "12159404-RR-127__1",
+        "mention_text": "calcified nodule, possibly a granuloma, unchanged. There are new patchy airspace and ground-glass opacities, predominately in the right lung,",
+        "gold": "calcified",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "19868102-RR-176__3",
+        "mention_text": "lobe mixed solid and ground-glass nodule now measures 10 x 8 mm compared to 8",
+        "gold": "part_solid",
+        "predicted": "ground_glass",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "15072349-RR-8__2",
+        "mention_text": "4 mm sub solid pulmonary nodule for which no follow-up is recommended per",
+        "gold": "part_solid",
+        "predicted": "solid",
+        "silver": null,
+        "annotation_confidence": "medium"
+      }
+    ]
+  },
+  "has_size": {
+    "silver": [
+      {
+        "sample_id": "14512319-RR-28__1",
+        "mention_text": "LUNGS:  Multiple, small, well-defined, solid lung nodules are seen, in the",
+        "gold": 1,
+        "predicted": 0,
+        "silver": 0,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16472682-RR-38__1",
+        "mention_text": "Scattered bilateral solid and ground-glass pulmonary nodules measuring up",
+        "gold": 1,
+        "predicted": 0,
+        "silver": 0,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16461545-RR-28__2",
+        "mention_text": "Spiculated nodule in the right upper lobe is unchanged and measures 1.5 x 1.3",
+        "gold": 1,
+        "predicted": 0,
+        "silver": 0,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "12159404-RR-127__1",
+        "mention_text": "calcified nodule, possibly a granuloma, unchanged. There are new patchy airspace and ground-glass opacities, predominately in the right lung,",
+        "gold": 1,
+        "predicted": 0,
+        "silver": 0,
+        "annotation_confidence": "medium"
+      }
+    ],
+    "regex": [
+      {
+        "sample_id": "14512319-RR-28__1",
+        "mention_text": "LUNGS:  Multiple, small, well-defined, solid lung nodules are seen, in the",
+        "gold": 1,
+        "predicted": 0,
+        "silver": 0,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16472682-RR-38__1",
+        "mention_text": "Scattered bilateral solid and ground-glass pulmonary nodules measuring up",
+        "gold": 1,
+        "predicted": 0,
+        "silver": 0,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16461545-RR-28__2",
+        "mention_text": "Spiculated nodule in the right upper lobe is unchanged and measures 1.5 x 1.3",
+        "gold": 1,
+        "predicted": 0,
+        "silver": 0,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "12159404-RR-127__1",
+        "mention_text": "calcified nodule, possibly a granuloma, unchanged. There are new patchy airspace and ground-glass opacities, predominately in the right lung,",
+        "gold": 1,
+        "predicted": 0,
+        "silver": 0,
+        "annotation_confidence": "medium"
+      }
+    ],
+    "ml_lr": [
+      {
+        "sample_id": "14512319-RR-28__1",
+        "mention_text": "LUNGS:  Multiple, small, well-defined, solid lung nodules are seen, in the",
+        "gold": 1,
+        "predicted": 0,
+        "silver": 0,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16472682-RR-38__1",
+        "mention_text": "Scattered bilateral solid and ground-glass pulmonary nodules measuring up",
+        "gold": 1,
+        "predicted": 0,
+        "silver": 0,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16461545-RR-28__2",
+        "mention_text": "Spiculated nodule in the right upper lobe is unchanged and measures 1.5 x 1.3",
+        "gold": 1,
+        "predicted": 0,
+        "silver": 0,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "12159404-RR-127__1",
+        "mention_text": "calcified nodule, possibly a granuloma, unchanged. There are new patchy airspace and ground-glass opacities, predominately in the right lung,",
+        "gold": 1,
+        "predicted": 0,
+        "silver": 0,
+        "annotation_confidence": "medium"
+      }
+    ],
+    "ml_svm": [
+      {
+        "sample_id": "13731472-RR-114__4",
+        "mention_text": "nodules which are new since ___: a 7 mm solid nodule in the lingula,",
+        "gold": 1,
+        "predicted": 0,
+        "silver": 1,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "14512319-RR-28__1",
+        "mention_text": "LUNGS:  Multiple, small, well-defined, solid lung nodules are seen, in the",
+        "gold": 1,
+        "predicted": 0,
+        "silver": 0,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16472682-RR-38__1",
+        "mention_text": "Scattered bilateral solid and ground-glass pulmonary nodules measuring up",
+        "gold": 1,
+        "predicted": 0,
+        "silver": 0,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16461545-RR-28__2",
+        "mention_text": "Spiculated nodule in the right upper lobe is unchanged and measures 1.5 x 1.3",
+        "gold": 1,
+        "predicted": 0,
+        "silver": 0,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "12159404-RR-127__1",
+        "mention_text": "calcified nodule, possibly a granuloma, unchanged. There are new patchy airspace and ground-glass opacities, predominately in the right lung,",
+        "gold": 1,
+        "predicted": 0,
+        "silver": 0,
+        "annotation_confidence": "medium"
+      }
+    ],
+    "pubmedbert": [
+      {
+        "sample_id": "14512319-RR-28__1",
+        "mention_text": "LUNGS:  Multiple, small, well-defined, solid lung nodules are seen, in the",
+        "gold": 1,
+        "predicted": 0,
+        "silver": 0,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16472682-RR-38__1",
+        "mention_text": "Scattered bilateral solid and ground-glass pulmonary nodules measuring up",
+        "gold": 1,
+        "predicted": 0,
+        "silver": 0,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16461545-RR-28__2",
+        "mention_text": "Spiculated nodule in the right upper lobe is unchanged and measures 1.5 x 1.3",
+        "gold": 1,
+        "predicted": 0,
+        "silver": 0,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "12159404-RR-127__1",
+        "mention_text": "calcified nodule, possibly a granuloma, unchanged. There are new patchy airspace and ground-glass opacities, predominately in the right lung,",
+        "gold": 1,
+        "predicted": 0,
+        "silver": 0,
+        "annotation_confidence": "medium"
+      }
+    ]
+  },
+  "size_mm": {
+    "silver": [
+      {
+        "sample_id": "16461545-RR-28__2",
+        "mention_text": "Spiculated nodule in the right upper lobe is unchanged and measures 1.5 x 1.3",
+        "gold": 15.0,
+        "predicted": 0.0,
+        "silver": null,
+        "annotation_confidence": "medium",
+        "absolute_error": 15.0
+      },
+      {
+        "sample_id": "16472682-RR-38__1",
+        "mention_text": "Scattered bilateral solid and ground-glass pulmonary nodules measuring up",
+        "gold": 9.0,
+        "predicted": 0.0,
+        "silver": null,
+        "annotation_confidence": "medium",
+        "absolute_error": 9.0
+      },
+      {
+        "sample_id": "18122040-RR-49__1",
+        "mention_text": "Subsolid nodules in the right upper lobe (4:98) measuring 1.2 x 1.1 cm, in the right lower lobe (4:73) measuring 2.0 x 1.2 cm and in the left lower lobe (4:147) measuring 1.0 cm.",
+        "gold": 20.0,
+        "predicted": 12.0,
+        "silver": 12.0,
+        "annotation_confidence": "medium",
+        "absolute_error": 8.0
+      },
+      {
+        "sample_id": "12159404-RR-127__1",
+        "mention_text": "calcified nodule, possibly a granuloma, unchanged. There are new patchy airspace and ground-glass opacities, predominately in the right lung,",
+        "gold": 6.0,
+        "predicted": 0.0,
+        "silver": null,
+        "annotation_confidence": "medium",
+        "absolute_error": 6.0
+      },
+      {
+        "sample_id": "14512319-RR-28__1",
+        "mention_text": "LUNGS:  Multiple, small, well-defined, solid lung nodules are seen, in the",
+        "gold": 4.8,
+        "predicted": 0.0,
+        "silver": null,
+        "annotation_confidence": "medium",
+        "absolute_error": 4.8
+      },
+      {
+        "sample_id": "15683514-RR-32__1",
+        "mention_text": "A large number of 2-4 mm nodules of indeterminate nature, both ground-glass and solid density, is scattered throughout both lungs, for example right upper lobe, 03:27, 30, and left upper lobe, 4:89 but absent",
+        "gold": 4.0,
+        "predicted": 3.0,
+        "silver": 3.0,
+        "annotation_confidence": "medium",
+        "absolute_error": 1.0
+      },
+      {
+        "sample_id": "12171157-RR-19__2",
+        "mention_text": "scattered small solid 1-3 mm diameter nodules are present in the right upper lobe (images 67, 77, 80), left upper lobe (image 123), and left lower lobe",
+        "gold": 3.0,
+        "predicted": 2.0,
+        "silver": 2.0,
+        "annotation_confidence": "medium",
+        "absolute_error": 1.0
+      },
+      {
+        "sample_id": "16581762-RR-14__1",
+        "mention_text": "Multiple 2-3 mm part solid and solid nodules (5, 44, 70, 71, 73, 101, 165, ___ in the left upper lobe, and lingula as well as right upper and lower lobes are indeterminate and may be related to",
+        "gold": 3.0,
+        "predicted": 2.5,
+        "silver": 2.5,
+        "annotation_confidence": "medium",
+        "absolute_error": 0.5
+      }
+    ],
+    "regex": [
+      {
+        "sample_id": "16461545-RR-28__2",
+        "mention_text": "Spiculated nodule in the right upper lobe is unchanged and measures 1.5 x 1.3",
+        "gold": 15.0,
+        "predicted": 0.0,
+        "silver": null,
+        "annotation_confidence": "medium",
+        "absolute_error": 15.0
+      },
+      {
+        "sample_id": "16472682-RR-38__1",
+        "mention_text": "Scattered bilateral solid and ground-glass pulmonary nodules measuring up",
+        "gold": 9.0,
+        "predicted": 0.0,
+        "silver": null,
+        "annotation_confidence": "medium",
+        "absolute_error": 9.0
+      },
+      {
+        "sample_id": "18122040-RR-49__1",
+        "mention_text": "Subsolid nodules in the right upper lobe (4:98) measuring 1.2 x 1.1 cm, in the right lower lobe (4:73) measuring 2.0 x 1.2 cm and in the left lower lobe (4:147) measuring 1.0 cm.",
+        "gold": 20.0,
+        "predicted": 12.0,
+        "silver": 12.0,
+        "annotation_confidence": "medium",
+        "absolute_error": 8.0
+      },
+      {
+        "sample_id": "12159404-RR-127__1",
+        "mention_text": "calcified nodule, possibly a granuloma, unchanged. There are new patchy airspace and ground-glass opacities, predominately in the right lung,",
+        "gold": 6.0,
+        "predicted": 0.0,
+        "silver": null,
+        "annotation_confidence": "medium",
+        "absolute_error": 6.0
+      },
+      {
+        "sample_id": "14512319-RR-28__1",
+        "mention_text": "LUNGS:  Multiple, small, well-defined, solid lung nodules are seen, in the",
+        "gold": 4.8,
+        "predicted": 0.0,
+        "silver": null,
+        "annotation_confidence": "medium",
+        "absolute_error": 4.8
+      },
+      {
+        "sample_id": "15683514-RR-32__1",
+        "mention_text": "A large number of 2-4 mm nodules of indeterminate nature, both ground-glass and solid density, is scattered throughout both lungs, for example right upper lobe, 03:27, 30, and left upper lobe, 4:89 but absent",
+        "gold": 4.0,
+        "predicted": 3.0,
+        "silver": 3.0,
+        "annotation_confidence": "medium",
+        "absolute_error": 1.0
+      },
+      {
+        "sample_id": "12171157-RR-19__2",
+        "mention_text": "scattered small solid 1-3 mm diameter nodules are present in the right upper lobe (images 67, 77, 80), left upper lobe (image 123), and left lower lobe",
+        "gold": 3.0,
+        "predicted": 2.0,
+        "silver": 2.0,
+        "annotation_confidence": "medium",
+        "absolute_error": 1.0
+      },
+      {
+        "sample_id": "16581762-RR-14__1",
+        "mention_text": "Multiple 2-3 mm part solid and solid nodules (5, 44, 70, 71, 73, 101, 165, ___ in the left upper lobe, and lingula as well as right upper and lower lobes are indeterminate and may be related to",
+        "gold": 3.0,
+        "predicted": 2.5,
+        "silver": 2.5,
+        "annotation_confidence": "medium",
+        "absolute_error": 0.5
+      }
+    ],
+    "ml_lr": [
+      {
+        "sample_id": "16461545-RR-28__2",
+        "mention_text": "Spiculated nodule in the right upper lobe is unchanged and measures 1.5 x 1.3",
+        "gold": 15.0,
+        "predicted": 0.0,
+        "silver": null,
+        "annotation_confidence": "medium",
+        "absolute_error": 15.0
+      },
+      {
+        "sample_id": "16472682-RR-38__1",
+        "mention_text": "Scattered bilateral solid and ground-glass pulmonary nodules measuring up",
+        "gold": 9.0,
+        "predicted": 0.0,
+        "silver": null,
+        "annotation_confidence": "medium",
+        "absolute_error": 9.0
+      },
+      {
+        "sample_id": "18122040-RR-49__1",
+        "mention_text": "Subsolid nodules in the right upper lobe (4:98) measuring 1.2 x 1.1 cm, in the right lower lobe (4:73) measuring 2.0 x 1.2 cm and in the left lower lobe (4:147) measuring 1.0 cm.",
+        "gold": 20.0,
+        "predicted": 12.0,
+        "silver": 12.0,
+        "annotation_confidence": "medium",
+        "absolute_error": 8.0
+      },
+      {
+        "sample_id": "12159404-RR-127__1",
+        "mention_text": "calcified nodule, possibly a granuloma, unchanged. There are new patchy airspace and ground-glass opacities, predominately in the right lung,",
+        "gold": 6.0,
+        "predicted": 0.0,
+        "silver": null,
+        "annotation_confidence": "medium",
+        "absolute_error": 6.0
+      },
+      {
+        "sample_id": "14512319-RR-28__1",
+        "mention_text": "LUNGS:  Multiple, small, well-defined, solid lung nodules are seen, in the",
+        "gold": 4.8,
+        "predicted": 0.0,
+        "silver": null,
+        "annotation_confidence": "medium",
+        "absolute_error": 4.8
+      },
+      {
+        "sample_id": "15683514-RR-32__1",
+        "mention_text": "A large number of 2-4 mm nodules of indeterminate nature, both ground-glass and solid density, is scattered throughout both lungs, for example right upper lobe, 03:27, 30, and left upper lobe, 4:89 but absent",
+        "gold": 4.0,
+        "predicted": 3.0,
+        "silver": 3.0,
+        "annotation_confidence": "medium",
+        "absolute_error": 1.0
+      },
+      {
+        "sample_id": "12171157-RR-19__2",
+        "mention_text": "scattered small solid 1-3 mm diameter nodules are present in the right upper lobe (images 67, 77, 80), left upper lobe (image 123), and left lower lobe",
+        "gold": 3.0,
+        "predicted": 2.0,
+        "silver": 2.0,
+        "annotation_confidence": "medium",
+        "absolute_error": 1.0
+      },
+      {
+        "sample_id": "16581762-RR-14__1",
+        "mention_text": "Multiple 2-3 mm part solid and solid nodules (5, 44, 70, 71, 73, 101, 165, ___ in the left upper lobe, and lingula as well as right upper and lower lobes are indeterminate and may be related to",
+        "gold": 3.0,
+        "predicted": 2.5,
+        "silver": 2.5,
+        "annotation_confidence": "medium",
+        "absolute_error": 0.5
+      }
+    ],
+    "ml_svm": [
+      {
+        "sample_id": "16461545-RR-28__2",
+        "mention_text": "Spiculated nodule in the right upper lobe is unchanged and measures 1.5 x 1.3",
+        "gold": 15.0,
+        "predicted": 0.0,
+        "silver": null,
+        "annotation_confidence": "medium",
+        "absolute_error": 15.0
+      },
+      {
+        "sample_id": "16472682-RR-38__1",
+        "mention_text": "Scattered bilateral solid and ground-glass pulmonary nodules measuring up",
+        "gold": 9.0,
+        "predicted": 0.0,
+        "silver": null,
+        "annotation_confidence": "medium",
+        "absolute_error": 9.0
+      },
+      {
+        "sample_id": "18122040-RR-49__1",
+        "mention_text": "Subsolid nodules in the right upper lobe (4:98) measuring 1.2 x 1.1 cm, in the right lower lobe (4:73) measuring 2.0 x 1.2 cm and in the left lower lobe (4:147) measuring 1.0 cm.",
+        "gold": 20.0,
+        "predicted": 12.0,
+        "silver": 12.0,
+        "annotation_confidence": "medium",
+        "absolute_error": 8.0
+      },
+      {
+        "sample_id": "12159404-RR-127__1",
+        "mention_text": "calcified nodule, possibly a granuloma, unchanged. There are new patchy airspace and ground-glass opacities, predominately in the right lung,",
+        "gold": 6.0,
+        "predicted": 0.0,
+        "silver": null,
+        "annotation_confidence": "medium",
+        "absolute_error": 6.0
+      },
+      {
+        "sample_id": "14512319-RR-28__1",
+        "mention_text": "LUNGS:  Multiple, small, well-defined, solid lung nodules are seen, in the",
+        "gold": 4.8,
+        "predicted": 0.0,
+        "silver": null,
+        "annotation_confidence": "medium",
+        "absolute_error": 4.8
+      },
+      {
+        "sample_id": "15683514-RR-32__1",
+        "mention_text": "A large number of 2-4 mm nodules of indeterminate nature, both ground-glass and solid density, is scattered throughout both lungs, for example right upper lobe, 03:27, 30, and left upper lobe, 4:89 but absent",
+        "gold": 4.0,
+        "predicted": 3.0,
+        "silver": 3.0,
+        "annotation_confidence": "medium",
+        "absolute_error": 1.0
+      },
+      {
+        "sample_id": "12171157-RR-19__2",
+        "mention_text": "scattered small solid 1-3 mm diameter nodules are present in the right upper lobe (images 67, 77, 80), left upper lobe (image 123), and left lower lobe",
+        "gold": 3.0,
+        "predicted": 2.0,
+        "silver": 2.0,
+        "annotation_confidence": "medium",
+        "absolute_error": 1.0
+      },
+      {
+        "sample_id": "16581762-RR-14__1",
+        "mention_text": "Multiple 2-3 mm part solid and solid nodules (5, 44, 70, 71, 73, 101, 165, ___ in the left upper lobe, and lingula as well as right upper and lower lobes are indeterminate and may be related to",
+        "gold": 3.0,
+        "predicted": 2.5,
+        "silver": 2.5,
+        "annotation_confidence": "medium",
+        "absolute_error": 0.5
+      }
+    ],
+    "pubmedbert": [
+      {
+        "sample_id": "16461545-RR-28__2",
+        "mention_text": "Spiculated nodule in the right upper lobe is unchanged and measures 1.5 x 1.3",
+        "gold": 15.0,
+        "predicted": 0.0,
+        "silver": null,
+        "annotation_confidence": "medium",
+        "absolute_error": 15.0
+      },
+      {
+        "sample_id": "16472682-RR-38__1",
+        "mention_text": "Scattered bilateral solid and ground-glass pulmonary nodules measuring up",
+        "gold": 9.0,
+        "predicted": 0.0,
+        "silver": null,
+        "annotation_confidence": "medium",
+        "absolute_error": 9.0
+      },
+      {
+        "sample_id": "18122040-RR-49__1",
+        "mention_text": "Subsolid nodules in the right upper lobe (4:98) measuring 1.2 x 1.1 cm, in the right lower lobe (4:73) measuring 2.0 x 1.2 cm and in the left lower lobe (4:147) measuring 1.0 cm.",
+        "gold": 20.0,
+        "predicted": 12.0,
+        "silver": 12.0,
+        "annotation_confidence": "medium",
+        "absolute_error": 8.0
+      },
+      {
+        "sample_id": "12159404-RR-127__1",
+        "mention_text": "calcified nodule, possibly a granuloma, unchanged. There are new patchy airspace and ground-glass opacities, predominately in the right lung,",
+        "gold": 6.0,
+        "predicted": 0.0,
+        "silver": null,
+        "annotation_confidence": "medium",
+        "absolute_error": 6.0
+      },
+      {
+        "sample_id": "14512319-RR-28__1",
+        "mention_text": "LUNGS:  Multiple, small, well-defined, solid lung nodules are seen, in the",
+        "gold": 4.8,
+        "predicted": 0.0,
+        "silver": null,
+        "annotation_confidence": "medium",
+        "absolute_error": 4.8
+      },
+      {
+        "sample_id": "15683514-RR-32__1",
+        "mention_text": "A large number of 2-4 mm nodules of indeterminate nature, both ground-glass and solid density, is scattered throughout both lungs, for example right upper lobe, 03:27, 30, and left upper lobe, 4:89 but absent",
+        "gold": 4.0,
+        "predicted": 3.0,
+        "silver": 3.0,
+        "annotation_confidence": "medium",
+        "absolute_error": 1.0
+      },
+      {
+        "sample_id": "12171157-RR-19__2",
+        "mention_text": "scattered small solid 1-3 mm diameter nodules are present in the right upper lobe (images 67, 77, 80), left upper lobe (image 123), and left lower lobe",
+        "gold": 3.0,
+        "predicted": 2.0,
+        "silver": 2.0,
+        "annotation_confidence": "medium",
+        "absolute_error": 1.0
+      },
+      {
+        "sample_id": "16581762-RR-14__1",
+        "mention_text": "Multiple 2-3 mm part solid and solid nodules (5, 44, 70, 71, 73, 101, 165, ___ in the left upper lobe, and lingula as well as right upper and lower lobes are indeterminate and may be related to",
+        "gold": 3.0,
+        "predicted": 2.5,
+        "silver": 2.5,
+        "annotation_confidence": "medium",
+        "absolute_error": 0.5
+      }
+    ]
+  },
+  "location": {
+    "silver": [
+      {
+        "sample_id": "16581762-RR-14__1",
+        "mention_text": "Multiple 2-3 mm part solid and solid nodules (5, 44, 70, 71, 73, 101, 165, ___ in the left upper lobe, and lingula as well as right upper and lower lobes are indeterminate and may be related to",
+        "gold": "bilateral",
+        "predicted": "LUL",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "18122040-RR-49__1",
+        "mention_text": "Subsolid nodules in the right upper lobe (4:98) measuring 1.2 x 1.1 cm, in the right lower lobe (4:73) measuring 2.0 x 1.2 cm and in the left lower lobe (4:147) measuring 1.0 cm.",
+        "gold": "bilateral",
+        "predicted": "RUL",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "15683514-RR-32__1",
+        "mention_text": "A large number of 2-4 mm nodules of indeterminate nature, both ground-glass and solid density, is scattered throughout both lungs, for example right upper lobe, 03:27, 30, and left upper lobe, 4:89 but absent",
+        "gold": "bilateral",
+        "predicted": "RUL",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "11626181-RR-39__6",
+        "mention_text": "calcified granuloma in left lower lobe is unchanged since the prior study as well as multiple calcified granulomas in the right upper lobe.",
+        "gold": "bilateral",
+        "predicted": "RUL",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "14512319-RR-28__1",
+        "mention_text": "LUNGS:  Multiple, small, well-defined, solid lung nodules are seen, in the",
+        "gold": "bilateral",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "13999829-RR-96__2",
+        "mention_text": "The nodule in the superior segment of the right lower lobe has increased in size now measuring 10 mm previously 6 mm (02:40). Scattered ground-glass opacification is noted throughout the bilateral lungs with more prominently in the right lower lobe with a more focal area of ground-glass and septal thickening in the right lower lobe (2:86).",
+        "gold": "RLL",
+        "predicted": "bilateral",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "12171157-RR-19__2",
+        "mention_text": "scattered small solid 1-3 mm diameter nodules are present in the right upper lobe (images 67, 77, 80), left upper lobe (image 123), and left lower lobe",
+        "gold": "bilateral",
+        "predicted": "RUL",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "19970758-RR-114__2",
+        "mention_text": "Ill-defined small ground-glass nodules are also noted",
+        "gold": "bilateral",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16118203-RR-24__1",
+        "mention_text": "Unchanged 8-mm right apical solid nodule and other smaller nodules.",
+        "gold": "RUL",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "19868102-RR-176__3",
+        "mention_text": "lobe mixed solid and ground-glass nodule now measures 10 x 8 mm compared to 8",
+        "gold": "LLL",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "17582691-RR-48__2",
+        "mention_text": "subpleural nodule with central calcification is 2 cm in diameter, unchanged",
+        "gold": "RUL",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      }
+    ],
+    "regex": [
+      {
+        "sample_id": "16581762-RR-14__1",
+        "mention_text": "Multiple 2-3 mm part solid and solid nodules (5, 44, 70, 71, 73, 101, 165, ___ in the left upper lobe, and lingula as well as right upper and lower lobes are indeterminate and may be related to",
+        "gold": "bilateral",
+        "predicted": "LUL",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "18122040-RR-49__1",
+        "mention_text": "Subsolid nodules in the right upper lobe (4:98) measuring 1.2 x 1.1 cm, in the right lower lobe (4:73) measuring 2.0 x 1.2 cm and in the left lower lobe (4:147) measuring 1.0 cm.",
+        "gold": "bilateral",
+        "predicted": "RUL",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "15683514-RR-32__1",
+        "mention_text": "A large number of 2-4 mm nodules of indeterminate nature, both ground-glass and solid density, is scattered throughout both lungs, for example right upper lobe, 03:27, 30, and left upper lobe, 4:89 but absent",
+        "gold": "bilateral",
+        "predicted": "RUL",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "11626181-RR-39__6",
+        "mention_text": "calcified granuloma in left lower lobe is unchanged since the prior study as well as multiple calcified granulomas in the right upper lobe.",
+        "gold": "bilateral",
+        "predicted": "RUL",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "14512319-RR-28__1",
+        "mention_text": "LUNGS:  Multiple, small, well-defined, solid lung nodules are seen, in the",
+        "gold": "bilateral",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "13999829-RR-96__2",
+        "mention_text": "The nodule in the superior segment of the right lower lobe has increased in size now measuring 10 mm previously 6 mm (02:40). Scattered ground-glass opacification is noted throughout the bilateral lungs with more prominently in the right lower lobe with a more focal area of ground-glass and septal thickening in the right lower lobe (2:86).",
+        "gold": "RLL",
+        "predicted": "bilateral",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "12171157-RR-19__2",
+        "mention_text": "scattered small solid 1-3 mm diameter nodules are present in the right upper lobe (images 67, 77, 80), left upper lobe (image 123), and left lower lobe",
+        "gold": "bilateral",
+        "predicted": "RUL",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "19970758-RR-114__2",
+        "mention_text": "Ill-defined small ground-glass nodules are also noted",
+        "gold": "bilateral",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16118203-RR-24__1",
+        "mention_text": "Unchanged 8-mm right apical solid nodule and other smaller nodules.",
+        "gold": "RUL",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "19868102-RR-176__3",
+        "mention_text": "lobe mixed solid and ground-glass nodule now measures 10 x 8 mm compared to 8",
+        "gold": "LLL",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "17582691-RR-48__2",
+        "mention_text": "subpleural nodule with central calcification is 2 cm in diameter, unchanged",
+        "gold": "RUL",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      }
+    ],
+    "ml_lr": [
+      {
+        "sample_id": "16581762-RR-14__1",
+        "mention_text": "Multiple 2-3 mm part solid and solid nodules (5, 44, 70, 71, 73, 101, 165, ___ in the left upper lobe, and lingula as well as right upper and lower lobes are indeterminate and may be related to",
+        "gold": "bilateral",
+        "predicted": "lingula",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "18122040-RR-49__1",
+        "mention_text": "Subsolid nodules in the right upper lobe (4:98) measuring 1.2 x 1.1 cm, in the right lower lobe (4:73) measuring 2.0 x 1.2 cm and in the left lower lobe (4:147) measuring 1.0 cm.",
+        "gold": "bilateral",
+        "predicted": "RUL",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "15683514-RR-32__1",
+        "mention_text": "A large number of 2-4 mm nodules of indeterminate nature, both ground-glass and solid density, is scattered throughout both lungs, for example right upper lobe, 03:27, 30, and left upper lobe, 4:89 but absent",
+        "gold": "bilateral",
+        "predicted": "RUL",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "11626181-RR-39__6",
+        "mention_text": "calcified granuloma in left lower lobe is unchanged since the prior study as well as multiple calcified granulomas in the right upper lobe.",
+        "gold": "bilateral",
+        "predicted": "RUL",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "14512319-RR-28__1",
+        "mention_text": "LUNGS:  Multiple, small, well-defined, solid lung nodules are seen, in the",
+        "gold": "bilateral",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "12171157-RR-19__2",
+        "mention_text": "scattered small solid 1-3 mm diameter nodules are present in the right upper lobe (images 67, 77, 80), left upper lobe (image 123), and left lower lobe",
+        "gold": "bilateral",
+        "predicted": "RUL",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "19970758-RR-114__2",
+        "mention_text": "Ill-defined small ground-glass nodules are also noted",
+        "gold": "bilateral",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16118203-RR-24__1",
+        "mention_text": "Unchanged 8-mm right apical solid nodule and other smaller nodules.",
+        "gold": "RUL",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "19868102-RR-176__3",
+        "mention_text": "lobe mixed solid and ground-glass nodule now measures 10 x 8 mm compared to 8",
+        "gold": "LLL",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "17582691-RR-48__2",
+        "mention_text": "subpleural nodule with central calcification is 2 cm in diameter, unchanged",
+        "gold": "RUL",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      }
+    ],
+    "ml_svm": [
+      {
+        "sample_id": "16581762-RR-14__1",
+        "mention_text": "Multiple 2-3 mm part solid and solid nodules (5, 44, 70, 71, 73, 101, 165, ___ in the left upper lobe, and lingula as well as right upper and lower lobes are indeterminate and may be related to",
+        "gold": "bilateral",
+        "predicted": "RUL",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "18122040-RR-49__1",
+        "mention_text": "Subsolid nodules in the right upper lobe (4:98) measuring 1.2 x 1.1 cm, in the right lower lobe (4:73) measuring 2.0 x 1.2 cm and in the left lower lobe (4:147) measuring 1.0 cm.",
+        "gold": "bilateral",
+        "predicted": "RUL",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "15683514-RR-32__1",
+        "mention_text": "A large number of 2-4 mm nodules of indeterminate nature, both ground-glass and solid density, is scattered throughout both lungs, for example right upper lobe, 03:27, 30, and left upper lobe, 4:89 but absent",
+        "gold": "bilateral",
+        "predicted": "RUL",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "11626181-RR-39__6",
+        "mention_text": "calcified granuloma in left lower lobe is unchanged since the prior study as well as multiple calcified granulomas in the right upper lobe.",
+        "gold": "bilateral",
+        "predicted": "RUL",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "14512319-RR-28__1",
+        "mention_text": "LUNGS:  Multiple, small, well-defined, solid lung nodules are seen, in the",
+        "gold": "bilateral",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "12171157-RR-19__2",
+        "mention_text": "scattered small solid 1-3 mm diameter nodules are present in the right upper lobe (images 67, 77, 80), left upper lobe (image 123), and left lower lobe",
+        "gold": "bilateral",
+        "predicted": "RUL",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "19970758-RR-114__2",
+        "mention_text": "Ill-defined small ground-glass nodules are also noted",
+        "gold": "bilateral",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16118203-RR-24__1",
+        "mention_text": "Unchanged 8-mm right apical solid nodule and other smaller nodules.",
+        "gold": "RUL",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "19868102-RR-176__3",
+        "mention_text": "lobe mixed solid and ground-glass nodule now measures 10 x 8 mm compared to 8",
+        "gold": "LLL",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "17582691-RR-48__2",
+        "mention_text": "subpleural nodule with central calcification is 2 cm in diameter, unchanged",
+        "gold": "RUL",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      }
+    ],
+    "pubmedbert": [
+      {
+        "sample_id": "16581762-RR-14__1",
+        "mention_text": "Multiple 2-3 mm part solid and solid nodules (5, 44, 70, 71, 73, 101, 165, ___ in the left upper lobe, and lingula as well as right upper and lower lobes are indeterminate and may be related to",
+        "gold": "bilateral",
+        "predicted": "LUL",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "18122040-RR-49__1",
+        "mention_text": "Subsolid nodules in the right upper lobe (4:98) measuring 1.2 x 1.1 cm, in the right lower lobe (4:73) measuring 2.0 x 1.2 cm and in the left lower lobe (4:147) measuring 1.0 cm.",
+        "gold": "bilateral",
+        "predicted": "RUL",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "15683514-RR-32__1",
+        "mention_text": "A large number of 2-4 mm nodules of indeterminate nature, both ground-glass and solid density, is scattered throughout both lungs, for example right upper lobe, 03:27, 30, and left upper lobe, 4:89 but absent",
+        "gold": "bilateral",
+        "predicted": "RUL",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "11626181-RR-39__6",
+        "mention_text": "calcified granuloma in left lower lobe is unchanged since the prior study as well as multiple calcified granulomas in the right upper lobe.",
+        "gold": "bilateral",
+        "predicted": "RUL",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "14512319-RR-28__1",
+        "mention_text": "LUNGS:  Multiple, small, well-defined, solid lung nodules are seen, in the",
+        "gold": "bilateral",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "13999829-RR-96__2",
+        "mention_text": "The nodule in the superior segment of the right lower lobe has increased in size now measuring 10 mm previously 6 mm (02:40). Scattered ground-glass opacification is noted throughout the bilateral lungs with more prominently in the right lower lobe with a more focal area of ground-glass and septal thickening in the right lower lobe (2:86).",
+        "gold": "RLL",
+        "predicted": "bilateral",
+        "silver": null,
+        "annotation_confidence": "high"
+      },
+      {
+        "sample_id": "12171157-RR-19__2",
+        "mention_text": "scattered small solid 1-3 mm diameter nodules are present in the right upper lobe (images 67, 77, 80), left upper lobe (image 123), and left lower lobe",
+        "gold": "bilateral",
+        "predicted": "RUL",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "19970758-RR-114__2",
+        "mention_text": "Ill-defined small ground-glass nodules are also noted",
+        "gold": "bilateral",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "16118203-RR-24__1",
+        "mention_text": "Unchanged 8-mm right apical solid nodule and other smaller nodules.",
+        "gold": "RUL",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "19868102-RR-176__3",
+        "mention_text": "lobe mixed solid and ground-glass nodule now measures 10 x 8 mm compared to 8",
+        "gold": "LLL",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      },
+      {
+        "sample_id": "17582691-RR-48__2",
+        "mention_text": "subpleural nodule with central calcification is 2 cm in diameter, unchanged",
+        "gold": "RUL",
+        "predicted": "no_location",
+        "silver": null,
+        "annotation_confidence": "medium"
+      }
+    ]
+  }
+}
