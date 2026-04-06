@@ -593,10 +593,11 @@ def generate_report(all_results: dict[str, dict[str, dict[str, Any]]], manifest_
         "### 4.2 has_size",
         render_task_summary_table(all_results, "has_size", methods),
         "",
-        "### 4.3 size_mm",
+        "### 4.3 size_mm（共享正则解析模块评测）",
         render_task_summary_table(all_results, "size_mm", methods),
         "",
         f"- 回归仅在 `gold_has_size=yes` 且 `gold_size_mm` 非空样本上评测，本次样本数为 `{size_positive_count}`。",
+        "- **口径说明**：所有方法的 `size_mm` 预测均来自同一共享正则解析模块（`predict_regex_size_mm`），因此各方法指标完全一致，不构成方法间对比。",
         "",
         "### 4.4 location_lobe",
         render_task_summary_table(all_results, "location", methods),
@@ -616,7 +617,7 @@ def generate_report(all_results: dict[str, dict[str, dict[str, Any]]], manifest_
         "",
         "## 6. 结论与论文建议",
         "- 若 gold 上 `density_category` 与 `location_lobe` 仍有明显性能差距，说明这两个字段存在真实建模价值，而不仅是 silver 对规则的复现。",
-        "- 若 `size_mm` 的主要误差来自 mention 边界与尺寸归属，而非纯提取失败，则问题更多来自数据定义与样本构造，而不完全是模型能力不足。",
+        "- 若 `size_mm` 的主要误差来自 mention 边界与尺寸归属，而非纯提取失败，则问题更多来自数据定义与样本构造，而不完全是模型能力不足。需注意当前 `size_mm` 评测基于所有方法共享的同一正则解析模块，不反映各方法的独立建模能力差异。",
         "- `has_size` 若在 gold 上接近饱和，可作为高稳定性字段；反之则说明报告表述中存在大量隐式尺寸线索，值得进一步建模。",
         "- 论文可明确写出：silver 评测高分并不等价于真实临床抽取质量，gold 小样本评测揭示了字段难度的真实排序。",
         "- 论文可进一步写出：真正值得投入 Phase 5.2 的方向，应优先放在 gold 上仍存在显著误差且具有决策价值的字段。",
@@ -721,6 +722,7 @@ def main() -> None:
         elif method in {"ml_lr", "ml_svm"}:
             method_predictions["density"] = predict_ml_density(ml_pipelines[(method, "density")], manifest_rows)
             method_predictions["has_size"] = predict_ml_has_size(ml_pipelines[(method, "has_size")], manifest_rows)
+            # size_mm: ML 基线无独立尺寸回归模型，复用共享正则解析模块
             method_predictions["size_mm"] = predict_regex_size_mm(manifest_rows)
             method_predictions["location"] = predict_ml_location(ml_pipelines[(method, "location")], manifest_rows)
         elif method == "pubmedbert":
@@ -735,6 +737,7 @@ def main() -> None:
                 int(value)
                 for value in predict_pubmedbert(size_model, size_tokenizer, manifest_rows, PUBMEDBERT_TASK_LABELS["size"])
             ]
+            # size_mm: PubMedBERT 无独立尺寸回归头，复用共享正则解析模块
             method_predictions["size_mm"] = predict_regex_size_mm(manifest_rows)
             method_predictions["location"] = [
                 normalize_location_label(value)
