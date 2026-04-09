@@ -104,7 +104,7 @@
 
 ### "我们的方法"（Method-PubMedBERT）
 
-**论文中的命名建议**：`PubMedBERT-MCP`（Mention-Centered Pipeline）或 `Ours`
+**论文中的命名建议**：`Method-PubMedBERT (Ours)`
 
 "我们的方法"不是一个裸模型，而是一个**任务特定的方法框架**，包含以下不可分割的设计决策：
 
@@ -143,10 +143,10 @@
 | # | 方法 | 论文中命名 | 类型 | 状态 | 补跑需求 |
 |---|------|----------|------|------|---------|
 | 1 | Regex Baseline | Regex | 规则基线 | ✅ 已有 Phase 4/5 结果 | 仅需表格重组 |
-| 2 | TF-IDF + Logistic Regression | TF-IDF+LR | ML 基线 | ✅ 已有 Phase 5 结果 | 仅需表格重组 |
-| 3 | TF-IDF + Linear SVM | TF-IDF+SVM | ML 基线 | ✅ 已有 Phase 5 结果 | 仅需表格重组 |
-| 4 | Vanilla PubMedBERT (full-text) | Vanilla-BERT | 对照消融 | ❌ **必须补跑** | 新实验 |
-| 5 | PubMedBERT-MCP (我们的方法) | Ours / PubMedBERT-MCP | 主模型 | ✅ 已有 Phase 5 结果 | 仅需表格重组 |
+| 2 | TF-IDF + LR | TF-IDF + LR | ML 基线 | ✅ 已有 Phase 5 结果 | 仅需表格重组 |
+| 3 | TF-IDF + SVM | TF-IDF + SVM | ML 基线 | ✅ 已有 Phase 5 结果 | 仅需表格重组 |
+| 4 | Vanilla PubMedBERT (full-text) | Vanilla PubMedBERT | 对照消融 | ❌ **必须补跑** | 新实验 |
+| 5 | Method-PubMedBERT (我们的方法) | Method-PubMedBERT (Ours) | 主模型 | ✅ 已有 Phase 5 结果 | 仅需表格重组 |
 
 ### 从列表中移除的方法及理由
 
@@ -161,7 +161,7 @@
 
 ### Vanilla PubMedBERT 补跑方案
 
-**训练配置**（与 PubMedBERT-MCP 保持一致，仅改变输入）：
+**训练配置**（与 Method-PubMedBERT 保持一致，仅改变输入）：
 - 模型：microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext
 - 输入：**full-text**（截断到 max_seq_length=512），不使用 mention-centered window
 - max_seq_length：512（full-text 需要更长序列）
@@ -183,8 +183,8 @@
 | Regex | — | — | — | — | — | — | — |
 | TF-IDF+LR | — | — | — | — | — | — | — |
 | TF-IDF+SVM | — | — | — | — | — | — | — |
-| Vanilla-BERT | — | — | — | — | — | — | — |
-| **Ours** | — | — | — | — | — | — | — |
+| Vanilla PubMedBERT | — | — | — | — | — | — | — |
+| **Method-PubMedBERT (Ours)** | — | — | — | — | — | — | — |
 
 **注释**：Regex 在 Silver 集上为 1.0 是 Silver Label 循环性所致（标签由 Regex 生成），并非真实完美。
 
@@ -197,10 +197,10 @@
 | Regex / Silver | — | — | — | — |
 | TF-IDF+LR | — | — | — | — |
 | TF-IDF+SVM | — | — | — | — |
-| Vanilla-BERT | — | — | — | — |
-| **Ours** | — | — | — | — |
+| Vanilla PubMedBERT | — | — | — | — |
+| **Method-PubMedBERT (Ours)** | — | — | — | — |
 
-**注释**：size_mm 列所有方法共享同一正则解析模块，结果一致。Vanilla-BERT 在 Gold 集上需补跑评估。
+**注释**：size_mm 列所有方法共享同一正则解析模块，结果一致。Vanilla PubMedBERT 在 Gold 集上需补跑评估。
 
 ### 表 M2-3：消融实验表
 
@@ -214,25 +214,30 @@
 | A3: Explicit-only silver labels | — | — | — | — |
 | A4: 去除 exam name 特征 | — | — | — | — |
 
-**说明**：A1 已有 Phase 5 LR 结果，需补 PubMedBERT 版本（即 Vanilla-BERT 实验）。A2 需确认是否等价于 full-text regex 实验。A3、A4 已有结果。
+**说明**：A1 已有 Phase 5 LR 结果，需补 PubMedBERT 版本（即 Vanilla PubMedBERT 实验）。A2 需确认是否等价于 full-text regex 实验。A3、A4 已有结果。
 
 ### 表 M2-4：参数讨论表
 
 **位置**：正文 §5.2 或附录
 
-#### P1: Mention-centered Window Size（上下文范围）
+#### P1: Mention-centered Window Size（max_seq_length）
 
-| Window 设置 | density Macro F1 | has_size F1 | location Macro F1 |
-|------------|-----------------|------------|------------------|
-| mention-only (0 context) | — | — | — |
-| mention + 1 sentence | — | — | — |
-| mention + 2 sentences (当前默认) | — | — | — |
-| mention + 3 sentences | — | — | — |
-| mention + full section | — | — | — |
+控制以结节 mention 为中心截取的文本窗口长度（token 数）。
 
-**状态**：❌ **必须补跑**。Phase 5 实验计划中列出但未执行。基于 TF-IDF+LR 即可，无需 PubMedBERT。
+| max_seq_length | density Macro F1 | has_size F1 | location Macro F1 |
+|---------------|-----------------|------------|------------------|
+| 64 | — | — | — |
+| 96 | — | — | — |
+| 128 (当前默认) | — | — | — |
+| 160 | — | — | — |
+| 192 | — | — | — |
 
-#### P2: Section 策略（Section Fusion Strategy）
+**状态**：❌ **必须补跑**。基于 TF-IDF+LR 即可（LR 使用对应长度截取的文本），无需 PubMedBERT。
+**预估耗时**：5 settings × 3 tasks × ~2min = ~30 分钟 CPU。
+
+#### P2: Section Strategy（Section 融合策略）
+
+控制从报告中选取哪些段落作为候选文本来源。
 
 | Section 设置 | density Macro F1 | has_size F1 | location Macro F1 |
 |-------------|-----------------|------------|------------------|
@@ -243,18 +248,24 @@
 | Full text (no section filter) | — | — | — |
 
 **状态**：❌ **必须补跑**。基于 TF-IDF+LR 即可。
+**预估耗时**：5 settings × 3 tasks × ~2min = ~30 分钟 CPU。
 
-#### P3: Silver Label 置信度阈值（Confidence Threshold）
+#### P3: Silver Label Quality Gate（训练数据质量分层）
 
-| 阈值设置 | 训练样本数 | density Macro F1 | has_size F1 | location Macro F1 |
-|---------|----------|-----------------|------------|------------------|
-| explicit only | — | — | — | — |
-| explicit + high confidence silver | — | — | — | — |
-| explicit + high + medium silver (当前默认) | — | — | — | — |
-| all labels (含 weak) | — | — | — | — |
-| all labels + augmented | — | — | — | — |
+控制训练集中包含哪些质量层级的 silver label。当前实现中 `label_quality` 字段为离散三级分层（`explicit` / `silver` / `weak`），由 `build_datasets.py` 中的 `_infer_label_quality()` 函数根据 density_text / size_text / location_text 是否存在来判定。**不存在连续置信度阈值**，因此本参数讨论基于离散质量组合。
 
-**状态**：⚠️ 部分已有（A3 消融覆盖了 explicit-only vs all 的两端），需补充中间梯度。
+| Quality Gate 设置 | 包含的 label_quality 层级 | density Macro F1 | has_size F1 | location Macro F1 |
+|------------------|------------------------|-----------------|------------|------------------|
+| explicit only | `explicit` | — | — | — |
+| explicit + silver | `explicit` + `silver` | — | — | — |
+| all (当前默认) | `explicit` + `silver` + `weak` | — | — | — |
+| all + regex-agree filter | 全部，但仅保留与 Regex 预测一致的样本 | — | — | — |
+| all + high-confidence filter | 全部，但仅保留 PubMedBERT 预测置信度 ≥ 0.95 的样本（需先跑一轮推理获取置信度） | — | — | — |
+
+**状态**：⚠️ 部分已有（A3 消融覆盖了 `explicit only` vs `all` 的两端），需补充中间 3 个梯度。
+**预估耗时**：3 new settings × 3 tasks × ~2min = ~20 分钟 CPU。
+
+> **实现依赖说明**：前 3 个设置可直接基于现有 `label_quality` 字段实现。第 4 个设置（regex-agree filter）需在数据构建阶段增加 Regex 预测一致性校验逻辑。第 5 个设置（high-confidence filter）需先完成一轮 PubMedBERT 推理以获取置信度分数，属于执行前需确认的实现依赖项。
 
 ## 4.4 补跑建议汇总
 
@@ -263,8 +274,8 @@
 | Vanilla PubMedBERT (3 tasks) | **P0 必须** | ~4 小时 | 缺少此行则无法证明方法框架的价值 |
 | P1 Window Size (5 settings × 3 tasks, LR) | **P1 必须** | ~30 分钟 | 参数讨论表核心项 |
 | P2 Section Strategy (5 settings × 3 tasks, LR) | **P1 必须** | ~30 分钟 | 参数讨论表核心项 |
-| P3 Confidence Threshold 中间梯度 (3 settings × 3 tasks, LR) | **P2 建议** | ~20 分钟 | 补充 A3 消融的中间值 |
-| Vanilla-BERT Gold 评测 (已有 62 Gold 样本) | **P0 必须** | ~10 分钟（推理） | Gold 表需要 Vanilla-BERT 行 |
+| P3 Quality Gate 中间梯度 (3 new settings × 3 tasks, LR) | **P1 必须** | ~20 分钟 | 补充 A3 消融的中间值，P3 第 4-5 设置有实现依赖（见 §4.3） |
+| Vanilla PubMedBERT Gold 评测 (已有 62 Gold 样本) | **P0 必须** | ~10 分钟（推理） | Gold 表需要 Vanilla PubMedBERT 行 |
 
 ## 4.5 可直接复用的已有结果
 
@@ -321,6 +332,33 @@
 | LLM-only baseline (见 §5.3) | GPU 推理 | 取决于模型选择 |
 
 **结论**：图谱智能体 MVP 本身几乎不消耗 GPU 资源，主要开销在外部范式对比的 LLM baseline。
+
+### MVP 完成标准（Definition of Done）
+
+#### A. 第一轮必须完成（Must-have）
+
+以下 6 项功能构成图谱智能体的最小可运行主干。**全部完成后方可开始模块3实验。**
+
+| # | 功能 | 完成标准（可验证） |
+|---|------|-----------------|
+| M1 | 显式 CDSG 图结构 | Lung-RADS v2022 的全部决策路径已编码为 JSON/YAML 格式的有向图定义文件，包含 ≥30 个状态节点和 ≥40 条条件转移边，可被 Graph Executor 加载 |
+| M2 | Report-Intent Router | 给定 case_bundle，能正确输出 `screening` 或 `incidental` 场景标签，并选择对应指南分支；在 Phase 4 recommendation_eval 数据上路由准确率 ≥ 90% |
+| M3 | Graph Executor | 能在 CDSG 上执行完整路径遍历：输入 case_bundle → 逐节点状态转移 → 输出最终推荐节点；对 Phase 4 rule_derived 子集的推荐结果与现有 FlatRule 引擎 100% 一致（hard constraint 下） |
+| M4 | Hard Constraint Validation | 所有 Lung-RADS v2022 的确定性规则（size 阈值、density 枚举、age 范围）已迁移到图节点条件中，覆盖现有 `lung_rads_engine.py` 的全部规则分支 |
+| M5 | Guideline Anchor Output | 每个推荐结果附带具体指南条款引用（如 "Lung-RADS v2022 §4A"），格式与现有 `guideline_anchor` 字段兼容 |
+| M6 | Abstention / Insufficient-data / Conservative Fallback | 当输入事实缺少 ≥2 个关键字段（density + size 同时缺失）时，系统输出 `abstention` 而非强行推荐；abstention 输出包含缺失字段列表和保守建议 |
+
+#### B. 第一轮增强项（Nice-to-have）
+
+以下功能提升系统能力但**不阻塞** Must-have 落地和模块3主实验启动。
+
+| # | 功能 | 说明 |
+|---|------|------|
+| N1 | Soft Match / Semantic Match | 对模糊输入（如 "possibly part-solid"）使用 sentence-transformers 或 NLI 模型进行语义匹配，扩展 hard constraint 的覆盖范围 |
+| N2 | 多跳路径排序（Top-K Path Ranking） | 当存在多条可行推理路径时，按置信度排序输出 Top-K 候选路径 |
+| N3 | 自然语言解释生成 | 将推理路径转化为人类可读的中文/英文解释文本，而非仅输出节点 ID 序列 |
+
+> **硬约束**：第一轮执行阶段不得因增强项阻塞 Must-have 功能落地。Must-have 全部通过验收后，方可投入增强项开发。
 
 ## 5.2 内部比较（第一层：同体系内部）
 
@@ -504,7 +542,7 @@
 | # | 实验/功能 | 所属模块 | 预估耗时 | 依赖 | 理由 |
 |---|---------|---------|---------|------|------|
 | R1 | Vanilla PubMedBERT (full-text, 3 tasks) | M2 | 4 小时 GPU | 无 | 缺少此行则无法证明方法框架 vs 裸模型的价值 |
-| R2 | Vanilla-BERT Gold 评测 | M2 | 10 分钟 GPU | R1 | Gold 表需要 Vanilla-BERT 行 |
+| R2 | Vanilla PubMedBERT Gold 评测 | M2 | 10 分钟 GPU | R1 | Gold 表需要 Vanilla PubMedBERT 行 |
 | R3 | P1 Window Size 参数讨论 (5 settings × 3 tasks, LR) | M2 | 30 分钟 CPU | 无 | 参数讨论表核心项，论文要求至少 3 参数 |
 | R4 | P2 Section Strategy 参数讨论 (5 settings × 3 tasks, LR) | M2 | 30 分钟 CPU | 无 | 参数讨论表核心项 |
 | R5 | 指南决策图定义 (Lung-RADS v2022 CDSG) | M3 | 2-3 天 | 无 | 模块3一切实验的基础 |
@@ -566,7 +604,7 @@
 
 ### Phase A：模块2补跑（约 1 天）
 1. R1: Vanilla PubMedBERT 训练（3 tasks，~4h GPU）
-2. R2: Vanilla-BERT Gold 评测（~10min）
+2. R2: Vanilla PubMedBERT Gold 评测（~10min）
 3. R3: Window Size 参数讨论（~30min CPU）
 4. R4: Section Strategy 参数讨论（~30min CPU）
 5. T1-T9: 表格重组（~2h 整理）
@@ -606,10 +644,10 @@
 |------|------|---------|---------|------|
 | 表 1 | 核心 Schema 字段定义摘要 | §3 方法 | schema_design.md | 已有，需精简 |
 | 表 2 | 数据集统计（mentions/subjects/split） | §4 数据集 | Phase 5 数据 | 已有，需整理 |
-| 表 3 | 模块2主结果表（Silver，5 方法 × 3 任务） | §5.2 | Phase 5 + Vanilla-BERT 补跑 | **需补 Vanilla-BERT 行** |
-| 表 4 | 模块2 Gold 评测结果（N=62） | §5.4 | Phase 5.1 + Vanilla-BERT 补跑 | **需补 Vanilla-BERT 行** |
+| 表 3 | 模块2主结果表（Silver，4 baselines + 1 Ours × 3 任务） | §5.2 | Phase 5 + Vanilla PubMedBERT 补跑 | **需补 Vanilla PubMedBERT 行** |
+| 表 4 | 模块2 Gold 评测结果（N=62） | §5.4 | Phase 5.1 + Vanilla PubMedBERT 补跑 | **需补 Vanilla PubMedBERT 行** |
 | 表 5 | Silver Ceiling 现象量化（Silver vs Gold 性能对比） | §5.4 | Phase 5 + 5.1 | 已有，需重组 |
-| 表 6 | 模块2消融实验 | §5.2 | Phase 5 消融 + Vanilla-BERT | **需补 PubMedBERT 版 A1** |
+| 表 6 | 模块2消融实验 | §5.2 | Phase 5 消融 + Vanilla PubMedBERT | **需补 PubMedBERT 版 A1** |
 | 表 7 | 模块3主结果表（6 方法 × 6 指标） | §5.6 | **全部需新做** | ❌ 待补 |
 | 表 8 | 模块3消融实验 | §5.6 | **全部需新做** | ❌ 待补 |
 | 表 9 | 典型误差案例分类表 | §5.5 | Phase 5 错误分析 | 已有，需精选 |
@@ -675,12 +713,12 @@
 
 ### 2. 模块2最终 baseline 是否锁定？
 
-**已锁定，共 5 个方法**：
+**已锁定，共 4 个 baseline + 1 个我们的方法**：
 1. Regex（规则基线）
-2. TF-IDF+LR（ML 基线）
-3. TF-IDF+SVM（ML 基线）
+2. TF-IDF + LR（ML 基线）
+3. TF-IDF + SVM（ML 基线）
 4. Vanilla PubMedBERT（full-text 微调，对照消融）
-5. PubMedBERT-MCP（我们的方法）
+5. Method-PubMedBERT (Ours)（我们的方法）
 
 PubMedBERT-CRF 已移除（任务为分类非序列标注）。DyGIE++/SpERT 已移除（非属性分类任务）。后续执行阶段不允许再增减 baseline。
 
@@ -718,7 +756,7 @@ PubMedBERT-CRF 已移除（任务为分类非序列标注）。DyGIE++/SpERT 已
 
 **Phase A：模块2补跑**（约 1 天）——这是最快能完成、最低风险的工作：
 1. 训练 Vanilla PubMedBERT（3 tasks）
-2. 跑 Vanilla-BERT Gold 评测
+2. 跑 Vanilla PubMedBERT Gold 评测
 3. 跑 P1/P2 参数讨论
 4. 重组所有已有结果到最终表格
 
