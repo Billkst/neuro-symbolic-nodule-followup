@@ -1,0 +1,129 @@
+{
+  "task": "density",
+  "total_samples": 201947,
+  "lf_coverage": {
+    "LF-D1": {
+      "count": 25662,
+      "rate": 0.1271
+    },
+    "LF-D2": {
+      "count": 1273,
+      "rate": 0.0063
+    },
+    "LF-D3": {
+      "count": 1806,
+      "rate": 0.0089
+    },
+    "LF-D4": {
+      "count": 1552,
+      "rate": 0.0077
+    },
+    "LF-D5": {
+      "count": 19370,
+      "rate": 0.0959
+    }
+  },
+  "lf_label_distributions": {
+    "LF-D1": {
+      "ground_glass": 13090,
+      "calcified": 7090,
+      "solid": 4899,
+      "part_solid": 583
+    },
+    "LF-D2": {
+      "ground_glass": 553,
+      "part_solid": 458,
+      "solid": 240,
+      "calcified": 22
+    },
+    "LF-D3": {
+      "unclear": 1806
+    },
+    "LF-D4": {
+      "unclear": 1552
+    },
+    "LF-D5": {
+      "ground_glass": 11258,
+      "solid": 4338,
+      "calcified": 2974,
+      "part_solid": 800
+    }
+  },
+  "conflict_rate": 0.0204,
+  "conflict_count": 4116,
+  "pairwise_overlap": {
+    "LF-D1+LF-D2": {
+      "overlap_count": 177,
+      "overlap_rate": 0.0009,
+      "agreement_rate": 0.2881
+    },
+    "LF-D1+LF-D3": {
+      "overlap_count": 949,
+      "overlap_rate": 0.0047,
+      "agreement_rate": 0.0
+    },
+    "LF-D1+LF-D4": {
+      "overlap_count": 1551,
+      "overlap_rate": 0.0077,
+      "agreement_rate": 0.0
+    },
+    "LF-D1+LF-D5": {
+      "overlap_count": 6715,
+      "overlap_rate": 0.0333,
+      "agreement_rate": 0.7443
+    },
+    "LF-D2+LF-D3": {
+      "overlap_count": 12,
+      "overlap_rate": 0.0001,
+      "agreement_rate": 0.0
+    },
+    "LF-D2+LF-D4": {
+      "overlap_count": 129,
+      "overlap_rate": 0.0006,
+      "agreement_rate": 0.0
+    },
+    "LF-D2+LF-D5": {
+      "overlap_count": 190,
+      "overlap_rate": 0.0009,
+      "agreement_rate": 0.2684
+    },
+    "LF-D3+LF-D4": {
+      "overlap_count": 94,
+      "overlap_rate": 0.0005,
+      "agreement_rate": 1.0
+    },
+    "LF-D3+LF-D5": {
+      "overlap_count": 325,
+      "overlap_rate": 0.0016,
+      "agreement_rate": 0.0
+    },
+    "LF-D4+LF-D5": {
+      "overlap_count": 478,
+      "overlap_rate": 0.0024,
+      "agreement_rate": 0.0
+    }
+  },
+  "aggregated_label_distribution": {
+    "__ABSTAIN__": 161924,
+    "ground_glass": 20624,
+    "calcified": 9032,
+    "solid": 8089,
+    "part_solid": 1350,
+    "unclear": 928
+  },
+  "gate_distribution": {
+    "G1": 0,
+    "G2": 0,
+    "G3": 4116,
+    "G4": 31289,
+    "G5": 4618,
+    "REJECTED": 161924
+  },
+  "gate_retention": {
+    "G1": 40023,
+    "G2": 36038,
+    "G3": 8734,
+    "G4": 35907,
+    "G5": 4618
+  }
+}

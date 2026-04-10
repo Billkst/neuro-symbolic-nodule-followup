@@ -1,0 +1,143 @@
+{
+  "task": "location",
+  "total_samples": 201947,
+  "lf_coverage": {
+    "LF-L1": {
+      "count": 77244,
+      "rate": 0.3825
+    },
+    "LF-L2": {
+      "count": 5826,
+      "rate": 0.0288
+    },
+    "LF-L3": {
+      "count": 7816,
+      "rate": 0.0387
+    },
+    "LF-L4": {
+      "count": 5970,
+      "rate": 0.0296
+    },
+    "LF-L5": {
+      "count": 57718,
+      "rate": 0.2858
+    }
+  },
+  "lf_label_distributions": {
+    "LF-L1": {
+      "RUL": 18844,
+      "RLL": 14872,
+      "LLL": 12340,
+      "LUL": 11527,
+      "RML": 7691,
+      "bilateral": 5511,
+      "unclear": 4871,
+      "lingula": 1588
+    },
+    "LF-L2": {
+      "bilateral": 3646,
+      "RUL": 733,
+      "LUL": 432,
+      "RML": 318,
+      "RLL": 309,
+      "LLL": 228,
+      "lingula": 160
+    },
+    "LF-L3": {
+      "bilateral": 7816
+    },
+    "LF-L4": {
+      "unclear": 5970
+    },
+    "LF-L5": {
+      "RUL": 14263,
+      "bilateral": 13040,
+      "RLL": 9653,
+      "LLL": 6001,
+      "LUL": 5796,
+      "RML": 5392,
+      "unclear": 2674,
+      "lingula": 899
+    }
+  },
+  "conflict_rate": 0.0275,
+  "conflict_count": 5557,
+  "pairwise_overlap": {
+    "LF-L1+LF-L2": {
+      "overlap_count": 5826,
+      "overlap_rate": 0.0288,
+      "agreement_rate": 0.2722
+    },
+    "LF-L1+LF-L3": {
+      "overlap_count": 6010,
+      "overlap_rate": 0.0298,
+      "agreement_rate": 0.917
+    },
+    "LF-L1+LF-L4": {
+      "overlap_count": 4936,
+      "overlap_rate": 0.0244,
+      "agreement_rate": 0.9868
+    },
+    "LF-L1+LF-L5": {
+      "overlap_count": 0,
+      "overlap_rate": 0.0,
+      "agreement_rate": 0
+    },
+    "LF-L2+LF-L3": {
+      "overlap_count": 298,
+      "overlap_rate": 0.0015,
+      "agreement_rate": 0.7852
+    },
+    "LF-L2+LF-L4": {
+      "overlap_count": 0,
+      "overlap_rate": 0.0,
+      "agreement_rate": 0
+    },
+    "LF-L2+LF-L5": {
+      "overlap_count": 0,
+      "overlap_rate": 0.0,
+      "agreement_rate": 0
+    },
+    "LF-L3+LF-L4": {
+      "overlap_count": 135,
+      "overlap_rate": 0.0007,
+      "agreement_rate": 0.0
+    },
+    "LF-L3+LF-L5": {
+      "overlap_count": 790,
+      "overlap_rate": 0.0039,
+      "agreement_rate": 0.2899
+    },
+    "LF-L4+LF-L5": {
+      "overlap_count": 323,
+      "overlap_rate": 0.0016,
+      "agreement_rate": 0.0929
+    }
+  },
+  "aggregated_label_distribution": {
+    "__ABSTAIN__": 65260,
+    "RUL": 32789,
+    "RLL": 24342,
+    "bilateral": 20137,
+    "LLL": 18245,
+    "LUL": 17225,
+    "RML": 12975,
+    "unclear": 8515,
+    "lingula": 2459
+  },
+  "gate_distribution": {
+    "G1": 0,
+    "G2": 0,
+    "G3": 5557,
+    "G4": 119231,
+    "G5": 11899,
+    "REJECTED": 65260
+  },
+  "gate_retention": {
+    "G1": 136687,
+    "G2": 131233,
+    "G3": 17456,
+    "G4": 131130,
+    "G5": 11899
+  }
+}

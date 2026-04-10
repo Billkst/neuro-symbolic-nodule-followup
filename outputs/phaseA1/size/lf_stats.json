@@ -1,0 +1,117 @@
+{
+  "task": "size",
+  "total_samples": 201947,
+  "lf_coverage": {
+    "LF-S1": {
+      "count": 64121,
+      "rate": 0.3175
+    },
+    "LF-S2": {
+      "count": 10289,
+      "rate": 0.0509
+    },
+    "LF-S3": {
+      "count": 27210,
+      "rate": 0.1347
+    },
+    "LF-S4": {
+      "count": 9427,
+      "rate": 0.0467
+    },
+    "LF-S5": {
+      "count": 92865,
+      "rate": 0.4598
+    }
+  },
+  "lf_label_distributions": {
+    "LF-S1": {
+      "true": 64121
+    },
+    "LF-S2": {
+      "true": 10289
+    },
+    "LF-S3": {
+      "true": 27210
+    },
+    "LF-S4": {
+      "true": 9427
+    },
+    "LF-S5": {
+      "false": 92865
+    }
+  },
+  "conflict_rate": 0.0,
+  "conflict_count": 0,
+  "pairwise_overlap": {
+    "LF-S1+LF-S2": {
+      "overlap_count": 9721,
+      "overlap_rate": 0.0481,
+      "agreement_rate": 1.0
+    },
+    "LF-S1+LF-S3": {
+      "overlap_count": 23377,
+      "overlap_rate": 0.1158,
+      "agreement_rate": 1.0
+    },
+    "LF-S1+LF-S4": {
+      "overlap_count": 1654,
+      "overlap_rate": 0.0082,
+      "agreement_rate": 1.0
+    },
+    "LF-S1+LF-S5": {
+      "overlap_count": 0,
+      "overlap_rate": 0.0,
+      "agreement_rate": 0
+    },
+    "LF-S2+LF-S3": {
+      "overlap_count": 9041,
+      "overlap_rate": 0.0448,
+      "agreement_rate": 1.0
+    },
+    "LF-S2+LF-S4": {
+      "overlap_count": 347,
+      "overlap_rate": 0.0017,
+      "agreement_rate": 1.0
+    },
+    "LF-S2+LF-S5": {
+      "overlap_count": 0,
+      "overlap_rate": 0.0,
+      "agreement_rate": 0
+    },
+    "LF-S3+LF-S4": {
+      "overlap_count": 968,
+      "overlap_rate": 0.0048,
+      "agreement_rate": 1.0
+    },
+    "LF-S3+LF-S5": {
+      "overlap_count": 0,
+      "overlap_rate": 0.0,
+      "agreement_rate": 0
+    },
+    "LF-S4+LF-S5": {
+      "overlap_count": 0,
+      "overlap_rate": 0.0,
+      "agreement_rate": 0
+    }
+  },
+  "aggregated_label_distribution": {
+    "false": 92865,
+    "true": 75568,
+    "__ABSTAIN__": 33514
+  },
+  "gate_distribution": {
+    "G1": 0,
+    "G2": 0,
+    "G3": 0,
+    "G4": 142300,
+    "G5": 26133,
+    "REJECTED": 33514
+  },
+  "gate_retention": {
+    "G1": 168433,
+    "G2": 168433,
+    "G3": 26133,
+    "G4": 168433,
+    "G5": 26133
+  }
+}
