@@ -1,0 +1,174 @@
+{
+  "timestamp": "2026-04-12T12:51:53.755528+00:00",
+  "phase5_split_manifest": {
+    "train_subjects": 23204,
+    "val_subjects": 4972,
+    "test_subjects": 4973,
+    "disjoint": true
+  },
+  "ws_split_consistency": {
+    "density": {
+      "train_ws_count": 9862,
+      "train_phase5_count": 23204,
+      "train_subjects_subset": true,
+      "train_subjects_exact_match": false,
+      "train_extra_subjects": 0,
+      "val_ws_count": 2148,
+      "val_phase5_count": 4972,
+      "val_subjects_subset": true,
+      "val_subjects_exact_match": false,
+      "val_extra_subjects": 0,
+      "test_ws_count": 2065,
+      "test_phase5_count": 4973,
+      "test_subjects_subset": true,
+      "test_subjects_exact_match": false,
+      "test_extra_subjects": 0
+    },
+    "size": {
+      "train_ws_count": 22523,
+      "train_phase5_count": 23204,
+      "train_subjects_subset": true,
+      "train_subjects_exact_match": false,
+      "train_extra_subjects": 0,
+      "val_ws_count": 4843,
+      "val_phase5_count": 4972,
+      "val_subjects_subset": true,
+      "val_subjects_exact_match": false,
+      "val_extra_subjects": 0,
+      "test_ws_count": 4831,
+      "test_phase5_count": 4973,
+      "test_subjects_subset": true,
+      "test_subjects_exact_match": false,
+      "test_extra_subjects": 0
+    },
+    "location": {
+      "train_ws_count": 19578,
+      "train_phase5_count": 23204,
+      "train_subjects_subset": true,
+      "train_subjects_exact_match": false,
+      "train_extra_subjects": 0,
+      "val_ws_count": 4193,
+      "val_phase5_count": 4972,
+      "val_subjects_subset": true,
+      "val_subjects_exact_match": false,
+      "val_extra_subjects": 0,
+      "test_ws_count": 4190,
+      "test_phase5_count": 4973,
+      "test_subjects_subset": true,
+      "test_subjects_exact_match": false,
+      "test_extra_subjects": 0
+    }
+  },
+  "cross_split_leakage": {
+    "density_train_val_overlap": 0,
+    "density_train_test_overlap": 0,
+    "density_val_test_overlap": 0,
+    "size_train_val_overlap": 0,
+    "size_train_test_overlap": 0,
+    "size_val_test_overlap": 0,
+    "location_train_val_overlap": 0,
+    "location_train_test_overlap": 0,
+    "location_val_test_overlap": 0,
+    "all_disjoint": true
+  },
+  "gate_consistency": {
+    "density": {
+      "g1": {
+        "exists": true,
+        "sample_count": 40023,
+        "subject_count": 9862,
+        "subjects_subset_of_train": true
+      },
+      "g2": {
+        "exists": true,
+        "sample_count": 36038,
+        "subject_count": 9601,
+        "subjects_subset_of_train": true
+      },
+      "g3": {
+        "exists": true,
+        "sample_count": 8734,
+        "subject_count": 3831,
+        "subjects_subset_of_train": true
+      },
+      "g4": {
+        "exists": true,
+        "sample_count": 35907,
+        "subject_count": 9595,
+        "subjects_subset_of_train": true
+      },
+      "g5": {
+        "exists": true,
+        "sample_count": 4618,
+        "subject_count": 2773,
+        "subjects_subset_of_train": true
+      }
+    },
+    "size": {
+      "g1": {
+        "exists": true,
+        "sample_count": 168433,
+        "subject_count": 22523,
+        "subjects_subset_of_train": true
+      },
+      "g2": {
+        "exists": true,
+        "sample_count": 168433,
+        "subject_count": 22523,
+        "subjects_subset_of_train": true
+      },
+      "g3": {
+        "exists": true,
+        "sample_count": 26133,
+        "subject_count": 9697,
+        "subjects_subset_of_train": true
+      },
+      "g4": {
+        "exists": true,
+        "sample_count": 168433,
+        "subject_count": 22523,
+        "subjects_subset_of_train": true
+      },
+      "g5": {
+        "exists": true,
+        "sample_count": 26133,
+        "subject_count": 9697,
+        "subjects_subset_of_train": true
+      }
+    },
+    "location": {
+      "g1": {
+        "exists": true,
+        "sample_count": 136687,
+        "subject_count": 19578,
+        "subjects_subset_of_train": true
+      },
+      "g2": {
+        "exists": true,
+        "sample_count": 131233,
+        "subject_count": 19395,
+        "subjects_subset_of_train": true
+      },
+      "g3": {
+        "exists": true,
+        "sample_count": 17456,
+        "subject_count": 8219,
+        "subjects_subset_of_train": true
+      },
+      "g4": {
+        "exists": true,
+        "sample_count": 131130,
+        "subject_count": 19391,
+        "subjects_subset_of_train": true
+      },
+      "g5": {
+        "exists": true,
+        "sample_count": 11899,
+        "subject_count": 6290,
+        "subjects_subset_of_train": true
+      }
+    }
+  },
+  "verdict": "PASS",
+  "issues": []
+}
