@@ -254,18 +254,9 @@ echo "M3 PID: $!"
 
 ```bash
 # G1: Gold 评测 (N=62)
+# --tag main_g2 对应训练时的 --tag main_g2，模型目录 = {task}_mws_cfe_main_g2
 python -u scripts/phaseA2/run_gold_eval_mws.py \
-    --gate g2 \
-    --model-base-dir outputs/phaseA2/models \
-    > logs/gold_eval_mws_g2.log 2>&1
-```
-
-**注意**：`run_gold_eval_mws.py` 的 `--gate` 参数用于定位模型目录名（`{task}_mws_cfe_g2`），但主结果的 tag 是 `main_g2`。需要确认模型目录名是否匹配。如果主结果模型目录是 `density_mws_cfe_main_g2`，则应使用：
-
-```bash
-python -u scripts/phaseA2/run_gold_eval_mws.py \
-    --gate main_g2 \
-    --model-base-dir outputs/phaseA2/models \
+    --tag main_g2 \
     > logs/gold_eval_mws_main_g2.log 2>&1
 ```
 
@@ -781,26 +772,14 @@ outputs/phaseA2/models/{task}_mws_cfe_{tag}/
 └── ...
 ```
 
-**注意**：当前训练脚本 (`train_mws_cfe_common.py`) 的 `run_mws_task()` 函数直接调用 `trainer.train()`，**没有暴露 `resume_from_checkpoint` 参数到 CLI**。如果需要断点续跑，有两种方案：
+`--resume-from-checkpoint` 已添加到 CLI。使用方式：
 
-**方案 A（推荐）**：在 `train_mws_cfe_common.py` 中添加 `--resume-from-checkpoint` 参数：
-```python
-# 在 build_arg_parser() 中添加：
-parser.add_argument("--resume-from-checkpoint", type=str, default=None)
-
-# 在 run_mws_task() 中修改：
-train_output = trainer.train(resume_from_checkpoint=args.resume_from_checkpoint)
-```
-
-添加后使用方式：
 ```bash
 python -u scripts/phaseA2/train_mws_density.py \
     --gate g2 --train-batch-size 32 --gradient-accumulation-steps 2 \
     --tag main_g2 \
     --resume-from-checkpoint outputs/phaseA2/models/density_mws_cfe_main_g2/checkpoint-1000
 ```
-
-**方案 B（临时）**：直接修改代码中的 `trainer.train()` 调用，传入 checkpoint 路径。
 
 ### 5.2 可复用产物
 
@@ -817,7 +796,7 @@ python -u scripts/phaseA2/train_mws_density.py \
 | 失败类型 | 处理方式 |
 |---------|---------|
 | OOM (显存不足) | 降低 `--train-batch-size` 到 16，相应增加 `--gradient-accumulation-steps` 到 4 |
-| 训练中断（kill/断电） | 使用 resume_from_checkpoint 从最近 checkpoint 恢复（需先添加该参数） |
+| 训练中断（kill/断电） | 使用 `--resume-from-checkpoint` 从最近 checkpoint 恢复 |
 | 训练发散（loss 爆炸） | 降低 `--learning-rate` 到 1e-5，或检查数据是否有异常 |
 | 数据文件缺失 | 检查 `outputs/phaseA1/{task}/` 目录，必要时重跑 `build_ws_datasets.py` |
 | 模型下载失败 | 确认 `HF_ENDPOINT=https://hf-mirror.com` 已设置，或手动下载模型到本地 |
@@ -1082,7 +1061,9 @@ MWS-CFE 的 location 分类器按 **8 类**训练：
 
 ## 附录 B：待确认/待实现事项
 
-1. **`--resume-from-checkpoint` 参数**：当前训练脚本未暴露该参数到 CLI，建议在正式跑实验前添加（见 §5.1）
-2. **`build_ws_datasets.py --uniform-weights`**：需确认是否已支持该参数，否则需要修改代码（见 §2.6）
-3. **`filter_ws_by_section.py`**：需确认是否已实现，否则需要编写（见 §2.7）
-4. **Gold 评测的 `--gate` 参数与 `--tag` 的关系**：`run_gold_eval_mws.py` 使用 `--gate` 定位模型目录名 `{task}_mws_cfe_{gate}`，但主结果的 tag 是 `main_g2`。需要确认是用 `--gate g2` 还是 `--gate main_g2`（见 §2.2）
+> 以下 4 项已全部补实现（2026-04-12），可直接使用。
+
+1. ✅ **`--resume-from-checkpoint` 参数**：已添加到 `train_mws_cfe_common.py`。用法：`--resume-from-checkpoint outputs/phaseA2/models/.../checkpoint-500`
+2. ✅ **`build_ws_datasets.py --uniform-weights`**：已添加。同时 `rebuild_ws_uniform.py` 已修复 API 调用 bug（原代码传 dict 给 weighted_majority_vote，应传 list[LFOutput]）。
+3. ✅ **`filter_ws_by_section.py`**：已实现，支持 `--section findings|impression|findings_impression`，带计时和过滤率统计。
+4. ✅ **Gold 评测 `--tag` 参数**：`run_gold_eval_mws.py` 新增 `--tag` 参数，与 `--gate` 解耦。模型目录 = `{task}_mws_cfe_{tag}`。主结果用 `--tag main_g2`。

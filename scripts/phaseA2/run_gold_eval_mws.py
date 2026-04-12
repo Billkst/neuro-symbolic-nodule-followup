@@ -87,7 +87,11 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="MWS-CFE Gold evaluation")
     parser.add_argument("--output-dir", type=str, default="outputs/phaseA2")
     parser.add_argument("--model-base-dir", type=str, default=None)
-    parser.add_argument("--gate", type=str, default="g2")
+    parser.add_argument("--gate", type=str, default="g2",
+                        help="Quality gate used during training (for default model dir naming)")
+    parser.add_argument("--tag", type=str, default=None,
+                        help="Experiment tag. Model dirs = {task}_mws_cfe_{tag}. "
+                             "If not set, falls back to --gate value.")
     parser.add_argument("--max-length", type=int, default=128)
     args = parser.parse_args()
 
@@ -97,23 +101,25 @@ def main() -> None:
     results_dir.mkdir(parents=True, exist_ok=True)
 
     model_base = Path(args.model_base_dir) if args.model_base_dir else output_dir / "models"
-    tag = args.gate
+    tag = args.tag if args.tag else args.gate
 
     log_dir = PROJECT_ROOT / "logs"
     log_dir.mkdir(parents=True, exist_ok=True)
     log_fp = open(log_dir / f"gold_eval_mws_{tag}.log", "w", encoding="utf-8", buffering=1)
 
     start = time.perf_counter()
-    log(f"[Start] Gold evaluation for MWS-CFE gate={tag}", log_fp)
+    log(f"[Start] Gold evaluation for MWS-CFE tag={tag}", log_fp)
+    log(f"[Config] model_base={model_base} tag={tag} gate={args.gate} max_length={args.max_length}", log_fp)
 
     manifest_path = PROJECT_ROOT / "outputs" / "phase5_1" / "gold_eval_manifest.jsonl"
     manifest_rows = load_jsonl(manifest_path)
-    log(f"[Data] Gold manifest: {len(manifest_rows)} samples", log_fp)
+    log(f"[Data] Gold manifest: {len(manifest_rows)} samples from {manifest_path}", log_fp)
 
     texts = [row["text_window"] for row in manifest_rows]
     all_results: dict[str, Any] = {}
 
     density_model_dir = model_base / f"density_mws_cfe_{tag}"
+    log(f"[Density] expected model dir: {density_model_dir} (exists={density_model_dir.exists()})", log_fp)
     if density_model_dir.exists():
         log(f"[Density] Loading model from {density_model_dir}", log_fp)
         density_preds = predict_with_model(density_model_dir, texts, DENSITY_LABELS, args.max_length)
@@ -125,6 +131,7 @@ def main() -> None:
         log(f"[Density] Model not found at {density_model_dir}, skipping", log_fp)
 
     size_model_dir = model_base / f"size_mws_cfe_{tag}"
+    log(f"[Size] expected model dir: {size_model_dir} (exists={size_model_dir.exists()})", log_fp)
     if size_model_dir.exists():
         log(f"[Size] Loading model from {size_model_dir}", log_fp)
         size_preds_raw = predict_with_model(size_model_dir, texts, SIZE_LABELS, args.max_length)
@@ -137,6 +144,7 @@ def main() -> None:
         log(f"[Size] Model not found at {size_model_dir}, skipping", log_fp)
 
     location_model_dir = model_base / f"location_mws_cfe_{tag}"
+    log(f"[Location] expected model dir: {location_model_dir} (exists={location_model_dir.exists()})", log_fp)
     if location_model_dir.exists():
         log(f"[Location] Loading model from {location_model_dir}", log_fp)
         loc_preds_8 = predict_with_model(location_model_dir, texts, LOCATION_LABELS_8, args.max_length)

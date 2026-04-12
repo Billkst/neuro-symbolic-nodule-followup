@@ -237,6 +237,8 @@ def main() -> None:
     parser.add_argument("--log", default="logs/build_ws_datasets.log")
     parser.add_argument("--nrows", type=int, default=None)
     parser.add_argument("--tasks", nargs="+", default=TASKS)
+    parser.add_argument("--uniform-weights", action="store_true",
+                        help="Use uniform weights (all 1.0) for all LFs instead of DEFAULT_WEIGHTS. For A-agg ablation.")
     args = parser.parse_args()
 
     input_dir = Path(args.input_dir)
@@ -247,14 +249,19 @@ def main() -> None:
 
     with log_path.open("w", encoding="utf-8", buffering=1) as log_fp:
         _log(f"[Start] build_ws_datasets", log_fp)
-        _log(f"[Config] input_dir={input_dir} output_dir={output_dir} nrows={args.nrows} tasks={args.tasks}", log_fp)
+        _log(f"[Config] input_dir={input_dir} output_dir={output_dir} nrows={args.nrows} tasks={args.tasks} uniform_weights={args.uniform_weights}", log_fp)
 
         all_stats = {}
 
         for task in args.tasks:
             _log(f"\n[Task: {task}]", log_fp)
             lf_list = ALL_LFS[task]
-            weights = DEFAULT_WEIGHTS[task]
+            if args.uniform_weights:
+                weights = {fn.__name__: 1.0 for fn in lf_list}
+                for lf_name in DEFAULT_WEIGHTS.get(task, {}):
+                    weights[lf_name] = 1.0
+            else:
+                weights = DEFAULT_WEIGHTS[task]
             _log(f"  LFs: {[fn.__name__ for fn in lf_list]}", log_fp)
             _log(f"  Weights: {weights}", log_fp)
 

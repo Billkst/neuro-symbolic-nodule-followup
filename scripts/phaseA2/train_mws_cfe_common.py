@@ -238,6 +238,8 @@ def build_arg_parser(task: str) -> argparse.ArgumentParser:
     parser.add_argument("--max-test-samples", type=int, default=None)
     parser.add_argument("--tag", type=str, default=None, help="Experiment tag for result file naming")
     parser.add_argument("--no-confidence-weight", action="store_true", help="Disable confidence weighting")
+    parser.add_argument("--resume-from-checkpoint", type=str, default=None,
+                        help="Path to checkpoint dir to resume training (e.g. outputs/phaseA2/models/.../checkpoint-500)")
     return parser
 
 
@@ -453,6 +455,10 @@ def run_mws_task(config: MWSTaskConfig) -> None:
 
     _log(f"[Start] train_mws_{config.task} gate={gate} tag={tag}")
     _log(f"[Config] model={MODEL_NAME} seed={args.seed} epochs={args.epochs} max_length={args.max_length} input_field={input_field}")
+    _log(f"[Config] batch={args.train_batch_size} grad_accum={args.gradient_accumulation_steps} effective_batch={args.train_batch_size * args.gradient_accumulation_steps}")
+    _log(f"[Config] lr={args.learning_rate} warmup={args.warmup_ratio} patience={args.patience} workers={args.dataloader_num_workers}")
+    if torch.cuda.is_available():
+        _log(f"[GPU] {torch.cuda.get_device_name(0)} | VRAM {torch.cuda.get_device_properties(0).total_mem / 1024**3:.1f}GB | fp16=True")
     _log(f"[Paths] train={train_path}")
     _log(f"[Paths] val={val_path}")
     _log(f"[Paths] test(ws)={test_path}")
@@ -511,10 +517,12 @@ def run_mws_task(config: MWSTaskConfig) -> None:
         seed=args.seed,
         data_seed=args.seed,
         logging_steps=50,
+        logging_nan_inf_filter=False,
         dataloader_num_workers=args.dataloader_num_workers,
         gradient_accumulation_steps=args.gradient_accumulation_steps,
         dataloader_pin_memory=True,
         dataloader_persistent_workers=True if args.dataloader_num_workers > 0 else False,
+        dataloader_prefetch_factor=2 if args.dataloader_num_workers > 0 else None,
         report_to=[],
         remove_unused_columns=False,
         label_names=["labels"],
@@ -535,8 +543,12 @@ def run_mws_task(config: MWSTaskConfig) -> None:
         class_weights=class_weights,
     )
 
+    resume_ckpt = args.resume_from_checkpoint
+    if resume_ckpt:
+        _log(f"[Resume] from checkpoint: {resume_ckpt}")
+
     train_start = time.time()
-    train_output = trainer.train()
+    train_output = trainer.train(resume_from_checkpoint=resume_ckpt)
     train_time = time.time() - train_start
 
     trainer.save_model(str(model_dir))
@@ -544,6 +556,9 @@ def run_mws_task(config: MWSTaskConfig) -> None:
 
     best_epoch = get_best_epoch(trainer.state.log_history, config.primary_metric)
     _log(f"[TrainDone] loss={train_output.training_loss:.4f} best_epoch={best_epoch} time={train_time:.1f}s")
+    if torch.cuda.is_available():
+        peak_mb = torch.cuda.max_memory_allocated() / 1024**2
+        _log(f"[GPU] peak_memory={peak_mb:.0f}MB ({peak_mb/1024:.1f}GB)")
 
     eval_start = time.time()
 
