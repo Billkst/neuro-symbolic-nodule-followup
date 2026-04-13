@@ -21,6 +21,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 import numpy as np
+import safetensors.torch
 import torch
 from sklearn.utils.class_weight import compute_class_weight
 from transformers import (
@@ -109,6 +110,37 @@ def load_jsonl(path: Path) -> list[dict[str, Any]]:
             if line:
                 rows.append(json.loads(line))
     return rows
+
+
+def normalize_layernorm_legacy_keys(state_dict: dict[str, torch.Tensor]) -> tuple[dict[str, torch.Tensor], bool]:
+    normalized: dict[str, torch.Tensor] = {}
+    changed = False
+    for key, value in state_dict.items():
+        new_key = key.replace("LayerNorm.beta", "LayerNorm.bias").replace("LayerNorm.gamma", "LayerNorm.weight")
+        normalized[new_key] = value
+        changed = changed or (new_key != key)
+    return normalized, changed
+
+
+def normalize_checkpoint_state_dict(checkpoint_dir: Path) -> bool:
+    safe_path = checkpoint_dir / "model.safetensors"
+    bin_path = checkpoint_dir / "pytorch_model.bin"
+
+    if safe_path.exists():
+        state_dict = safetensors.torch.load_file(str(safe_path), device="cpu")
+        normalized, changed = normalize_layernorm_legacy_keys(state_dict)
+        if changed:
+            safetensors.torch.save_file(normalized, str(safe_path), metadata={"format": "pt"})
+        return changed
+
+    if bin_path.exists():
+        state_dict = torch.load(bin_path, map_location="cpu", weights_only=True)
+        normalized, changed = normalize_layernorm_legacy_keys(state_dict)
+        if changed:
+            torch.save(normalized, str(bin_path))
+        return changed
+
+    return False
 
 
 @dataclass
@@ -212,6 +244,13 @@ class EpochMetricsLogger(TrainerCallback):
             f"Best{self.primary_metric} {self.best_val:.4f} | "
             f"Time {elapsed:.1f}s"
         )
+
+
+class CheckpointCompatibilityCallback(TrainerCallback):
+    def on_save(self, args, state, control, **kwargs):
+        checkpoint_dir = Path(args.output_dir) / f"checkpoint-{state.global_step}"
+        if normalize_checkpoint_state_dict(checkpoint_dir):
+            _log(f"[Checkpoint] normalized legacy LayerNorm keys in {checkpoint_dir}")
 
 
 def build_arg_parser(task: str) -> argparse.ArgumentParser:
@@ -458,7 +497,7 @@ def run_mws_task(config: MWSTaskConfig) -> None:
     _log(f"[Config] batch={args.train_batch_size} grad_accum={args.gradient_accumulation_steps} effective_batch={args.train_batch_size * args.gradient_accumulation_steps}")
     _log(f"[Config] lr={args.learning_rate} warmup={args.warmup_ratio} patience={args.patience} workers={args.dataloader_num_workers}")
     if torch.cuda.is_available():
-        _log(f"[GPU] {torch.cuda.get_device_name(0)} | VRAM {torch.cuda.get_device_properties(0).total_mem / 1024**3:.1f}GB | fp16=True")
+        _log(f"[GPU] {torch.cuda.get_device_name(0)} | VRAM {torch.cuda.get_device_properties(0).total_memory / 1024**3:.1f}GB | fp16=True")
     _log(f"[Paths] train={train_path}")
     _log(f"[Paths] val={val_path}")
     _log(f"[Paths] test(ws)={test_path}")
@@ -539,6 +578,7 @@ def run_mws_task(config: MWSTaskConfig) -> None:
         callbacks=[
             EarlyStoppingCallback(early_stopping_patience=args.patience),
             EpochMetricsLogger(total_epochs=args.epochs, primary_metric=config.primary_metric, seed=args.seed),
+            CheckpointCompatibilityCallback(),
         ],
         class_weights=class_weights,
     )
@@ -546,12 +586,16 @@ def run_mws_task(config: MWSTaskConfig) -> None:
     resume_ckpt = args.resume_from_checkpoint
     if resume_ckpt:
         _log(f"[Resume] from checkpoint: {resume_ckpt}")
+        if normalize_checkpoint_state_dict(Path(resume_ckpt)):
+            _log(f"[Resume] normalized legacy LayerNorm keys in {resume_ckpt}")
 
     train_start = time.time()
     train_output = trainer.train(resume_from_checkpoint=resume_ckpt)
     train_time = time.time() - train_start
 
     trainer.save_model(str(model_dir))
+    if normalize_checkpoint_state_dict(model_dir):
+        _log(f"[Checkpoint] normalized legacy LayerNorm keys in final model dir {model_dir}")
     tokenizer.save_pretrained(str(model_dir))
 
     best_epoch = get_best_epoch(trainer.state.log_history, config.primary_metric)
