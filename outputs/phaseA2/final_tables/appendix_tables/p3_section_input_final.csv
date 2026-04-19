@@ -1,0 +1,6 @@
+Input strategy,Task,Acc.,Macro-F1
+mention_text / main,Density,12.77 ± 0.06,23.17 ± 4.47
+findings,Density,12.81 ± 0.04,19.03 ± 2.23
+impression,Density,14.12 ± 1.86,31.27 ± 7.21
+findings_impression,Density,12.74 ± 0.05,22.90 ± 3.68
+full_text,Density,22.14 ± 4.70,23.22 ± 4.62

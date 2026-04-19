@@ -1,0 +1,77 @@
+% Appendix tables for Module 2. All values are mean $\pm$ standard deviation over five seeds.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Appendix A1: Complete A2 quality-gate ablation.}
+\label{tab:appendix-a2-quality-gate}
+\begin{tabular}{llcc}
+\hline
+Variant & Task & Acc. & Macro-F1 \\
+\hline
+G1 & Density & 13.43 $\pm$ 0.07 & 25.84 $\pm$ 6.48 \\
+G1 & Location & 99.75 $\pm$ 0.09 & 99.31 $\pm$ 0.22 \\
+G2 / main & Density & 12.77 $\pm$ 0.06 & 23.17 $\pm$ 4.47 \\
+G2 / main & Location & 98.47 $\pm$ 0.19 & 96.63 $\pm$ 0.33 \\
+G3 & Density & 19.28 $\pm$ 4.26 & 39.84 $\pm$ 3.60 \\
+G3 & Location & 99.67 $\pm$ 0.03 & 98.94 $\pm$ 0.22 \\
+G4 & Density & 12.76 $\pm$ 0.07 & 24.51 $\pm$ 10.53 \\
+G4 & Location & 98.29 $\pm$ 0.21 & 96.36 $\pm$ 0.32 \\
+G5 & Density & 12.55 $\pm$ 0.25 & 28.35 $\pm$ 7.09 \\
+G5 & Location & 90.11 $\pm$ 0.47 & 67.49 $\pm$ 2.11 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Appendix A2: Complete A3 aggregation ablation.}
+\label{tab:appendix-a3-aggregation}
+\begin{tabular}{llcc}
+\hline
+Variant & Task & Acc. & Macro-F1 \\
+\hline
+Weighted vote / main & Density & 12.77 $\pm$ 0.06 & 23.17 $\pm$ 4.47 \\
+Weighted vote / main & Location & 98.47 $\pm$ 0.19 & 96.63 $\pm$ 0.33 \\
+Uniform vote & Density & 12.75 $\pm$ 0.07 & 23.24 $\pm$ 8.34 \\
+Uniform vote & Location & 98.41 $\pm$ 0.18 & 96.53 $\pm$ 0.39 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Appendix A3: P1 max-sequence-length analysis for density.}
+\label{tab:appendix-p1-max-seq-length}
+\begin{tabular}{lcc}
+\hline
+Max seq length & Acc. & Macro-F1 \\
+\hline
+64 & 12.75 $\pm$ 0.05 & 19.21 $\pm$ 3.52 \\
+96 & 12.79 $\pm$ 0.13 & 22.51 $\pm$ 5.74 \\
+128 / main & 12.77 $\pm$ 0.06 & 23.17 $\pm$ 4.47 \\
+160 & 12.75 $\pm$ 0.09 & 23.12 $\pm$ 4.63 \\
+192 & 12.71 $\pm$ 0.04 & 24.77 $\pm$ 6.10 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Appendix A4: P3 section and input-strategy analysis for density.}
+\label{tab:appendix-p3-section-input}
+\begin{tabular}{lcc}
+\hline
+Input strategy & Acc. & Macro-F1 \\
+\hline
+mention\_text / main & 12.77 $\pm$ 0.06 & 23.17 $\pm$ 4.47 \\
+findings & 12.81 $\pm$ 0.04 & 19.03 $\pm$ 2.23 \\
+impression & 14.12 $\pm$ 1.86 & 31.27 $\pm$ 7.21 \\
+findings\_impression & 12.74 $\pm$ 0.05 & 22.90 $\pm$ 3.68 \\
+full\_text & 22.14 $\pm$ 4.70 & 23.22 $\pm$ 4.62 \\
+\hline
+\end{tabular}
+\end{table}

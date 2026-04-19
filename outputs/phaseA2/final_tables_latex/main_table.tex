@@ -1,0 +1,19 @@
+\begin{table}[htbp]
+\centering
+\small
+\caption{Module 2 main results under the unified multi-source weak-supervision protocol.}
+\label{tab:module2-main}
+\begin{tabular}{lcccccc}
+\hline
+Method & Density Acc. & Density Macro-F1 & Has-size Acc. & Has-size F1 & Location Acc. & Location Macro-F1 \\
+\hline
+TF-IDF + LR & 13.13 $\pm$ 0.00 & 17.64 $\pm$ 0.00 & 90.06 $\pm$ 0.00 & 87.83 $\pm$ 0.00 & 98.49 $\pm$ 0.00 & 95.95 $\pm$ 0.00 \\
+TF-IDF + SVM & 13.07 $\pm$ 0.00 & 18.52 $\pm$ 0.00 & 89.76 $\pm$ 0.00 & 87.53 $\pm$ 0.00 & 98.70 $\pm$ 0.00 & 96.73 $\pm$ 0.00 \\
+Vanilla PubMedBERT & 12.76 $\pm$ 0.09 & 43.76 $\pm$ 6.92 & 84.29 $\pm$ 1.36 & 82.11 $\pm$ 1.28 & 98.74 $\pm$ 0.37 & 97.13 $\pm$ 0.83 \\
+MWS-CFE (Ours) & 12.77 $\pm$ 0.06 & 23.17 $\pm$ 4.47 & 83.91 $\pm$ 1.33 & 81.75 $\pm$ 1.26 & 98.47 $\pm$ 0.19 & 96.63 $\pm$ 0.33 \\
+\hline
+\end{tabular}
+\vspace{0.4em}
+\parbox{0.96\linewidth}{\footnotesize
+All results are reported as mean $\pm$ standard deviation over five seeds and are multiplied by 100. The size task is reported as has-size detection.}
+\end{table}

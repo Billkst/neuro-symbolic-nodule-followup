@@ -1,0 +1,27 @@
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Module 2 training and evaluation cost summary.}
+\label{tab:module2-efficiency}
+\begin{tabular}{llccccc}
+\hline
+Method & Task & Train Samples & Train Time / seed (s) & Eval Time / seed (s) & Best Epoch & Peak GPU Memory (GB) \\
+\hline
+TF-IDF + LR & Density & 36038.0 $\pm$ 0.0 & 47.3 $\pm$ 1.2 & 2.9 $\pm$ 0.2 & -- & 0.00 $\pm$ 0.00 \\
+TF-IDF + LR & Has-size & 168433.0 $\pm$ 0.0 & 12.6 $\pm$ 2.2 & 4.2 $\pm$ 0.5 & -- & 0.00 $\pm$ 0.00 \\
+TF-IDF + LR & Location & 131233.0 $\pm$ 0.0 & 112.8 $\pm$ 3.9 & 4.1 $\pm$ 0.4 & -- & 0.00 $\pm$ 0.00 \\
+TF-IDF + SVM & Density & 36038.0 $\pm$ 0.0 & 56.3 $\pm$ 2.3 & 2.8 $\pm$ 0.2 & -- & 0.00 $\pm$ 0.00 \\
+TF-IDF + SVM & Has-size & 168433.0 $\pm$ 0.0 & 19.3 $\pm$ 1.1 & 4.1 $\pm$ 0.5 & -- & 0.00 $\pm$ 0.00 \\
+TF-IDF + SVM & Location & 131233.0 $\pm$ 0.0 & 290.1 $\pm$ 11.7 & 4.2 $\pm$ 0.3 & -- & 0.00 $\pm$ 0.00 \\
+Vanilla PubMedBERT & Density & 36038.0 $\pm$ 0.0 & 343.1 $\pm$ 79.2 & 26.8 $\pm$ 0.3 & 3.0 $\pm$ 1.4 & 9.25 $\pm$ 0.01 \\
+Vanilla PubMedBERT & Has-size & 168433.0 $\pm$ 0.0 & 1865.0 $\pm$ 366.1 & 48.2 $\pm$ 2.2 & 5.0 $\pm$ 1.6 & 6.14 $\pm$ 0.01 \\
+Vanilla PubMedBERT & Location & 131233.0 $\pm$ 0.0 & 843.7 $\pm$ 227.6 & 78.9 $\pm$ 1.1 & 1.8 $\pm$ 1.3 & 6.14 $\pm$ 0.02 \\
+MWS-CFE (Ours) & Density & 36038.0 $\pm$ 0.0 & 271.7 $\pm$ 105.4 & 26.0 $\pm$ 10.1 & 3.0 $\pm$ 3.4 & not recorded \\
+MWS-CFE (Ours) & Has-size & 168433.0 $\pm$ 0.0 & 1745.8 $\pm$ 518.7 & 45.1 $\pm$ 5.7 & 5.6 $\pm$ 2.6 & not recorded \\
+MWS-CFE (Ours) & Location & 131233.0 $\pm$ 0.0 & 763.4 $\pm$ 104.8 & 87.8 $\pm$ 18.8 & 1.4 $\pm$ 0.5 & not recorded \\
+\hline
+\end{tabular}
+\vspace{0.4em}
+\parbox{0.96\linewidth}{\footnotesize
+Eval time denotes full evaluation time per seed, not strict per-sample inference latency. GPU memory for MWS-CFE was not recorded in the historical JSON metadata; this does not indicate zero memory usage.}
+\end{table}

@@ -1,0 +1,24 @@
+\begin{table}[htbp]
+\centering
+\small
+\caption{Core Module 2 ablation summary.}
+\label{tab:module2-core-ablation}
+\begin{tabular}{lllcc}
+\hline
+Experiment & Variant & Task & Acc. & Macro-F1 \\
+\hline
+Quality gate & G2 / main & Density & 12.77 $\pm$ 0.06 & 23.17 $\pm$ 4.47 \\
+Quality gate & G3 & Density & 19.28 $\pm$ 4.26 & 39.84 $\pm$ 3.60 \\
+Quality gate & G2 / main & Location & 98.47 $\pm$ 0.19 & 96.63 $\pm$ 0.33 \\
+Quality gate & G1 & Location & 99.75 $\pm$ 0.09 & 99.31 $\pm$ 0.22 \\
+Quality gate & G5 & Location & 90.11 $\pm$ 0.47 & 67.49 $\pm$ 2.11 \\
+Aggregation & Weighted vote / main & Density & 12.77 $\pm$ 0.06 & 23.17 $\pm$ 4.47 \\
+Aggregation & Uniform vote & Density & 12.75 $\pm$ 0.07 & 23.24 $\pm$ 8.34 \\
+Aggregation & Weighted vote / main & Location & 98.47 $\pm$ 0.19 & 96.63 $\pm$ 0.33 \\
+Aggregation & Uniform vote & Location & 98.41 $\pm$ 0.18 & 96.53 $\pm$ 0.39 \\
+\hline
+\end{tabular}
+\vspace{0.4em}
+\parbox{0.96\linewidth}{\footnotesize
+G2 is the predefined main setting. G3 and G1 are shown because they are the strongest audited quality gates for density and location, respectively.}
+\end{table}
