@@ -5,11 +5,13 @@ from typing import Any, cast
 import numpy as np
 from sklearn.metrics import (
     accuracy_score,
+    average_precision_score,
     confusion_matrix,
     f1_score,
     mean_absolute_error,
     precision_score,
     recall_score,
+    roc_auc_score,
 )
 
 
@@ -65,6 +67,53 @@ def evaluate_density(y_true, y_pred, label_names):
         },
         "confusion_matrix": _serialize_confusion_matrix(y_true, y_pred, label_names),
     }
+
+
+def evaluate_binary_detection(y_true, y_pred, label_names, positive_label, positive_scores=None):
+    """Evaluate a binary classification task with optional positive-class scores."""
+    precision = precision_score(
+        y_true,
+        y_pred,
+        pos_label=positive_label,
+        zero_division=cast(Any, 0),
+    )
+    recall = recall_score(
+        y_true,
+        y_pred,
+        pos_label=positive_label,
+        zero_division=cast(Any, 0),
+    )
+    f1 = f1_score(
+        y_true,
+        y_pred,
+        pos_label=positive_label,
+        zero_division=cast(Any, 0),
+    )
+    result = {
+        "accuracy": _to_serializable_float(accuracy_score(y_true, y_pred)),
+        "precision": _to_serializable_float(precision),
+        "recall": _to_serializable_float(recall),
+        "f1": _to_serializable_float(f1),
+        "macro_f1": _to_serializable_float(
+            f1_score(
+                y_true,
+                y_pred,
+                labels=label_names,
+                average="macro",
+                zero_division=cast(Any, 0),
+            )
+        ),
+        "confusion_matrix": _serialize_confusion_matrix(y_true, y_pred, label_names),
+    }
+    if positive_scores is not None:
+        y_binary = [1 if label == positive_label else 0 for label in y_true]
+        if len(set(y_binary)) == 2:
+            result["auprc"] = _to_serializable_float(average_precision_score(y_binary, positive_scores))
+            result["auroc"] = _to_serializable_float(roc_auc_score(y_binary, positive_scores))
+        else:
+            result["auprc"] = None
+            result["auroc"] = None
+    return result
 
 
 def evaluate_size_detection(y_true, y_pred):

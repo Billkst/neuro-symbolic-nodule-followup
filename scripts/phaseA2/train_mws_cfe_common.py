@@ -40,12 +40,13 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.phase5.evaluation.metrics import (
+    evaluate_binary_detection,
     evaluate_density,
     evaluate_location,
     evaluate_size_detection,
 )
 
-MODEL_NAME = "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext"
+MODEL_NAME = str(PROJECT_ROOT / "outputs" / "phase5" / "hf_models" / "biomedbert_base_safe")
 DEFAULT_SEED = 42
 DEFAULT_EPOCHS = 10
 DEFAULT_MAX_LENGTH = 128
@@ -165,12 +166,14 @@ class LazyMentionDataset(torch.utils.data.Dataset):
         label_encoder: Callable[[dict[str, Any]], int],
         max_length: int,
         input_field: str = "mention_text",
+        use_confidence_weight: bool = False,
     ) -> None:
         self.rows = rows
         self.tokenizer = tokenizer
         self.label_encoder = label_encoder
         self.max_length = max_length
         self.input_field = input_field
+        self.use_confidence_weight = use_confidence_weight
 
     def __len__(self) -> int:
         return len(self.rows)
@@ -181,6 +184,8 @@ class LazyMentionDataset(torch.utils.data.Dataset):
         encoding = self.tokenizer(text, truncation=True, max_length=self.max_length)
         item = dict(encoding)
         item["labels"] = self.label_encoder(row)
+        if self.use_confidence_weight:
+            item["sample_weight"] = float(row.get("ws_confidence", 1.0) or 0.0)
         return item
 
 
@@ -191,14 +196,19 @@ class ConfidenceWeightedTrainer(Trainer):
         self,
         class_weights: torch.Tensor | None = None,
         sample_weights: np.ndarray | None = None,
+        loss_type: str = "ce",
+        focal_gamma: float = 2.0,
         **kwargs: Any,
     ) -> None:
         super().__init__(**kwargs)
         self.class_weights = class_weights
         self.sample_weights = sample_weights
+        self.loss_type = loss_type
+        self.focal_gamma = focal_gamma
 
     def compute_loss(self, model, inputs, return_outputs=False, num_items_in_batch=None, **kwargs):
         labels = inputs.pop("labels")
+        sample_weight = inputs.pop("sample_weight", None)
         outputs = model(**inputs)
         logits = outputs.logits
         if self.class_weights is not None:
@@ -206,7 +216,16 @@ class ConfidenceWeightedTrainer(Trainer):
         else:
             loss_fn = torch.nn.CrossEntropyLoss(reduction="none")
         per_sample_loss = loss_fn(logits, labels)
-        loss = per_sample_loss.mean()
+        if self.loss_type == "focal":
+            probs = torch.softmax(logits, dim=-1)
+            true_probs = probs.gather(1, labels.unsqueeze(1)).squeeze(1).clamp(min=1e-6, max=1.0)
+            per_sample_loss = ((1.0 - true_probs) ** self.focal_gamma) * per_sample_loss
+        if sample_weight is not None:
+            weights = sample_weight.to(logits.device, dtype=per_sample_loss.dtype).clamp(min=0.0)
+            denom = weights.sum().clamp(min=1e-8)
+            loss = (per_sample_loss * weights).sum() / denom
+        else:
+            loss = per_sample_loss.mean()
         return (loss, outputs) if return_outputs else loss
 
 
@@ -277,6 +296,9 @@ def build_arg_parser(task: str) -> argparse.ArgumentParser:
     parser.add_argument("--max-test-samples", type=int, default=None)
     parser.add_argument("--tag", type=str, default=None, help="Experiment tag for result file naming")
     parser.add_argument("--no-confidence-weight", action="store_true", help="Disable confidence weighting")
+    parser.add_argument("--loss-type", choices=["ce", "focal"], default="ce",
+                        help="Loss function: ce or focal. Focal is an optional imbalance stress test.")
+    parser.add_argument("--focal-gamma", type=float, default=2.0)
     parser.add_argument("--resume-from-checkpoint", type=str, default=None,
                         help="Path to checkpoint dir to resume training (e.g. outputs/phaseA2/models/.../checkpoint-500)")
     return parser
@@ -286,7 +308,11 @@ def get_label_encoder(config: MWSTaskConfig) -> Callable[[dict[str, Any]], int]:
     label_to_id = {label: idx for idx, label in enumerate(config.label_names)}
     if config.task == "size":
         return lambda row: 1 if bool(row["has_size"]) else 0
-    return lambda row: label_to_id.get(str(row[config.label_field]), label_to_id.get("unclear", 0))
+    if config.task == "density_stage1":
+        fallback = label_to_id["unclear_or_no_evidence"]
+    else:
+        fallback = label_to_id.get("unclear", 0)
+    return lambda row: label_to_id.get(str(row[config.label_field]), fallback)
 
 
 def compute_class_weights_from_rows(
@@ -312,7 +338,28 @@ def build_compute_metrics(config: MWSTaskConfig) -> Callable[[Any], dict[str, fl
         logits, labels = eval_pred
         predictions = np.argmax(logits, axis=-1)
 
-        if config.task == "density":
+        if config.task == "density_stage1":
+            y_true = [config.label_names[int(idx)] for idx in labels]
+            y_pred = [config.label_names[int(idx)] for idx in predictions]
+            scores = torch.softmax(torch.tensor(logits), dim=-1).numpy()[:, config.label_names.index("explicit_density")]
+            results = evaluate_binary_detection(
+                y_true,
+                y_pred,
+                config.label_names,
+                positive_label="explicit_density",
+                positive_scores=scores,
+            )
+            return {
+                "accuracy": float(results["accuracy"]),
+                "precision": float(results["precision"]),
+                "recall": float(results["recall"]),
+                "f1": float(results["f1"]),
+                "macro_f1": float(results["macro_f1"]),
+                "auprc": float(results["auprc"]) if results.get("auprc") is not None else 0.0,
+                "auroc": float(results["auroc"]) if results.get("auroc") is not None else 0.0,
+            }
+
+        if config.task in {"density", "density_stage2"}:
             y_true = [config.label_names[int(idx)] for idx in labels]
             y_pred = [config.label_names[int(idx)] for idx in predictions]
             results = evaluate_density(y_true, y_pred, config.label_names)
@@ -408,7 +455,30 @@ def evaluate_on_phase5_test(
     pred_output = trainer.predict(test_dataset)
     pred_ids = np.argmax(pred_output.predictions, axis=-1).tolist()
 
-    if config.task == "density":
+    if config.task == "density_stage1":
+        positive_idx = config.label_names.index("explicit_density")
+        probs = torch.softmax(torch.tensor(pred_output.predictions), dim=-1).numpy()
+        y_true = [str(row[config.label_field]) for row in phase5_test_rows]
+        y_pred = [config.label_names[idx] for idx in pred_ids]
+        results = evaluate_binary_detection(
+            y_true,
+            y_pred,
+            config.label_names,
+            positive_label="explicit_density",
+            positive_scores=probs[:, positive_idx],
+        )
+        return {
+            "accuracy": float(results["accuracy"]),
+            "precision": float(results["precision"]),
+            "recall": float(results["recall"]),
+            "f1": float(results["f1"]),
+            "macro_f1": float(results["macro_f1"]),
+            "auprc": float(results["auprc"]) if results.get("auprc") is not None else None,
+            "auroc": float(results["auroc"]) if results.get("auroc") is not None else None,
+            "confusion_matrix": results.get("confusion_matrix", {}),
+        }
+
+    if config.task in {"density", "density_stage2"}:
         y_true = [str(row[config.label_field]) for row in phase5_test_rows]
         y_pred = [config.label_names[idx] for idx in pred_ids]
         results = evaluate_density(y_true, y_pred, config.label_names)
@@ -494,6 +564,11 @@ def run_mws_task(config: MWSTaskConfig) -> None:
 
     _log(f"[Start] train_mws_{config.task} gate={gate} tag={tag}")
     _log(f"[Config] model={MODEL_NAME} seed={args.seed} epochs={args.epochs} max_length={args.max_length} input_field={input_field}")
+    confidence_weighting = bool(config.use_confidence_weight and not args.no_confidence_weight)
+    _log(
+        f"[Config] class_weighting={config.weighted_loss} "
+        f"confidence_weighting={confidence_weighting} loss_type={args.loss_type} focal_gamma={args.focal_gamma}"
+    )
     _log(f"[Config] batch={args.train_batch_size} grad_accum={args.gradient_accumulation_steps} effective_batch={args.train_batch_size * args.gradient_accumulation_steps}")
     _log(f"[Config] lr={args.learning_rate} warmup={args.warmup_ratio} patience={args.patience} workers={args.dataloader_num_workers}")
     if torch.cuda.is_available():
@@ -522,7 +597,14 @@ def run_mws_task(config: MWSTaskConfig) -> None:
     data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
     label_encoder = get_label_encoder(config)
 
-    train_dataset = LazyMentionDataset(train_rows, tokenizer, label_encoder, args.max_length, input_field)
+    train_dataset = LazyMentionDataset(
+        train_rows,
+        tokenizer,
+        label_encoder,
+        args.max_length,
+        input_field,
+        use_confidence_weight=confidence_weighting,
+    )
     val_dataset = LazyMentionDataset(val_rows, tokenizer, label_encoder, args.max_length, input_field)
 
     class_weights = compute_class_weights_from_rows(train_rows, config, label_encoder)
@@ -581,6 +663,8 @@ def run_mws_task(config: MWSTaskConfig) -> None:
             CheckpointCompatibilityCallback(),
         ],
         class_weights=class_weights,
+        loss_type=args.loss_type,
+        focal_gamma=args.focal_gamma,
     )
 
     resume_ckpt = args.resume_from_checkpoint
@@ -637,6 +721,14 @@ def run_mws_task(config: MWSTaskConfig) -> None:
         "eval_time_seconds": eval_time,
         "best_epoch": best_epoch,
         "training_args": to_jsonable(training_args.to_dict()),
+        "method_components": {
+            "class_weighting": bool(class_weights is not None),
+            "confidence_weighting": confidence_weighting,
+            "loss": "weighted mean of per-sample cross entropy"
+            if args.loss_type == "ce"
+            else f"weighted mean of focal cross entropy (gamma={args.focal_gamma})",
+            "sample_weight_field": "ws_confidence" if confidence_weighting else None,
+        },
     }
 
     result_path = results_dir / result_fname
