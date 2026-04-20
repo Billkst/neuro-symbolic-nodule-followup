@@ -212,3 +212,6 @@ outputs/phase5/datasets/*.jsonl
 outputs/phase5/hf_cache/
 *.safetensors
 *.bin
+follow-up_env.yml
+outputs/
+logs/
