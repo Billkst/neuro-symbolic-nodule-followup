@@ -18,7 +18,14 @@ from typing import Any
 import numpy as np
 import torch
 from sklearn.linear_model import LogisticRegression
-from transformers import AutoModelForSequenceClassification, AutoTokenizer, DataCollatorWithPadding, Trainer
+from sklearn.metrics import precision_recall_curve
+from transformers import (
+    AutoModelForSequenceClassification,
+    AutoTokenizer,
+    DataCollatorWithPadding,
+    Trainer,
+    TrainingArguments,
+)
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if str(PROJECT_ROOT) not in sys.path:
@@ -50,8 +57,15 @@ def predict_logits(
     tokenizer = AutoTokenizer.from_pretrained(str(model_dir))
     model = AutoModelForSequenceClassification.from_pretrained(str(model_dir), num_labels=2)
     dataset = LazyMentionDataset(rows, tokenizer, label_encoder, max_length, input_field)
+    training_args = TrainingArguments(
+        output_dir=str(PROJECT_ROOT / "outputs" / "phaseA2_planB" / "tmp" / "stage1_threshold_predict"),
+        per_device_eval_batch_size=max(1, int(batch_size)),
+        report_to=[],
+        disable_tqdm=True,
+    )
     trainer = Trainer(
         model=model,
+        args=training_args,
         data_collator=DataCollatorWithPadding(tokenizer=tokenizer),
         tokenizer=tokenizer,
     )
@@ -97,15 +111,27 @@ def evaluate_threshold(rows: list[dict[str, Any]], probs: np.ndarray, threshold:
 
 
 def tune_threshold(rows: list[dict[str, Any]], probs: np.ndarray) -> tuple[float, dict[str, Any]]:
-    candidates = sorted({0.0, 0.5, 1.0, *[float(x) for x in probs]})
-    best_threshold = 0.5
-    best_result: dict[str, Any] | None = None
-    for threshold in candidates:
-        result = evaluate_threshold(rows, probs, threshold)
-        if best_result is None or float(result["f1"]) > float(best_result["f1"]):
-            best_threshold = threshold
-            best_result = result
-    assert best_result is not None
+    y_true = np.asarray([1 if label == POSITIVE else 0 for label in label_strings(rows)], dtype=np.int64)
+
+    if y_true.sum() == 0 or y_true.sum() == len(y_true):
+        best_threshold = 0.5
+    else:
+        precision, recall, thresholds = precision_recall_curve(y_true, probs, pos_label=1)
+        if thresholds.size == 0:
+            best_threshold = 0.5
+        else:
+            precision = precision[:-1]
+            recall = recall[:-1]
+            denom = precision + recall
+            f1 = np.divide(
+                2.0 * precision * recall,
+                denom,
+                out=np.zeros_like(denom, dtype=np.float64),
+                where=denom > 0,
+            )
+            best_threshold = float(thresholds[int(np.argmax(f1))])
+
+    best_result = evaluate_threshold(rows, probs, best_threshold)
     return best_threshold, best_result
 
 
