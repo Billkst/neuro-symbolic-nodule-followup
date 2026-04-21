@@ -156,6 +156,7 @@ class MWSTaskConfig:
     use_confidence_weight: bool = True
     input_field: str = "mention_text"
     extra_label_names: list[str] = field(default_factory=list)
+    row_transform: Callable[[dict[str, Any]], dict[str, Any]] | None = None
 
 
 class LazyMentionDataset(torch.utils.data.Dataset):
@@ -290,7 +291,7 @@ def build_arg_parser(task: str) -> argparse.ArgumentParser:
     parser.add_argument("--ws-data-dir", type=str, default=None, help="Override WS data directory")
     parser.add_argument("--phase5-data-dir", type=str, default=None, help="Override Phase5 test data dir")
     parser.add_argument("--output-dir", type=str, default=None, help="Override output directory")
-    parser.add_argument("--input-field", type=str, default="mention_text", help="Input text field")
+    parser.add_argument("--input-field", type=str, default=None, help="Input text field")
     parser.add_argument("--max-train-samples", type=int, default=None)
     parser.add_argument("--max-val-samples", type=int, default=None)
     parser.add_argument("--max-test-samples", type=int, default=None)
@@ -591,6 +592,13 @@ def run_mws_task(config: MWSTaskConfig) -> None:
     if args.max_test_samples:
         test_rows = test_rows[:args.max_test_samples]
 
+    if config.row_transform is not None:
+        _log(f"[FeatureAugmentation] applying row_transform={getattr(config.row_transform, '__name__', 'callable')}")
+        train_rows = [config.row_transform(row) for row in train_rows]
+        val_rows = [config.row_transform(row) for row in val_rows]
+        test_rows = [config.row_transform(row) for row in test_rows]
+        phase5_test_rows = [config.row_transform(row) for row in phase5_test_rows]
+
     _log(f"[Data] train={len(train_rows)} val={len(val_rows)} test_ws={len(test_rows)} test_phase5={len(phase5_test_rows)}")
 
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
@@ -724,6 +732,7 @@ def run_mws_task(config: MWSTaskConfig) -> None:
         "method_components": {
             "class_weighting": bool(class_weights is not None),
             "confidence_weighting": confidence_weighting,
+            "row_transform": getattr(config.row_transform, "__name__", None) if config.row_transform else None,
             "loss": "weighted mean of per-sample cross entropy"
             if args.loss_type == "ce"
             else f"weighted mean of focal cross entropy (gamma={args.focal_gamma})",
