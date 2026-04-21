@@ -1,0 +1,12 @@
+Statistic,Value,Source File,Method,Sample Size
+Total rows in radiology.csv.gz,66542176,mimic-iv-note-deidentified-free-text-clinical-notes-2.2.zip/note/radiology.csv.gz,Full-scan,N/A
+Total rows in discharge.csv.gz,98971604,mimic-iv-note-deidentified-free-text-clinical-notes-2.2.zip/note/discharge.csv.gz,Full-scan,N/A
+Total rows in radiology_detail.csv.gz,6046121,mimic-iv-note-deidentified-free-text-clinical-notes-2.2.zip/note/radiology_detail.csv.gz,Full-scan,N/A
+Total rows in discharge_detail.csv.gz,186137,mimic-iv-note-deidentified-free-text-clinical-notes-2.2.zip/note/discharge_detail.csv.gz,Full-scan,N/A
+Number of LIDC XML files,1318,/home/UserData/ljx/Project_3/neuro-symbolic-nodule-followup/data/lidc_extracted/tcia-lidc-xml,Full-scan,N/A
+Total patients in patients.csv.gz,364627,mimic-iv-3.1.zip/mimic-iv-3.1/hosp/patients.csv.gz,Full-scan,N/A
+"Radiology reports containing ""nodule""",5463112 (est.),mimic-iv-note-deidentified-free-text-clinical-notes-2.2.zip/note/radiology.csv.gz,Sample-based,10000 rows
+"Discharge reports containing ""Social History""",96368650 (est.),mimic-iv-note-deidentified-free-text-clinical-notes-2.2.zip/note/discharge.csv.gz,Sample-based,10000 rows
+"Discharge reports containing ""smok""",11183791 (est.),mimic-iv-note-deidentified-free-text-clinical-notes-2.2.zip/note/discharge.csv.gz,Sample-based,10000 rows
+"Discharge reports containing ""pack.year""",504755 (est.),mimic-iv-note-deidentified-free-text-clinical-notes-2.2.zip/note/discharge.csv.gz,Sample-based,10000 rows
+Subject_id overlap (radiology nodule vs discharge),233,Both CSVs,Sample-based,"Rad: 10000, Disc: 10000"
