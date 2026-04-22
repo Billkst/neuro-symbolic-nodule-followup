@@ -297,6 +297,7 @@ def build_arg_parser(task: str) -> argparse.ArgumentParser:
     parser.add_argument("--max-test-samples", type=int, default=None)
     parser.add_argument("--tag", type=str, default=None, help="Experiment tag for result file naming")
     parser.add_argument("--no-confidence-weight", action="store_true", help="Disable confidence weighting")
+    parser.add_argument("--no-class-weight", action="store_true", help="Disable class-weighted loss for configs that enable it")
     parser.add_argument("--loss-type", choices=["ce", "focal"], default="ce",
                         help="Loss function: ce or focal. Focal is an optional imbalance stress test.")
     parser.add_argument("--focal-gamma", type=float, default=2.0)
@@ -565,9 +566,10 @@ def run_mws_task(config: MWSTaskConfig) -> None:
 
     _log(f"[Start] train_mws_{config.task} gate={gate} tag={tag}")
     _log(f"[Config] model={MODEL_NAME} seed={args.seed} epochs={args.epochs} max_length={args.max_length} input_field={input_field}")
+    class_weighting = bool(config.weighted_loss and not args.no_class_weight)
     confidence_weighting = bool(config.use_confidence_weight and not args.no_confidence_weight)
     _log(
-        f"[Config] class_weighting={config.weighted_loss} "
+        f"[Config] class_weighting={class_weighting} "
         f"confidence_weighting={confidence_weighting} loss_type={args.loss_type} focal_gamma={args.focal_gamma}"
     )
     _log(f"[Config] batch={args.train_batch_size} grad_accum={args.gradient_accumulation_steps} effective_batch={args.train_batch_size * args.gradient_accumulation_steps}")
@@ -615,7 +617,20 @@ def run_mws_task(config: MWSTaskConfig) -> None:
     )
     val_dataset = LazyMentionDataset(val_rows, tokenizer, label_encoder, args.max_length, input_field)
 
-    class_weights = compute_class_weights_from_rows(train_rows, config, label_encoder)
+    weight_config = MWSTaskConfig(
+        task=config.task,
+        label_field=config.label_field,
+        label_names=config.label_names,
+        model_dir_name=config.model_dir_name,
+        result_file_name=config.result_file_name,
+        primary_metric=config.primary_metric,
+        weighted_loss=class_weighting,
+        use_confidence_weight=config.use_confidence_weight,
+        input_field=config.input_field,
+        extra_label_names=config.extra_label_names,
+        row_transform=config.row_transform,
+    )
+    class_weights = compute_class_weights_from_rows(train_rows, weight_config, label_encoder)
     if class_weights is not None:
         weight_msg = ", ".join(
             f"{label}={w:.4f}" for label, w in zip(config.label_names, class_weights.tolist(), strict=False)
@@ -731,6 +746,7 @@ def run_mws_task(config: MWSTaskConfig) -> None:
         "training_args": to_jsonable(training_args.to_dict()),
         "method_components": {
             "class_weighting": bool(class_weights is not None),
+            "class_weighting_requested": class_weighting,
             "confidence_weighting": confidence_weighting,
             "row_transform": getattr(config.row_transform, "__name__", None) if config.row_transform else None,
             "loss": "weighted mean of per-sample cross entropy"

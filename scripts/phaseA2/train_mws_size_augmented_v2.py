@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Train cue-feature augmented MWS-CFE for Has-size.
+"""Train Wave2 cue-feature augmented MWS-CFE for Has-size.
 
-This remains a learned model: size cues are encoded as input features and the
-classifier predicts the label. No deterministic rule override is applied.
+This is still a learned classifier. Size cues are encoded into the input text;
+no deterministic rule override is used at prediction time.
 """
 from __future__ import annotations
 
@@ -23,7 +23,7 @@ if __name__ == "__main__":
             task="size",
             label_field="has_size",
             label_names=["no_size", "has_size"],
-            model_dir_name="size_mws_cfe_augmented",
+            model_dir_name="size_mws_cfe_augmented_v2",
             result_file_name="mws_cfe_size_results.json",
             primary_metric="f1",
             weighted_loss=True,
