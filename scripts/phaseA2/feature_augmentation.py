@@ -122,5 +122,14 @@ def add_size_cue_augmented_text(row: dict[str, Any]) -> dict[str, Any]:
     return add_cue_augmented_text(row, task="size")
 
 
+def add_size_cue_augmented_mention_text(row: dict[str, Any]) -> dict[str, Any]:
+    return add_cue_augmented_text(
+        row,
+        task="size",
+        source_field="mention_text",
+        output_field="cue_augmented_mention_text",
+    )
+
+
 def add_location_cue_augmented_text(row: dict[str, Any]) -> dict[str, Any]:
     return add_cue_augmented_text(row, task="location")
