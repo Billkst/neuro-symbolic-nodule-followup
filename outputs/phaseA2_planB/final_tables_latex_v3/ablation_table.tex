@@ -1,0 +1,25 @@
+\begin{table}[t]
+\centering
+\caption{Module 2 final core ablations and Wave5 Has-size component analysis.}
+\label{tab:module2_ablation_v3}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{llllllll}
+\toprule
+Section & Variant & Seeds & Density Stage 1 F1 & Density Stage 1 AUPRC & Density Stage 2 Macro-F1 & Has-size F1 & Protocol Note \\
+\midrule
+Core density ablation & Final two-stage density (P0 Stage 1 + G3 len128 Stage 2) & 5 & 97.48 $\pm$ 0.24 & 98.82 $\pm$ 0.41 & 96.89 $\pm$ 0.32 & -- & final full row for density \\
+Core density ablation & Legacy G2 quality gate before selection & 5 & 97.48 $\pm$ 0.24 & 98.82 $\pm$ 0.41 & 91.05 $\pm$ 0.54 & -- & shows effect of selecting G3+len128 for Stage 2 \\
+Core density ablation & Before P0 threshold tuning (legacy default decision layer) & 5 & 60.29 $\pm$ 6.93 & 98.82 $\pm$ 0.41 & -- & -- & legacy aggregate; diagnostic for P0 threshold tuning, not a final full ablation \\
+Core density ablation & w/o quality gate (G1 diagnostic) & 5 & 68.59 $\pm$ 6.47 & 99.09 $\pm$ 0.18 & 94.58 $\pm$ 0.37 & -- & quality gate selection diagnostic \\
+Core density ablation & w/o section-aware input & 5 & 62.10 $\pm$ 3.65 & 79.33 $\pm$ 4.64 & 86.76 $\pm$ 0.32 & -- & section-aware input ablation \\
+Core density ablation & w/o confidence-aware training & 5 & 78.63 $\pm$ 5.93 & 98.81 $\pm$ 0.30 & 90.70 $\pm$ 0.77 & -- & confidence-aware training ablation \\
+Has-size Wave5 component analysis & lexical alone & 5 & -- & -- & -- & 90.58 $\pm$ 0.00 & 5-seed learned lexical expert \\
+Has-size Wave5 component analysis & lexical + BERT & 1 & -- & -- & -- & 92.09 $\pm$ 0.00 & diagnostic component analysis; seed42 only \\
+Has-size Wave5 component analysis & lexical + cue & 1 & -- & -- & -- & 98.88 $\pm$ 0.00 & diagnostic component analysis; seed42 only \\
+Has-size Wave5 component analysis & lexical + BERT + cue & 5 & -- & -- & -- & 99.28 $\pm$ 0.02 & final 5-seed learned stacked head \\
+\bottomrule
+\end{tabular}%
+}
+\vspace{0.3em}
+\footnotesize{The first block is the directly reportable core density ablation. The Wave5 block is component analysis; seed42-only rows are diagnostic and not five-seed ablations.}
+\end{table}

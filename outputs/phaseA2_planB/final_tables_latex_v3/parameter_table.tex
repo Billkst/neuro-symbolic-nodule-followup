@@ -1,0 +1,33 @@
+\begin{table}[t]
+\centering
+\caption{Module 2 parameter and decision-layer diagnostics.}
+\label{tab:module2_parameter_v3}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lllllllll}
+\toprule
+Parameter Group & Parameter Type & Value & Seeds & Density Stage 1 AUPRC & Density Stage 1 F1 & Density Stage 2 Macro-F1 & Has-size F1 & Notes \\
+\midrule
+P1 max\_seq\_length & numeric length scan & 64 & 5 & 98.19 $\pm$ 0.69 & 60.89 $\pm$ 16.14 & 89.64 $\pm$ 1.18 & -- & retained P1 scan \\
+P1 max\_seq\_length & numeric length scan & 96 & 5 & 98.10 $\pm$ 0.50 & 61.21 $\pm$ 10.55 & 90.89 $\pm$ 0.57 & -- & retained P1 scan \\
+P1 max\_seq\_length & numeric length scan & 128 & 5 & 98.82 $\pm$ 0.41 & 97.48 $\pm$ 0.24 & 91.05 $\pm$ 0.54 & -- & retained P1 scan \\
+P1 max\_seq\_length & numeric length scan & 160 & 5 & 98.79 $\pm$ 0.41 & 70.99 $\pm$ 9.83 & 91.17 $\pm$ 0.38 & -- & retained P1 scan \\
+P1 max\_seq\_length & numeric length scan & 192 & 5 & 98.80 $\pm$ 0.51 & 68.45 $\pm$ 7.35 & 91.70 $\pm$ 0.49 & -- & retained P1 scan \\
+P2 quality gate & categorical design choice & G1 & 5 & 99.09 $\pm$ 0.18 & 68.59 $\pm$ 6.47 & 94.58 $\pm$ 0.37 & -- & categorical gate option; not a continuous numerical parameter \\
+P2 quality gate & categorical design choice & G2 & 5 & 98.82 $\pm$ 0.41 & 97.48 $\pm$ 0.24 & 91.05 $\pm$ 0.54 & -- & categorical gate option; not a continuous numerical parameter \\
+P2 quality gate & categorical design choice & G3 (selected) & 5 & 99.35 $\pm$ 0.20 & 97.96 $\pm$ 0.28 & 96.83 $\pm$ 0.18 & -- & categorical gate option; not a continuous numerical parameter \\
+P2 quality gate & categorical design choice & G4 & 5 & 98.80 $\pm$ 0.28 & 66.95 $\pm$ 5.95 & 91.32 $\pm$ 0.81 & -- & categorical gate option; not a continuous numerical parameter \\
+P2 quality gate & categorical design choice & G5 & 5 & 99.09 $\pm$ 0.27 & 94.35 $\pm$ 1.94 & 88.62 $\pm$ 1.22 & -- & categorical gate option; not a continuous numerical parameter \\
+P3 section/input strategy & categorical design choice & Mention only & 5 & 41.84 $\pm$ 8.80 & 37.51 $\pm$ 8.46 & 74.09 $\pm$ 2.31 & -- & categorical input-construction strategy; not a continuous numerical parameter \\
+P3 section/input strategy & categorical design choice & Section-aware (selected) & 5 & 98.82 $\pm$ 0.41 & 97.48 $\pm$ 0.24 & 91.05 $\pm$ 0.54 & -- & categorical input-construction strategy; not a continuous numerical parameter \\
+P3 section/input strategy & categorical design choice & Findings only & 5 & 78.29 $\pm$ 2.99 & 54.47 $\pm$ 12.88 & 86.22 $\pm$ 0.75 & -- & categorical input-construction strategy; not a continuous numerical parameter \\
+P3 section/input strategy & categorical design choice & Impression only & 5 & 88.15 $\pm$ 2.92 & 67.76 $\pm$ 1.32 & 89.80 $\pm$ 1.85 & -- & categorical input-construction strategy; not a continuous numerical parameter \\
+P3 section/input strategy & categorical design choice & Findings + impression & 5 & 79.33 $\pm$ 4.64 & 62.10 $\pm$ 3.65 & 86.76 $\pm$ 0.32 & -- & categorical input-construction strategy; not a continuous numerical parameter \\
+P3 section/input strategy & categorical design choice & Full text & 5 & 79.33 $\pm$ 4.64 & 62.10 $\pm$ 3.65 & 86.76 $\pm$ 0.32 & -- & categorical input-construction strategy; not a continuous numerical parameter \\
+Wave5 Has-size threshold & diagnostic decision-layer setting & threshold 0.882856 $\pm$ 0.033658 & 5 & -- & -- & -- & 99.28 $\pm$ 0.02 & threshold tuned on phase5-like dev; Phase5 test not used for threshold \\
+Wave5 Has-size stacked head & diagnostic decision-layer setting & lexical + BERT + cue logistic-regression head & 5 & -- & -- & -- & 99.28 $\pm$ 0.02 & test\_truncated=false; test\_sample\_count=42057 \\
+\bottomrule
+\end{tabular}%
+}
+\vspace{0.3em}
+\footnotesize{P2 quality gate and P3 section/input strategy are categorical design choices, not continuous numerical parameters. Wave5 rows document Has-size threshold and stacked-head diagnostics.}
+\end{table}
