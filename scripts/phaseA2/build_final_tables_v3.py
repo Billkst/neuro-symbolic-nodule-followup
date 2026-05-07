@@ -889,11 +889,11 @@ def build_figure_manifest() -> list[dict[str, str]]:
 def build_figure_manifest_v6() -> list[dict[str, str]]:
     specs = [
         (
-            "p1_max_seq_length_stage_2_macro_f1_zoomed.svg",
+            "p1_max_seq_length_stage_1_auprc_zoomed.svg",
             "P1 max_seq_length",
-            "Density Stage 2 Macro-F1",
+            "Density Stage 1 AUPRC",
             "appendix_or_optional_main",
-            "重画图；zoomed y-axis，横坐标包含 64/96/128/160/192，并标出 128 selected。P1 不作为强优越性主证据。",
+            "重画图；zoomed y-axis，横坐标包含 64/96/128/160/192，并标出 128 selected。P1 用 Stage 1 AUPRC 展示，避免用非最高 Macro-F1 解释 128 选择。",
         ),
         (
             "p2_quality_gate_stage_2_macro_f1_zoomed.svg",
@@ -969,6 +969,7 @@ def render_zoomed_bar_svg(
     values: list[dict[str, Any]],
     y_min: float,
     y_max: float,
+    y_label: str = "Macro-F1 (%)",
     note: str,
 ) -> str:
     width = 980
@@ -997,7 +998,7 @@ def render_zoomed_bar_svg(
         f'<text x="{width / 2}" y="58" text-anchor="middle" font-family="Arial" font-size="14" fill="#4b5563">{html.escape(subtitle)}; zoomed y-axis {y_min:.1f}-{y_max:.1f}%</text>',
         f'<line x1="{left}" y1="{top}" x2="{left}" y2="{top + plot_h}" stroke="#111827" stroke-width="1.4"/>',
         f'<line x1="{left}" y1="{top + plot_h}" x2="{left + plot_w}" y2="{top + plot_h}" stroke="#111827" stroke-width="1.4"/>',
-        f'<text x="28" y="{top + plot_h / 2}" text-anchor="middle" font-family="Arial" font-size="13" fill="#374151" transform="rotate(-90 28,{top + plot_h / 2})">Macro-F1 (%)</text>',
+        f'<text x="28" y="{top + plot_h / 2}" text-anchor="middle" font-family="Arial" font-size="13" fill="#374151" transform="rotate(-90 28,{top + plot_h / 2})">{html.escape(y_label)}</text>',
     ]
     for tick in range(tick_count + 1):
         value = y_min + (y_max - y_min) * tick / tick_count
@@ -1054,17 +1055,18 @@ def write_v6_zoomed_parameter_figures() -> None:
     ]
     p1_values = []
     for label, tag, selected in p1_specs:
-        mean, std = percent_summary(f"mws_cfe_density_stage2_results_{tag}_seed*.json", "macro_f1")
+        mean, std = percent_summary(f"mws_cfe_density_stage1_results_{tag}_seed*.json", "auprc")
         p1_values.append({"label": label, "mean": mean, "std": std, "selected": selected})
     p1_min, p1_max = y_bounds(p1_values, pad=1.0, floor_step=0.5)
     write_text_svg(
-        FINAL_FIGURES_DIR / "p1_max_seq_length_stage_2_macro_f1_zoomed.svg",
+        FINAL_FIGURES_DIR / "p1_max_seq_length_stage_1_auprc_zoomed.svg",
         render_zoomed_bar_svg(
             title="P1 max_seq_length",
-            subtitle="Density Stage 2 Macro-F1 across input lengths",
+            subtitle="Density Stage 1 AUPRC across input lengths",
             values=p1_values,
             y_min=p1_min,
             y_max=p1_max,
+            y_label="AUPRC (%)",
             note="",
         ),
     )
@@ -1089,6 +1091,7 @@ def write_v6_zoomed_parameter_figures() -> None:
             values=p2_values,
             y_min=p2_min,
             y_max=p2_max,
+            y_label="Macro-F1 (%)",
             note="",
         ),
     )
@@ -1114,6 +1117,7 @@ def write_v6_zoomed_parameter_figures() -> None:
             values=p3_values,
             y_min=p3_min,
             y_max=p3_max,
+            y_label="Macro-F1 (%)",
             note="",
         ),
     )
@@ -1468,7 +1472,7 @@ Has-size Wave5 diagnostic parameter table：`{(TABLES_DIR / "size_wave5_diagnost
 
 ## 6. 参数图进入正文和附录
 
-v6 重新绘制 Stage 2 参数图，使用 zoomed y-axis，并在图中直接标出 selected 配置。因为 P1 长度扫描的差异很小，P1 不再作为正文强证据，只作为可选正文图或附录图。
+v6 重新绘制参数图，使用 zoomed y-axis，并在图中直接标出 selected 配置。P1 改用 Stage 1 AUPRC 展示，因为 128 不是 Stage 2 Macro-F1 最高点；这样能避免用非最高的 Stage 2 F1 解释 128 选择。P1 仍不作为正文强证据，只作为可选正文图或附录图。
 
 正文优先推荐 2 张参数图：
 {chr(10).join(f"- `{name}`" for name in main_figures)}
