@@ -1,0 +1,48 @@
+artifact_type,path_or_group,status,input,output,function,runnable_or_usable,evidence_or_counts,alignment_note
+document,docs/刘俊希-开题报告.docx,available,docx,opening proposal text,模块3最高优先级设计来源,yes,"提取到“基于因果解耦与神经符号推理的随访建议生成”正文",定义模块3为 CDSG 神经符号临床推理智能体
+document,docs/项目三内容理解稿.md,available,markdown,开题报告整理稿,模块3技术路线说明,yes,"包含准入判定难/信息提取难/决策合规难、CDSG、硬匹配、软匹配、轨迹报告",与开题报告高度一致
+document,docs/module3_graph_agent_execution_plan.md,available,markdown,模块3设计计划,模块3工程组件拆解,yes,"提出 router、guideline_graph、graph executor、hard constraints、soft match、abstention",可作为下一步实现蓝图
+document,reports/final_experiment_redesign_plan.md,available,markdown,最终实验重构计划,模块3实验重构方案,yes,"明确当前只有 flat rule engine，需补 CDSG MVP",直接指出当前偏差
+document,reports/phase3_baseline_design.md,available,markdown,Phase 3 baseline 设计,端到端原型说明,yes,"定义 radiology facts -> case_bundle -> rule-based recommendation",是 baseline 不是模块3完成态
+document,reports/phase3_smoke_test.md,available,markdown,Phase 3 smoke test,运行摘要与样例,yes,"25 case_bundles、25 recommendations、schema_invalid=0",证明最小闭环可运行
+document,reports/thesis_chapter3_draft.md,available,markdown,论文第三章草稿,方法章节草稿,yes,"主要叙述神经感知层 + 规则引擎",需要重写以突出 CDSG 智能体
+document,deep-research-report,missing,none,none,未发现同名或等价模块3调研报告,no,"仅发现 phase5 deep_analysis，属于模块2分析",需要用户确认是否在仓库外
+script,scripts/phaseA3,missing,none,none,模块3专用脚本目录,no,"find: no such file or directory",需要新建或改用 src/module3
+script,scripts/module3,missing,none,none,模块3专用脚本目录,no,"find: no such file or directory",需要新建或改用 scripts/phaseA3
+script,scripts/run_phase3_demo.py,available,"MIMIC radiology/discharge data","outputs/phase3_demo_output.json; logs/run_phase3_demo.log",端到端 demo: 抽取事实、组装 bundle、生成 recommendation,yes,"smoke test 记录 50 radiology facts、25 bundles、25 recommendations",可作为可运行参考但不是 CDSG
+script,scripts/build_case_bundles.py,available,"outputs/radiology_facts.jsonl; outputs/smoking_results.jsonl","outputs/case_bundles.jsonl",按 subject_id 组装 case_bundle,yes,"使用 assemble_case_bundles",可复用于模块3入口
+script,scripts/run_recommendation_baseline.py,available,outputs/case_bundles.jsonl,outputs/recommendations.jsonl,运行 Lung-RADS structured rule baseline,yes,"调用 generate_recommendation",FlatRule baseline
+script,scripts/eval_recommendation_baseline.py,available,"phase4 cache radiology/smoking facts","outputs/phase4/results/recommendations_*.jsonl; metrics json",比较 cue_only 与 structured_rule,yes,"Phase 4 已有 253 条 structured_rule recommendations",可扩展为模块3评估 harness
+script,scripts/build_phase4_eval_sets.py,available,MIMIC data or cached facts,outputs/phase4/manifests/*.json,构建 radiology/smoking/recommendation/case study manifest,yes,"recommendation_eval selected_count=464",弱评估集构建逻辑可复用
+script,scripts/run_phase4_benchmark.py,available,configs/phase4_config.yaml,outputs/phase4/benchmark_summary.*,运行 Phase 4 baseline benchmark,yes,"已有 benchmark_summary.txt",不含 CDSG/LLM/RAG
+script,scripts/run_radiology_baseline.py,available,MIMIC radiology data,outputs/radiology_facts.jsonl,生成 regex radiology facts,yes,"Phase 3/4 使用",模块2事实来源 baseline
+script,scripts/run_smoking_baseline.py,available,MIMIC discharge data,outputs/smoking_results.jsonl,生成 smoking eligibility,yes,"Phase 3 文档使用",模块1辅助属性 baseline
+script,scripts/eval_radiology_baseline.py,available,phase4 manifest/config,outputs/phase4/results/radiology_*.jsonl,评估 radiology regex baseline,yes,"Phase 4 results available",模块2事实质量参考
+script,scripts/eval_smoking_baseline.py,available,phase4 manifest/config,outputs/phase4/results/smoking_*.jsonl,评估 smoking baseline,yes,"Phase 4 results available",准入属性质量参考
+source,src/assemblers/case_bundle_assembler.py,available,radiology_facts + smoking_results + demographics,case_bundle list,组装统一病例输入,yes,"tests/assemblers 覆盖 label_quality、schema validity",模块3入口基础
+source,src/rules/lung_rads_engine.py,available,case_bundle,recommendation_schema object,Lung-RADS v2022 minimal flat IF-THEN 规则引擎,yes,"tests/rules 覆盖 solid/part_solid/GGO/缺失 size/多结节",结构化 rule baseline；不能代表 CDSG
+source,src/eval/recommendation_metrics.py,available,recommendations list,metrics dict,计算 schema、anchor、reasoning、insufficient 等指标,yes,"Phase 4 metrics 使用",需扩展 path validity、harmful rate、grounding
+source,src/pipeline/schema_validator.py,available,json instance + schema name,validation errors,JSON schema 校验,yes,"Phase 3 smoke test schema_invalid=0",可继续复用
+schema,schemas/radiology_fact_schema.json,available,radiology report extraction,radiology fact,模块2结构化事实 schema,yes,"字段含 size_mm/density/location/evidence_span/confidence",符合模块3事实输入需要
+schema,schemas/smoking_eligibility_schema.json,available,discharge note,smoking eligibility,吸烟史/高危准入辅助属性 schema,yes,"字段含 pack_year/evidence_quality/missing_flags",准入语义 soft match 的输入基础
+schema,schemas/case_bundle_schema.json,available,radiology_fact + smoking_eligibility + demographics,case_bundle,统一实验单位 schema,yes,"recommendation_target 可嵌套 recommendation_schema",模块3应继续作为唯一入口
+schema,schemas/recommendation_schema.json,available,rule engine or CDSG output,recommendation,推荐输出 schema,yes,"description 已提到 rule-engine and CDSG outputs",需扩展 graph_trace/intent/confidence
+schema,schemas/guideline_graph_schema.json,missing,none,none,指南图谱 schema,no,"未发现",模块3 P0 缺口
+config,configs/phase4_config.yaml,available,config,phase4 paths and baseline variants,Phase 4 评估配置,yes,"recommendation_variants=cue_only,structured_rule",需新增 module3 config
+graph,configs/module3/guideline_graphs or data/guidelines/structured,missing,none,none,CDSG 图定义存放位置,no,"未发现 guideline_graph/CDSG 文件",模块3核心缺口
+data,outputs/phaseA3,created_for_this_audit,none,"outputs/phaseA3/tables/*.csv",本轮新建审计输出目录,yes,"此前 outputs/phaseA3 不存在",仅含审计表，不代表模块3实验产物
+data,outputs/module3,missing,none,none,模块3历史输出目录,no,"find 未发现",尚无模块3正式输出
+data,outputs/phase4/cache/radiology_facts_eval.jsonl,available,Phase 4 radiology manifest,500 radiology facts,Phase 4 模块2事实缓存,yes,"wc -l=500",可用于 predicted facts 层评估
+data,outputs/phase4/cache/case_bundles_eval.jsonl,available,Phase 4 facts + assembler,253 case bundles,Phase 4 推荐输入缓存,yes,"wc -l=253",可用于 FlatRule/CDSG 初始输入
+data,outputs/phase4/results/recommendations_structured_rule.jsonl,available,case_bundles_eval,253 recommendations,Lung-RADS structured_rule baseline 输出,yes,"schema_valid_rate=1.0; insufficient_data_rate=0.3281",当前最接近模块3输出的产物
+data,outputs/phase4/results/recommendations_cue_only.jsonl,available,case_bundles_eval,253 cue-only recommendations,原文 cue baseline 输出,yes,"schema_valid_rate=0.0; actionable_rate=0.5415",可作弱 baseline 但 schema 不合格
+data,outputs/phase4/manifests/recommendation_eval.json,available,Phase 4 radiology facts,464 note-level samples,推荐评估 manifest,yes,"explicit_cue=166; rule_derived=166; insufficient_data=132",弱标签来源；不是 gold
+data,outputs/phase4/benchmark_summary.txt,available,Phase 4 benchmark outputs,summary text,Phase 4 总结,yes,"structured_rule guideline_anchor_presence_rate=0.6719",记录当前 baseline 水平
+data,outputs/phase5/datasets/*_train.jsonl,available,模块2提及级样本,201947 rows per task,模块2 train split,yes,"density/location/size train each 201947",不是模块3推荐 split
+data,outputs/phase5/datasets/*_val.jsonl,available,模块2提及级样本,44890 rows per task,模块2 val split,yes,"density/location/size val each 44890",可作为 predicted facts 训练评估来源
+data,outputs/phase5/datasets/*_test.jsonl,available,模块2提及级样本,42057 rows per task,模块2 test split,yes,"density/location/size test each 42057",subject-disjoint 但不是 case-level recommendation
+data,outputs/phase5/datasets/split_manifest.json,available,模块2 dataset build,split metadata,记录 subject-disjoint split,yes,"total_mentions=288894; total_subjects=33149; disjoint=true",可借鉴模块3 split 原则
+data,outputs/phase5_1/gold_eval_manifest.jsonl,available,manual/gold module2 eval,62 gold samples,模块2金标评估集,yes,"wc -l=62",可抽样转成 oracle facts 但无 recommendation gold
+data,outputs/phase5_1/gold_eval_metrics.json,available,gold_eval predictions,metrics json,模块2 gold 指标,yes,"density macro-F1=0.7003; size within_tolerance=0.9074",端到端误差传播参考
+label,随访建议 gold labels,missing,none,none,case-level recommendation gold,no,"未发现 expert_annotation/gold recommendation 文件",模块3主指标最大缺口
+split,module3 train/val/test split,missing,none,none,模块3推荐生成 split,no,"case_bundle split 当前多为 unlabeled",需要先构建 case-level split
