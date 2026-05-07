@@ -1,0 +1,7 @@
+file_name,source_path,P family,metric,suitable_for,note
+p1_max_seq_length_stage_1_auprc.svg,outputs/phaseA2_planB/figures/p1_max_seq_length_stage_1_auprc.svg,P1 max_seq_length,Density Stage 1 AUPRC,appendix,secondary parameter diagnostic; keep out of the main table to avoid widening the main text
+p1_max_seq_length_stage_2_macro_f1.svg,outputs/phaseA2_planB/figures/p1_max_seq_length_stage_2_macro_f1.svg,P1 max_seq_length,Density Stage 2 Macro-F1,main_text_candidate,justifies retaining len128 over len192 for Stage 2
+p2_quality_gate_stage_1_auprc.svg,outputs/phaseA2_planB/figures/p2_quality_gate_stage_1_auprc.svg,P2 quality_gate,Density Stage 1 AUPRC,appendix,secondary parameter diagnostic; keep out of the main table to avoid widening the main text
+p2_quality_gate_stage_2_macro_f1.svg,outputs/phaseA2_planB/figures/p2_quality_gate_stage_2_macro_f1.svg,P2 quality_gate,Density Stage 2 Macro-F1,main_text_candidate,justifies G3 gate selection for Stage 2
+p3_section_input_strategy_stage_1_auprc.svg,outputs/phaseA2_planB/figures/p3_section_input_strategy_stage_1_auprc.svg,P3 section/input strategy,Density Stage 1 AUPRC,appendix,secondary parameter diagnostic; keep out of the main table to avoid widening the main text
+p3_section_input_strategy_stage_2_macro_f1.svg,outputs/phaseA2_planB/figures/p3_section_input_strategy_stage_2_macro_f1.svg,P3 section/input strategy,Density Stage 2 Macro-F1,main_text_candidate,summarizes section-aware input choice for Stage 2

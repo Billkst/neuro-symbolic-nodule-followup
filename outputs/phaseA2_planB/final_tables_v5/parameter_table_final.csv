@@ -1,0 +1,19 @@
+Parameter Group,Parameter Type,Value,Tag,Seeds,Density Stage 1 AUPRC,Density Stage 1 F1,Density Stage 2 Macro-F1,Has-size F1,Notes
+P1 max_seq_length,numeric length scan,64,p1_len64,5,98.19 +/- 0.69,60.89 +/- 16.14,89.64 +/- 1.18,--,retained P1 scan
+P1 max_seq_length,numeric length scan,96,p1_len96,5,98.10 +/- 0.50,61.21 +/- 10.55,90.89 +/- 0.57,--,retained P1 scan
+P1 max_seq_length,numeric length scan,128,planb_full,5,98.82 +/- 0.41,97.48 +/- 0.24,91.05 +/- 0.54,--,retained P1 scan
+P1 max_seq_length,numeric length scan,160,p1_len160,5,98.79 +/- 0.41,70.99 +/- 9.83,91.17 +/- 0.38,--,retained P1 scan
+P1 max_seq_length,numeric length scan,192,p1_len192,5,98.80 +/- 0.51,68.45 +/- 7.35,91.70 +/- 0.49,--,retained P1 scan
+P2 quality gate,categorical design choice,G1,p2_g1,5,99.09 +/- 0.18,68.59 +/- 6.47,94.58 +/- 0.37,--,categorical gate option; not a continuous numerical parameter
+P2 quality gate,categorical design choice,G2,planb_full,5,98.82 +/- 0.41,97.48 +/- 0.24,91.05 +/- 0.54,--,categorical gate option; not a continuous numerical parameter
+P2 quality gate,categorical design choice,G3 (selected),p2_g3,5,99.35 +/- 0.20,97.96 +/- 0.28,96.83 +/- 0.18,--,categorical gate option; not a continuous numerical parameter
+P2 quality gate,categorical design choice,G4,p2_g4,5,98.80 +/- 0.28,66.95 +/- 5.95,91.32 +/- 0.81,--,categorical gate option; not a continuous numerical parameter
+P2 quality gate,categorical design choice,G5,p2_g5,5,99.09 +/- 0.27,94.35 +/- 1.94,88.62 +/- 1.22,--,categorical gate option; not a continuous numerical parameter
+P3 section/input strategy,categorical design choice,Mention only,p3_mention_text,5,41.84 +/- 8.80,37.51 +/- 8.46,74.09 +/- 2.31,--,categorical input-construction strategy; not a continuous numerical parameter
+P3 section/input strategy,categorical design choice,Section-aware (selected),planb_full,5,98.82 +/- 0.41,97.48 +/- 0.24,91.05 +/- 0.54,--,categorical input-construction strategy; not a continuous numerical parameter
+P3 section/input strategy,categorical design choice,Findings only,p3_findings_text,5,78.29 +/- 2.99,54.47 +/- 12.88,86.22 +/- 0.75,--,categorical input-construction strategy; not a continuous numerical parameter
+P3 section/input strategy,categorical design choice,Impression only,p3_impression_text,5,88.15 +/- 2.92,67.76 +/- 1.32,89.80 +/- 1.85,--,categorical input-construction strategy; not a continuous numerical parameter
+P3 section/input strategy,categorical design choice,Findings + impression,p3_findings_impression_text,5,79.33 +/- 4.64,62.10 +/- 3.65,86.76 +/- 0.32,--,categorical input-construction strategy; not a continuous numerical parameter
+P3 section/input strategy,categorical design choice,Full text,p3_full_text,5,79.33 +/- 4.64,62.10 +/- 3.65,86.76 +/- 0.32,--,categorical input-construction strategy; not a continuous numerical parameter
+Wave5 Has-size threshold,diagnostic decision-layer setting,threshold 0.882856 +/- 0.033658,size_wave5_lexical_bert_cue_lr,5,--,--,--,99.28 +/- 0.02,threshold tuned on phase5-like dev; Phase5 test not used for threshold
+Wave5 Has-size stacked head,diagnostic decision-layer setting,lexical + BERT + cue logistic-regression head,size_wave5_lexical_bert_cue_lr,5,--,--,--,99.28 +/- 0.02,test_truncated=false; test_sample_count=42057
