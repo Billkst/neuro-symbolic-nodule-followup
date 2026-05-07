@@ -1,0 +1,185 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neuro-symbolic-nodule-followup.local/schemas/module3_case_bundle_schema.json",
+  "title": "Module 3 CDSG Case Bundle Schema",
+  "description": "Executor-facing case bundle schema for Module 3 CDSG hard-rule inference. The schema is intentionally compatible with the existing unified case_bundle_schema while exposing the nodule facts consumed by the Clinical Decision State Graph.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["case_id", "radiology_facts"],
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable case identifier consumed by the CDSG executor."
+    },
+    "subject_id": {
+      "type": ["integer", "string", "null"],
+      "description": "Patient or subject identifier linked to the case."
+    },
+    "radiology_facts": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Existing Module 1/2 radiology fact records. The executor reads radiology_facts[].nodules[] as the canonical nodule source.",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["nodules"],
+        "properties": {
+          "note_id": {
+            "type": ["string", "integer", "null"],
+            "description": "Source radiology note identifier."
+          },
+          "subject_id": {
+            "type": ["integer", "string", "null"],
+            "description": "Subject identifier associated with the source radiology fact."
+          },
+          "nodule_count": {
+            "type": ["integer", "null"],
+            "minimum": 0,
+            "description": "Report-level nodule count when extracted."
+          },
+          "report_text": {
+            "type": ["string", "null"],
+            "description": "Source report text used only for provenance and evidence tracing."
+          },
+          "nodules": {
+            "type": "array",
+            "description": "Structured nodule facts consumed by symbolic hard matching.",
+            "items": {
+              "$ref": "#/$defs/nodule_fact"
+            }
+          }
+        }
+      }
+    },
+    "nodules": {
+      "type": "array",
+      "description": "Optional normalized nodule facts. This field is not required because the current repository stores nodules under radiology_facts[].nodules[].",
+      "items": {
+        "$ref": "#/$defs/nodule_fact"
+      }
+    },
+    "multiple_nodules": {
+      "type": ["boolean", "null"],
+      "description": "Optional case-level multiplicity flag. When absent, the executor derives multiplicity from available nodule counts."
+    },
+    "risk_flags": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Optional patient-level or case-level risk flags used by later Module 3 versions.",
+      "properties": {
+        "high_risk_screening": {
+          "type": ["boolean", "string", "null"],
+          "description": "High-risk screening status derived from smoking eligibility when available."
+        },
+        "heavy_smoker": {
+          "type": ["boolean", "string", "null"],
+          "description": "Qualitative or normalized heavy-smoking flag. M3-1 records it but does not run semantic fallback."
+        },
+        "pack_years": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "description": "Smoking pack-year value when extracted."
+        }
+      }
+    },
+    "smoking_eligibility": {
+      "type": ["object", "null"],
+      "additionalProperties": true,
+      "description": "Existing smoking eligibility block. Missing smoking information is non-blocking for the M3-1 Lung-RADS hard-rule path."
+    },
+    "source_confidence": {
+      "type": ["string", "number", "null"],
+      "description": "Optional case-level source confidence. Per-nodule confidence is preferred when available."
+    },
+    "missing_flags": {
+      "type": "array",
+      "uniqueItems": true,
+      "description": "Optional case-level missing flags.",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "nodule_fact": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "nodule_id_in_report": {
+          "type": ["integer", "string", "null"],
+          "description": "Nodule identifier within the source report."
+        },
+        "size_mm": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "description": "Measured nodule size in millimeters. This is a blocking fact for M3-1 hard-rule inference."
+        },
+        "size_text": {
+          "type": ["string", "null"],
+          "description": "Source text supporting size extraction."
+        },
+        "density_category": {
+          "type": ["string", "null"],
+          "description": "Normalized density category, e.g. solid, part_solid, ground_glass, calcified, fat_containing, unclear. Missing or unclear density is a blocking fact in M3-1 CDSG."
+        },
+        "density_text": {
+          "type": ["string", "null"],
+          "description": "Source text supporting density extraction."
+        },
+        "solid_component_mm": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "description": "Optional explicit solid-component size for part-solid nodules."
+        },
+        "location_lobe": {
+          "type": ["string", "null"],
+          "description": "Normalized lobe or lung location."
+        },
+        "location_text": {
+          "type": ["string", "null"],
+          "description": "Source text supporting location extraction."
+        },
+        "count_type": {
+          "type": ["string", "null"],
+          "description": "Single or multiple nodule descriptor."
+        },
+        "change_status": {
+          "type": ["string", "null"],
+          "description": "Temporal change status, such as new, stable, increased, or decreased."
+        },
+        "change_text": {
+          "type": ["string", "null"],
+          "description": "Source text supporting temporal change extraction."
+        },
+        "calcification": {
+          "type": ["boolean", "null"],
+          "description": "Calcification flag when extracted."
+        },
+        "spiculation": {
+          "type": ["boolean", "null"],
+          "description": "Spiculation flag. M3-1 records it but does not implement 4X logic."
+        },
+        "evidence_span": {
+          "type": ["string", "null"],
+          "description": "Source evidence span used to ground matched conditions."
+        },
+        "recommendation_cue": {
+          "type": ["string", "null"],
+          "description": "Report recommendation cue, retained for evidence only. The CDSG executor never copies it as the final recommendation."
+        },
+        "confidence": {
+          "type": ["string", "number", "null"],
+          "description": "Per-nodule source confidence from the upstream extractor."
+        },
+        "missing_flags": {
+          "type": "array",
+          "description": "Per-nodule missing flags from upstream extraction.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

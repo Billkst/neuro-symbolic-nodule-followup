@@ -1,0 +1,307 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neuro-symbolic-nodule-followup.local/schemas/module3_recommendation_schema.json",
+  "title": "Module 3 CDSG Recommendation Schema",
+  "description": "Standard output schema for Module 3 CDSG-constrained neuro-symbolic recommendation inference. Recommendations must come from terminal graph nodes or explicit abstention nodes, with the reasoning path and guideline anchors bound to actual graph execution.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "case_id",
+    "recommendation",
+    "recommendation_level",
+    "recommendation_action",
+    "followup_interval",
+    "followup_modality",
+    "risk_category",
+    "lung_rads_category",
+    "guideline_source",
+    "guideline_anchor",
+    "reasoning_path",
+    "missing_info",
+    "missing_information",
+    "evidence_quality",
+    "decision_path",
+    "visited_nodes",
+    "matched_edges",
+    "failed_conditions",
+    "abstention_reason",
+    "triggered_rules",
+    "input_facts_used",
+    "output_type",
+    "generation_metadata"
+  ],
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "recommendation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "action", "followup_interval", "followup_modality"],
+      "properties": {
+        "level": {
+          "type": "string",
+          "enum": ["routine_screening", "short_interval_followup", "diagnostic_workup", "tissue_sampling", "multidisciplinary_review", "no_followup_needed", "insufficient_data"]
+        },
+        "action": {
+          "type": "string",
+          "minLength": 1
+        },
+        "followup_interval": {
+          "oneOf": [
+            { "type": "string", "enum": ["immediate", "1_month", "3_months", "6_months", "12_months", "24_months", "none", "unspecified"] },
+            { "type": "null" }
+          ]
+        },
+        "followup_modality": {
+          "oneOf": [
+            { "type": "string", "enum": ["LDCT", "CT_with_contrast", "PET_CT", "biopsy", "bronchoscopy", "surgical_consultation", "clinical_followup", "chest_xray", "none"] },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "recommendation_level": {
+      "type": "string",
+      "enum": ["routine_screening", "short_interval_followup", "diagnostic_workup", "tissue_sampling", "multidisciplinary_review", "no_followup_needed", "insufficient_data"]
+    },
+    "recommendation_action": {
+      "type": "string",
+      "minLength": 1
+    },
+    "followup_interval": {
+      "oneOf": [
+        { "type": "string", "enum": ["immediate", "1_month", "3_months", "6_months", "12_months", "24_months", "none", "unspecified"] },
+        { "type": "null" }
+      ]
+    },
+    "followup_modality": {
+      "oneOf": [
+        { "type": "string", "enum": ["LDCT", "CT_with_contrast", "PET_CT", "biopsy", "bronchoscopy", "surgical_consultation", "clinical_followup", "chest_xray", "none"] },
+        { "type": "null" }
+      ]
+    },
+    "risk_category": {
+      "type": ["string", "null"],
+      "description": "Coarse risk/category label derived from the terminal graph node."
+    },
+    "lung_rads_category": {
+      "oneOf": [
+        { "type": "string", "enum": ["0", "1", "2", "3", "4A", "4B", "4X", "S"] },
+        { "type": "null" }
+      ]
+    },
+    "guideline_source": {
+      "type": "string",
+      "enum": ["Lung-RADS_v2022", "Fleischner_2017", "Chinese_Screening_2021", "Chinese_Clinical_2024", "NCCN_2018", "USPSTF_2021", "composite", "none"]
+    },
+    "guideline_anchor": {
+      "type": "array",
+      "description": "Guideline anchors bound to matched graph edges and terminal nodes.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["anchor_id", "source", "graph_element_id", "graph_element_type", "condition"],
+        "properties": {
+          "anchor_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source": {
+            "type": "string",
+            "minLength": 1
+          },
+          "graph_element_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "graph_element_type": {
+            "type": "string",
+            "enum": ["node", "edge", "modifier"]
+          },
+          "condition": {
+            "type": "string",
+            "minLength": 1
+          },
+          "text": {
+            "type": ["string", "null"]
+          }
+        }
+      }
+    },
+    "reasoning_path": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["step", "node_id", "edge_id", "condition", "matched", "match_type"],
+        "properties": {
+          "step": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "node_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "edge_id": {
+            "type": ["string", "null"]
+          },
+          "condition": {
+            "type": "string",
+            "minLength": 1
+          },
+          "matched": {
+            "type": "boolean"
+          },
+          "match_type": {
+            "type": "string",
+            "enum": ["hard", "terminal", "modifier", "abstention"]
+          },
+          "evidence_span": {
+            "type": ["string", "null"]
+          },
+          "facts_used": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      }
+    },
+    "missing_info": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "missing_information": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Compatibility alias for existing recommendation metrics."
+    },
+    "evidence_quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["overall", "fact_confidence", "source_confidence", "notes"],
+      "properties": {
+        "overall": {
+          "type": "string",
+          "enum": ["high", "medium", "low", "insufficient"]
+        },
+        "fact_confidence": {
+          "type": ["string", "number", "null"]
+        },
+        "source_confidence": {
+          "type": ["string", "number", "null"]
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "decision_path": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "visited_nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "matched_edges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "failed_conditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["node_id", "edge_id", "condition", "reason", "missing_fields"],
+        "properties": {
+          "node_id": {
+            "type": "string"
+          },
+          "edge_id": {
+            "type": "string"
+          },
+          "condition": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "missing_fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "abstention_reason": {
+      "type": ["string", "null"]
+    },
+    "triggered_rules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "input_facts_used": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["nodule_size_mm", "nodule_density", "nodule_count", "change_status", "patient_risk_level", "smoking_eligible"]
+    },
+    "output_type": {
+      "type": "string",
+      "enum": ["cdsg_rule_based"]
+    },
+    "generation_metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["engine_version", "generation_timestamp", "rules_version", "graph_id", "graph_version", "terminal_node_id"],
+      "properties": {
+        "engine_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "generation_timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "rules_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "graph_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "graph_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "terminal_node_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

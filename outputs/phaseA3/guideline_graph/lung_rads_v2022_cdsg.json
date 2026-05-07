@@ -1,0 +1,812 @@
+{
+  "graph_id": "lung_rads_v2022_cdsg_mvp",
+  "graph_name": "Lung-RADS v2022 CDSG MVP",
+  "version": "0.1.0",
+  "guideline_source": "Lung-RADS_v2022",
+  "rules_version": "lung_rads_v2022_cdsg_mvp_0.1",
+  "entry_node": "START",
+  "description": "Hard-rule Clinical Decision State Graph covering the minimal Lung-RADS v2022 rule scope already implemented by the flat Lung-RADS baseline. M3-1 excludes soft match, NLI, RAG, LLM generation, and GPU training.",
+  "decision_policy": {
+    "candidate_source": "radiology_facts[].nodules[]",
+    "dominant_selection": "highest_terminal_severity_then_size",
+    "missing_size_policy": "abstain",
+    "missing_density_policy": "abstain",
+    "unsupported_density_policy": "abstain",
+    "missing_smoking_eligibility_policy": "record_nonblocking_missing_info",
+    "terminal_recommendation_policy": "template_from_terminal_node"
+  },
+  "category_order": {
+    "0": 0,
+    "1": 1,
+    "2": 2,
+    "3": 3,
+    "4A": 4,
+    "4B": 5,
+    "4X": 6,
+    "S": 7
+  },
+  "recommendation_templates": {
+    "2": {
+      "recommendation_level": "routine_screening",
+      "recommendation_action": "继续 annual LDCT 筛查，12 个月后复查。",
+      "followup_interval": "12_months",
+      "followup_modality": "LDCT"
+    },
+    "3": {
+      "recommendation_level": "short_interval_followup",
+      "recommendation_action": "建议 6 个月后复查 LDCT。",
+      "followup_interval": "6_months",
+      "followup_modality": "LDCT"
+    },
+    "4A_existing": {
+      "recommendation_level": "short_interval_followup",
+      "recommendation_action": "建议 3 个月后复查 LDCT，必要时补充 PET-CT。",
+      "followup_interval": "3_months",
+      "followup_modality": "LDCT"
+    },
+    "4A_new": {
+      "recommendation_level": "diagnostic_workup",
+      "recommendation_action": "建议尽快进入诊断性评估，可行 PET-CT，并在 3 个月内完成复评。",
+      "followup_interval": "3_months",
+      "followup_modality": "PET_CT"
+    },
+    "4B": {
+      "recommendation_level": "tissue_sampling",
+      "recommendation_action": "建议立即进一步诊断评估，优先考虑组织取样或 PET-CT。",
+      "followup_interval": "immediate",
+      "followup_modality": "biopsy"
+    },
+    "insufficient_data": {
+      "recommendation_level": "insufficient_data",
+      "recommendation_action": "缺少足够结构化事实，当前只能返回 insufficient_data。",
+      "followup_interval": null,
+      "followup_modality": null
+    }
+  },
+  "nodes": [
+    {
+      "node_id": "START",
+      "node_type": "start",
+      "description": "Start Lung-RADS hard-rule graph execution."
+    },
+    {
+      "node_id": "REQUIRE_NODULE",
+      "node_type": "decision",
+      "description": "Require at least one structured nodule candidate."
+    },
+    {
+      "node_id": "REQUIRE_SIZE",
+      "node_type": "decision",
+      "description": "Require numeric nodule size before Lung-RADS threshold routing."
+    },
+    {
+      "node_id": "REQUIRE_DENSITY",
+      "node_type": "decision",
+      "description": "Require explicit density class before hard symbolic routing."
+    },
+    {
+      "node_id": "SOLID_NEW_SIZE",
+      "node_type": "decision",
+      "description": "New solid nodule size thresholds."
+    },
+    {
+      "node_id": "SOLID_EXISTING_SIZE",
+      "node_type": "decision",
+      "description": "Baseline or non-new solid nodule size thresholds."
+    },
+    {
+      "node_id": "PART_SOLID_EXISTING_SIZE",
+      "node_type": "decision",
+      "description": "Baseline or non-new part-solid nodule size and solid-component thresholds."
+    },
+    {
+      "node_id": "GROUND_GLASS_NEW_SIZE",
+      "node_type": "decision",
+      "description": "New ground-glass nodule size thresholds."
+    },
+    {
+      "node_id": "GROUND_GLASS_EXISTING_SIZE",
+      "node_type": "decision",
+      "description": "Baseline or non-new ground-glass nodule size thresholds."
+    },
+    {
+      "node_id": "T_BENIGN_ATTENUATION_CAT2",
+      "node_type": "terminal_recommendation",
+      "lung_rads_category": "2",
+      "risk_category": "benign_or_indolent",
+      "recommendation_template": "2",
+      "severity": 2,
+      "triggered_rule": "benign_density_category_2",
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_BENIGN_ATTENUATION_CAT2",
+        "source": "Lung-RADS_v2022",
+        "condition": "benign attenuation pattern -> category 2",
+        "text": "Benign attenuation pattern treated as Lung-RADS category 2 in minimal engine."
+      }
+    },
+    {
+      "node_id": "T_SOLID_NEW_LT4_CAT2",
+      "node_type": "terminal_recommendation",
+      "lung_rads_category": "2",
+      "risk_category": "benign_or_indolent",
+      "recommendation_template": "2",
+      "severity": 2,
+      "triggered_rule": "solid_new_lt4_category_2",
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_SOLID_NEW_LT4_CAT2",
+        "source": "Lung-RADS_v2022",
+        "condition": "new solid nodule < 4 mm",
+        "text": "New solid nodule < 4 mm -> category 2 with annual screening."
+      }
+    },
+    {
+      "node_id": "T_SOLID_NEW_4_7_CAT3",
+      "node_type": "terminal_recommendation",
+      "lung_rads_category": "3",
+      "risk_category": "probably_benign",
+      "recommendation_template": "3",
+      "severity": 3,
+      "triggered_rule": "solid_new_4_to_7_category_3",
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_SOLID_NEW_4_7_CAT3",
+        "source": "Lung-RADS_v2022",
+        "condition": "new solid nodule >= 4 mm and < 8 mm",
+        "text": "New solid nodule 4-7 mm -> category 3 with 6-month follow-up."
+      }
+    },
+    {
+      "node_id": "T_SOLID_NEW_8_14_CAT4A",
+      "node_type": "terminal_recommendation",
+      "lung_rads_category": "4A",
+      "risk_category": "suspicious",
+      "recommendation_template": "4A_new",
+      "severity": 4,
+      "triggered_rule": "solid_new_8_to_14_category_4A",
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_SOLID_NEW_8_14_CAT4A",
+        "source": "Lung-RADS_v2022",
+        "condition": "new solid nodule >= 8 mm and < 15 mm",
+        "text": "New solid nodule 8-14 mm -> category 4A with diagnostic workup or short follow-up."
+      }
+    },
+    {
+      "node_id": "T_SOLID_NEW_GE15_CAT4B",
+      "node_type": "terminal_recommendation",
+      "lung_rads_category": "4B",
+      "risk_category": "very_suspicious",
+      "recommendation_template": "4B",
+      "severity": 5,
+      "triggered_rule": "solid_new_ge15_category_4B",
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_SOLID_NEW_GE15_CAT4B",
+        "source": "Lung-RADS_v2022",
+        "condition": "new solid nodule >= 15 mm",
+        "text": "New solid nodule >= 15 mm -> category 4B with immediate workup."
+      }
+    },
+    {
+      "node_id": "T_SOLID_LT6_CAT2",
+      "node_type": "terminal_recommendation",
+      "lung_rads_category": "2",
+      "risk_category": "benign_or_indolent",
+      "recommendation_template": "2",
+      "severity": 2,
+      "triggered_rule": "solid_lt6_category_2",
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_SOLID_LT6_CAT2",
+        "source": "Lung-RADS_v2022",
+        "condition": "solid nodule < 6 mm",
+        "text": "Solid nodule < 6 mm -> category 2 with annual screening."
+      }
+    },
+    {
+      "node_id": "T_SOLID_6_7_CAT3",
+      "node_type": "terminal_recommendation",
+      "lung_rads_category": "3",
+      "risk_category": "probably_benign",
+      "recommendation_template": "3",
+      "severity": 3,
+      "triggered_rule": "solid_6_to_7_category_3",
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_SOLID_6_7_CAT3",
+        "source": "Lung-RADS_v2022",
+        "condition": "solid nodule >= 6 mm and < 8 mm",
+        "text": "Solid nodule 6-7 mm -> category 3 with 6-month follow-up."
+      }
+    },
+    {
+      "node_id": "T_SOLID_8_14_CAT4A",
+      "node_type": "terminal_recommendation",
+      "lung_rads_category": "4A",
+      "risk_category": "suspicious",
+      "recommendation_template": "4A_existing",
+      "severity": 4,
+      "triggered_rule": "solid_8_to_14_category_4A",
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_SOLID_8_14_CAT4A",
+        "source": "Lung-RADS_v2022",
+        "condition": "solid nodule >= 8 mm and < 15 mm",
+        "text": "Solid nodule 8-14 mm -> category 4A with 3-month follow-up or PET-CT."
+      }
+    },
+    {
+      "node_id": "T_SOLID_GE15_CAT4B",
+      "node_type": "terminal_recommendation",
+      "lung_rads_category": "4B",
+      "risk_category": "very_suspicious",
+      "recommendation_template": "4B",
+      "severity": 5,
+      "triggered_rule": "solid_ge15_category_4B",
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_SOLID_GE15_CAT4B",
+        "source": "Lung-RADS_v2022",
+        "condition": "solid nodule >= 15 mm",
+        "text": "Solid nodule >= 15 mm -> category 4B with immediate diagnostic action."
+      }
+    },
+    {
+      "node_id": "T_PART_SOLID_NEW_CAT3",
+      "node_type": "terminal_recommendation",
+      "lung_rads_category": "3",
+      "risk_category": "probably_benign",
+      "recommendation_template": "3",
+      "severity": 3,
+      "triggered_rule": "part_solid_new_category_3",
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_PART_SOLID_NEW_CAT3",
+        "source": "Lung-RADS_v2022",
+        "condition": "new part-solid nodule",
+        "text": "New part-solid nodule -> category 3 with 6-month follow-up."
+      }
+    },
+    {
+      "node_id": "T_PART_SOLID_LT6_CAT2",
+      "node_type": "terminal_recommendation",
+      "lung_rads_category": "2",
+      "risk_category": "benign_or_indolent",
+      "recommendation_template": "2",
+      "severity": 2,
+      "triggered_rule": "part_solid_lt6_category_2",
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_PART_SOLID_LT6_CAT2",
+        "source": "Lung-RADS_v2022",
+        "condition": "part-solid nodule < 6 mm",
+        "text": "Part-solid nodule < 6 mm -> category 2 with annual screening."
+      }
+    },
+    {
+      "node_id": "T_PART_SOLID_GE6_MISSING_SOLID_COMPONENT_CAT4A",
+      "node_type": "terminal_recommendation",
+      "lung_rads_category": "4A",
+      "risk_category": "suspicious",
+      "recommendation_template": "4A_existing",
+      "severity": 4,
+      "triggered_rule": "part_solid_missing_solid_component_conservative_4A",
+      "adds_missing_info": ["solid_component_mm"],
+      "adds_evidence_note": "part-solid 结节缺少 solid component，按保守 4A 处理。",
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_PART_SOLID_GE6_MISSING_SOLID_COMPONENT_CAT4A",
+        "source": "Lung-RADS_v2022",
+        "condition": "part-solid nodule >= 6 mm with missing solid component",
+        "text": "Part-solid nodule >= 6 mm with missing solid component -> conservative category 4A fallback."
+      }
+    },
+    {
+      "node_id": "T_PART_SOLID_GE6_SOLID_COMPONENT_LT6_CAT3",
+      "node_type": "terminal_recommendation",
+      "lung_rads_category": "3",
+      "risk_category": "probably_benign",
+      "recommendation_template": "3",
+      "severity": 3,
+      "triggered_rule": "part_solid_ge6_solid_component_lt6_category_3",
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_PART_SOLID_GE6_SOLID_COMPONENT_LT6_CAT3",
+        "source": "Lung-RADS_v2022",
+        "condition": "part-solid nodule >= 6 mm with solid component < 6 mm",
+        "text": "Part-solid nodule >= 6 mm with solid component < 6 mm -> category 3."
+      }
+    },
+    {
+      "node_id": "T_PART_SOLID_GE6_SOLID_COMPONENT_GE6_CAT4A",
+      "node_type": "terminal_recommendation",
+      "lung_rads_category": "4A",
+      "risk_category": "suspicious",
+      "recommendation_template": "4A_existing",
+      "severity": 4,
+      "triggered_rule": "part_solid_ge6_solid_component_ge6_category_4A",
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_PART_SOLID_GE6_SOLID_COMPONENT_GE6_CAT4A",
+        "source": "Lung-RADS_v2022",
+        "condition": "part-solid nodule >= 6 mm with solid component >= 6 mm",
+        "text": "Part-solid nodule >= 6 mm with solid component >= 6 mm -> category 4A."
+      }
+    },
+    {
+      "node_id": "T_GGO_NEW_LT30_CAT2",
+      "node_type": "terminal_recommendation",
+      "lung_rads_category": "2",
+      "risk_category": "benign_or_indolent",
+      "recommendation_template": "2",
+      "severity": 2,
+      "triggered_rule": "ground_glass_new_lt30_category_2",
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_GGO_NEW_LT30_CAT2",
+        "source": "Lung-RADS_v2022",
+        "condition": "new ground-glass nodule < 30 mm",
+        "text": "New ground-glass nodule < 30 mm -> category 2 with annual follow-up."
+      }
+    },
+    {
+      "node_id": "T_GGO_NEW_GE30_CAT3",
+      "node_type": "terminal_recommendation",
+      "lung_rads_category": "3",
+      "risk_category": "probably_benign",
+      "recommendation_template": "3",
+      "severity": 3,
+      "triggered_rule": "ground_glass_new_ge30_category_3",
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_GGO_NEW_GE30_CAT3",
+        "source": "Lung-RADS_v2022",
+        "condition": "new ground-glass nodule >= 30 mm",
+        "text": "New ground-glass nodule >= 30 mm -> category 3 with 6-month follow-up."
+      }
+    },
+    {
+      "node_id": "T_GGO_LT30_CAT2",
+      "node_type": "terminal_recommendation",
+      "lung_rads_category": "2",
+      "risk_category": "benign_or_indolent",
+      "recommendation_template": "2",
+      "severity": 2,
+      "triggered_rule": "ground_glass_lt30_category_2",
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_GGO_LT30_CAT2",
+        "source": "Lung-RADS_v2022",
+        "condition": "ground-glass nodule < 30 mm",
+        "text": "Ground-glass nodule < 30 mm -> category 2 with annual screening."
+      }
+    },
+    {
+      "node_id": "T_GGO_GE30_CAT3",
+      "node_type": "terminal_recommendation",
+      "lung_rads_category": "3",
+      "risk_category": "probably_benign",
+      "recommendation_template": "3",
+      "severity": 3,
+      "triggered_rule": "ground_glass_ge30_category_3",
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_GGO_GE30_CAT3",
+        "source": "Lung-RADS_v2022",
+        "condition": "ground-glass nodule >= 30 mm",
+        "text": "Ground-glass nodule >= 30 mm -> category 3 with 6-month follow-up."
+      }
+    },
+    {
+      "node_id": "A_NO_NODULE",
+      "node_type": "terminal_abstention",
+      "lung_rads_category": null,
+      "risk_category": "insufficient_data",
+      "recommendation_template": "insufficient_data",
+      "severity": -1,
+      "triggered_rule": "fallback_no_nodule",
+      "abstention_reason": "no_structured_nodule",
+      "missing_info": ["nodule"],
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_ABSTAIN_NO_NODULE",
+        "source": "Lung-RADS_v2022",
+        "condition": "no structured nodule candidate",
+        "text": "No terminal Lung-RADS recommendation is emitted when no structured nodule is available."
+      }
+    },
+    {
+      "node_id": "A_MISSING_SIZE",
+      "node_type": "terminal_abstention",
+      "lung_rads_category": null,
+      "risk_category": "insufficient_data",
+      "recommendation_template": "insufficient_data",
+      "severity": -1,
+      "triggered_rule": "fallback_missing_size",
+      "abstention_reason": "missing_nodule_size",
+      "missing_info": ["nodule_size"],
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_ABSTAIN_MISSING_SIZE",
+        "source": "Lung-RADS_v2022",
+        "condition": "nodule size is required for Lung-RADS threshold routing",
+        "text": "缺少 size_mm，无法进入 Lung-RADS 尺寸分支。"
+      }
+    },
+    {
+      "node_id": "A_MISSING_DENSITY",
+      "node_type": "terminal_abstention",
+      "lung_rads_category": null,
+      "risk_category": "insufficient_data",
+      "recommendation_template": "insufficient_data",
+      "severity": -1,
+      "triggered_rule": "fallback_missing_density",
+      "abstention_reason": "missing_nodule_density",
+      "missing_info": ["density_category"],
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_ABSTAIN_MISSING_DENSITY",
+        "source": "Lung-RADS_v2022",
+        "condition": "explicit nodule density is required for hard symbolic routing",
+        "text": "缺少明确 density_category，M3-1 CDSG 不按 solid 路径自由补全。"
+      }
+    },
+    {
+      "node_id": "A_UNSUPPORTED_DENSITY",
+      "node_type": "terminal_abstention",
+      "lung_rads_category": null,
+      "risk_category": "insufficient_data",
+      "recommendation_template": "insufficient_data",
+      "severity": -1,
+      "triggered_rule": "fallback_unsupported_density",
+      "abstention_reason": "unsupported_nodule_density",
+      "missing_info": ["density_category"],
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_ABSTAIN_UNSUPPORTED_DENSITY",
+        "source": "Lung-RADS_v2022",
+        "condition": "density outside M3-1 supported rule set",
+        "text": "Density is outside the M3-1 hard-rule graph scope."
+      }
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "E_START",
+      "from": "START",
+      "to": "REQUIRE_NODULE",
+      "priority": 1,
+      "condition": { "op": "always" },
+      "condition_text": "start graph execution",
+      "reasoning_template": "enter Lung-RADS CDSG hard-rule graph"
+    },
+    {
+      "edge_id": "E_NO_NODULE",
+      "from": "REQUIRE_NODULE",
+      "to": "A_NO_NODULE",
+      "priority": 1,
+      "condition": { "op": "equals", "fact": "has_nodule", "value": false },
+      "condition_text": "has_nodule == false",
+      "reasoning_template": "no structured nodule candidate is available"
+    },
+    {
+      "edge_id": "E_HAS_NODULE",
+      "from": "REQUIRE_NODULE",
+      "to": "REQUIRE_SIZE",
+      "priority": 2,
+      "condition": { "op": "equals", "fact": "has_nodule", "value": true },
+      "condition_text": "has_nodule == true",
+      "reasoning_template": "structured nodule candidate found"
+    },
+    {
+      "edge_id": "E_MISSING_SIZE",
+      "from": "REQUIRE_SIZE",
+      "to": "A_MISSING_SIZE",
+      "priority": 1,
+      "condition": { "op": "missing", "fact": "size_mm" },
+      "condition_text": "size_mm is missing",
+      "reasoning_template": "size_mm is required but missing"
+    },
+    {
+      "edge_id": "E_HAS_SIZE",
+      "from": "REQUIRE_SIZE",
+      "to": "REQUIRE_DENSITY",
+      "priority": 2,
+      "condition": { "op": "exists", "fact": "size_mm" },
+      "condition_text": "size_mm exists",
+      "reasoning_template": "numeric size available for hard thresholds"
+    },
+    {
+      "edge_id": "E_MISSING_DENSITY",
+      "from": "REQUIRE_DENSITY",
+      "to": "A_MISSING_DENSITY",
+      "priority": 1,
+      "condition": { "op": "missing_or_in", "fact": "density", "values": [null, "", "unclear", "unknown"] },
+      "condition_text": "density is missing or unclear",
+      "reasoning_template": "explicit density is required for symbolic routing"
+    },
+    {
+      "edge_id": "E_BENIGN_DENSITY",
+      "from": "REQUIRE_DENSITY",
+      "to": "T_BENIGN_ATTENUATION_CAT2",
+      "priority": 2,
+      "condition": { "op": "in", "fact": "density", "values": ["calcified", "fat_containing"] },
+      "condition_text": "density in {calcified, fat_containing}",
+      "reasoning_template": "benign attenuation pattern"
+    },
+    {
+      "edge_id": "E_SOLID_NEW",
+      "from": "REQUIRE_DENSITY",
+      "to": "SOLID_NEW_SIZE",
+      "priority": 3,
+      "condition": {
+        "op": "all",
+        "conditions": [
+          { "op": "equals", "fact": "density", "value": "solid" },
+          { "op": "equals", "fact": "is_new", "value": true }
+        ]
+      },
+      "condition_text": "density == solid and change_status == new",
+      "reasoning_template": "route to new solid nodule thresholds"
+    },
+    {
+      "edge_id": "E_SOLID_EXISTING",
+      "from": "REQUIRE_DENSITY",
+      "to": "SOLID_EXISTING_SIZE",
+      "priority": 4,
+      "condition": { "op": "equals", "fact": "density", "value": "solid" },
+      "condition_text": "density == solid",
+      "reasoning_template": "route to baseline solid nodule thresholds"
+    },
+    {
+      "edge_id": "E_PART_SOLID_NEW",
+      "from": "REQUIRE_DENSITY",
+      "to": "T_PART_SOLID_NEW_CAT3",
+      "priority": 5,
+      "condition": {
+        "op": "all",
+        "conditions": [
+          { "op": "equals", "fact": "density", "value": "part_solid" },
+          { "op": "equals", "fact": "is_new", "value": true }
+        ]
+      },
+      "condition_text": "density == part_solid and change_status == new",
+      "reasoning_template": "new part-solid nodule terminal path"
+    },
+    {
+      "edge_id": "E_PART_SOLID_EXISTING",
+      "from": "REQUIRE_DENSITY",
+      "to": "PART_SOLID_EXISTING_SIZE",
+      "priority": 6,
+      "condition": { "op": "equals", "fact": "density", "value": "part_solid" },
+      "condition_text": "density == part_solid",
+      "reasoning_template": "route to part-solid nodule thresholds"
+    },
+    {
+      "edge_id": "E_GGO_NEW",
+      "from": "REQUIRE_DENSITY",
+      "to": "GROUND_GLASS_NEW_SIZE",
+      "priority": 7,
+      "condition": {
+        "op": "all",
+        "conditions": [
+          { "op": "equals", "fact": "density", "value": "ground_glass" },
+          { "op": "equals", "fact": "is_new", "value": true }
+        ]
+      },
+      "condition_text": "density == ground_glass and change_status == new",
+      "reasoning_template": "route to new ground-glass nodule thresholds"
+    },
+    {
+      "edge_id": "E_GGO_EXISTING",
+      "from": "REQUIRE_DENSITY",
+      "to": "GROUND_GLASS_EXISTING_SIZE",
+      "priority": 8,
+      "condition": { "op": "equals", "fact": "density", "value": "ground_glass" },
+      "condition_text": "density == ground_glass",
+      "reasoning_template": "route to ground-glass nodule thresholds"
+    },
+    {
+      "edge_id": "E_UNSUPPORTED_DENSITY",
+      "from": "REQUIRE_DENSITY",
+      "to": "A_UNSUPPORTED_DENSITY",
+      "priority": 99,
+      "condition": { "op": "always" },
+      "condition_text": "density outside supported set",
+      "reasoning_template": "density outside hard-rule graph scope"
+    },
+    {
+      "edge_id": "E_SOLID_NEW_LT4",
+      "from": "SOLID_NEW_SIZE",
+      "to": "T_SOLID_NEW_LT4_CAT2",
+      "priority": 1,
+      "condition": { "op": "lt", "fact": "size_mm", "value": 4 },
+      "condition_text": "size_mm < 4",
+      "reasoning_template": "new solid nodule < 4 mm"
+    },
+    {
+      "edge_id": "E_SOLID_NEW_4_7",
+      "from": "SOLID_NEW_SIZE",
+      "to": "T_SOLID_NEW_4_7_CAT3",
+      "priority": 2,
+      "condition": { "op": "range", "fact": "size_mm", "gte": 4, "lt": 8 },
+      "condition_text": "4 <= size_mm < 8",
+      "reasoning_template": "new solid nodule 4-7 mm"
+    },
+    {
+      "edge_id": "E_SOLID_NEW_8_14",
+      "from": "SOLID_NEW_SIZE",
+      "to": "T_SOLID_NEW_8_14_CAT4A",
+      "priority": 3,
+      "condition": { "op": "range", "fact": "size_mm", "gte": 8, "lt": 15 },
+      "condition_text": "8 <= size_mm < 15",
+      "reasoning_template": "new solid nodule 8-14 mm"
+    },
+    {
+      "edge_id": "E_SOLID_NEW_GE15",
+      "from": "SOLID_NEW_SIZE",
+      "to": "T_SOLID_NEW_GE15_CAT4B",
+      "priority": 4,
+      "condition": { "op": "gte", "fact": "size_mm", "value": 15 },
+      "condition_text": "size_mm >= 15",
+      "reasoning_template": "new solid nodule >= 15 mm"
+    },
+    {
+      "edge_id": "E_SOLID_LT6",
+      "from": "SOLID_EXISTING_SIZE",
+      "to": "T_SOLID_LT6_CAT2",
+      "priority": 1,
+      "condition": { "op": "lt", "fact": "size_mm", "value": 6 },
+      "condition_text": "size_mm < 6",
+      "reasoning_template": "solid nodule < 6 mm"
+    },
+    {
+      "edge_id": "E_SOLID_6_7",
+      "from": "SOLID_EXISTING_SIZE",
+      "to": "T_SOLID_6_7_CAT3",
+      "priority": 2,
+      "condition": { "op": "range", "fact": "size_mm", "gte": 6, "lt": 8 },
+      "condition_text": "6 <= size_mm < 8",
+      "reasoning_template": "solid nodule 6-7 mm"
+    },
+    {
+      "edge_id": "E_SOLID_8_14",
+      "from": "SOLID_EXISTING_SIZE",
+      "to": "T_SOLID_8_14_CAT4A",
+      "priority": 3,
+      "condition": { "op": "range", "fact": "size_mm", "gte": 8, "lt": 15 },
+      "condition_text": "8 <= size_mm < 15",
+      "reasoning_template": "solid nodule 8-14 mm"
+    },
+    {
+      "edge_id": "E_SOLID_GE15",
+      "from": "SOLID_EXISTING_SIZE",
+      "to": "T_SOLID_GE15_CAT4B",
+      "priority": 4,
+      "condition": { "op": "gte", "fact": "size_mm", "value": 15 },
+      "condition_text": "size_mm >= 15",
+      "reasoning_template": "solid nodule >= 15 mm"
+    },
+    {
+      "edge_id": "E_PART_SOLID_LT6",
+      "from": "PART_SOLID_EXISTING_SIZE",
+      "to": "T_PART_SOLID_LT6_CAT2",
+      "priority": 1,
+      "condition": { "op": "lt", "fact": "size_mm", "value": 6 },
+      "condition_text": "size_mm < 6",
+      "reasoning_template": "part-solid nodule < 6 mm"
+    },
+    {
+      "edge_id": "E_PART_SOLID_GE6_MISSING_SOLID_COMPONENT",
+      "from": "PART_SOLID_EXISTING_SIZE",
+      "to": "T_PART_SOLID_GE6_MISSING_SOLID_COMPONENT_CAT4A",
+      "priority": 2,
+      "condition": {
+        "op": "all",
+        "conditions": [
+          { "op": "gte", "fact": "size_mm", "value": 6 },
+          { "op": "missing", "fact": "solid_component_mm" }
+        ]
+      },
+      "condition_text": "size_mm >= 6 and solid_component_mm is missing",
+      "reasoning_template": "part-solid nodule >= 6 mm without explicit solid component"
+    },
+    {
+      "edge_id": "E_PART_SOLID_GE6_SOLID_COMPONENT_LT6",
+      "from": "PART_SOLID_EXISTING_SIZE",
+      "to": "T_PART_SOLID_GE6_SOLID_COMPONENT_LT6_CAT3",
+      "priority": 3,
+      "condition": {
+        "op": "all",
+        "conditions": [
+          { "op": "gte", "fact": "size_mm", "value": 6 },
+          { "op": "lt", "fact": "solid_component_mm", "value": 6 }
+        ]
+      },
+      "condition_text": "size_mm >= 6 and solid_component_mm < 6",
+      "reasoning_template": "part-solid nodule >= 6 mm with solid component < 6 mm"
+    },
+    {
+      "edge_id": "E_PART_SOLID_GE6_SOLID_COMPONENT_GE6",
+      "from": "PART_SOLID_EXISTING_SIZE",
+      "to": "T_PART_SOLID_GE6_SOLID_COMPONENT_GE6_CAT4A",
+      "priority": 4,
+      "condition": {
+        "op": "all",
+        "conditions": [
+          { "op": "gte", "fact": "size_mm", "value": 6 },
+          { "op": "gte", "fact": "solid_component_mm", "value": 6 }
+        ]
+      },
+      "condition_text": "size_mm >= 6 and solid_component_mm >= 6",
+      "reasoning_template": "part-solid nodule >= 6 mm with solid component >= 6 mm"
+    },
+    {
+      "edge_id": "E_GGO_NEW_LT30",
+      "from": "GROUND_GLASS_NEW_SIZE",
+      "to": "T_GGO_NEW_LT30_CAT2",
+      "priority": 1,
+      "condition": { "op": "lt", "fact": "size_mm", "value": 30 },
+      "condition_text": "size_mm < 30",
+      "reasoning_template": "new ground-glass nodule < 30 mm"
+    },
+    {
+      "edge_id": "E_GGO_NEW_GE30",
+      "from": "GROUND_GLASS_NEW_SIZE",
+      "to": "T_GGO_NEW_GE30_CAT3",
+      "priority": 2,
+      "condition": { "op": "gte", "fact": "size_mm", "value": 30 },
+      "condition_text": "size_mm >= 30",
+      "reasoning_template": "new ground-glass nodule >= 30 mm"
+    },
+    {
+      "edge_id": "E_GGO_LT30",
+      "from": "GROUND_GLASS_EXISTING_SIZE",
+      "to": "T_GGO_LT30_CAT2",
+      "priority": 1,
+      "condition": { "op": "lt", "fact": "size_mm", "value": 30 },
+      "condition_text": "size_mm < 30",
+      "reasoning_template": "ground-glass nodule < 30 mm"
+    },
+    {
+      "edge_id": "E_GGO_GE30",
+      "from": "GROUND_GLASS_EXISTING_SIZE",
+      "to": "T_GGO_GE30_CAT3",
+      "priority": 2,
+      "condition": { "op": "gte", "fact": "size_mm", "value": 30 },
+      "condition_text": "size_mm >= 30",
+      "reasoning_template": "ground-glass nodule >= 30 mm"
+    }
+  ],
+  "modifiers": [
+    {
+      "modifier_id": "M_STABLE_GE_2Y_DOWNGRADE_TO_2",
+      "condition": {
+        "op": "all",
+        "conditions": [
+          { "op": "equals", "fact": "stable_for_two_years", "value": true },
+          { "op": "in", "fact": "lung_rads_category", "values": ["3", "4A"] }
+        ]
+      },
+      "condition_text": "change_status == stable and text indicates stability for at least 2 years and category in {3, 4A}",
+      "new_lung_rads_category": "2",
+      "recommendation_template": "2",
+      "triggered_rule": "stable_ge_2y_downgrade_to_2",
+      "adds_evidence_note": "稳定至少 2 年，按类别 2 处理。",
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_MODIFIER_STABLE_GE_2Y",
+        "source": "Lung-RADS_v2022",
+        "condition": "stable for at least 2 years -> downgrade to category 2 in minimal engine",
+        "text": "Stability for at least 2 years downgrades eligible category 3/4A nodules to category 2."
+      }
+    },
+    {
+      "modifier_id": "M_GROWTH_UPGRADE_ONE_CATEGORY",
+      "condition": { "op": "equals", "fact": "change_status", "value": "increased" },
+      "condition_text": "change_status == increased",
+      "upgrade_category_by_one": true,
+      "triggered_rule": "growth_modifier_upgrade",
+      "adds_evidence_note": "存在增长证据，类别上调一级。",
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_MODIFIER_GROWTH_UPGRADE",
+        "source": "Lung-RADS_v2022",
+        "condition": "interval growth -> upgrade one category in minimal engine",
+        "text": "Interval growth upgrades the baseline category by one level in the minimal engine."
+      }
+    },
+    {
+      "modifier_id": "M_DECREASE_MAINTAIN",
+      "condition": { "op": "equals", "fact": "change_status", "value": "decreased" },
+      "condition_text": "change_status == decreased",
+      "maintain_category": true,
+      "triggered_rule": "decrease_modifier_maintain",
+      "adds_evidence_note": "存在缩小证据，维持当前类别并提示改善。",
+      "guideline_anchor": {
+        "anchor_id": "LR2022_MVP_MODIFIER_DECREASE_MAINTAIN",
+        "source": "Lung-RADS_v2022",
+        "condition": "decrease -> maintain category in minimal engine",
+        "text": "Interval decrease maintains the baseline category in the minimal engine."
+      }
+    }
+  ]
+}
