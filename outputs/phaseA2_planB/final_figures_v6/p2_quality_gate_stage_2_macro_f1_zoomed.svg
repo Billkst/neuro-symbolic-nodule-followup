@@ -1,54 +1,52 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="980" height="560" viewBox="0 0 980 560">
 <rect width="100%" height="100%" fill="#ffffff"/>
 <text x="490.0" y="32" text-anchor="middle" font-family="Arial" font-size="22" font-weight="700" fill="#111827">P2 quality gate</text>
-<text x="490.0" y="58" text-anchor="middle" font-family="Arial" font-size="14" fill="#4b5563">Density Stage 2 Macro-F1 across weak-label filters</text>
-<line x1="92" y1="92" x2="92" y2="442" stroke="#111827" stroke-width="1.4"/>
-<line x1="92" y1="442" x2="936" y2="442" stroke="#111827" stroke-width="1.4"/>
-<text x="28" y="267.0" text-anchor="middle" font-family="Arial" font-size="13" fill="#374151" transform="rotate(-90 28,267.0)">Macro-F1 (%)</text>
-<text x="92" y="532" text-anchor="start" font-family="Arial" font-size="12" fill="#6b7280">Zoomed y-axis: 86.0-98.5%, not zero-based.</text>
-<text x="936" y="532" text-anchor="end" font-family="Arial" font-size="12" fill="#6b7280">G3 selected: at least two labeling functions cover the sample.</text>
-<line x1="86" y1="442.00" x2="936" y2="442.00" stroke="#e5e7eb" stroke-width="1"/>
-<text x="80" y="446.00" text-anchor="end" font-family="Arial" font-size="12" fill="#374151">86.0</text>
-<line x1="86" y1="372.00" x2="936" y2="372.00" stroke="#e5e7eb" stroke-width="1"/>
-<text x="80" y="376.00" text-anchor="end" font-family="Arial" font-size="12" fill="#374151">88.5</text>
-<line x1="86" y1="302.00" x2="936" y2="302.00" stroke="#e5e7eb" stroke-width="1"/>
-<text x="80" y="306.00" text-anchor="end" font-family="Arial" font-size="12" fill="#374151">91.0</text>
-<line x1="86" y1="232.00" x2="936" y2="232.00" stroke="#e5e7eb" stroke-width="1"/>
-<text x="80" y="236.00" text-anchor="end" font-family="Arial" font-size="12" fill="#374151">93.5</text>
-<line x1="86" y1="162.00" x2="936" y2="162.00" stroke="#e5e7eb" stroke-width="1"/>
-<text x="80" y="166.00" text-anchor="end" font-family="Arial" font-size="12" fill="#374151">96.0</text>
+<text x="490.0" y="58" text-anchor="middle" font-family="Arial" font-size="14" fill="#4b5563">Density Stage 2 Macro-F1 across weak-label filters; zoomed y-axis 86.0-98.5%</text>
+<line x1="92" y1="92" x2="92" y2="474" stroke="#111827" stroke-width="1.4"/>
+<line x1="92" y1="474" x2="936" y2="474" stroke="#111827" stroke-width="1.4"/>
+<text x="28" y="283.0" text-anchor="middle" font-family="Arial" font-size="13" fill="#374151" transform="rotate(-90 28,283.0)">Macro-F1 (%)</text>
+<line x1="86" y1="474.00" x2="936" y2="474.00" stroke="#e5e7eb" stroke-width="1"/>
+<text x="80" y="478.00" text-anchor="end" font-family="Arial" font-size="12" fill="#374151">86.0</text>
+<line x1="86" y1="397.60" x2="936" y2="397.60" stroke="#e5e7eb" stroke-width="1"/>
+<text x="80" y="401.60" text-anchor="end" font-family="Arial" font-size="12" fill="#374151">88.5</text>
+<line x1="86" y1="321.20" x2="936" y2="321.20" stroke="#e5e7eb" stroke-width="1"/>
+<text x="80" y="325.20" text-anchor="end" font-family="Arial" font-size="12" fill="#374151">91.0</text>
+<line x1="86" y1="244.80" x2="936" y2="244.80" stroke="#e5e7eb" stroke-width="1"/>
+<text x="80" y="248.80" text-anchor="end" font-family="Arial" font-size="12" fill="#374151">93.5</text>
+<line x1="86" y1="168.40" x2="936" y2="168.40" stroke="#e5e7eb" stroke-width="1"/>
+<text x="80" y="172.40" text-anchor="end" font-family="Arial" font-size="12" fill="#374151">96.0</text>
 <line x1="86" y1="92.00" x2="936" y2="92.00" stroke="#e5e7eb" stroke-width="1"/>
 <text x="80" y="96.00" text-anchor="end" font-family="Arial" font-size="12" fill="#374151">98.5</text>
-<rect x="135.40" y="201.69" width="82.00" height="240.31" fill="#2563eb" opacity="0.88" stroke="#1d4ed8" stroke-width="1"/>
-<line x1="176.40" y1="191.36" x2="176.40" y2="212.01" stroke="#111827" stroke-width="1.3"/>
-<line x1="169.40" y1="191.36" x2="183.40" y2="191.36" stroke="#111827" stroke-width="1.3"/>
-<line x1="169.40" y1="212.01" x2="183.40" y2="212.01" stroke="#111827" stroke-width="1.3"/>
-<text x="176.40" y="191.69" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#111827">94.58</text>
-<text x="176.40" y="470" text-anchor="end" font-family="Arial" font-size="12" fill="#374151" transform="rotate(-28 176.40,470)">G1</text>
-<rect x="304.20" y="300.49" width="82.00" height="141.51" fill="#2563eb" opacity="0.88" stroke="#1d4ed8" stroke-width="1"/>
-<line x1="345.20" y1="285.35" x2="345.20" y2="315.63" stroke="#111827" stroke-width="1.3"/>
-<line x1="338.20" y1="285.35" x2="352.20" y2="285.35" stroke="#111827" stroke-width="1.3"/>
-<line x1="338.20" y1="315.63" x2="352.20" y2="315.63" stroke="#111827" stroke-width="1.3"/>
-<text x="345.20" y="290.49" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#111827">91.05</text>
-<text x="345.20" y="470" text-anchor="end" font-family="Arial" font-size="12" fill="#374151" transform="rotate(-28 345.20,470)">G2</text>
-<rect x="473.00" y="138.74" width="82.00" height="303.26" fill="#d97706" opacity="0.88" stroke="#92400e" stroke-width="1"/>
-<line x1="514.00" y1="133.66" x2="514.00" y2="143.82" stroke="#111827" stroke-width="1.3"/>
-<line x1="507.00" y1="133.66" x2="521.00" y2="133.66" stroke="#111827" stroke-width="1.3"/>
-<line x1="507.00" y1="143.82" x2="521.00" y2="143.82" stroke="#111827" stroke-width="1.3"/>
-<text x="514.00" y="128.74" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#111827">96.83</text>
-<text x="514.00" y="470" text-anchor="end" font-family="Arial" font-size="12" fill="#374151" transform="rotate(-28 514.00,470)">G3 (selected)</text>
+<rect x="135.40" y="211.72" width="82.00" height="262.28" fill="#2563eb" opacity="0.88" stroke="#1d4ed8" stroke-width="1"/>
+<line x1="176.40" y1="200.45" x2="176.40" y2="222.98" stroke="#111827" stroke-width="1.3"/>
+<line x1="169.40" y1="200.45" x2="183.40" y2="200.45" stroke="#111827" stroke-width="1.3"/>
+<line x1="169.40" y1="222.98" x2="183.40" y2="222.98" stroke="#111827" stroke-width="1.3"/>
+<text x="176.40" y="201.72" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#111827">94.58</text>
+<text x="176.40" y="502" text-anchor="end" font-family="Arial" font-size="12" fill="#374151" transform="rotate(-28 176.40,502)">G1</text>
+<rect x="304.20" y="319.55" width="82.00" height="154.45" fill="#2563eb" opacity="0.88" stroke="#1d4ed8" stroke-width="1"/>
+<line x1="345.20" y1="303.03" x2="345.20" y2="336.08" stroke="#111827" stroke-width="1.3"/>
+<line x1="338.20" y1="303.03" x2="352.20" y2="303.03" stroke="#111827" stroke-width="1.3"/>
+<line x1="338.20" y1="336.08" x2="352.20" y2="336.08" stroke="#111827" stroke-width="1.3"/>
+<text x="345.20" y="309.55" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#111827">91.05</text>
+<text x="345.20" y="502" text-anchor="end" font-family="Arial" font-size="12" fill="#374151" transform="rotate(-28 345.20,502)">G2</text>
+<rect x="473.00" y="143.01" width="82.00" height="330.99" fill="#d97706" opacity="0.88" stroke="#92400e" stroke-width="1"/>
+<line x1="514.00" y1="137.46" x2="514.00" y2="148.56" stroke="#111827" stroke-width="1.3"/>
+<line x1="507.00" y1="137.46" x2="521.00" y2="137.46" stroke="#111827" stroke-width="1.3"/>
+<line x1="507.00" y1="148.56" x2="521.00" y2="148.56" stroke="#111827" stroke-width="1.3"/>
+<text x="514.00" y="133.01" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#111827">96.83</text>
+<text x="514.00" y="502" text-anchor="end" font-family="Arial" font-size="12" fill="#374151" transform="rotate(-28 514.00,502)">G3 (selected)</text>
 <text x="514.00" y="76" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#92400e">selected</text>
-<line x1="514.00" y1="82" x2="514.00" y2="116.74" stroke="#92400e" stroke-width="1.2" stroke-dasharray="4 3"/>
-<rect x="641.80" y="293.02" width="82.00" height="148.98" fill="#2563eb" opacity="0.88" stroke="#1d4ed8" stroke-width="1"/>
-<line x1="682.80" y1="270.40" x2="682.80" y2="315.65" stroke="#111827" stroke-width="1.3"/>
-<line x1="675.80" y1="270.40" x2="689.80" y2="270.40" stroke="#111827" stroke-width="1.3"/>
-<line x1="675.80" y1="315.65" x2="689.80" y2="315.65" stroke="#111827" stroke-width="1.3"/>
-<text x="682.80" y="283.02" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#111827">91.32</text>
-<text x="682.80" y="470" text-anchor="end" font-family="Arial" font-size="12" fill="#374151" transform="rotate(-28 682.80,470)">G4</text>
-<rect x="810.60" y="368.67" width="82.00" height="73.33" fill="#2563eb" opacity="0.88" stroke="#1d4ed8" stroke-width="1"/>
-<line x1="851.60" y1="334.43" x2="851.60" y2="402.92" stroke="#111827" stroke-width="1.3"/>
-<line x1="844.60" y1="334.43" x2="858.60" y2="334.43" stroke="#111827" stroke-width="1.3"/>
-<line x1="844.60" y1="402.92" x2="858.60" y2="402.92" stroke="#111827" stroke-width="1.3"/>
-<text x="851.60" y="358.67" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#111827">88.62</text>
-<text x="851.60" y="470" text-anchor="end" font-family="Arial" font-size="12" fill="#374151" transform="rotate(-28 851.60,470)">G5</text>
+<line x1="514.00" y1="82" x2="514.00" y2="121.01" stroke="#92400e" stroke-width="1.2" stroke-dasharray="4 3"/>
+<rect x="641.80" y="311.40" width="82.00" height="162.60" fill="#2563eb" opacity="0.88" stroke="#1d4ed8" stroke-width="1"/>
+<line x1="682.80" y1="286.71" x2="682.80" y2="336.09" stroke="#111827" stroke-width="1.3"/>
+<line x1="675.80" y1="286.71" x2="689.80" y2="286.71" stroke="#111827" stroke-width="1.3"/>
+<line x1="675.80" y1="336.09" x2="689.80" y2="336.09" stroke="#111827" stroke-width="1.3"/>
+<text x="682.80" y="301.40" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#111827">91.32</text>
+<text x="682.80" y="502" text-anchor="end" font-family="Arial" font-size="12" fill="#374151" transform="rotate(-28 682.80,502)">G4</text>
+<rect x="810.60" y="393.97" width="82.00" height="80.03" fill="#2563eb" opacity="0.88" stroke="#1d4ed8" stroke-width="1"/>
+<line x1="851.60" y1="356.59" x2="851.60" y2="431.35" stroke="#111827" stroke-width="1.3"/>
+<line x1="844.60" y1="356.59" x2="858.60" y2="356.59" stroke="#111827" stroke-width="1.3"/>
+<line x1="844.60" y1="431.35" x2="858.60" y2="431.35" stroke="#111827" stroke-width="1.3"/>
+<text x="851.60" y="383.97" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#111827">88.62</text>
+<text x="851.60" y="502" text-anchor="end" font-family="Arial" font-size="12" fill="#374151" transform="rotate(-28 851.60,502)">G5</text>
 </svg>

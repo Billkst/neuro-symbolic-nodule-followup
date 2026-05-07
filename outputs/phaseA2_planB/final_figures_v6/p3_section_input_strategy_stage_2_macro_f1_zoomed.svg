@@ -1,60 +1,58 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="980" height="560" viewBox="0 0 980 560">
 <rect width="100%" height="100%" fill="#ffffff"/>
 <text x="490.0" y="32" text-anchor="middle" font-family="Arial" font-size="22" font-weight="700" fill="#111827">P3 section/input strategy</text>
-<text x="490.0" y="58" text-anchor="middle" font-family="Arial" font-size="14" fill="#4b5563">Density Stage 2 Macro-F1 across input constructions</text>
-<line x1="92" y1="92" x2="92" y2="442" stroke="#111827" stroke-width="1.4"/>
-<line x1="92" y1="442" x2="936" y2="442" stroke="#111827" stroke-width="1.4"/>
-<text x="28" y="267.0" text-anchor="middle" font-family="Arial" font-size="13" fill="#374151" transform="rotate(-90 28,267.0)">Macro-F1 (%)</text>
-<text x="92" y="532" text-anchor="start" font-family="Arial" font-size="12" fill="#6b7280">Zoomed y-axis: 70.0-93.0%, not zero-based.</text>
-<text x="936" y="532" text-anchor="end" font-family="Arial" font-size="12" fill="#6b7280">Section-aware selected: structured context without full-text noise.</text>
-<line x1="86" y1="442.00" x2="936" y2="442.00" stroke="#e5e7eb" stroke-width="1"/>
-<text x="80" y="446.00" text-anchor="end" font-family="Arial" font-size="12" fill="#374151">70.0</text>
-<line x1="86" y1="372.00" x2="936" y2="372.00" stroke="#e5e7eb" stroke-width="1"/>
-<text x="80" y="376.00" text-anchor="end" font-family="Arial" font-size="12" fill="#374151">74.6</text>
-<line x1="86" y1="302.00" x2="936" y2="302.00" stroke="#e5e7eb" stroke-width="1"/>
-<text x="80" y="306.00" text-anchor="end" font-family="Arial" font-size="12" fill="#374151">79.2</text>
-<line x1="86" y1="232.00" x2="936" y2="232.00" stroke="#e5e7eb" stroke-width="1"/>
-<text x="80" y="236.00" text-anchor="end" font-family="Arial" font-size="12" fill="#374151">83.8</text>
-<line x1="86" y1="162.00" x2="936" y2="162.00" stroke="#e5e7eb" stroke-width="1"/>
-<text x="80" y="166.00" text-anchor="end" font-family="Arial" font-size="12" fill="#374151">88.4</text>
+<text x="490.0" y="58" text-anchor="middle" font-family="Arial" font-size="14" fill="#4b5563">Density Stage 2 Macro-F1 across input constructions; zoomed y-axis 70.0-93.0%</text>
+<line x1="92" y1="92" x2="92" y2="474" stroke="#111827" stroke-width="1.4"/>
+<line x1="92" y1="474" x2="936" y2="474" stroke="#111827" stroke-width="1.4"/>
+<text x="28" y="283.0" text-anchor="middle" font-family="Arial" font-size="13" fill="#374151" transform="rotate(-90 28,283.0)">Macro-F1 (%)</text>
+<line x1="86" y1="474.00" x2="936" y2="474.00" stroke="#e5e7eb" stroke-width="1"/>
+<text x="80" y="478.00" text-anchor="end" font-family="Arial" font-size="12" fill="#374151">70.0</text>
+<line x1="86" y1="397.60" x2="936" y2="397.60" stroke="#e5e7eb" stroke-width="1"/>
+<text x="80" y="401.60" text-anchor="end" font-family="Arial" font-size="12" fill="#374151">74.6</text>
+<line x1="86" y1="321.20" x2="936" y2="321.20" stroke="#e5e7eb" stroke-width="1"/>
+<text x="80" y="325.20" text-anchor="end" font-family="Arial" font-size="12" fill="#374151">79.2</text>
+<line x1="86" y1="244.80" x2="936" y2="244.80" stroke="#e5e7eb" stroke-width="1"/>
+<text x="80" y="248.80" text-anchor="end" font-family="Arial" font-size="12" fill="#374151">83.8</text>
+<line x1="86" y1="168.40" x2="936" y2="168.40" stroke="#e5e7eb" stroke-width="1"/>
+<text x="80" y="172.40" text-anchor="end" font-family="Arial" font-size="12" fill="#374151">88.4</text>
 <line x1="86" y1="92.00" x2="936" y2="92.00" stroke="#e5e7eb" stroke-width="1"/>
 <text x="80" y="96.00" text-anchor="end" font-family="Arial" font-size="12" fill="#374151">93.0</text>
-<rect x="122.95" y="379.71" width="78.77" height="62.29" fill="#2563eb" opacity="0.88" stroke="#1d4ed8" stroke-width="1"/>
-<line x1="162.33" y1="344.63" x2="162.33" y2="414.80" stroke="#111827" stroke-width="1.3"/>
-<line x1="155.33" y1="344.63" x2="169.33" y2="344.63" stroke="#111827" stroke-width="1.3"/>
-<line x1="155.33" y1="414.80" x2="169.33" y2="414.80" stroke="#111827" stroke-width="1.3"/>
-<text x="162.33" y="369.71" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#111827">74.09</text>
-<text x="162.33" y="470" text-anchor="end" font-family="Arial" font-size="12" fill="#374151" transform="rotate(-28 162.33,470)">Mention</text>
-<rect x="263.61" y="121.61" width="78.77" height="320.39" fill="#d97706" opacity="0.88" stroke="#92400e" stroke-width="1"/>
-<line x1="303.00" y1="113.39" x2="303.00" y2="129.84" stroke="#111827" stroke-width="1.3"/>
-<line x1="296.00" y1="113.39" x2="310.00" y2="113.39" stroke="#111827" stroke-width="1.3"/>
-<line x1="296.00" y1="129.84" x2="310.00" y2="129.84" stroke="#111827" stroke-width="1.3"/>
-<text x="303.00" y="111.61" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#111827">91.05</text>
-<text x="303.00" y="470" text-anchor="end" font-family="Arial" font-size="12" fill="#374151" transform="rotate(-28 303.00,470)">Section-aware (selected)</text>
+<rect x="122.95" y="406.02" width="78.77" height="67.98" fill="#2563eb" opacity="0.88" stroke="#1d4ed8" stroke-width="1"/>
+<line x1="162.33" y1="367.72" x2="162.33" y2="444.31" stroke="#111827" stroke-width="1.3"/>
+<line x1="155.33" y1="367.72" x2="169.33" y2="367.72" stroke="#111827" stroke-width="1.3"/>
+<line x1="155.33" y1="444.31" x2="169.33" y2="444.31" stroke="#111827" stroke-width="1.3"/>
+<text x="162.33" y="396.02" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#111827">74.09</text>
+<text x="162.33" y="502" text-anchor="end" font-family="Arial" font-size="12" fill="#374151" transform="rotate(-28 162.33,502)">Mention</text>
+<rect x="263.61" y="124.32" width="78.77" height="349.68" fill="#d97706" opacity="0.88" stroke="#92400e" stroke-width="1"/>
+<line x1="303.00" y1="115.34" x2="303.00" y2="133.30" stroke="#111827" stroke-width="1.3"/>
+<line x1="296.00" y1="115.34" x2="310.00" y2="115.34" stroke="#111827" stroke-width="1.3"/>
+<line x1="296.00" y1="133.30" x2="310.00" y2="133.30" stroke="#111827" stroke-width="1.3"/>
+<text x="303.00" y="114.32" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#111827">91.05</text>
+<text x="303.00" y="502" text-anchor="end" font-family="Arial" font-size="12" fill="#374151" transform="rotate(-28 303.00,502)">Section-aware (selected)</text>
 <text x="303.00" y="76" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#92400e">selected</text>
-<line x1="303.00" y1="82" x2="303.00" y2="99.61" stroke="#92400e" stroke-width="1.2" stroke-dasharray="4 3"/>
-<rect x="404.28" y="195.12" width="78.77" height="246.88" fill="#2563eb" opacity="0.88" stroke="#1d4ed8" stroke-width="1"/>
-<line x1="443.67" y1="183.68" x2="443.67" y2="206.57" stroke="#111827" stroke-width="1.3"/>
-<line x1="436.67" y1="183.68" x2="450.67" y2="183.68" stroke="#111827" stroke-width="1.3"/>
-<line x1="436.67" y1="206.57" x2="450.67" y2="206.57" stroke="#111827" stroke-width="1.3"/>
-<text x="443.67" y="185.12" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#111827">86.22</text>
-<text x="443.67" y="470" text-anchor="end" font-family="Arial" font-size="12" fill="#374151" transform="rotate(-28 443.67,470)">Findings</text>
-<rect x="544.95" y="140.68" width="78.77" height="301.32" fill="#2563eb" opacity="0.88" stroke="#1d4ed8" stroke-width="1"/>
-<line x1="584.33" y1="112.60" x2="584.33" y2="168.76" stroke="#111827" stroke-width="1.3"/>
-<line x1="577.33" y1="112.60" x2="591.33" y2="112.60" stroke="#111827" stroke-width="1.3"/>
-<line x1="577.33" y1="168.76" x2="591.33" y2="168.76" stroke="#111827" stroke-width="1.3"/>
-<text x="584.33" y="130.68" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#111827">89.80</text>
-<text x="584.33" y="470" text-anchor="end" font-family="Arial" font-size="12" fill="#374151" transform="rotate(-28 584.33,470)">Impression</text>
-<rect x="685.61" y="186.93" width="78.77" height="255.07" fill="#2563eb" opacity="0.88" stroke="#1d4ed8" stroke-width="1"/>
-<line x1="725.00" y1="182.06" x2="725.00" y2="191.80" stroke="#111827" stroke-width="1.3"/>
-<line x1="718.00" y1="182.06" x2="732.00" y2="182.06" stroke="#111827" stroke-width="1.3"/>
-<line x1="718.00" y1="191.80" x2="732.00" y2="191.80" stroke="#111827" stroke-width="1.3"/>
-<text x="725.00" y="176.93" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#111827">86.76</text>
-<text x="725.00" y="470" text-anchor="end" font-family="Arial" font-size="12" fill="#374151" transform="rotate(-28 725.00,470)">Findings+Impression</text>
-<rect x="826.28" y="186.93" width="78.77" height="255.07" fill="#2563eb" opacity="0.88" stroke="#1d4ed8" stroke-width="1"/>
-<line x1="865.67" y1="182.06" x2="865.67" y2="191.80" stroke="#111827" stroke-width="1.3"/>
-<line x1="858.67" y1="182.06" x2="872.67" y2="182.06" stroke="#111827" stroke-width="1.3"/>
-<line x1="858.67" y1="191.80" x2="872.67" y2="191.80" stroke="#111827" stroke-width="1.3"/>
-<text x="865.67" y="176.93" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#111827">86.76</text>
-<text x="865.67" y="470" text-anchor="end" font-family="Arial" font-size="12" fill="#374151" transform="rotate(-28 865.67,470)">Full text</text>
+<line x1="303.00" y1="82" x2="303.00" y2="102.32" stroke="#92400e" stroke-width="1.2" stroke-dasharray="4 3"/>
+<rect x="404.28" y="204.55" width="78.77" height="269.45" fill="#2563eb" opacity="0.88" stroke="#1d4ed8" stroke-width="1"/>
+<line x1="443.67" y1="192.06" x2="443.67" y2="217.04" stroke="#111827" stroke-width="1.3"/>
+<line x1="436.67" y1="192.06" x2="450.67" y2="192.06" stroke="#111827" stroke-width="1.3"/>
+<line x1="436.67" y1="217.04" x2="450.67" y2="217.04" stroke="#111827" stroke-width="1.3"/>
+<text x="443.67" y="194.55" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#111827">86.22</text>
+<text x="443.67" y="502" text-anchor="end" font-family="Arial" font-size="12" fill="#374151" transform="rotate(-28 443.67,502)">Findings</text>
+<rect x="544.95" y="145.13" width="78.77" height="328.87" fill="#2563eb" opacity="0.88" stroke="#1d4ed8" stroke-width="1"/>
+<line x1="584.33" y1="114.48" x2="584.33" y2="175.78" stroke="#111827" stroke-width="1.3"/>
+<line x1="577.33" y1="114.48" x2="591.33" y2="114.48" stroke="#111827" stroke-width="1.3"/>
+<line x1="577.33" y1="175.78" x2="591.33" y2="175.78" stroke="#111827" stroke-width="1.3"/>
+<text x="584.33" y="135.13" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#111827">89.80</text>
+<text x="584.33" y="502" text-anchor="end" font-family="Arial" font-size="12" fill="#374151" transform="rotate(-28 584.33,502)">Impression</text>
+<rect x="685.61" y="195.61" width="78.77" height="278.39" fill="#2563eb" opacity="0.88" stroke="#1d4ed8" stroke-width="1"/>
+<line x1="725.00" y1="190.30" x2="725.00" y2="200.93" stroke="#111827" stroke-width="1.3"/>
+<line x1="718.00" y1="190.30" x2="732.00" y2="190.30" stroke="#111827" stroke-width="1.3"/>
+<line x1="718.00" y1="200.93" x2="732.00" y2="200.93" stroke="#111827" stroke-width="1.3"/>
+<text x="725.00" y="185.61" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#111827">86.76</text>
+<text x="725.00" y="502" text-anchor="end" font-family="Arial" font-size="12" fill="#374151" transform="rotate(-28 725.00,502)">Findings+Impression</text>
+<rect x="826.28" y="195.61" width="78.77" height="278.39" fill="#2563eb" opacity="0.88" stroke="#1d4ed8" stroke-width="1"/>
+<line x1="865.67" y1="190.30" x2="865.67" y2="200.93" stroke="#111827" stroke-width="1.3"/>
+<line x1="858.67" y1="190.30" x2="872.67" y2="190.30" stroke="#111827" stroke-width="1.3"/>
+<line x1="858.67" y1="200.93" x2="872.67" y2="200.93" stroke="#111827" stroke-width="1.3"/>
+<text x="865.67" y="185.61" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#111827">86.76</text>
+<text x="865.67" y="502" text-anchor="end" font-family="Arial" font-size="12" fill="#374151" transform="rotate(-28 865.67,502)">Full text</text>
 </svg>

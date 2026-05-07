@@ -893,7 +893,7 @@ def build_figure_manifest_v6() -> list[dict[str, str]]:
             "P1 max_seq_length",
             "Density Stage 2 Macro-F1",
             "appendix_or_optional_main",
-            "重画图；zoomed y-axis，并标出 128 selected。P1 主要说明 128 与 192 表现接近且 128 更短，不作为强优越性主证据。",
+            "重画图；zoomed y-axis，横坐标包含 64/96/128/160/192，并标出 128 selected。P1 不作为强优越性主证据。",
         ),
         (
             "p2_quality_gate_stage_2_macro_f1_zoomed.svg",
@@ -976,7 +976,7 @@ def render_zoomed_bar_svg(
     left = 92
     right = 44
     top = 92
-    bottom = 118
+    bottom = 86
     plot_w = width - left - right
     plot_h = height - top - bottom
     bar_w = min(82, plot_w / max(len(values), 1) * 0.56)
@@ -994,12 +994,10 @@ def render_zoomed_bar_svg(
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
         '<rect width="100%" height="100%" fill="#ffffff"/>',
         f'<text x="{width / 2}" y="32" text-anchor="middle" font-family="Arial" font-size="22" font-weight="700" fill="#111827">{html.escape(title)}</text>',
-        f'<text x="{width / 2}" y="58" text-anchor="middle" font-family="Arial" font-size="14" fill="#4b5563">{html.escape(subtitle)}</text>',
+        f'<text x="{width / 2}" y="58" text-anchor="middle" font-family="Arial" font-size="14" fill="#4b5563">{html.escape(subtitle)}; zoomed y-axis {y_min:.1f}-{y_max:.1f}%</text>',
         f'<line x1="{left}" y1="{top}" x2="{left}" y2="{top + plot_h}" stroke="#111827" stroke-width="1.4"/>',
         f'<line x1="{left}" y1="{top + plot_h}" x2="{left + plot_w}" y2="{top + plot_h}" stroke="#111827" stroke-width="1.4"/>',
         f'<text x="28" y="{top + plot_h / 2}" text-anchor="middle" font-family="Arial" font-size="13" fill="#374151" transform="rotate(-90 28,{top + plot_h / 2})">Macro-F1 (%)</text>',
-        f'<text x="{left}" y="{height - 28}" text-anchor="start" font-family="Arial" font-size="12" fill="#6b7280">Zoomed y-axis: {y_min:.1f}-{y_max:.1f}%, not zero-based.</text>',
-        f'<text x="{width - right}" y="{height - 28}" text-anchor="end" font-family="Arial" font-size="12" fill="#6b7280">{html.escape(note)}</text>',
     ]
     for tick in range(tick_count + 1):
         value = y_min + (y_max - y_min) * tick / tick_count
@@ -1047,22 +1045,27 @@ def y_bounds(values: list[dict[str, Any]], *, pad: float = 1.0, floor_step: floa
 
 
 def write_v6_zoomed_parameter_figures() -> None:
-    p1_128 = percent_summary("mws_cfe_density_stage2_results_density_final_g3_len128_seed*.json", "macro_f1")
-    p1_192 = percent_summary("mws_cfe_density_stage2_results_density_final_g3_len192_seed*.json", "macro_f1")
-    p1_values = [
-        {"label": "128 (selected)", "mean": p1_128[0], "std": p1_128[1], "selected": True},
-        {"label": "192", "mean": p1_192[0], "std": p1_192[1], "selected": False},
+    p1_specs = [
+        ("64", "p1_len64", False),
+        ("96", "p1_len96", False),
+        ("128 (selected)", "planb_full", True),
+        ("160", "p1_len160", False),
+        ("192", "p1_len192", False),
     ]
-    p1_min, p1_max = y_bounds(p1_values, pad=0.15, floor_step=0.1)
+    p1_values = []
+    for label, tag, selected in p1_specs:
+        mean, std = percent_summary(f"mws_cfe_density_stage2_results_{tag}_seed*.json", "macro_f1")
+        p1_values.append({"label": label, "mean": mean, "std": std, "selected": selected})
+    p1_min, p1_max = y_bounds(p1_values, pad=1.0, floor_step=0.5)
     write_text_svg(
         FINAL_FIGURES_DIR / "p1_max_seq_length_stage_2_macro_f1_zoomed.svg",
         render_zoomed_bar_svg(
-            title="P1 max_seq_length final check",
-            subtitle="Density Stage 2 Macro-F1 under selected G3 gate",
+            title="P1 max_seq_length",
+            subtitle="Density Stage 2 Macro-F1 across input lengths",
             values=p1_values,
             y_min=p1_min,
             y_max=p1_max,
-            note="128 chosen for comparable accuracy with shorter input.",
+            note="",
         ),
     )
 
@@ -1086,7 +1089,7 @@ def write_v6_zoomed_parameter_figures() -> None:
             values=p2_values,
             y_min=p2_min,
             y_max=p2_max,
-            note="G3 selected: at least two labeling functions cover the sample.",
+            note="",
         ),
     )
 
@@ -1111,7 +1114,7 @@ def write_v6_zoomed_parameter_figures() -> None:
             values=p3_values,
             y_min=p3_min,
             y_max=p3_max,
-            note="Section-aware selected: structured context without full-text noise.",
+            note="",
         ),
     )
 
