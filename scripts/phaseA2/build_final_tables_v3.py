@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import html
 import json
 import math
 import re
@@ -888,25 +889,25 @@ def build_figure_manifest() -> list[dict[str, str]]:
 def build_figure_manifest_v6() -> list[dict[str, str]]:
     specs = [
         (
-            "p1_max_seq_length_stage_2_macro_f1.svg",
+            "p1_max_seq_length_stage_2_macro_f1_zoomed.svg",
             "P1 max_seq_length",
             "Density Stage 2 Macro-F1",
-            "main_text_recommended",
-            "正文推荐；若版面紧张，可移至附录并优先保留 P2/P3 图。",
+            "appendix_or_optional_main",
+            "重画图；zoomed y-axis，并标出 128 selected。P1 主要说明 128 与 192 表现接近且 128 更短，不作为强优越性主证据。",
         ),
         (
-            "p2_quality_gate_stage_2_macro_f1.svg",
+            "p2_quality_gate_stage_2_macro_f1_zoomed.svg",
             "P2 quality gate",
             "Density Stage 2 Macro-F1",
             "main_text_recommended",
-            "正文优先保留；展示 G3 gate selection 对 Stage 2 的核心影响。",
+            "重画图；zoomed y-axis，并标出 G3 selected。正文优先保留，展示 quality gate 选择对 Stage 2 的核心影响。",
         ),
         (
-            "p3_section_input_strategy_stage_2_macro_f1.svg",
+            "p3_section_input_strategy_stage_2_macro_f1_zoomed.svg",
             "P3 section/input strategy",
             "Density Stage 2 Macro-F1",
             "main_text_recommended",
-            "正文优先保留；展示 section-aware input strategy 的核心影响。",
+            "重画图；zoomed y-axis，并标出 section-aware selected。正文优先保留，展示输入构造策略的核心影响。",
         ),
         (
             "p1_max_seq_length_stage_1_auprc.svg",
@@ -932,7 +933,10 @@ def build_figure_manifest_v6() -> list[dict[str, str]]:
     ]
     rows: list[dict[str, str]] = []
     for file_name, p_family, metric, placement, note in specs:
-        path = FIGURES_DIR / file_name
+        if file_name.endswith("_zoomed.svg"):
+            path = FINAL_FIGURES_DIR / file_name
+        else:
+            path = FIGURES_DIR / file_name
         rows.append(
             {
                 "file_name": file_name,
@@ -944,6 +948,172 @@ def build_figure_manifest_v6() -> list[dict[str, str]]:
             }
         )
     return rows
+
+
+def write_text_svg(path: Path, body: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(body + "\n", encoding="utf-8")
+
+
+def percent_summary(pattern: str, metric: str) -> tuple[float, float]:
+    summary = summarize_pattern(pattern, metric)
+    if summary.mean is None:
+        return 0.0, 0.0
+    return summary.mean * 100.0, (summary.std or 0.0) * 100.0
+
+
+def render_zoomed_bar_svg(
+    *,
+    title: str,
+    subtitle: str,
+    values: list[dict[str, Any]],
+    y_min: float,
+    y_max: float,
+    note: str,
+) -> str:
+    width = 980
+    height = 560
+    left = 92
+    right = 44
+    top = 92
+    bottom = 118
+    plot_w = width - left - right
+    plot_h = height - top - bottom
+    bar_w = min(82, plot_w / max(len(values), 1) * 0.56)
+
+    def y_pos(value: float) -> float:
+        return top + plot_h - ((value - y_min) / (y_max - y_min)) * plot_h
+
+    def x_center(idx: int) -> float:
+        if len(values) == 1:
+            return left + plot_w / 2
+        return left + (idx + 0.5) * plot_w / len(values)
+
+    tick_count = 5
+    pieces = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
+        '<rect width="100%" height="100%" fill="#ffffff"/>',
+        f'<text x="{width / 2}" y="32" text-anchor="middle" font-family="Arial" font-size="22" font-weight="700" fill="#111827">{html.escape(title)}</text>',
+        f'<text x="{width / 2}" y="58" text-anchor="middle" font-family="Arial" font-size="14" fill="#4b5563">{html.escape(subtitle)}</text>',
+        f'<line x1="{left}" y1="{top}" x2="{left}" y2="{top + plot_h}" stroke="#111827" stroke-width="1.4"/>',
+        f'<line x1="{left}" y1="{top + plot_h}" x2="{left + plot_w}" y2="{top + plot_h}" stroke="#111827" stroke-width="1.4"/>',
+        f'<text x="28" y="{top + plot_h / 2}" text-anchor="middle" font-family="Arial" font-size="13" fill="#374151" transform="rotate(-90 28,{top + plot_h / 2})">Macro-F1 (%)</text>',
+        f'<text x="{left}" y="{height - 28}" text-anchor="start" font-family="Arial" font-size="12" fill="#6b7280">Zoomed y-axis: {y_min:.1f}-{y_max:.1f}%, not zero-based.</text>',
+        f'<text x="{width - right}" y="{height - 28}" text-anchor="end" font-family="Arial" font-size="12" fill="#6b7280">{html.escape(note)}</text>',
+    ]
+    for tick in range(tick_count + 1):
+        value = y_min + (y_max - y_min) * tick / tick_count
+        y = y_pos(value)
+        pieces.append(f'<line x1="{left - 6}" y1="{y:.2f}" x2="{left + plot_w}" y2="{y:.2f}" stroke="#e5e7eb" stroke-width="1"/>')
+        pieces.append(f'<text x="{left - 12}" y="{y + 4:.2f}" text-anchor="end" font-family="Arial" font-size="12" fill="#374151">{value:.1f}</text>')
+
+    for idx, row in enumerate(values):
+        mean = float(row["mean"])
+        std = float(row.get("std") or 0.0)
+        selected = bool(row.get("selected"))
+        label = str(row["label"])
+        x = x_center(idx)
+        y = y_pos(mean)
+        base_y = top + plot_h
+        color = "#d97706" if selected else "#2563eb"
+        stroke = "#92400e" if selected else "#1d4ed8"
+        pieces.append(f'<rect x="{x - bar_w / 2:.2f}" y="{y:.2f}" width="{bar_w:.2f}" height="{base_y - y:.2f}" fill="{color}" opacity="0.88" stroke="{stroke}" stroke-width="1"/>')
+        if std > 0:
+            high = y_pos(min(mean + std, y_max))
+            low = y_pos(max(mean - std, y_min))
+            pieces.append(f'<line x1="{x:.2f}" y1="{high:.2f}" x2="{x:.2f}" y2="{low:.2f}" stroke="#111827" stroke-width="1.3"/>')
+            pieces.append(f'<line x1="{x - 7:.2f}" y1="{high:.2f}" x2="{x + 7:.2f}" y2="{high:.2f}" stroke="#111827" stroke-width="1.3"/>')
+            pieces.append(f'<line x1="{x - 7:.2f}" y1="{low:.2f}" x2="{x + 7:.2f}" y2="{low:.2f}" stroke="#111827" stroke-width="1.3"/>')
+        pieces.append(f'<text x="{x:.2f}" y="{y - 10:.2f}" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#111827">{mean:.2f}</text>')
+        pieces.append(
+            f'<text x="{x:.2f}" y="{base_y + 28}" text-anchor="end" font-family="Arial" font-size="12" fill="#374151" '
+            f'transform="rotate(-28 {x:.2f},{base_y + 28})">{html.escape(label)}</text>'
+        )
+        if selected:
+            pieces.append(f'<text x="{x:.2f}" y="{top - 16}" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#92400e">selected</text>')
+            pieces.append(f'<line x1="{x:.2f}" y1="{top - 10}" x2="{x:.2f}" y2="{max(y - 22, top + 4):.2f}" stroke="#92400e" stroke-width="1.2" stroke-dasharray="4 3"/>')
+    pieces.append("</svg>")
+    return "\n".join(pieces)
+
+
+def y_bounds(values: list[dict[str, Any]], *, pad: float = 1.0, floor_step: float = 0.5) -> tuple[float, float]:
+    lows = [float(row["mean"]) - float(row.get("std") or 0.0) for row in values]
+    highs = [float(row["mean"]) + float(row.get("std") or 0.0) for row in values]
+    lower = math.floor((min(lows) - pad) / floor_step) * floor_step
+    upper = math.ceil((max(highs) + pad) / floor_step) * floor_step
+    if upper <= lower:
+        upper = lower + 1.0
+    return lower, upper
+
+
+def write_v6_zoomed_parameter_figures() -> None:
+    p1_128 = percent_summary("mws_cfe_density_stage2_results_density_final_g3_len128_seed*.json", "macro_f1")
+    p1_192 = percent_summary("mws_cfe_density_stage2_results_density_final_g3_len192_seed*.json", "macro_f1")
+    p1_values = [
+        {"label": "128 (selected)", "mean": p1_128[0], "std": p1_128[1], "selected": True},
+        {"label": "192", "mean": p1_192[0], "std": p1_192[1], "selected": False},
+    ]
+    p1_min, p1_max = y_bounds(p1_values, pad=0.15, floor_step=0.1)
+    write_text_svg(
+        FINAL_FIGURES_DIR / "p1_max_seq_length_stage_2_macro_f1_zoomed.svg",
+        render_zoomed_bar_svg(
+            title="P1 max_seq_length final check",
+            subtitle="Density Stage 2 Macro-F1 under selected G3 gate",
+            values=p1_values,
+            y_min=p1_min,
+            y_max=p1_max,
+            note="128 chosen for comparable accuracy with shorter input.",
+        ),
+    )
+
+    p2_specs = [
+        ("G1", "p2_g1", False),
+        ("G2", "planb_full", False),
+        ("G3 (selected)", "p2_g3", True),
+        ("G4", "p2_g4", False),
+        ("G5", "p2_g5", False),
+    ]
+    p2_values = []
+    for label, tag, selected in p2_specs:
+        mean, std = percent_summary(f"mws_cfe_density_stage2_results_{tag}_seed*.json", "macro_f1")
+        p2_values.append({"label": label, "mean": mean, "std": std, "selected": selected})
+    p2_min, p2_max = y_bounds(p2_values, pad=1.0, floor_step=0.5)
+    write_text_svg(
+        FINAL_FIGURES_DIR / "p2_quality_gate_stage_2_macro_f1_zoomed.svg",
+        render_zoomed_bar_svg(
+            title="P2 quality gate",
+            subtitle="Density Stage 2 Macro-F1 across weak-label filters",
+            values=p2_values,
+            y_min=p2_min,
+            y_max=p2_max,
+            note="G3 selected: at least two labeling functions cover the sample.",
+        ),
+    )
+
+    p3_specs = [
+        ("Mention", "p3_mention_text", False),
+        ("Section-aware (selected)", "planb_full", True),
+        ("Findings", "p3_findings_text", False),
+        ("Impression", "p3_impression_text", False),
+        ("Findings+Impression", "p3_findings_impression_text", False),
+        ("Full text", "p3_full_text", False),
+    ]
+    p3_values = []
+    for label, tag, selected in p3_specs:
+        mean, std = percent_summary(f"mws_cfe_density_stage2_results_{tag}_seed*.json", "macro_f1")
+        p3_values.append({"label": label, "mean": mean, "std": std, "selected": selected})
+    p3_min, p3_max = y_bounds(p3_values, pad=1.0, floor_step=1.0)
+    write_text_svg(
+        FINAL_FIGURES_DIR / "p3_section_input_strategy_stage_2_macro_f1_zoomed.svg",
+        render_zoomed_bar_svg(
+            title="P3 section/input strategy",
+            subtitle="Density Stage 2 Macro-F1 across input constructions",
+            values=p3_values,
+            y_min=p3_min,
+            y_max=p3_max,
+            note="Section-aware selected: structured context without full-text noise.",
+        ),
+    )
 
 
 def markdown_table(rows: list[dict[str, str]], columns: list[str]) -> str:
@@ -1239,6 +1409,7 @@ def write_report_v6(
         for filename in APPENDIX_TASK_FILES.values()
     )
     main_figures = [row["file_name"] for row in figure_manifest_rows if row["placement"] == "main_text_recommended"]
+    optional_figures = [row["file_name"] for row in figure_manifest_rows if row["placement"] == "appendix_or_optional_main"]
     appendix_figures = [row["file_name"] for row in figure_manifest_rows if row["placement"] == "appendix"]
 
     report = f"""# 模块2 final tables v6 论文呈现报告
@@ -1294,13 +1465,18 @@ Has-size Wave5 diagnostic parameter table：`{(TABLES_DIR / "size_wave5_diagnost
 
 ## 6. 参数图进入正文和附录
 
-正文推荐 3 张参数图：
+v6 重新绘制 Stage 2 参数图，使用 zoomed y-axis，并在图中直接标出 selected 配置。因为 P1 长度扫描的差异很小，P1 不再作为正文强证据，只作为可选正文图或附录图。
+
+正文优先推荐 2 张参数图：
 {chr(10).join(f"- `{name}`" for name in main_figures)}
+
+正文可选或附录图：
+{chr(10).join(f"- `{name}`" for name in optional_figures)}
 
 附录放 3 张参数图：
 {chr(10).join(f"- `{name}`" for name in appendix_figures)}
 
-如果版面紧张，正文只保留 `p2_quality_gate_stage_2_macro_f1.svg` 和 `p3_section_input_strategy_stage_2_macro_f1.svg`；P1 图移入附录。完整索引见 `{(FINAL_FIGURES_DIR / "figure_manifest.csv").relative_to(PROJECT_ROOT)}`。
+如果版面紧张，正文只保留 `p2_quality_gate_stage_2_macro_f1_zoomed.svg` 和 `p3_section_input_strategy_stage_2_macro_f1_zoomed.svg`；P1 图移入附录。完整索引见 `{(FINAL_FIGURES_DIR / "figure_manifest.csv").relative_to(PROJECT_ROOT)}`。
 
 ## 7. 最终判断
 
@@ -1329,6 +1505,7 @@ def main() -> None:
         density_parameter_rows = build_density_parameter_table_v6()
         size_parameter_rows = build_size_wave5_diagnostic_parameter_table_v6()
         appendix_tables = build_task_appendix_full_metrics_tables()
+        write_v6_zoomed_parameter_figures()
         figure_manifest_rows = build_figure_manifest_v6()
 
         write_csv(TABLES_DIR / "main_table_final.csv", main_rows)

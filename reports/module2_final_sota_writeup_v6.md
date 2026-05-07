@@ -65,17 +65,21 @@ Has-size Wave5 diagnostic parameter table：`outputs/phaseA2_planB/final_tables_
 
 ## 6. 参数图进入正文和附录
 
-正文推荐 3 张参数图：
-- `p1_max_seq_length_stage_2_macro_f1.svg`
-- `p2_quality_gate_stage_2_macro_f1.svg`
-- `p3_section_input_strategy_stage_2_macro_f1.svg`
+v6 重新绘制 Stage 2 参数图，使用 zoomed y-axis，并在图中直接标出 selected 配置。因为 P1 长度扫描的差异很小，P1 不再作为正文强证据，只作为可选正文图或附录图。
+
+正文优先推荐 2 张参数图：
+- `p2_quality_gate_stage_2_macro_f1_zoomed.svg`
+- `p3_section_input_strategy_stage_2_macro_f1_zoomed.svg`
+
+正文可选或附录图：
+- `p1_max_seq_length_stage_2_macro_f1_zoomed.svg`
 
 附录放 3 张参数图：
 - `p1_max_seq_length_stage_1_auprc.svg`
 - `p2_quality_gate_stage_1_auprc.svg`
 - `p3_section_input_strategy_stage_1_auprc.svg`
 
-如果版面紧张，正文只保留 `p2_quality_gate_stage_2_macro_f1.svg` 和 `p3_section_input_strategy_stage_2_macro_f1.svg`；P1 图移入附录。完整索引见 `outputs/phaseA2_planB/final_figures_v6/figure_manifest.csv`。
+如果版面紧张，正文只保留 `p2_quality_gate_stage_2_macro_f1_zoomed.svg` 和 `p3_section_input_strategy_stage_2_macro_f1_zoomed.svg`；P1 图移入附录。完整索引见 `outputs/phaseA2_planB/final_figures_v6/figure_manifest.csv`。
 
 ## 7. 最终判断
 

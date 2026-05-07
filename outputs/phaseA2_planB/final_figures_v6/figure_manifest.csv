@@ -1,7 +1,7 @@
 file_name,source_path,P family,metric,placement,note
-p1_max_seq_length_stage_2_macro_f1.svg,outputs/phaseA2_planB/figures/p1_max_seq_length_stage_2_macro_f1.svg,P1 max_seq_length,Density Stage 2 Macro-F1,main_text_recommended,正文推荐；若版面紧张，可移至附录并优先保留 P2/P3 图。
-p2_quality_gate_stage_2_macro_f1.svg,outputs/phaseA2_planB/figures/p2_quality_gate_stage_2_macro_f1.svg,P2 quality gate,Density Stage 2 Macro-F1,main_text_recommended,正文优先保留；展示 G3 gate selection 对 Stage 2 的核心影响。
-p3_section_input_strategy_stage_2_macro_f1.svg,outputs/phaseA2_planB/figures/p3_section_input_strategy_stage_2_macro_f1.svg,P3 section/input strategy,Density Stage 2 Macro-F1,main_text_recommended,正文优先保留；展示 section-aware input strategy 的核心影响。
+p1_max_seq_length_stage_2_macro_f1_zoomed.svg,outputs/phaseA2_planB/final_figures_v6/p1_max_seq_length_stage_2_macro_f1_zoomed.svg,P1 max_seq_length,Density Stage 2 Macro-F1,appendix_or_optional_main,重画图；zoomed y-axis，并标出 128 selected。P1 主要说明 128 与 192 表现接近且 128 更短，不作为强优越性主证据。
+p2_quality_gate_stage_2_macro_f1_zoomed.svg,outputs/phaseA2_planB/final_figures_v6/p2_quality_gate_stage_2_macro_f1_zoomed.svg,P2 quality gate,Density Stage 2 Macro-F1,main_text_recommended,重画图；zoomed y-axis，并标出 G3 selected。正文优先保留，展示 quality gate 选择对 Stage 2 的核心影响。
+p3_section_input_strategy_stage_2_macro_f1_zoomed.svg,outputs/phaseA2_planB/final_figures_v6/p3_section_input_strategy_stage_2_macro_f1_zoomed.svg,P3 section/input strategy,Density Stage 2 Macro-F1,main_text_recommended,重画图；zoomed y-axis，并标出 section-aware selected。正文优先保留，展示输入构造策略的核心影响。
 p1_max_seq_length_stage_1_auprc.svg,outputs/phaseA2_planB/figures/p1_max_seq_length_stage_1_auprc.svg,P1 max_seq_length,Density Stage 1 AUPRC,appendix,附录图；补充 Stage 1 AUPRC 对长度扫描的敏感性。
 p2_quality_gate_stage_1_auprc.svg,outputs/phaseA2_planB/figures/p2_quality_gate_stage_1_auprc.svg,P2 quality gate,Density Stage 1 AUPRC,appendix,附录图；补充 Stage 1 AUPRC 对 gate 选择的敏感性。
 p3_section_input_strategy_stage_1_auprc.svg,outputs/phaseA2_planB/figures/p3_section_input_strategy_stage_1_auprc.svg,P3 section/input strategy,Density Stage 1 AUPRC,appendix,附录图；补充 Stage 1 AUPRC 对输入构造策略的敏感性。
