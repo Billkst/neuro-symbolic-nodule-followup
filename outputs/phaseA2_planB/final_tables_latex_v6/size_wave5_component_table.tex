@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\caption{Module 2 Has-size Wave5 component analysis.}
+\label{tab:module2_size_wave5_components_v6}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lllll}
+\toprule
+Variant & Seeds & Has-size F1 & Has-size AUPRC & 中文说明 \\
+\midrule
+lexical alone & 5 & 90.58 $\pm$ 0.00 & 95.93 $\pm$ 0.00 & 5-seed learned lexical expert；作为 Wave5 组件基线。 \\
+lexical + BERT & 1 & 92.09 $\pm$ 0.00 & 96.63 $\pm$ 0.00 & seed42 诊断结果；用于判断 BERT probability 的边际贡献。 \\
+lexical + cue & 1 & 98.88 $\pm$ 0.00 & 99.86 $\pm$ 0.00 & seed42 诊断结果；用于判断 cue features 的边际贡献。 \\
+lexical + BERT + cue & 5 & 99.28 $\pm$ 0.02 & 99.90 $\pm$ 0.01 & 最终 5-seed learned stacked head；不属于 deterministic cue-only。 \\
+\bottomrule
+\end{tabular}%
+}
+\vspace{0.3em}
+\footnotesize{This is component analysis, not a strict five-seed ablation for every row; seed42-only diagnostics are marked in the Chinese note column.}
+\end{table}

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build Module 2 final tables v3/v4/v5 from existing Plan B result artifacts.
+"""Build Module 2 final tables v3/v4/v5/v6 from existing Plan B result artifacts.
 
 This script is read-only with respect to experiment outputs: it aggregates
 already-produced JSON/CSV files and writes paper-ready CSV, LaTeX, and Markdown
@@ -63,6 +63,41 @@ APPENDIX_METRICS = [
     ("auprc", "AUPRC"),
     ("auroc", "AUROC"),
 ]
+
+APPENDIX_TASK_METRICS = {
+    "density_stage1": [
+        ("accuracy", "Accuracy"),
+        ("precision", "Precision"),
+        ("recall", "Recall"),
+        ("f1", "F1"),
+        ("macro_f1", "Macro-F1"),
+        ("auprc", "AUPRC"),
+        ("auroc", "AUROC"),
+    ],
+    "density_stage2": [
+        ("accuracy", "Accuracy"),
+        ("macro_f1", "Macro-F1"),
+    ],
+    "size": [
+        ("accuracy", "Accuracy"),
+        ("precision", "Precision"),
+        ("recall", "Recall"),
+        ("f1", "F1"),
+        ("auprc", "AUPRC"),
+        ("auroc", "AUROC"),
+    ],
+    "location": [
+        ("accuracy", "Accuracy"),
+        ("macro_f1", "Macro-F1"),
+    ],
+}
+
+APPENDIX_TASK_FILES = {
+    "density_stage1": "appendix_density_stage1_full_metrics.csv",
+    "density_stage2": "appendix_density_stage2_full_metrics.csv",
+    "size": "appendix_size_full_metrics.csv",
+    "location": "appendix_location_full_metrics.csv",
+}
 
 TASK_TITLES = {
     "density_stage1": "Density Stage 1",
@@ -168,14 +203,15 @@ MAIN_METHODS = [
 
 
 def configure_version(version: str) -> None:
-    global ACTIVE_VERSION, TABLES_DIR, LATEX_DIR, REPORT_PATH, MAIN_METHODS
-    if version not in {"v3", "v4", "v5"}:
+    global ACTIVE_VERSION, TABLES_DIR, LATEX_DIR, REPORT_PATH, FINAL_FIGURES_DIR, MAIN_METHODS
+    if version not in {"v3", "v4", "v5", "v6"}:
         raise ValueError(f"Unsupported final table version: {version}")
     ACTIVE_VERSION = version
     TABLES_DIR = PROJECT_ROOT / f"outputs/phaseA2_planB/final_tables_{version}"
     LATEX_DIR = PROJECT_ROOT / f"outputs/phaseA2_planB/final_tables_latex_{version}"
     REPORT_PATH = PROJECT_ROOT / f"reports/module2_final_sota_writeup_{version}.md"
-    if version == "v5":
+    FINAL_FIGURES_DIR = PROJECT_ROOT / f"outputs/phaseA2_planB/final_figures_{version}"
+    if version in {"v5", "v6"}:
         MAIN_METHODS = [*BASE_MAIN_METHODS, *EXTRA_PLM_METHODS, OURS_METHOD_V5]
     elif version == "v4":
         MAIN_METHODS = [*BASE_MAIN_METHODS, *EXTRA_PLM_METHODS, OURS_METHOD_V3_V4]
@@ -184,13 +220,13 @@ def configure_version(version: str) -> None:
 
 
 def final_stage1_pattern() -> str:
-    if ACTIVE_VERSION == "v5":
+    if ACTIVE_VERSION in {"v5", "v6"}:
         return "mws_cfe_density_stage1_results_density_final_g3_len128_seed*.json"
     return "mws_cfe_density_stage1_results_planb_full_seed*.json"
 
 
 def final_stage1_source_note() -> str:
-    if ACTIVE_VERSION == "v5":
+    if ACTIVE_VERSION in {"v5", "v6"}:
         return "stage1 density_final_g3_len128; stage2 density_final_g3_len128"
     return "stage1 planb_full; stage2 density_final_g3_len128"
 
@@ -256,6 +292,11 @@ def fmt(summary: Summary, *, percent: bool = True, decimals: int = 2) -> str:
         return "--"
     scale = 100.0 if percent else 1.0
     return f"{summary.mean * scale:.{decimals}f} +/- {(summary.std or 0.0) * scale:.{decimals}f}"
+
+
+def fmt_na(summary: Summary, *, percent: bool = True, decimals: int = 2) -> str:
+    value = fmt(summary, percent=percent, decimals=decimals)
+    return "N/A" if value == "--" else value
 
 
 def fmt_latex(summary: Summary, *, bold: bool = False, percent: bool = True, decimals: int = 2) -> str:
@@ -349,7 +390,7 @@ def build_ablation_table() -> list[dict[str, str]]:
     }
     final_stage2 = summarize_pattern("mws_cfe_density_stage2_results_density_final_g3_len128_seed*.json", "macro_f1")
     final_density_variant = "Final two-stage density (P0 calibrated Stage 1 + G3 len128 Stage 2)"
-    if ACTIVE_VERSION == "v5":
+    if ACTIVE_VERSION in {"v5", "v6"}:
         final_density_variant = "Final two-stage density (G3 len128 calibrated Stage 1 + G3 len128 Stage 2)"
     rows: list[dict[str, str]] = [
         {
@@ -595,6 +636,210 @@ def build_appendix_full_metrics_table() -> list[dict[str, str]]:
     return rows
 
 
+def build_task_appendix_full_metrics_tables() -> dict[str, list[dict[str, str]]]:
+    tables: dict[str, list[dict[str, str]]] = {}
+    for task, metric_specs in APPENDIX_TASK_METRICS.items():
+        rows: list[dict[str, str]] = []
+        for method, task_patterns in MAIN_METHODS:
+            pattern = task_patterns[task]
+            summaries = {metric: summarize_pattern(pattern, metric) for metric, _ in metric_specs}
+            row = {
+                "Method": method,
+                "Seeds": seed_text_from_summaries(list(summaries.values())),
+            }
+            for metric, title in metric_specs:
+                row[title] = fmt_na(summaries[metric])
+            rows.append(row)
+        tables[task] = rows
+    return tables
+
+
+def build_density_ablation_table_v6() -> list[dict[str, str]]:
+    full_stage1_f1 = summarize_pattern(final_stage1_pattern(), "f1")
+    full_stage1_auprc = summarize_pattern(final_stage1_pattern(), "auprc")
+    full_stage2 = summarize_pattern("mws_cfe_density_stage2_results_density_final_g3_len128_seed*.json", "macro_f1")
+
+    legacy_f1_value = read_legacy_main_value("MWS-CFE (Ours)", "Density Stage 1 F1")
+    legacy_auprc_value = read_legacy_main_value("MWS-CFE (Ours)", "Density Stage 1 AUPRC")
+
+    g2_stage1_f1 = summarize_pattern("mws_cfe_density_stage1_results_planb_full_seed*.json", "f1")
+    g2_stage1_auprc = summarize_pattern("mws_cfe_density_stage1_results_planb_full_seed*.json", "auprc")
+    g2_stage2 = summarize_pattern("mws_cfe_density_stage2_results_planb_full_seed*.json", "macro_f1")
+
+    rows = [
+        {
+            "Variant": "Full MWS-CFE",
+            "Seeds": str(max(full_stage1_f1.n, full_stage2.n)),
+            "Density Stage 1 F1": fmt(full_stage1_f1),
+            "Density Stage 1 AUPRC": fmt(full_stage1_auprc),
+            "Density Stage 2 Macro-F1": fmt(full_stage2),
+            "中文说明": "最终完整模型：Stage 1 使用 G3+len128 校准配置，Stage 2 使用 G3+len128；不使用 len192。",
+        },
+        {
+            "Variant": "w/o P0 threshold tuning",
+            "Seeds": "5",
+            "Density Stage 1 F1": legacy_f1_value,
+            "Density Stage 1 AUPRC": legacy_auprc_value,
+            "Density Stage 2 Macro-F1": "N/A",
+            "中文说明": "只诊断 Stage 1 阈值校准层；Stage 2 指标不适用于该行。",
+        },
+        {
+            "Variant": "w/o G3 gate selection",
+            "Seeds": str(max(g2_stage1_f1.n, g2_stage2.n)),
+            "Density Stage 1 F1": fmt(g2_stage1_f1),
+            "Density Stage 1 AUPRC": fmt(g2_stage1_auprc),
+            "Density Stage 2 Macro-F1": fmt(g2_stage2),
+            "中文说明": "回退到旧 G2 gate 配置，用于显示选择 G3 gate 后的增益。",
+        },
+    ]
+
+    for variant, tag, note in [
+        ("w/o section-aware input", "ab_wo_section", "去掉 section-aware 输入构造，保留其余训练流程。"),
+        ("w/o confidence-aware training", "ab_wo_confidence", "去掉 confidence-aware training，保留其余模型结构。"),
+    ]:
+        stage1_f1 = summarize_pattern(f"mws_cfe_density_stage1_results_{tag}_seed*.json", "f1")
+        stage1_auprc = summarize_pattern(f"mws_cfe_density_stage1_results_{tag}_seed*.json", "auprc")
+        stage2 = summarize_pattern(f"mws_cfe_density_stage2_results_{tag}_seed*.json", "macro_f1")
+        rows.append(
+            {
+                "Variant": variant,
+                "Seeds": str(max(stage1_f1.n, stage2.n)),
+                "Density Stage 1 F1": fmt(stage1_f1),
+                "Density Stage 1 AUPRC": fmt(stage1_auprc),
+                "Density Stage 2 Macro-F1": fmt(stage2),
+                "中文说明": note,
+            }
+        )
+    return rows
+
+
+def build_size_wave5_component_table_v6() -> list[dict[str, str]]:
+    rows: list[dict[str, str]] = []
+    for variant, tag, note in [
+        ("lexical alone", "size_wave5_lexical_alone", "5-seed learned lexical expert；作为 Wave5 组件基线。"),
+        ("lexical + BERT", "size_wave5_lexical_bert_lr", "seed42 诊断结果；用于判断 BERT probability 的边际贡献。"),
+        ("lexical + cue", "size_wave5_lexical_cue_lr", "seed42 诊断结果；用于判断 cue features 的边际贡献。"),
+        ("lexical + BERT + cue", "size_wave5_lexical_bert_cue_lr", "最终 5-seed learned stacked head；不属于 deterministic cue-only。"),
+    ]:
+        f1 = summarize_pattern(f"mws_cfe_size_results_{tag}_seed*.json", "f1")
+        auprc = summarize_pattern(f"mws_cfe_size_results_{tag}_seed*.json", "auprc")
+        rows.append(
+            {
+                "Variant": variant,
+                "Seeds": str(f1.n),
+                "Has-size F1": fmt(f1),
+                "Has-size AUPRC": fmt(auprc),
+                "中文说明": note,
+            }
+        )
+    return rows
+
+
+def build_density_parameter_table_v6() -> list[dict[str, str]]:
+    rows: list[dict[str, str]] = []
+    for group, param_type, note, values in [
+        (
+            "P1 max_seq_length",
+            "数值型长度扫描",
+            "P1 长度扫描；Stage 1 只报告 AUPRC，避免不同阈值设置下的 F1 不可比。",
+            [
+                ("64", "p1_len64"),
+                ("96", "p1_len96"),
+                ("128", "planb_full"),
+                ("160", "p1_len160"),
+                ("192", "p1_len192"),
+            ],
+        ),
+        (
+            "P2 quality gate",
+            "类别型设计选择",
+            "类别型设计选择，不是连续数值参数；用于比较 gate 策略。",
+            [
+                ("G1", "p2_g1"),
+                ("G2", "planb_full"),
+                ("G3 (selected)", "p2_g3"),
+                ("G4", "p2_g4"),
+                ("G5", "p2_g5"),
+            ],
+        ),
+        (
+            "P3 section/input strategy",
+            "类别型设计选择",
+            "类别型设计选择，不是连续数值参数；用于比较输入构造策略。",
+            [
+                ("Mention only", "p3_mention_text"),
+                ("Section-aware (selected)", "planb_full"),
+                ("Findings only", "p3_findings_text"),
+                ("Impression only", "p3_impression_text"),
+                ("Findings + impression", "p3_findings_impression_text"),
+                ("Full text", "p3_full_text"),
+            ],
+        ),
+    ]:
+        for value, tag in values:
+            stage1_auprc = summarize_pattern(f"mws_cfe_density_stage1_results_{tag}_seed*.json", "auprc")
+            stage2 = summarize_pattern(f"mws_cfe_density_stage2_results_{tag}_seed*.json", "macro_f1")
+            rows.append(
+                {
+                    "参数组": group,
+                    "参数类型": param_type,
+                    "取值": value,
+                    "Seeds": str(max(stage1_auprc.n, stage2.n)),
+                    "Density Stage 1 AUPRC": fmt(stage1_auprc),
+                    "Density Stage 2 Macro-F1": fmt(stage2),
+                    "中文说明": note,
+                }
+            )
+    return rows
+
+
+def build_size_wave5_diagnostic_parameter_table_v6() -> list[dict[str, str]]:
+    rows: list[dict[str, str]] = []
+    final_tag = "size_wave5_lexical_bert_cue_lr"
+    final_f1 = summarize_pattern(f"mws_cfe_size_results_{final_tag}_seed*.json", "f1")
+    final_auprc = summarize_pattern(f"mws_cfe_size_results_{final_tag}_seed*.json", "auprc")
+    threshold = summarize_thresholds(f"mws_cfe_size_results_{final_tag}_seed*.json")
+    rows.extend(
+        [
+            {
+                "诊断组": "Wave5 threshold",
+                "取值": f"threshold {fmt(threshold, percent=False, decimals=6)}",
+                "Seeds": str(final_f1.n),
+                "Has-size F1": fmt(final_f1),
+                "Has-size AUPRC": fmt(final_auprc),
+                "中文说明": "阈值在 phase5-like dev 上选择；Phase5 test 未用于阈值选择。",
+            },
+            {
+                "诊断组": "Wave5 stacked head",
+                "取值": "lexical + BERT + cue logistic-regression head",
+                "Seeds": str(final_f1.n),
+                "Has-size F1": fmt(final_f1),
+                "Has-size AUPRC": fmt(final_auprc),
+                "中文说明": "最终学习式堆叠头；融合 lexical probability、BERT probability 和 cue features。",
+            },
+        ]
+    )
+    for group, value, tag, note in [
+        ("component", "lexical alone", "size_wave5_lexical_alone", "lexical alone 组件基线。"),
+        ("component", "lexical + BERT", "size_wave5_lexical_bert_lr", "lexical + BERT，seed42 诊断结果。"),
+        ("component", "lexical + cue", "size_wave5_lexical_cue_lr", "lexical + cue，seed42 诊断结果。"),
+        ("component", "lexical + BERT + cue", "size_wave5_lexical_bert_cue_lr", "lexical + BERT + cue，最终 5-seed 组件组合。"),
+    ]:
+        f1 = summarize_pattern(f"mws_cfe_size_results_{tag}_seed*.json", "f1")
+        auprc = summarize_pattern(f"mws_cfe_size_results_{tag}_seed*.json", "auprc")
+        rows.append(
+            {
+                "诊断组": group,
+                "取值": value,
+                "Seeds": str(f1.n),
+                "Has-size F1": fmt(f1),
+                "Has-size AUPRC": fmt(auprc),
+                "中文说明": note,
+            }
+        )
+    return rows
+
+
 def infer_figure_manifest_row(path: Path) -> dict[str, str]:
     name = path.name
     if name.startswith("p1_"):
@@ -640,6 +885,67 @@ def build_figure_manifest() -> list[dict[str, str]]:
     return [infer_figure_manifest_row(path) for path in paths]
 
 
+def build_figure_manifest_v6() -> list[dict[str, str]]:
+    specs = [
+        (
+            "p1_max_seq_length_stage_2_macro_f1.svg",
+            "P1 max_seq_length",
+            "Density Stage 2 Macro-F1",
+            "main_text_recommended",
+            "正文推荐；若版面紧张，可移至附录并优先保留 P2/P3 图。",
+        ),
+        (
+            "p2_quality_gate_stage_2_macro_f1.svg",
+            "P2 quality gate",
+            "Density Stage 2 Macro-F1",
+            "main_text_recommended",
+            "正文优先保留；展示 G3 gate selection 对 Stage 2 的核心影响。",
+        ),
+        (
+            "p3_section_input_strategy_stage_2_macro_f1.svg",
+            "P3 section/input strategy",
+            "Density Stage 2 Macro-F1",
+            "main_text_recommended",
+            "正文优先保留；展示 section-aware input strategy 的核心影响。",
+        ),
+        (
+            "p1_max_seq_length_stage_1_auprc.svg",
+            "P1 max_seq_length",
+            "Density Stage 1 AUPRC",
+            "appendix",
+            "附录图；补充 Stage 1 AUPRC 对长度扫描的敏感性。",
+        ),
+        (
+            "p2_quality_gate_stage_1_auprc.svg",
+            "P2 quality gate",
+            "Density Stage 1 AUPRC",
+            "appendix",
+            "附录图；补充 Stage 1 AUPRC 对 gate 选择的敏感性。",
+        ),
+        (
+            "p3_section_input_strategy_stage_1_auprc.svg",
+            "P3 section/input strategy",
+            "Density Stage 1 AUPRC",
+            "appendix",
+            "附录图；补充 Stage 1 AUPRC 对输入构造策略的敏感性。",
+        ),
+    ]
+    rows: list[dict[str, str]] = []
+    for file_name, p_family, metric, placement, note in specs:
+        path = FIGURES_DIR / file_name
+        rows.append(
+            {
+                "file_name": file_name,
+                "source_path": str(path.relative_to(PROJECT_ROOT)),
+                "P family": p_family,
+                "metric": metric,
+                "placement": placement,
+                "note": note,
+            }
+        )
+    return rows
+
+
 def markdown_table(rows: list[dict[str, str]], columns: list[str]) -> str:
     lines = [
         "| " + " | ".join(columns) + " |",
@@ -674,10 +980,10 @@ def write_main_latex(raw: dict[str, dict[str, Summary]]) -> None:
         best[spec.key] = max(value for value in means if value is not None)
 
     extra_plm_note = ""
-    if ACTIVE_VERSION in {"v4", "v5"}:
+    if ACTIVE_VERSION in {"v4", "v5", "v6"}:
         extra_plm_note = rf"SciBERT and BioClinicalBERT are included in {ACTIVE_VERSION} as extra PLM baselines. "
     stage1_note = "P0 threshold-tuned Stage 1"
-    if ACTIVE_VERSION == "v5":
+    if ACTIVE_VERSION in {"v5", "v6"}:
         stage1_note = "G3+len128 threshold-calibrated Stage 1"
     lines = [
         r"\begin{table}[t]",
@@ -900,9 +1206,113 @@ BERT-only size head 在 Wave3/Wave4 中表现不稳定，尤其受阈值选择�
     REPORT_PATH.write_text(report, encoding="utf-8")
 
 
+def write_report_v6(
+    main_md: str,
+    raw_main: dict[str, dict[str, Summary]],
+    density_ablation_rows: list[dict[str, str]],
+    size_component_rows: list[dict[str, str]],
+    density_parameter_rows: list[dict[str, str]],
+    size_parameter_rows: list[dict[str, str]],
+    appendix_tables: dict[str, list[dict[str, str]]],
+    figure_manifest_rows: list[dict[str, str]],
+    ours_all_best: bool,
+) -> None:
+    missing_extra_plm = [
+        method
+        for method in ["SciBERT", "BioClinicalBERT / ClinicalBERT"]
+        if method in raw_main and all(summary.n == 0 for summary in raw_main[method].values())
+    ]
+    need_more_experiments = "需要补齐 extra PLM full 5-seed 结果" if missing_extra_plm else "不需要"
+    experiment_note = (
+        "当前 v6 表格结构已完成，但正文 PLM baseline 仍缺少结果，需要先同步或运行 extra PLM full 5-seed。"
+        if missing_extra_plm
+        else "当前已有结果足够支持 Module 2 v6 表格封板；不需要重新训练或补 Ours 实验。"
+    )
+    all_best_text = "是" if ours_all_best else "否"
+
+    appendix_paths = "\n".join(
+        f"- `{(TABLES_DIR / filename).relative_to(PROJECT_ROOT)}`"
+        for filename in APPENDIX_TASK_FILES.values()
+    )
+    latex_appendix_paths = "\n".join(
+        f"- `{(LATEX_DIR / filename.replace('.csv', '.tex')).relative_to(PROJECT_ROOT)}`"
+        for filename in APPENDIX_TASK_FILES.values()
+    )
+    main_figures = [row["file_name"] for row in figure_manifest_rows if row["placement"] == "main_text_recommended"]
+    appendix_figures = [row["file_name"] for row in figure_manifest_rows if row["placement"] == "appendix"]
+
+    report = f"""# 模块2 final tables v6 论文呈现报告
+
+> 日期：2026-05-07
+> 范围：只重构表格和报告呈现；未启动训练，未修改任何实验结果。
+
+## 1. v6 主表
+
+v6 主表沿用 v5 learned-model 主表口径：正文只保留 learned models，即学习模型；cue-only 和 P2 deterministic hybrid 继续排除。Ours Density Stage 1 使用 `mws_cfe_density_stage1_results_density_final_g3_len128_seed*.json`，Density Stage 2 继续使用 `mws_cfe_density_stage2_results_density_final_g3_len128_seed*.json`，不使用 len192。
+
+{main_md}
+
+Ours 是否在正文 learned-model 主表所有主指标上最优：**{all_best_text}**。
+
+## 2. 主表 primary metrics 口径
+
+主表不同任务使用不同 primary metrics，即主要评价指标，是因为任务定义和可解释性不同。
+
+1. Density Stage 1 是二分类证据检测；本文做了 threshold calibration，即阈值校准，因此正文报告 F1、AUPRC 和 AUROC。
+2. Density Stage 2 是多类别密度亚型分类，因此正文报告 Macro-F1，避免大类掩盖小类表现。
+3. Has-size 是二分类字段抽取，因此正文报告 F1，直接反映 has_size 正类抽取质量。
+4. Location 是多类别位置抽取，因此正文报告 Macro-F1，避免频繁肺叶类别主导平均结果。
+5. Accuracy、Precision、Recall、AUPRC、AUROC 等完整指标进入附录，避免正文主表过宽。
+
+## 3. 任务级完整指标附录
+
+v6 将 appendix full metrics 拆成 4 张任务级表，而不是继续使用一张大总表。原因是四个任务可计算和应报告的指标不同；拆表后每张表只包含该任务适用指标，不再出现大量空白列。若旧结果 JSON 未提供某个适用指标，表中写作 N/A，表示未计算而非任务不适用。
+
+CSV 路径：
+{appendix_paths}
+
+LaTeX 路径：
+{latex_appendix_paths}
+
+## 4. 消融表拆分
+
+Density ablation 和 Has-size Wave5 component analysis 在 v6 中分开。Density ablation 是 Full vs w/o 格式，用来解释 Stage 1/Stage 2 density pipeline 的关键组件；Has-size Wave5 表是组件诊断，不伪装成严格 5-seed ablation，其中 `lexical + BERT` 和 `lexical + cue` 明确标为 seed42 诊断结果。
+
+Density ablation：`{(TABLES_DIR / "density_ablation_table_final.csv").relative_to(PROJECT_ROOT)}`，共 {len(density_ablation_rows)} 行。
+
+Has-size Wave5 component analysis：`{(TABLES_DIR / "size_wave5_component_table_final.csv").relative_to(PROJECT_ROOT)}`，共 {len(size_component_rows)} 行。
+
+## 5. 参数表拆分
+
+Density 参数表只讨论 P1/P2/P3，并只保留 Density Stage 1 AUPRC 与 Density Stage 2 Macro-F1。这里不放 Has-size F1，也不放 Density Stage 1 F1，因为很多参数设置没有统一做 P0 threshold tuning，F1 不适合作为公平参数扫描指标。
+
+P2 quality gate 和 P3 section/input strategy 是 categorical design choices，即类别型设计选择，不是连续数值参数；因此 v6 报告把它们作为设计选项比较，而不是数值超参数曲线。
+
+Density parameter table：`{(TABLES_DIR / "density_parameter_table_final.csv").relative_to(PROJECT_ROOT)}`，共 {len(density_parameter_rows)} 行。
+
+Has-size Wave5 diagnostic parameter table：`{(TABLES_DIR / "size_wave5_diagnostic_parameter_table.csv").relative_to(PROJECT_ROOT)}`，共 {len(size_parameter_rows)} 行。
+
+## 6. 参数图进入正文和附录
+
+正文推荐 3 张参数图：
+{chr(10).join(f"- `{name}`" for name in main_figures)}
+
+附录放 3 张参数图：
+{chr(10).join(f"- `{name}`" for name in appendix_figures)}
+
+如果版面紧张，正文只保留 `p2_quality_gate_stage_2_macro_f1.svg` 和 `p3_section_input_strategy_stage_2_macro_f1.svg`；P1 图移入附录。完整索引见 `{(FINAL_FIGURES_DIR / "figure_manifest.csv").relative_to(PROJECT_ROOT)}`。
+
+## 7. 最终判断
+
+模块2是否还需要补实验：**{need_more_experiments}**。{experiment_note}
+"""
+    REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
+    REPORT_PATH.write_text(report, encoding="utf-8")
+
+
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Build Module 2 final tables v3/v4/v5")
-    parser.add_argument("--version", choices=["v3", "v4", "v5"], default="v3")
+    parser = argparse.ArgumentParser(description="Build Module 2 final tables v3/v4/v5/v6")
+    parser.add_argument("--version", choices=["v3", "v4", "v5", "v6"], default="v3")
     return parser.parse_args()
 
 
@@ -912,6 +1322,101 @@ def main() -> None:
 
     main_rows, raw_main, _best_flags, verdict = build_main_table()
     ours_all_best = verdict == "yes"
+
+    if ACTIVE_VERSION == "v6":
+        density_ablation_rows = build_density_ablation_table_v6()
+        size_component_rows = build_size_wave5_component_table_v6()
+        density_parameter_rows = build_density_parameter_table_v6()
+        size_parameter_rows = build_size_wave5_diagnostic_parameter_table_v6()
+        appendix_tables = build_task_appendix_full_metrics_tables()
+        figure_manifest_rows = build_figure_manifest_v6()
+
+        write_csv(TABLES_DIR / "main_table_final.csv", main_rows)
+        write_main_latex(raw_main)
+
+        write_csv(TABLES_DIR / "density_ablation_table_final.csv", density_ablation_rows)
+        write_csv(TABLES_DIR / "size_wave5_component_table_final.csv", size_component_rows)
+        write_csv(TABLES_DIR / "density_parameter_table_final.csv", density_parameter_rows)
+        write_csv(TABLES_DIR / "size_wave5_diagnostic_parameter_table.csv", size_parameter_rows)
+        write_csv(FINAL_FIGURES_DIR / "figure_manifest.csv", figure_manifest_rows)
+
+        write_generic_latex_table(
+            LATEX_DIR / "density_ablation_table.tex",
+            density_ablation_rows,
+            ["Variant", "Seeds", "Density Stage 1 F1", "Density Stage 1 AUPRC", "Density Stage 2 Macro-F1", "中文说明"],
+            "Module 2 density ablation under final v6 presentation.",
+            "tab:module2_density_ablation_v6",
+            "Full-vs-without comparison for density components. N/A denotes metrics not applicable to the diagnostic row.",
+        )
+        write_generic_latex_table(
+            LATEX_DIR / "size_wave5_component_table.tex",
+            size_component_rows,
+            ["Variant", "Seeds", "Has-size F1", "Has-size AUPRC", "中文说明"],
+            "Module 2 Has-size Wave5 component analysis.",
+            "tab:module2_size_wave5_components_v6",
+            "This is component analysis, not a strict five-seed ablation for every row; seed42-only diagnostics are marked in the Chinese note column.",
+        )
+        write_generic_latex_table(
+            LATEX_DIR / "density_parameter_table.tex",
+            density_parameter_rows,
+            ["参数组", "参数类型", "取值", "Seeds", "Density Stage 1 AUPRC", "Density Stage 2 Macro-F1", "中文说明"],
+            "Module 2 density parameter diagnostics for P1/P2/P3.",
+            "tab:module2_density_parameters_v6",
+            "Stage 1 F1 is omitted because not every scan uses the same P0 threshold calibration; P2/P3 are categorical design choices.",
+        )
+        write_generic_latex_table(
+            LATEX_DIR / "size_wave5_diagnostic_parameter_table.tex",
+            size_parameter_rows,
+            ["诊断组", "取值", "Seeds", "Has-size F1", "Has-size AUPRC", "中文说明"],
+            "Module 2 Has-size Wave5 diagnostic parameters.",
+            "tab:module2_size_wave5_diagnostics_v6",
+            "Wave5 diagnostics document thresholding, stacked-head design, and component combinations.",
+        )
+
+        for task, rows in appendix_tables.items():
+            filename = APPENDIX_TASK_FILES[task]
+            write_csv(TABLES_DIR / filename, rows)
+            metric_columns = [title for _, title in APPENDIX_TASK_METRICS[task]]
+            write_generic_latex_table(
+                LATEX_DIR / filename.replace(".csv", ".tex"),
+                rows,
+                ["Method", "Seeds", *metric_columns],
+                f"Module 2 {TASK_TITLES[task]} full metrics appendix.",
+                f"tab:module2_{task}_full_metrics_v6",
+                "Task-level appendix table; only metrics applicable to this task are included.",
+            )
+
+        main_md = build_main_markdown(raw_main)
+        write_report_v6(
+            main_md,
+            raw_main,
+            density_ablation_rows,
+            size_component_rows,
+            density_parameter_rows,
+            size_parameter_rows,
+            appendix_tables,
+            figure_manifest_rows,
+            ours_all_best,
+        )
+
+        print(f"Wrote final tables {ACTIVE_VERSION} artifacts:")
+        print(TABLES_DIR / "main_table_final.csv")
+        print(TABLES_DIR / "density_ablation_table_final.csv")
+        print(TABLES_DIR / "size_wave5_component_table_final.csv")
+        print(TABLES_DIR / "density_parameter_table_final.csv")
+        print(TABLES_DIR / "size_wave5_diagnostic_parameter_table.csv")
+        for filename in APPENDIX_TASK_FILES.values():
+            print(TABLES_DIR / filename)
+            print(LATEX_DIR / filename.replace(".csv", ".tex"))
+        print(LATEX_DIR / "main_table.tex")
+        print(LATEX_DIR / "density_ablation_table.tex")
+        print(LATEX_DIR / "size_wave5_component_table.tex")
+        print(LATEX_DIR / "density_parameter_table.tex")
+        print(LATEX_DIR / "size_wave5_diagnostic_parameter_table.tex")
+        print(FINAL_FIGURES_DIR / "figure_manifest.csv")
+        print(REPORT_PATH)
+        return
+
     ablation_rows = build_ablation_table()
     parameter_rows = build_parameter_table()
     appendix_rows = build_appendix_full_metrics_table()

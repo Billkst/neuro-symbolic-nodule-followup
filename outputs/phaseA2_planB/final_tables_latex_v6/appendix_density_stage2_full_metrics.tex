@@ -1,0 +1,22 @@
+\begin{table}[t]
+\centering
+\caption{Module 2 Density Stage 2 full metrics appendix.}
+\label{tab:module2_density_stage2_full_metrics_v6}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{llll}
+\toprule
+Method & Seeds & Accuracy & Macro-F1 \\
+\midrule
+TF-IDF + LR & 5 (13,42,87,3407,31415) & 87.59 $\pm$ 0.00 & 79.11 $\pm$ 0.00 \\
+TF-IDF + SVM & 5 (13,42,87,3407,31415) & 89.37 $\pm$ 0.00 & 81.41 $\pm$ 0.00 \\
+TF-IDF + MLP & 5 (13,42,87,3407,31415) & 87.47 $\pm$ 0.18 & 78.08 $\pm$ 0.36 \\
+Vanilla PubMedBERT & 5 (13,42,87,3407,31415) & 95.82 $\pm$ 1.51 & 91.19 $\pm$ 0.82 \\
+SciBERT & 5 (13,42,87,3407,31415) & 95.18 $\pm$ 1.49 & 90.54 $\pm$ 1.04 \\
+BioClinicalBERT / ClinicalBERT & 5 (13,42,87,3407,31415) & 95.01 $\pm$ 1.43 & 90.56 $\pm$ 0.91 \\
+MWS-CFE (Ours; final) & 5 (13,42,87,3407,31415) & 98.90 $\pm$ 0.29 & 96.89 $\pm$ 0.32 \\
+\bottomrule
+\end{tabular}%
+}
+\vspace{0.3em}
+\footnotesize{Task-level appendix table; only metrics applicable to this task are included.}
+\end{table}

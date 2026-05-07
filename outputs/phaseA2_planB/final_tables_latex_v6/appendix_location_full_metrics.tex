@@ -1,0 +1,22 @@
+\begin{table}[t]
+\centering
+\caption{Module 2 Location full metrics appendix.}
+\label{tab:module2_location_full_metrics_v6}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{llll}
+\toprule
+Method & Seeds & Accuracy & Macro-F1 \\
+\midrule
+TF-IDF + LR & 5 (13,42,87,3407,31415) & 36.32 $\pm$ 0.00 & 49.41 $\pm$ 0.00 \\
+TF-IDF + SVM & 5 (13,42,87,3407,31415) & 36.55 $\pm$ 0.00 & 47.80 $\pm$ 0.00 \\
+TF-IDF + MLP & 5 (13,42,87,3407,31415) & 36.20 $\pm$ 0.07 & 60.57 $\pm$ 1.09 \\
+Vanilla PubMedBERT & 5 (13,42,87,3407,31415) & 98.82 $\pm$ 0.31 & 97.39 $\pm$ 0.53 \\
+SciBERT & 5 (13,42,87,3407,31415) & 98.95 $\pm$ 0.33 & 97.52 $\pm$ 0.64 \\
+BioClinicalBERT / ClinicalBERT & 5 (13,42,87,3407,31415) & 98.82 $\pm$ 0.13 & 97.33 $\pm$ 0.23 \\
+MWS-CFE (Ours; final) & 5 (13,42,87,3407,31415) & 99.30 $\pm$ 0.38 & 98.35 $\pm$ 0.71 \\
+\bottomrule
+\end{tabular}%
+}
+\vspace{0.3em}
+\footnotesize{Task-level appendix table; only metrics applicable to this task are included.}
+\end{table}

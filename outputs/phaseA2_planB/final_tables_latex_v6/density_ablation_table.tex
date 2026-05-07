@@ -1,0 +1,20 @@
+\begin{table}[t]
+\centering
+\caption{Module 2 density ablation under final v6 presentation.}
+\label{tab:module2_density_ablation_v6}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{llllll}
+\toprule
+Variant & Seeds & Density Stage 1 F1 & Density Stage 1 AUPRC & Density Stage 2 Macro-F1 & 中文说明 \\
+\midrule
+Full MWS-CFE & 5 & 98.43 $\pm$ 0.45 & 99.36 $\pm$ 0.39 & 96.89 $\pm$ 0.32 & 最终完整模型：Stage 1 使用 G3+len128 校准配置，Stage 2 使用 G3+len128；不使用 len192。 \\
+w/o P0 threshold tuning & 5 & 60.29 $\pm$ 6.93 & 98.82 $\pm$ 0.41 & N/A & 只诊断 Stage 1 阈值校准层；Stage 2 指标不适用于该行。 \\
+w/o G3 gate selection & 5 & 97.48 $\pm$ 0.24 & 98.82 $\pm$ 0.41 & 91.05 $\pm$ 0.54 & 回退到旧 G2 gate 配置，用于显示选择 G3 gate 后的增益。 \\
+w/o section-aware input & 5 & 62.10 $\pm$ 3.65 & 79.33 $\pm$ 4.64 & 86.76 $\pm$ 0.32 & 去掉 section-aware 输入构造，保留其余训练流程。 \\
+w/o confidence-aware training & 5 & 78.63 $\pm$ 5.93 & 98.81 $\pm$ 0.30 & 90.70 $\pm$ 0.77 & 去掉 confidence-aware training，保留其余模型结构。 \\
+\bottomrule
+\end{tabular}%
+}
+\vspace{0.3em}
+\footnotesize{Full-vs-without comparison for density components. N/A denotes metrics not applicable to the diagnostic row.}
+\end{table}
