@@ -1,0 +1,16 @@
+dimension,label,count,interpretation
+overall,total_conflict_rows,425,overall conflict audit count
+overall,conflict_cases,150,overall conflict audit count
+overall,conflict_case_notes,280,overall conflict audit count
+overall,manual_review_rows,150,overall conflict audit count
+overall,aggregation_resolvable_rows,275,overall conflict audit count
+conflict_field,density_category,25,candidate fact disagreement by field
+conflict_field,location_lobe,270,candidate fact disagreement by field
+conflict_field,size_mm,130,candidate fact disagreement by field
+risk_level,high,25,risk level assigned by conflict audit
+risk_level,medium,400,risk level assigned by conflict audit
+resolution_path,density_subtype_conflict_changes_cdsg_path_manual_review,25,candidate resolution category
+resolution_path,largest_size_case_or_note_level_resolution_possible,114,candidate resolution category
+resolution_path,location_conflict_low_cdsg_impact_but_grounding_risk,161,candidate resolution category
+resolution_path,many_size_values_largest_size_possible_but_review_recommended,16,candidate resolution category
+resolution_path,multiple_location_mentions_likely_multiple_nodules,109,candidate resolution category

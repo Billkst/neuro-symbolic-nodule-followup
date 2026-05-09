@@ -1,0 +1,8 @@
+dimension,label,count,fraction_of_abstentions,fraction_of_total
+abstention_reason,missing_nodule_density,104,0.587571,0.411067
+abstention_reason,missing_nodule_size,66,0.372881,0.260870
+abstention_reason,no_structured_nodule,7,0.039548,0.027668
+missing_information,density_category,104,0.587571,0.411067
+missing_information,nodule,7,0.039548,0.027668
+missing_information,nodule_size,66,0.372881,0.260870
+missing_information,smoking_eligibility,170,0.960452,0.671937

@@ -1,0 +1,5 @@
+strategy,original_actionable,original_abstention,original_missing_density,original_missing_size,original_no_structured_nodule,simulated_actionable,simulated_abstention,simulated_missing_density,simulated_missing_size,simulated_no_structured_nodule,actionable_delta,abstention_delta,missing_density_delta,missing_size_delta,recovered_cases,cases_modified,aggregation_candidates_appended,high_risk_candidates,medium_risk_candidates,confidence_threshold,risk_note,adopted_in_conservative_v2,m3a_status
+same_case_union,76,177,104,66,7,84,169,96,66,7,8,-8,-8,0,8,8,8,4,1,,high_risk,no,not_adopted_high_fact_mismatch_risk
+same_note_union,76,177,104,66,7,80,173,100,66,7,4,-4,-4,0,4,4,4,0,1,,medium_or_lower_risk,no,appendix_only_not_official_v2
+dominant_size_density_nearest,76,177,104,66,7,84,169,96,66,7,8,-8,-8,0,8,8,8,4,1,,high_risk,no,not_adopted_high_fact_mismatch_risk
+confidence_gated_same_note_union,76,177,104,66,7,79,174,101,66,7,3,-3,-3,0,3,3,3,0,0,0.7,low_risk,no,appendix_only_low_risk_diagnostic
