@@ -29,6 +29,12 @@ VALID_DENSITIES = ["solid", "part_solid", "ground_glass", "calcified"]
 VALID_LOCATIONS = ["RUL", "RML", "RLL", "LUL", "LLL", "lingula", "bilateral"]
 LOCATION_LABELS = VALID_LOCATIONS + ["unclear"]
 STAGE1_LABELS = ["explicit_density", "unclear_or_no_evidence"]
+MODEL_WEIGHT_FILES = ["model.safetensors", "pytorch_model.bin", "tf_model.h5"]
+TASK_MODEL_HINTS = {
+    "density_stage1": ["density_stage1", "stage1"],
+    "density_stage2": ["density_stage2", "stage2"],
+    "location": ["location"],
+}
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -48,6 +54,26 @@ def _load_jsonl(path: Path) -> list[dict[str, Any]]:
             if line:
                 rows.append(json.loads(line))
     return rows
+
+
+def _load_rows_file(path: Path) -> list[dict[str, Any]]:
+    if not path.exists():
+        raise FileNotFoundError(f"phase4 aligned mention file does not exist: {path}")
+    suffix = path.suffix.lower()
+    if suffix == ".jsonl":
+        return _load_jsonl(path)
+    if suffix == ".csv":
+        with path.open("r", encoding="utf-8", newline="") as fp:
+            return [dict(row) for row in csv.DictReader(fp)]
+    if suffix == ".json":
+        data = _load_json(path)
+        if isinstance(data, list):
+            return [dict(row) for row in data if isinstance(row, dict)]
+        if isinstance(data, dict):
+            rows = data.get("rows") or data.get("data") or data.get("mentions")
+            if isinstance(rows, list):
+                return [dict(row) for row in rows if isinstance(row, dict)]
+    raise ValueError(f"unsupported rows file format: {path}")
 
 
 def _write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
@@ -77,6 +103,42 @@ def _phase5_rows(phase5_data_dir: Path, task: str) -> list[dict[str, Any]]:
             out["source_path"] = str(path)
             rows.append(out)
     return rows
+
+
+def _task_base_name(task: str) -> str:
+    if task.startswith("density_stage"):
+        return "density"
+    return task
+
+
+def _rows_for_task(
+    *,
+    task: str,
+    phase5_data_dir: Path,
+    phase4_aligned_mentions: Path | None,
+    note_to_case: dict[str, str],
+    include_all_phase5: bool,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    base_task = _task_base_name(task)
+    if phase4_aligned_mentions is not None:
+        all_rows = _load_rows_file(phase4_aligned_mentions)
+        rows: list[dict[str, Any]] = []
+        for row in all_rows:
+            row_task = row.get("task")
+            if row_task and str(row_task) not in {task, base_task}:
+                continue
+            out = dict(row)
+            out.setdefault("source_split", "phase4_aligned_mentions")
+            out.setdefault("source_path", str(phase4_aligned_mentions))
+            rows.append(out)
+        if include_all_phase5:
+            return rows, rows
+        return [row for row in rows if row.get("case_id") or str(row.get("note_id")) in note_to_case], rows
+
+    all_rows = _phase5_rows(phase5_data_dir, base_task)
+    if include_all_phase5:
+        return all_rows, all_rows
+    return [row for row in all_rows if str(row.get("note_id")) in note_to_case], all_rows
 
 
 def _note_to_case(case_bundle_path: Path) -> dict[str, str]:
@@ -123,6 +185,166 @@ def _model_path_from_result(result: dict[str, Any], fallback: str | None = None)
     return path if path.is_absolute() else PROJECT_ROOT / path
 
 
+def _resolve_path(value: str | None) -> Path | None:
+    if not value:
+        return None
+    path = Path(str(value)).expanduser()
+    return path if path.is_absolute() else PROJECT_ROOT / path
+
+
+def _display_path(path: Path) -> str:
+    try:
+        return str(path.relative_to(PROJECT_ROOT))
+    except ValueError:
+        return str(path)
+
+
+def _looks_like_hf_model_dir(path: Path) -> bool:
+    if not path.is_dir():
+        return False
+    if not (path / "config.json").exists():
+        return False
+    return any((path / name).exists() for name in MODEL_WEIGHT_FILES)
+
+
+def _result_model_dir(result: dict[str, Any]) -> Path | None:
+    for value in [
+        result.get("model_dir"),
+        result.get("model_path"),
+        result.get("training_args", {}).get("output_dir") if isinstance(result.get("training_args"), dict) else None,
+    ]:
+        path = _resolve_path(str(value)) if value else None
+        if path is not None:
+            return path
+    return None
+
+
+def _without_seed_suffix(value: str) -> str:
+    text = value.strip()
+    if "_seed" not in text:
+        return text
+    return text.split("_seed", 1)[0]
+
+
+def _dedupe(values: list[str]) -> list[str]:
+    seen: set[str] = set()
+    out: list[str] = []
+    for value in values:
+        text = str(value).strip()
+        if text and text not in seen:
+            seen.add(text)
+            out.append(text)
+    return out
+
+
+def _model_search_roots() -> list[Path]:
+    return [
+        PROJECT_ROOT / "outputs/phaseA2_planB/models",
+        PROJECT_ROOT / "outputs/phaseA2/models",
+        PROJECT_ROOT / "outputs/phase5/models",
+        PROJECT_ROOT / "outputs/phase5/hf_models",
+        PROJECT_ROOT / "models",
+    ]
+
+
+def _score_model_candidate(path: Path, task: str, tags: list[str]) -> int:
+    name = path.name
+    full = str(path)
+    tag_score = 0
+    for tag in tags:
+        if name == tag:
+            tag_score += 100
+        if tag in name:
+            tag_score += 40
+        elif tag in full:
+            tag_score += 20
+    if tag_score == 0:
+        return 0
+    score = tag_score
+    for hint in TASK_MODEL_HINTS.get(task, []):
+        if hint in name:
+            score += 25
+        elif hint in full:
+            score += 10
+    if "checkpoint" not in name:
+        score += 5
+    return score
+
+
+def _discover_model_dir(
+    *,
+    task: str,
+    explicit_model_dir: str | None,
+    result: dict[str, Any],
+    preferred_tag: str,
+) -> dict[str, Any]:
+    checked: list[str] = []
+    tags = _dedupe(
+        [
+            preferred_tag,
+            _without_seed_suffix(preferred_tag),
+            str(result.get("tag") or ""),
+            _without_seed_suffix(str(result.get("tag") or "")),
+        ]
+    )
+
+    explicit_path = _resolve_path(explicit_model_dir)
+    if explicit_path is not None:
+        checked.append(str(explicit_path))
+        if _looks_like_hf_model_dir(explicit_path):
+            return {
+                "model_dir": explicit_path,
+                "model_dir_source": "explicit_cli",
+                "failure_reason": None,
+                "checked_paths": checked,
+            }
+        return {
+            "model_dir": explicit_path,
+            "model_dir_source": "explicit_cli",
+            "failure_reason": f"explicit_model_dir_missing_or_incomplete:{explicit_path}",
+            "checked_paths": checked,
+        }
+
+    result_path = _result_model_dir(result)
+    if result_path is not None:
+        checked.append(str(result_path))
+        if _looks_like_hf_model_dir(result_path):
+            return {
+                "model_dir": result_path,
+                "model_dir_source": "result_json",
+                "failure_reason": None,
+                "checked_paths": checked,
+            }
+
+    candidates: list[tuple[int, Path]] = []
+    for root in _model_search_roots():
+        checked.append(str(root))
+        if not root.exists():
+            continue
+        for path in root.rglob("*"):
+            if not path.is_dir() or not _looks_like_hf_model_dir(path):
+                continue
+            score = _score_model_candidate(path, task, tags)
+            if score > 0:
+                candidates.append((score, path))
+
+    if candidates:
+        candidates.sort(key=lambda item: (item[0], -len(str(item[1]))), reverse=True)
+        return {
+            "model_dir": candidates[0][1],
+            "model_dir_source": "auto_discovery",
+            "failure_reason": None,
+            "checked_paths": checked,
+        }
+
+    return {
+        "model_dir": result_path,
+        "model_dir_source": "not_found",
+        "failure_reason": f"model_dir_not_found_or_incomplete;checked={';'.join(checked[:12])}",
+        "checked_paths": checked,
+    }
+
+
 def _normalize_density(value: Any) -> str | None:
     if value is None:
         return None
@@ -158,8 +380,8 @@ def _base_record(
     note_id = row.get("note_id")
     sample_id = row.get("sample_id")
     return {
-        "case_id": note_to_case.get(str(note_id)),
-        "report_id": note_id,
+        "case_id": row.get("case_id") or note_to_case.get(str(note_id)),
+        "report_id": row.get("report_id") or note_id,
         "note_id": note_id,
         "subject_id": row.get("subject_id"),
         "mention_id": row.get("mention_id") or sample_id,
@@ -208,6 +430,7 @@ def _export_density_stage1_constructed(
     note_to_case: dict[str, str],
     model_tag: str,
     result: dict[str, Any],
+    failure_reason: str = "final_density_stage1_per_sample_predictions_missing_or_model_dir_absent_locally",
 ) -> list[dict[str, Any]]:
     threshold = _stage1_threshold(result)
     records: list[dict[str, Any]] = []
@@ -220,7 +443,7 @@ def _export_density_stage1_constructed(
                 "predicted_label": constructed,
                 "gold_or_constructed_label": constructed,
                 "prediction_source_type": "constructed_fact_not_final_model",
-                "failure_reason": "final_density_stage1_per_sample_predictions_missing_or_model_dir_absent_locally",
+                "failure_reason": failure_reason,
                 "model_export_required": True,
                 "stage1_threshold": threshold,
                 "density_label_source": row.get("density_label"),
@@ -235,6 +458,7 @@ def _export_density_stage2_constructed(
     rows: list[dict[str, Any]],
     note_to_case: dict[str, str],
     model_tag: str,
+    failure_reason: str = "final_density_stage2_per_sample_predictions_missing_or_model_dir_absent_locally",
 ) -> list[dict[str, Any]]:
     records: list[dict[str, Any]] = []
     for row in rows:
@@ -245,7 +469,7 @@ def _export_density_stage2_constructed(
                 "predicted_label": density if density in VALID_DENSITIES else None,
                 "gold_or_constructed_label": density,
                 "prediction_source_type": "constructed_fact_not_final_model",
-                "failure_reason": "final_density_stage2_per_sample_predictions_missing_or_model_dir_absent_locally",
+                "failure_reason": failure_reason,
                 "model_export_required": True,
                 "density_label_source": row.get("density_label"),
             }
@@ -259,6 +483,7 @@ def _export_location_constructed(
     rows: list[dict[str, Any]],
     note_to_case: dict[str, str],
     model_tag: str,
+    failure_reason: str = "final_location_per_sample_predictions_missing_or_model_dir_absent_locally",
 ) -> list[dict[str, Any]]:
     records: list[dict[str, Any]] = []
     for row in rows:
@@ -270,7 +495,7 @@ def _export_location_constructed(
                 "predicted_label": predicted,
                 "gold_or_constructed_label": label,
                 "prediction_source_type": "constructed_fact_not_final_model",
-                "failure_reason": "final_location_per_sample_predictions_missing_or_model_dir_absent_locally",
+                "failure_reason": failure_reason,
                 "model_export_required": True,
                 "has_location": row.get("has_location"),
             }
@@ -393,11 +618,11 @@ def _export_density_stage1_model_predictions(
     note_to_case: dict[str, str],
     model_tag: str,
     result: dict[str, Any],
+    model_dir: Path,
     max_length: int,
     batch_size: int,
 ) -> list[dict[str, Any]]:
     prepared = _prepare_density_rows_for_inference(rows)
-    model_dir = _model_path_from_result(result)
     input_field = str(result.get("input_field") or "section_aware_text")
     threshold = _stage1_threshold(result)
     predictions = _run_hf_inference(
@@ -438,11 +663,11 @@ def _export_density_stage2_model_predictions(
     note_to_case: dict[str, str],
     model_tag: str,
     result: dict[str, Any],
+    model_dir: Path,
     max_length: int,
     batch_size: int,
 ) -> list[dict[str, Any]]:
     prepared = _prepare_density_rows_for_inference(rows)
-    model_dir = _model_path_from_result(result)
     input_field = str(result.get("input_field") or "section_aware_text")
     predictions = _run_hf_inference(
         rows=prepared,
@@ -479,11 +704,11 @@ def _export_location_model_predictions(
     note_to_case: dict[str, str],
     model_tag: str,
     result: dict[str, Any],
+    model_dir: Path,
     max_length: int,
     batch_size: int,
 ) -> list[dict[str, Any]]:
     prepared = _prepare_location_rows_for_inference(rows)
-    model_dir = _model_path_from_result(result)
     input_field = str(result.get("input_field") or "cue_augmented_text")
     model_rows = [row for row in prepared if row.get("location_label") != "no_location"]
     model_predictions_by_sample: dict[str, dict[str, Any]] = {}
@@ -535,16 +760,35 @@ def _export_location_model_predictions(
     return records
 
 
-def _summary_rows(task: str, records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def _summary_rows(
+    task: str,
+    records: list[dict[str, Any]],
+    *,
+    input_rows: int,
+    model_dir_info: dict[str, Any] | None = None,
+    task_failure_reason: str | None = None,
+) -> list[dict[str, Any]]:
     counter = Counter(str(row.get("prediction_source_type")) for row in records)
     failure_counter = Counter(str(row.get("failure_reason")) for row in records if row.get("failure_reason"))
     source_split_counter = Counter(str(row.get("source_split")) for row in records)
+    model_dir = model_dir_info.get("model_dir") if model_dir_info else None
+    model_dir_source = model_dir_info.get("model_dir_source") if model_dir_info else None
     rows = [
+        {"task": task, "metric": "input_rows", "value": input_rows},
         {"task": task, "metric": "rows_exported", "value": len(records)},
+        {"task": task, "metric": "skipped_rows", "value": max(input_rows - len(records), 0)},
         {"task": task, "metric": "case_aligned_rows", "value": sum(1 for row in records if row.get("case_id"))},
         {"task": task, "metric": "case_alignment_rate", "value": f"{sum(1 for row in records if row.get('case_id')) / len(records):.6f}" if records else "0.000000"},
         {"task": task, "metric": "model_export_required_rows", "value": sum(1 for row in records if row.get("model_export_required"))},
     ]
+    if model_dir is not None:
+        rows.append({"task": task, "metric": "model_dir_used", "value": str(model_dir)})
+    if model_dir_source:
+        rows.append({"task": task, "metric": "model_dir_source", "value": model_dir_source})
+    if model_dir_info and model_dir_info.get("failure_reason"):
+        rows.append({"task": task, "metric": f"failure_reason.{model_dir_info['failure_reason']}", "value": input_rows})
+    if task_failure_reason and task_failure_reason != (model_dir_info or {}).get("failure_reason"):
+        rows.append({"task": task, "metric": f"failure_reason.{task_failure_reason}", "value": input_rows})
     for key, value in sorted(counter.items()):
         rows.append({"task": task, "metric": f"prediction_source_type.{key}", "value": value})
     for key, value in sorted(failure_counter.items()):
@@ -552,6 +796,22 @@ def _summary_rows(task: str, records: list[dict[str, Any]]) -> list[dict[str, An
     for key, value in sorted(source_split_counter.items()):
         rows.append({"task": task, "metric": f"source_split.{key}", "value": value})
     return rows
+
+
+def _no_records_failure(
+    *,
+    task: str,
+    input_rows: int,
+    model_dir_info: dict[str, Any] | None,
+    reason: str,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    return [], _summary_rows(
+        task,
+        [],
+        input_rows=input_rows,
+        model_dir_info=model_dir_info,
+        task_failure_reason=reason,
+    )
 
 
 def main() -> None:
@@ -565,9 +825,22 @@ def main() -> None:
     parser.add_argument("--density-stage2-result", default="outputs/phaseA2_planB/results/mws_cfe_density_stage2_results_density_final_g3_len128_seed42.json")
     parser.add_argument("--size-result", default="outputs/phaseA2_planB/results/mws_cfe_size_results_size_wave5_lexical_alone_seed42.json")
     parser.add_argument("--location-result", default="outputs/phaseA2_planB/results/mws_cfe_location_results_location_aug_g2_seed42.json")
+    parser.add_argument("--density-stage1-model-dir", default=None)
+    parser.add_argument("--density-stage2-model-dir", default=None)
+    parser.add_argument("--location-model-dir", default=None)
+    parser.add_argument(
+        "--phase4-aligned-mentions",
+        default=None,
+        help="Optional JSONL/CSV/JSON mention file already aligned to Phase4 cases.",
+    )
     parser.add_argument("--size-probability-dir", default="outputs/phaseA2_planB/size_wave5/probabilities")
     parser.add_argument("--size-probability-tag", default="size_wave5_lexical_alone_seed42")
     parser.add_argument("--allow-model-inference", action="store_true")
+    parser.add_argument(
+        "--allow-constructed-fallback",
+        action="store_true",
+        help="Emit constructed Phase5 facts when final model inference is unavailable. Disabled by default.",
+    )
     parser.add_argument("--max-length", type=int, default=128)
     parser.add_argument("--batch-size", type=int, default=128)
     parser.add_argument(
@@ -580,72 +853,170 @@ def main() -> None:
     phase5_data_dir = PROJECT_ROOT / args.phase5_data_dir
     output_dir = PROJECT_ROOT / args.output_dir
     note_to_case = _note_to_case(PROJECT_ROOT / args.case_bundles)
+    phase4_aligned_mentions = _resolve_path(args.phase4_aligned_mentions)
 
-    density_rows_all = _phase5_rows(phase5_data_dir, "density")
-    size_rows_all = _phase5_rows(phase5_data_dir, "size")
-    location_rows_all = _phase5_rows(phase5_data_dir, "location")
-    if args.include_all_phase5:
-        density_rows = density_rows_all
-        size_rows = size_rows_all
-        location_rows = location_rows_all
-    else:
-        density_rows = [row for row in density_rows_all if str(row.get("note_id")) in note_to_case]
-        size_rows = [row for row in size_rows_all if str(row.get("note_id")) in note_to_case]
-        location_rows = [row for row in location_rows_all if str(row.get("note_id")) in note_to_case]
+    density_rows, density_rows_all = _rows_for_task(
+        task="density_stage1",
+        phase5_data_dir=phase5_data_dir,
+        phase4_aligned_mentions=phase4_aligned_mentions,
+        note_to_case=note_to_case,
+        include_all_phase5=args.include_all_phase5,
+    )
+    size_rows, size_rows_all = _rows_for_task(
+        task="size",
+        phase5_data_dir=phase5_data_dir,
+        phase4_aligned_mentions=phase4_aligned_mentions,
+        note_to_case=note_to_case,
+        include_all_phase5=args.include_all_phase5,
+    )
+    location_rows, location_rows_all = _rows_for_task(
+        task="location",
+        phase5_data_dir=phase5_data_dir,
+        phase4_aligned_mentions=phase4_aligned_mentions,
+        note_to_case=note_to_case,
+        include_all_phase5=args.include_all_phase5,
+    )
 
     density_stage1_result = _load_json(PROJECT_ROOT / args.density_stage1_result)
     density_stage2_result = _load_json(PROJECT_ROOT / args.density_stage2_result)
     size_result = _load_json(PROJECT_ROOT / args.size_result)
     location_result = _load_json(PROJECT_ROOT / args.location_result)
+    density_stage1_model_dir_info = _discover_model_dir(
+        task="density_stage1",
+        explicit_model_dir=args.density_stage1_model_dir,
+        result=density_stage1_result,
+        preferred_tag="density_final_g3_len128",
+    )
+    density_stage2_model_dir_info = _discover_model_dir(
+        task="density_stage2",
+        explicit_model_dir=args.density_stage2_model_dir,
+        result=density_stage2_result,
+        preferred_tag="density_final_g3_len128",
+    )
+    location_model_dir_info = _discover_model_dir(
+        task="location",
+        explicit_model_dir=args.location_model_dir,
+        result=location_result,
+        preferred_tag="location_aug_g2",
+    )
 
     requested = {task.strip() for task in args.tasks.split(",") if task.strip()}
     all_summary: list[dict[str, Any]] = []
     outputs: dict[str, str] = {}
 
     if "density_stage1" in requested:
-        if args.allow_model_inference:
-            records = _export_density_stage1_model_predictions(
-                rows=density_rows,
-                note_to_case=note_to_case,
-                model_tag=_model_tag(density_stage1_result, "density_stage1_final"),
-                result=density_stage1_result,
-                max_length=args.max_length,
-                batch_size=args.batch_size,
+        task_failure_reason: str | None = None
+        records: list[dict[str, Any]]
+        if args.allow_model_inference and not density_stage1_model_dir_info.get("failure_reason"):
+            try:
+                records = _export_density_stage1_model_predictions(
+                    rows=density_rows,
+                    note_to_case=note_to_case,
+                    model_tag=_model_tag(density_stage1_result, "density_stage1_final"),
+                    result=density_stage1_result,
+                    model_dir=density_stage1_model_dir_info["model_dir"],
+                    max_length=args.max_length,
+                    batch_size=args.batch_size,
+                )
+            except Exception as exc:  # noqa: BLE001 - failure is surfaced in summary for hcf audit.
+                task_failure_reason = f"model_inference_failed:{type(exc).__name__}:{exc}"
+                records = []
+        elif args.allow_constructed_fallback:
+            failure = (
+                density_stage1_model_dir_info.get("failure_reason")
+                if args.allow_model_inference
+                else "model_inference_disabled_constructed_fallback_used"
             )
-        else:
             records = _export_density_stage1_constructed(
                 rows=density_rows,
                 note_to_case=note_to_case,
                 model_tag=_model_tag(density_stage1_result, "density_stage1_final"),
                 result=density_stage1_result,
-            )
-        path = output_dir / "module2_density_stage1_predictions.jsonl"
-        _write_jsonl(path, records)
-        all_summary.extend(_summary_rows("density_stage1", records))
-        all_summary.append({"task": "density_stage1", "metric": "phase5_rows_total_before_phase4_filter", "value": len(density_rows_all)})
-        outputs["density_stage1"] = str(path.relative_to(PROJECT_ROOT))
-
-    if "density_stage2" in requested:
-        if args.allow_model_inference:
-            records = _export_density_stage2_model_predictions(
-                rows=density_rows,
-                note_to_case=note_to_case,
-                model_tag=_model_tag(density_stage2_result, "density_stage2_final"),
-                result=density_stage2_result,
-                max_length=args.max_length,
-                batch_size=args.batch_size,
+                failure_reason=str(failure),
             )
         else:
+            reason = (
+                str(density_stage1_model_dir_info.get("failure_reason"))
+                if args.allow_model_inference
+                else "model_inference_disabled_and_constructed_fallback_disabled"
+            )
+            records, failure_rows = _no_records_failure(
+                task="density_stage1",
+                input_rows=len(density_rows),
+                model_dir_info=density_stage1_model_dir_info,
+                reason=reason,
+            )
+            all_summary.extend(failure_rows)
+        path = output_dir / "module2_density_stage1_predictions.jsonl"
+        _write_jsonl(path, records)
+        if records or task_failure_reason:
+            all_summary.extend(
+                _summary_rows(
+                    "density_stage1",
+                    records,
+                    input_rows=len(density_rows),
+                    model_dir_info=density_stage1_model_dir_info,
+                    task_failure_reason=task_failure_reason,
+                )
+            )
+        all_summary.append({"task": "density_stage1", "metric": "phase5_rows_total_before_phase4_filter", "value": len(density_rows_all)})
+        outputs["density_stage1"] = _display_path(path)
+
+    if "density_stage2" in requested:
+        task_failure_reason = None
+        if args.allow_model_inference and not density_stage2_model_dir_info.get("failure_reason"):
+            try:
+                records = _export_density_stage2_model_predictions(
+                    rows=density_rows,
+                    note_to_case=note_to_case,
+                    model_tag=_model_tag(density_stage2_result, "density_stage2_final"),
+                    result=density_stage2_result,
+                    model_dir=density_stage2_model_dir_info["model_dir"],
+                    max_length=args.max_length,
+                    batch_size=args.batch_size,
+                )
+            except Exception as exc:  # noqa: BLE001
+                task_failure_reason = f"model_inference_failed:{type(exc).__name__}:{exc}"
+                records = []
+        elif args.allow_constructed_fallback:
+            failure = (
+                density_stage2_model_dir_info.get("failure_reason")
+                if args.allow_model_inference
+                else "model_inference_disabled_constructed_fallback_used"
+            )
             records = _export_density_stage2_constructed(
                 rows=density_rows,
                 note_to_case=note_to_case,
                 model_tag=_model_tag(density_stage2_result, "density_stage2_final"),
+                failure_reason=str(failure),
             )
+        else:
+            reason = (
+                str(density_stage2_model_dir_info.get("failure_reason"))
+                if args.allow_model_inference
+                else "model_inference_disabled_and_constructed_fallback_disabled"
+            )
+            records, failure_rows = _no_records_failure(
+                task="density_stage2",
+                input_rows=len(density_rows),
+                model_dir_info=density_stage2_model_dir_info,
+                reason=reason,
+            )
+            all_summary.extend(failure_rows)
         path = output_dir / "module2_density_stage2_predictions.jsonl"
         _write_jsonl(path, records)
-        all_summary.extend(_summary_rows("density_stage2", records))
+        if records or task_failure_reason:
+            all_summary.extend(
+                _summary_rows(
+                    "density_stage2",
+                    records,
+                    input_rows=len(density_rows),
+                    model_dir_info=density_stage2_model_dir_info,
+                    task_failure_reason=task_failure_reason,
+                )
+            )
         all_summary.append({"task": "density_stage2", "metric": "phase5_rows_total_before_phase4_filter", "value": len(density_rows_all)})
-        outputs["density_stage2"] = str(path.relative_to(PROJECT_ROOT))
+        outputs["density_stage2"] = _display_path(path)
 
     if "size" in requested:
         probabilities = _load_size_probabilities(PROJECT_ROOT / args.size_probability_dir, args.size_probability_tag)
@@ -659,33 +1030,67 @@ def main() -> None:
         )
         path = output_dir / "module2_size_predictions.jsonl"
         _write_jsonl(path, records)
-        all_summary.extend(_summary_rows("size", records))
+        all_summary.extend(_summary_rows("size", records, input_rows=len(size_rows)))
         all_summary.append({"task": "size", "metric": "phase5_rows_total_before_phase4_filter", "value": len(size_rows_all)})
         all_summary.append({"task": "size", "metric": "size_probability_threshold", "value": f"{threshold:.6f}"})
         all_summary.append({"task": "size", "metric": "size_probability_rows_loaded", "value": len(probabilities)})
-        outputs["size"] = str(path.relative_to(PROJECT_ROOT))
+        outputs["size"] = _display_path(path)
 
     if "location" in requested:
-        if args.allow_model_inference:
-            records = _export_location_model_predictions(
-                rows=location_rows,
-                note_to_case=note_to_case,
-                model_tag=_model_tag(location_result, "location_final"),
-                result=location_result,
-                max_length=args.max_length,
-                batch_size=args.batch_size,
+        task_failure_reason = None
+        if args.allow_model_inference and not location_model_dir_info.get("failure_reason"):
+            try:
+                records = _export_location_model_predictions(
+                    rows=location_rows,
+                    note_to_case=note_to_case,
+                    model_tag=_model_tag(location_result, "location_final"),
+                    result=location_result,
+                    model_dir=location_model_dir_info["model_dir"],
+                    max_length=args.max_length,
+                    batch_size=args.batch_size,
+                )
+            except Exception as exc:  # noqa: BLE001
+                task_failure_reason = f"model_inference_failed:{type(exc).__name__}:{exc}"
+                records = []
+        elif args.allow_constructed_fallback:
+            failure = (
+                location_model_dir_info.get("failure_reason")
+                if args.allow_model_inference
+                else "model_inference_disabled_constructed_fallback_used"
             )
-        else:
             records = _export_location_constructed(
                 rows=location_rows,
                 note_to_case=note_to_case,
                 model_tag=_model_tag(location_result, "location_final"),
+                failure_reason=str(failure),
             )
+        else:
+            reason = (
+                str(location_model_dir_info.get("failure_reason"))
+                if args.allow_model_inference
+                else "model_inference_disabled_and_constructed_fallback_disabled"
+            )
+            records, failure_rows = _no_records_failure(
+                task="location",
+                input_rows=len(location_rows),
+                model_dir_info=location_model_dir_info,
+                reason=reason,
+            )
+            all_summary.extend(failure_rows)
         path = output_dir / "module2_location_predictions.jsonl"
         _write_jsonl(path, records)
-        all_summary.extend(_summary_rows("location", records))
+        if records or task_failure_reason:
+            all_summary.extend(
+                _summary_rows(
+                    "location",
+                    records,
+                    input_rows=len(location_rows),
+                    model_dir_info=location_model_dir_info,
+                    task_failure_reason=task_failure_reason,
+                )
+            )
         all_summary.append({"task": "location", "metric": "phase5_rows_total_before_phase4_filter", "value": len(location_rows_all)})
-        outputs["location"] = str(path.relative_to(PROJECT_ROOT))
+        outputs["location"] = _display_path(path)
 
     _write_csv(PROJECT_ROOT / args.summary, all_summary)
     print(json.dumps({"outputs": outputs, "summary": args.summary}, ensure_ascii=False, sort_keys=True), flush=True)
