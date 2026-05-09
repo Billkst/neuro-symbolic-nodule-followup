@@ -1,0 +1,16 @@
+metric,value
+total_conflict_rows,425
+conflict_cases,150
+conflict_case_notes,280
+manual_review_rows,150
+aggregation_resolvable_rows,275
+field.density_category,25
+field.location_lobe,270
+field.size_mm,130
+risk_level.high,25
+risk_level.medium,400
+resolution.density_subtype_conflict_changes_cdsg_path_manual_review,25
+resolution.largest_size_case_or_note_level_resolution_possible,114
+resolution.location_conflict_low_cdsg_impact_but_grounding_risk,161
+resolution.many_size_values_largest_size_possible_but_review_recommended,16
+resolution.multiple_location_mentions_likely_multiple_nodules,109
