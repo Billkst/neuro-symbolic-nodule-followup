@@ -76,6 +76,39 @@ def _load_rows_file(path: Path) -> list[dict[str, Any]]:
     raise ValueError(f"unsupported rows file format: {path}")
 
 
+def _is_missing(value: Any) -> bool:
+    return value is None or str(value).strip() == ""
+
+
+def _load_phase4_anchor_rows(path: Path) -> list[dict[str, Any]]:
+    rows = _load_rows_file(path)
+    if not rows:
+        raise ValueError(f"phase4 aligned anchor is empty: {path}")
+
+    missing: list[str] = []
+    for idx, row in enumerate(rows, start=1):
+        missing_fields = [field for field in ["case_id", "mention_text"] if _is_missing(row.get(field))]
+        if missing_fields:
+            missing.append(f"row={idx}:missing={','.join(missing_fields)}")
+        if len(missing) >= 10:
+            break
+    if missing:
+        raise ValueError(
+            "phase4 aligned anchor must contain non-empty case_id and mention_text; "
+            + "; ".join(missing)
+        )
+
+    anchored: list[dict[str, Any]] = []
+    for row in rows:
+        out = dict(row)
+        out["anchor_file"] = _display_path(path)
+        out["anchor_source_path"] = str(path)
+        out["alignment_key_used"] = "phase4_aligned_anchor"
+        out.setdefault("source_split", "phase4_aligned_anchor")
+        anchored.append(out)
+    return anchored
+
+
 def _write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", buffering=1) as fp:
@@ -115,25 +148,14 @@ def _rows_for_task(
     *,
     task: str,
     phase5_data_dir: Path,
-    phase4_aligned_mentions: Path | None,
+    phase4_anchor_rows: list[dict[str, Any]] | None,
     note_to_case: dict[str, str],
     include_all_phase5: bool,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     base_task = _task_base_name(task)
-    if phase4_aligned_mentions is not None:
-        all_rows = _load_rows_file(phase4_aligned_mentions)
-        rows: list[dict[str, Any]] = []
-        for row in all_rows:
-            row_task = row.get("task")
-            if row_task and str(row_task) not in {task, base_task}:
-                continue
-            out = dict(row)
-            out.setdefault("source_split", "phase4_aligned_mentions")
-            out.setdefault("source_path", str(phase4_aligned_mentions))
-            rows.append(out)
-        if include_all_phase5:
-            return rows, rows
-        return [row for row in rows if row.get("case_id") or str(row.get("note_id")) in note_to_case], rows
+    if phase4_anchor_rows is not None:
+        rows = [dict(row) for row in phase4_anchor_rows]
+        return rows, rows
 
     all_rows = _phase5_rows(phase5_data_dir, base_task)
     if include_all_phase5:
@@ -370,6 +392,14 @@ def _as_float(value: Any) -> float | None:
     return None
 
 
+def _record_key(row: dict[str, Any]) -> str:
+    for key in ["mention_id", "sample_id"]:
+        value = row.get(key)
+        if not _is_missing(value):
+            return f"{key}:{value}"
+    return f"case_text:{row.get('case_id')}::{row.get('mention_text')}"
+
+
 def _base_record(
     row: dict[str, Any],
     *,
@@ -394,6 +424,9 @@ def _base_record(
         "model_tag": model_tag,
         "source_split": row.get("source_split"),
         "source_path": row.get("source_path"),
+        "anchor_file": row.get("anchor_file"),
+        "anchor_source_path": row.get("anchor_source_path"),
+        "alignment_key_used": row.get("alignment_key_used"),
         "gold_or_constructed_label": None,
         "label_quality": row.get("label_quality"),
         "prediction_source_type": None,
@@ -472,6 +505,9 @@ def _export_density_stage2_constructed(
                 "failure_reason": failure_reason,
                 "model_export_required": True,
                 "density_label_source": row.get("density_label"),
+                "stage1_predicted_label": "explicit_density" if density in VALID_DENSITIES else "unclear_or_no_evidence",
+                "stage1_explicit_density": density in VALID_DENSITIES,
+                "stage2_applicable": density in VALID_DENSITIES,
             }
         )
         records.append(rec)
@@ -554,10 +590,13 @@ def _prepare_density_rows_for_inference(rows: list[dict[str, Any]]) -> list[dict
     out: list[dict[str, Any]] = []
     for row in rows:
         prepared = add_input_strategy_fields(dict(row), section_cache)
-        density = _normalize_density(row.get("density_label"))
-        prepared["density_stage1_label"] = "explicit_density" if density in VALID_DENSITIES else "unclear_or_no_evidence"
+        density_value = row.get("density_label")
+        density = _normalize_density(density_value)
         if density in VALID_DENSITIES:
+            prepared["density_stage1_label"] = "explicit_density"
             prepared["density_stage2_label"] = density
+        elif density_value is not None:
+            prepared["density_stage1_label"] = "unclear_or_no_evidence"
         out.append(prepared)
     return out
 
@@ -644,6 +683,8 @@ def _export_density_stage1_model_predictions(
                 "predicted_label": label,
                 "probability": positive_prob,
                 "confidence": positive_prob if label == "explicit_density" else pred["probabilities"].get("unclear_or_no_evidence"),
+                "explicit_density_probability": positive_prob,
+                "unclear_or_no_evidence_probability": pred["probabilities"].get("unclear_or_no_evidence"),
                 "all_probabilities": pred["probabilities"],
                 "gold_or_constructed_label": row.get("density_stage1_label"),
                 "prediction_source_type": "final_model_inference",
@@ -666,6 +707,7 @@ def _export_density_stage2_model_predictions(
     model_dir: Path,
     max_length: int,
     batch_size: int,
+    stage1_records_by_key: dict[str, dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
     prepared = _prepare_density_rows_for_inference(rows)
     input_field = str(result.get("input_field") or "section_aware_text")
@@ -680,6 +722,9 @@ def _export_density_stage2_model_predictions(
     records: list[dict[str, Any]] = []
     for pred in predictions:
         row = pred["row"]
+        stage1_record = (stage1_records_by_key or {}).get(_record_key(row))
+        stage1_label = stage1_record.get("predicted_label") if stage1_record else row.get("density_stage1_label")
+        stage1_explicit = True if stage1_label == "explicit_density" else False if stage1_label else None
         rec = _base_record(row, task="density_stage2", model_tag=model_tag, note_to_case=note_to_case)
         rec.update(
             {
@@ -692,6 +737,10 @@ def _export_density_stage2_model_predictions(
                 "failure_reason": None,
                 "model_export_required": False,
                 "density_label_source": row.get("density_label"),
+                "stage1_predicted_label": stage1_label,
+                "stage1_explicit_density": stage1_explicit,
+                "stage1_explicit_density_probability": stage1_record.get("explicit_density_probability") if stage1_record else None,
+                "stage2_applicable": stage1_explicit,
             }
         )
         records.append(rec)
@@ -711,7 +760,7 @@ def _export_location_model_predictions(
     prepared = _prepare_location_rows_for_inference(rows)
     input_field = str(result.get("input_field") or "cue_augmented_text")
     model_rows = [row for row in prepared if row.get("location_label") != "no_location"]
-    model_predictions_by_sample: dict[str, dict[str, Any]] = {}
+    model_predictions_by_key: dict[str, dict[str, Any]] = {}
     if model_rows:
         for pred in _run_hf_inference(
             rows=model_rows,
@@ -721,7 +770,7 @@ def _export_location_model_predictions(
             max_length=max_length,
             batch_size=batch_size,
         ):
-            model_predictions_by_sample[str(pred["row"].get("sample_id"))] = pred
+            model_predictions_by_key[_record_key(pred["row"])] = pred
 
     records: list[dict[str, Any]] = []
     for row in prepared:
@@ -741,7 +790,7 @@ def _export_location_model_predictions(
                 }
             )
         else:
-            pred = model_predictions_by_sample.get(str(row.get("sample_id")))
+            pred = model_predictions_by_key.get(_record_key(row))
             predicted_label = pred["predicted_label"] if pred else None
             rec.update(
                 {
@@ -767,6 +816,7 @@ def _summary_rows(
     input_rows: int,
     model_dir_info: dict[str, Any] | None = None,
     task_failure_reason: str | None = None,
+    anchor_info: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
     counter = Counter(str(row.get("prediction_source_type")) for row in records)
     failure_counter = Counter(str(row.get("failure_reason")) for row in records if row.get("failure_reason"))
@@ -785,6 +835,10 @@ def _summary_rows(
         rows.append({"task": task, "metric": "model_dir_used", "value": str(model_dir)})
     if model_dir_source:
         rows.append({"task": task, "metric": "model_dir_source", "value": model_dir_source})
+    if anchor_info:
+        rows.append({"task": task, "metric": "anchor_file_used", "value": anchor_info.get("anchor_file_used")})
+        rows.append({"task": task, "metric": "anchor_rows", "value": anchor_info.get("anchor_rows")})
+        rows.append({"task": task, "metric": "alignment_key_used", "value": "phase4_aligned_anchor"})
     if model_dir_info and model_dir_info.get("failure_reason"):
         rows.append({"task": task, "metric": f"failure_reason.{model_dir_info['failure_reason']}", "value": input_rows})
     if task_failure_reason and task_failure_reason != (model_dir_info or {}).get("failure_reason"):
@@ -804,6 +858,7 @@ def _no_records_failure(
     input_rows: int,
     model_dir_info: dict[str, Any] | None,
     reason: str,
+    anchor_info: dict[str, Any] | None = None,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     return [], _summary_rows(
         task,
@@ -811,7 +866,25 @@ def _no_records_failure(
         input_rows=input_rows,
         model_dir_info=model_dir_info,
         task_failure_reason=reason,
+        anchor_info=anchor_info,
     )
+
+
+def _anchor_zero_export_failure(
+    *,
+    task: str,
+    records: list[dict[str, Any]],
+    input_rows: int,
+    model_dir_info: dict[str, Any] | None,
+    task_failure_reason: str | None,
+    anchor_info: dict[str, Any] | None,
+) -> str | None:
+    if not anchor_info or task not in {"density_stage1", "density_stage2", "location"}:
+        return None
+    if input_rows <= 0 or records:
+        return None
+    reason = task_failure_reason or (model_dir_info or {}).get("failure_reason") or "anchor_export_zero_rows_without_failure_reason"
+    return f"{task}:{reason}"
 
 
 def main() -> None:
@@ -854,25 +927,35 @@ def main() -> None:
     output_dir = PROJECT_ROOT / args.output_dir
     note_to_case = _note_to_case(PROJECT_ROOT / args.case_bundles)
     phase4_aligned_mentions = _resolve_path(args.phase4_aligned_mentions)
+    phase4_anchor_rows = _load_phase4_anchor_rows(phase4_aligned_mentions) if phase4_aligned_mentions else None
+    anchor_info = (
+        {
+            "anchor_file_used": _display_path(phase4_aligned_mentions),
+            "anchor_rows": len(phase4_anchor_rows or []),
+            "alignment_key_used": "phase4_aligned_anchor",
+        }
+        if phase4_aligned_mentions
+        else None
+    )
 
     density_rows, density_rows_all = _rows_for_task(
         task="density_stage1",
         phase5_data_dir=phase5_data_dir,
-        phase4_aligned_mentions=phase4_aligned_mentions,
+        phase4_anchor_rows=phase4_anchor_rows,
         note_to_case=note_to_case,
         include_all_phase5=args.include_all_phase5,
     )
     size_rows, size_rows_all = _rows_for_task(
         task="size",
         phase5_data_dir=phase5_data_dir,
-        phase4_aligned_mentions=phase4_aligned_mentions,
+        phase4_anchor_rows=phase4_anchor_rows,
         note_to_case=note_to_case,
         include_all_phase5=args.include_all_phase5,
     )
     location_rows, location_rows_all = _rows_for_task(
         task="location",
         phase5_data_dir=phase5_data_dir,
-        phase4_aligned_mentions=phase4_aligned_mentions,
+        phase4_anchor_rows=phase4_anchor_rows,
         note_to_case=note_to_case,
         include_all_phase5=args.include_all_phase5,
     )
@@ -903,6 +986,8 @@ def main() -> None:
     requested = {task.strip() for task in args.tasks.split(",") if task.strip()}
     all_summary: list[dict[str, Any]] = []
     outputs: dict[str, str] = {}
+    fatal_failures: list[str] = []
+    stage1_records_by_key: dict[str, dict[str, Any]] = {}
 
     if "density_stage1" in requested:
         task_failure_reason: str | None = None
@@ -945,10 +1030,12 @@ def main() -> None:
                 input_rows=len(density_rows),
                 model_dir_info=density_stage1_model_dir_info,
                 reason=reason,
+                anchor_info=anchor_info,
             )
             all_summary.extend(failure_rows)
         path = output_dir / "module2_density_stage1_predictions.jsonl"
         _write_jsonl(path, records)
+        stage1_records_by_key = {_record_key(row): row for row in records}
         if records or task_failure_reason:
             all_summary.extend(
                 _summary_rows(
@@ -957,8 +1044,21 @@ def main() -> None:
                     input_rows=len(density_rows),
                     model_dir_info=density_stage1_model_dir_info,
                     task_failure_reason=task_failure_reason,
+                    anchor_info=anchor_info,
                 )
             )
+        fatal = _anchor_zero_export_failure(
+            task="density_stage1",
+            records=records,
+            input_rows=len(density_rows),
+            model_dir_info=density_stage1_model_dir_info,
+            task_failure_reason=task_failure_reason,
+            anchor_info=anchor_info,
+        )
+        if fatal:
+            all_summary.append({"task": "density_stage1", "metric": f"failure_reason.{fatal}", "value": len(density_rows)})
+            if args.allow_model_inference:
+                fatal_failures.append(fatal)
         all_summary.append({"task": "density_stage1", "metric": "phase5_rows_total_before_phase4_filter", "value": len(density_rows_all)})
         outputs["density_stage1"] = _display_path(path)
 
@@ -974,6 +1074,7 @@ def main() -> None:
                     model_dir=density_stage2_model_dir_info["model_dir"],
                     max_length=args.max_length,
                     batch_size=args.batch_size,
+                    stage1_records_by_key=stage1_records_by_key,
                 )
             except Exception as exc:  # noqa: BLE001
                 task_failure_reason = f"model_inference_failed:{type(exc).__name__}:{exc}"
@@ -1001,6 +1102,7 @@ def main() -> None:
                 input_rows=len(density_rows),
                 model_dir_info=density_stage2_model_dir_info,
                 reason=reason,
+                anchor_info=anchor_info,
             )
             all_summary.extend(failure_rows)
         path = output_dir / "module2_density_stage2_predictions.jsonl"
@@ -1013,8 +1115,21 @@ def main() -> None:
                     input_rows=len(density_rows),
                     model_dir_info=density_stage2_model_dir_info,
                     task_failure_reason=task_failure_reason,
+                    anchor_info=anchor_info,
                 )
             )
+        fatal = _anchor_zero_export_failure(
+            task="density_stage2",
+            records=records,
+            input_rows=len(density_rows),
+            model_dir_info=density_stage2_model_dir_info,
+            task_failure_reason=task_failure_reason,
+            anchor_info=anchor_info,
+        )
+        if fatal:
+            all_summary.append({"task": "density_stage2", "metric": f"failure_reason.{fatal}", "value": len(density_rows)})
+            if args.allow_model_inference:
+                fatal_failures.append(fatal)
         all_summary.append({"task": "density_stage2", "metric": "phase5_rows_total_before_phase4_filter", "value": len(density_rows_all)})
         outputs["density_stage2"] = _display_path(path)
 
@@ -1030,7 +1145,7 @@ def main() -> None:
         )
         path = output_dir / "module2_size_predictions.jsonl"
         _write_jsonl(path, records)
-        all_summary.extend(_summary_rows("size", records, input_rows=len(size_rows)))
+        all_summary.extend(_summary_rows("size", records, input_rows=len(size_rows), anchor_info=anchor_info))
         all_summary.append({"task": "size", "metric": "phase5_rows_total_before_phase4_filter", "value": len(size_rows_all)})
         all_summary.append({"task": "size", "metric": "size_probability_threshold", "value": f"{threshold:.6f}"})
         all_summary.append({"task": "size", "metric": "size_probability_rows_loaded", "value": len(probabilities)})
@@ -1075,6 +1190,7 @@ def main() -> None:
                 input_rows=len(location_rows),
                 model_dir_info=location_model_dir_info,
                 reason=reason,
+                anchor_info=anchor_info,
             )
             all_summary.extend(failure_rows)
         path = output_dir / "module2_location_predictions.jsonl"
@@ -1087,13 +1203,29 @@ def main() -> None:
                     input_rows=len(location_rows),
                     model_dir_info=location_model_dir_info,
                     task_failure_reason=task_failure_reason,
+                    anchor_info=anchor_info,
                 )
             )
+        fatal = _anchor_zero_export_failure(
+            task="location",
+            records=records,
+            input_rows=len(location_rows),
+            model_dir_info=location_model_dir_info,
+            task_failure_reason=task_failure_reason,
+            anchor_info=anchor_info,
+        )
+        if fatal:
+            all_summary.append({"task": "location", "metric": f"failure_reason.{fatal}", "value": len(location_rows)})
+            if args.allow_model_inference:
+                fatal_failures.append(fatal)
         all_summary.append({"task": "location", "metric": "phase5_rows_total_before_phase4_filter", "value": len(location_rows_all)})
         outputs["location"] = _display_path(path)
 
     _write_csv(PROJECT_ROOT / args.summary, all_summary)
-    print(json.dumps({"outputs": outputs, "summary": args.summary}, ensure_ascii=False, sort_keys=True), flush=True)
+    payload = {"outputs": outputs, "summary": args.summary, "fatal_failures": fatal_failures}
+    print(json.dumps(payload, ensure_ascii=False, sort_keys=True), flush=True)
+    if fatal_failures:
+        raise SystemExit(2)
 
 
 if __name__ == "__main__":
