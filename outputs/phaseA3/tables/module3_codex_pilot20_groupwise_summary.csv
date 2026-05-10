@@ -1,0 +1,6 @@
+audit_group,rows,low_confidence_count,low_confidence_rate,needs_clinical_expert_review_count,needs_clinical_expert_review_rate,rows_with_any_codex_uncertainty,uncertainty_rate,evidence_grounding_support_count,evidence_grounding_support_denominator,evidence_grounding_support_rate,methodological_conclusion
+actionable_recommendation,8,5,0.625000,6,0.750000,5,0.625000,8,8,1.000000,actionable-looking cases still contain substantial clinical uncertainty
+high_risk_density_conflict,5,4,0.800000,5,1.000000,4,0.800000,5,5,1.000000,most sensitive group; all cases require clinical expert review before any gold use
+missing_density_priority_sample,4,2,0.500000,4,1.000000,4,1.000000,4,4,1.000000,density absence makes clinical adjudication unsafe without expert review
+missing_size_priority_sample,4,0,0.000000,0,0.000000,3,0.750000,4,4,1.000000,size absence supports conservative abstention but blocks category-level claims
+no_structured_nodule,4,0,0.000000,0,0.000000,0,0.000000,4,4,1.000000,abstention appears methodologically stable in this pilot

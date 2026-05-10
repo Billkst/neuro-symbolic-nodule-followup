@@ -1,0 +1,4 @@
+confidence,count,denominator,rate,interpretation
+high,1,20,0.050000,rare stable prelabel; still not clinical gold
+medium,12,20,0.600000,evidence-grounded but not sufficient for expert replacement
+low,7,20,0.350000,requires caution; often tied to conflicts or missing facts
