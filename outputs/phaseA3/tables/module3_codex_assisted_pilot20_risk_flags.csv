@@ -1,0 +1,2 @@
+case_id,audit_group,pilot_stratum,flag_reasons,codex_confidence,codex_under_followup_risk_suggestion,codex_over_followup_risk_suggestion,needs_clinical_expert_review,obvious_codex_error,codex_rationale,codex_cited_evidence,non_clinical_reviewer_notes
+,,,no_risk_flags_or_no_completed_review,,,,,,,,
