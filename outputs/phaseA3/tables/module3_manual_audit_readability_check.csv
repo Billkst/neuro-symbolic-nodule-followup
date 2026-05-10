@@ -1,0 +1,28 @@
+check_id,check_name,status,affected_rows,total_rows,rate,details,example_case_ids
+file.audit_set_nonempty,audit set CSV has rows,pass,133,133,1.000000,input audit set loaded,
+identity.case_id_unique,case_id uniqueness,pass,0,133,0.000000,unique_case_ids=133,
+field_group.identity,identity required columns,pass,0,3,0.000000,all required columns present,
+field_group.decision,decision required columns,pass,0,4,0.000000,all required columns present,
+field_group.traceability,traceability required columns,pass,0,2,0.000000,all required columns present,
+field_group.evidence,evidence required columns,pass,0,4,0.000000,all required columns present,
+field_empty.case_id,case_id non-empty coverage,pass,0,133,0.000000,non-empty for all rows,
+field_empty.subject_id,subject_id non-empty coverage,pass,0,133,0.000000,non-empty for all rows,
+field_empty.audit_group,audit_group non-empty coverage,pass,0,133,0.000000,non-empty for all rows,
+field_empty.candidate_nodule_evidence,candidate_nodule_evidence non-empty coverage,warn,7,133,0.052632,empty values,CASE-10011365-001|CASE-10041127-001|CASE-10048899-001|CASE-10054464-001|CASE-10070928-001|CASE-10085477-001|CASE-10091141-001
+field_empty.reasoning_path,reasoning_path non-empty coverage,pass,0,133,0.000000,non-empty for all rows,
+field_empty.guideline_anchor,guideline_anchor non-empty coverage,pass,0,133,0.000000,non-empty for all rows,
+decision.actionable_recommendation_complete,actionable rows have recommendation and Lung-RADS category,pass,0,76,0.000000,actionable_rows=76,
+decision.abstention_reason_complete,abstained rows have abstention reason,pass,0,57,0.000000,abstained_rows=57; total_rows=133,
+json_parse.candidate_nodule_evidence,candidate_nodule_evidence parseable compact JSON,pass,0,133,0.000000,parseable when non-empty,
+json_parse.conflict_evidence,conflict_evidence parseable compact JSON,pass,0,133,0.000000,parseable when non-empty,
+json_parse.reasoning_path,reasoning_path parseable compact JSON,pass,0,133,0.000000,parseable when non-empty,
+json_parse.guideline_anchor,guideline_anchor parseable compact JSON,pass,0,133,0.000000,parseable when non-empty,
+evidence.mention_text_coverage,rows with mention_text in candidate evidence,warn,126,133,0.947368,"coverage count, not a failure for no-structured-nodule rows",
+evidence.readable_context_coverage,"rows with mention text, conflict span, or source note id",pass,133,133,1.000000,coverage count for any human-readable context field,
+length.candidate_nodule_evidence,candidate_nodule_evidence length readability,fail,116,133,0.872180,warn_threshold=2400; fail_threshold=6000; max_len=7165,CASE-10001401-001|CASE-10002155-001|CASE-10006029-001|CASE-10013653-001|CASE-10014354-001|CASE-10014869-001|CASE-10024331-001|CASE-10025268-001
+length.conflict_evidence,conflict_evidence length readability,warn,34,133,0.255639,warn_threshold=1600; fail_threshold=4000; max_len=2918,CASE-10001401-001|CASE-10002155-001|CASE-10006029-001|CASE-10010231-001|CASE-10013653-001|CASE-10014610-001|CASE-10024331-001|CASE-10025862-001
+length.reasoning_path,reasoning_path length readability,pass,0,133,0.000000,warn_threshold=1200; fail_threshold=3000; max_len=821,
+length.guideline_anchor,guideline_anchor length readability,pass,0,133,0.000000,warn_threshold=1200; fail_threshold=3000; max_len=1039,
+conflict.high_risk_summary_complete,high-risk density conflict rows have conflict evidence,pass,0,19,0.000000,high_risk_density_conflict_rows=19,
+label_template.columns,manual label template columns,pass,0,12,0.000000,all label columns present,
+label_template.empty_ready_for_annotation,label template rows currently empty,pass,133,133,1.000000,empty labels are expected before manual annotation,

@@ -1,0 +1,32 @@
+metric,value,numerator,denominator,rate,note
+input_rows,133,133,133,1.000000,rows loaded from annotation file
+annotated_rows,0,0,133,0.000000,rows with at least one non-empty manual label
+missing_annotation_columns,,0,12,0.000000,dry-run warning if non-empty
+label_completion.gold_actionable,0,0,133,0.000000,field-level annotation completion
+label_completion.gold_lung_rads_category,0,0,133,0.000000,field-level annotation completion
+label_completion.gold_recommendation_level,0,0,133,0.000000,field-level annotation completion
+label_completion.cdsg_recommendation_correct,0,0,133,0.000000,field-level annotation completion
+label_completion.abstention_appropriate,0,0,133,0.000000,field-level annotation completion
+label_completion.density_fact_correct,0,0,133,0.000000,field-level annotation completion
+label_completion.size_fact_correct,0,0,133,0.000000,field-level annotation completion
+label_completion.dominant_nodule_correct,0,0,133,0.000000,field-level annotation completion
+label_completion.conflict_requires_manual_resolution,0,0,133,0.000000,field-level annotation completion
+label_completion.under_followup_risk,0,0,133,0.000000,field-level annotation completion
+label_completion.over_followup_risk,0,0,133,0.000000,field-level annotation completion
+label_completion.annotator_notes,0,0,133,0.000000,field-level annotation completion
+cdsg_recommendation_correct_rate,0,0,0,0.000000,positive rate among annotated non-uncertain values
+abstention_appropriate_rate,0,0,0,0.000000,positive rate among annotated non-uncertain values
+density_fact_correct_rate,0,0,0,0.000000,positive rate among annotated non-uncertain values
+size_fact_correct_rate,0,0,0,0.000000,positive rate among annotated non-uncertain values
+dominant_nodule_correct_rate,0,0,0,0.000000,positive rate among annotated non-uncertain values
+conflict_requires_manual_resolution_rate,0,0,0,0.000000,manual-resolution-needed rate among yes/no labels
+distribution.under_followup_risk.none,0,0,0,0.000000,risk distribution among non-empty labels
+distribution.under_followup_risk.low,0,0,0,0.000000,risk distribution among non-empty labels
+distribution.under_followup_risk.medium,0,0,0,0.000000,risk distribution among non-empty labels
+distribution.under_followup_risk.high,0,0,0,0.000000,risk distribution among non-empty labels
+distribution.under_followup_risk.uncertain,0,0,0,0.000000,risk distribution among non-empty labels
+distribution.over_followup_risk.none,0,0,0,0.000000,risk distribution among non-empty labels
+distribution.over_followup_risk.low,0,0,0,0.000000,risk distribution among non-empty labels
+distribution.over_followup_risk.medium,0,0,0,0.000000,risk distribution among non-empty labels
+distribution.over_followup_risk.high,0,0,0,0.000000,risk distribution among non-empty labels
+distribution.over_followup_risk.uncertain,0,0,0,0.000000,risk distribution among non-empty labels
