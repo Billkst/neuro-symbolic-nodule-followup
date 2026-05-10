@@ -1,0 +1,22 @@
+metric,value,note
+total_cases,253,conservative v2 full set
+audit_set_unique_cases,133,deduplicated case-level audit set
+raw_selection_events,152,group additions before case-level deduplication
+deduplicated_overlap_events,19,multi-label audit cases retained once
+missing_density_sample_target,30,priority deterministic sample
+missing_size_sample_target,20,priority deterministic sample
+high_risk_density_conflict_source_rows,25,"conflict rows, not unique cases"
+source_pool.actionable_recommendation,76,eligible source rows or cases
+source_pool.high_risk_density_conflict,19,eligible source rows or cases
+source_pool.missing_density_pool,104,eligible source rows or cases
+source_pool.missing_density_priority_sample,30,eligible source rows or cases
+source_pool.missing_size_pool,66,eligible source rows or cases
+source_pool.missing_size_priority_sample,20,eligible source rows or cases
+source_pool.no_structured_nodule,7,eligible source rows or cases
+selected_group.actionable_recommendation,76,unique audit cases carrying group label
+selected_group.high_risk_density_conflict,19,unique audit cases carrying group label
+selected_group.missing_density_priority_sample,30,unique audit cases carrying group label
+selected_group.missing_size_priority_sample,20,unique audit cases carrying group label
+selected_group.no_structured_nodule,7,unique audit cases carrying group label
+cases_with_1_audit_groups,114,deduplication profile
+cases_with_2_audit_groups,19,deduplication profile
