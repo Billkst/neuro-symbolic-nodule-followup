@@ -1,18 +1,20 @@
 metric,label,count,denominator,rate,note
 input_rows,all,20,20,1.000000,pilot rows loaded
-codex_annotated_rows,any_codex_column_nonempty,0,20,0.000000,preannotation completion
-non_clinical_reviewed_rows,any_review_column_nonempty,0,20,0.000000,evidence verification completion
+codex_annotated_rows,any_codex_column_nonempty,20,20,1.000000,preannotation completion
+non_clinical_reviewed_rows,any_review_column_nonempty,20,20,1.000000,evidence verification completion
 missing_required_columns,,0,23,0.000000,should be zero for a valid filled template
-codex_confidence_distribution,empty,20,20,1.000000,Codex confidence distribution
-needs_clinical_expert_review,yes,0,0,0.000000,non-clinical evidence review yes-rate among filled values
-obvious_codex_error,yes,0,0,0.000000,non-clinical evidence review yes-rate among filled values
-codex_cited_evidence_exists,yes,0,0,0.000000,non-clinical evidence review yes-rate among filled values
-codex_rationale_supported_by_evidence,yes,0,0,0.000000,non-clinical evidence review yes-rate among filled values
-evidence_grounding_support_rate,cited_evidence_and_rationale_supported,0,0,0.000000,cited_yes=0; rationale_yes=0
-rows_with_any_codex_uncertainty,any_uncertain,0,20,0.000000,any uncertainty among Codex suggestion fields
-recommend_expand_to_133_cases,no,0,1,0.000000,"requires complete pilot, high grounding support, and low obvious Codex error count"
-group_uncertainty.actionable_recommendation,any_uncertain,0,8,0.000000,audit group-wise uncertainty
-group_uncertainty.high_risk_density_conflict,any_uncertain,0,5,0.000000,audit group-wise uncertainty
-group_uncertainty.missing_density_priority_sample,any_uncertain,0,4,0.000000,audit group-wise uncertainty
-group_uncertainty.missing_size_priority_sample,any_uncertain,0,4,0.000000,audit group-wise uncertainty
+codex_confidence_distribution,high,1,20,0.050000,Codex confidence distribution
+codex_confidence_distribution,low,7,20,0.350000,Codex confidence distribution
+codex_confidence_distribution,medium,12,20,0.600000,Codex confidence distribution
+needs_clinical_expert_review,yes,10,20,0.500000,non-clinical evidence review yes-rate among filled values
+obvious_codex_error,yes,0,20,0.000000,non-clinical evidence review yes-rate among filled values
+codex_cited_evidence_exists,yes,20,20,1.000000,non-clinical evidence review yes-rate among filled values
+codex_rationale_supported_by_evidence,yes,20,20,1.000000,non-clinical evidence review yes-rate among filled values
+evidence_grounding_support_rate,cited_evidence_and_rationale_supported,20,20,1.000000,cited_yes=20; rationale_yes=20
+rows_with_any_codex_uncertainty,any_uncertain,12,20,0.600000,any uncertainty among Codex suggestion fields
+recommend_expand_to_133_cases,no,0,1,0.000000,"requires complete pilot, high grounding support, low obvious Codex error count, and manageable low-confidence/expert-review burden"
+group_uncertainty.actionable_recommendation,any_uncertain,5,8,0.625000,audit group-wise uncertainty
+group_uncertainty.high_risk_density_conflict,any_uncertain,4,5,0.800000,audit group-wise uncertainty
+group_uncertainty.missing_density_priority_sample,any_uncertain,4,4,1.000000,audit group-wise uncertainty
+group_uncertainty.missing_size_priority_sample,any_uncertain,3,4,0.750000,audit group-wise uncertainty
 group_uncertainty.no_structured_nodule,any_uncertain,0,4,0.000000,audit group-wise uncertainty

@@ -219,12 +219,17 @@ def _summary_rows(rows: list[dict[str, str]], fieldnames: list[str]) -> list[dic
     )
 
     grounding_rate_value = both_yes / grounding_denominator if grounding_denominator else 0.0
+    obvious_error_count = sum(1 for row in rows if _yes(row.get("obvious_codex_error")))
+    expert_review_count = sum(1 for row in rows if _yes(row.get("needs_clinical_expert_review")))
+    low_confidence_count = sum(1 for row in rows if _clean(row.get("codex_confidence")).lower() == "low")
     recommend_expand = (
         total > 0
         and len(codex_annotated) == total
         and len(reviewed) == total
         and grounding_rate_value >= 0.8
-        and sum(1 for row in rows if _yes(row.get("obvious_codex_error"))) <= 2
+        and obvious_error_count <= 2
+        and expert_review_count <= max(2, total // 4)
+        and low_confidence_count <= max(2, total // 4)
     )
     output.append(
         {
@@ -233,7 +238,10 @@ def _summary_rows(rows: list[dict[str, str]], fieldnames: list[str]) -> list[dic
             "count": int(recommend_expand),
             "denominator": 1,
             "rate": "1.000000" if recommend_expand else "0.000000",
-            "note": "requires complete pilot, high grounding support, and low obvious Codex error count",
+            "note": (
+                "requires complete pilot, high grounding support, low obvious Codex error count, "
+                "and manageable low-confidence/expert-review burden"
+            ),
         }
     )
     return output
@@ -366,13 +374,36 @@ def _write_report(
     codex_annotated = sum(1 for row in rows if _is_codex_annotated(row))
     reviewed = sum(1 for row in rows if _is_reviewed(row))
     dry_run = codex_annotated == 0 or reviewed == 0
+    confidence_counter = Counter(_clean(row.get("codex_confidence")) or "empty" for row in rows)
+    expert_review_cases = [row.get("case_id", "") for row in rows if _yes(row.get("needs_clinical_expert_review"))]
+    obvious_error_count = sum(1 for row in rows if _yes(row.get("obvious_codex_error")))
+    low_confidence_count = confidence_counter.get("low", 0)
+    expansion_blocker = "无"
+    if expand_label != "yes":
+        blockers: list[str] = []
+        if len(rows) and codex_annotated != len(rows):
+            blockers.append("Codex pre-annotation 未完成")
+        if len(rows) and reviewed != len(rows):
+            blockers.append("非医学 evidence self-check 未完成")
+        grounding_row = summary_index.get(("evidence_grounding_support_rate", "cited_evidence_and_rationale_supported"))
+        if grounding_row and float(grounding_row.get("rate", 0.0)) < 0.8:
+            blockers.append("evidence grounding support rate 低于 0.8")
+        if obvious_error_count > 2:
+            blockers.append("obvious Codex error 数量超过阈值")
+        if expert_review_cases:
+            blockers.append("仍有多例需要 clinical expert review")
+        if low_confidence_count > max(2, len(rows) // 4 if rows else 0):
+            blockers.append("low confidence case 占比偏高")
+        expansion_blocker = "；".join(blockers) if blockers else "pilot 仍存在未量化风险"
 
     lines = [
         "# M3-3C Codex-Assisted Pilot 20 Audit Report",
         "",
         "## 定位",
         "",
-        "本报告是 Codex-assisted evidence audit 的 pilot 20 统计结果。它不是 clinical gold benchmark，也不用于 learned-model performance table。",
+        "本报告是 Codex-assisted pre-annotation / model-assisted evidence audit 的 pilot 20 统计结果。它不是 clinical gold benchmark、不是 expert label、不是 manual gold，也不用于 learned-model performance table。",
+        "",
+        "没有医学专家参与；非医学复核列仅表示 Codex evidence-grounding self-check。结果只能用于 failure-mode audit。",
         "",
         "## 输入状态",
         "",
@@ -402,8 +433,20 @@ def _write_report(
                 f"- evidence grounding support：{metric('evidence_grounding_support_rate', 'cited_evidence_and_rationale_supported')}",
                 f"- rows with Codex uncertainty：{metric('rows_with_any_codex_uncertainty', 'any_uncertain')}",
                 f"- 是否建议扩展到 133 cases：{expand_label}",
+                f"- 不建议扩展原因：{expansion_blocker if expand_label != 'yes' else '不适用'}",
+                f"- 当前是否可进入 learned-model performance experiment：no",
             ]
         )
+        lines.extend(["", "## Codex Confidence 分布", ""])
+        for label in ["high", "medium", "low", "empty"]:
+            if label in confidence_counter:
+                lines.append(f"- {label}: {confidence_counter[label]}")
+        lines.extend(["", "## Clinical Expert Review Queue", ""])
+        if expert_review_cases:
+            lines.extend(f"- {case_id}" for case_id in expert_review_cases)
+        else:
+            lines.append("- 无")
+        lines.extend(["", "## Obvious Codex Error", "", f"- obvious Codex error 数量：{obvious_error_count}"])
     lines.extend(
         [
             "",
@@ -425,7 +468,7 @@ def _write_report(
             "",
             "## 使用限制",
             "",
-            "Codex suggestion 和非医学复核结果只用于 failure-mode audit。若要形成 clinical gold benchmark，需要医学专家复核并重新定义 gold 标注协议。",
+            "Codex suggestion 和非医学复核结果只用于 failure-mode audit。若要形成 clinical gold benchmark，需要医学专家复核并重新定义 gold 标注协议。当前仍不能进入 learned-model performance experiment。",
         ]
     )
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
